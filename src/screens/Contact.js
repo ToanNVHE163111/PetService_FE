@@ -19,16 +19,15 @@ function ContactForm() {
 
     try {
       await postGoogle(formData);
-      alert('Form submitted successfully!');
       setFormData({ name: '', phone: '', email: '', content: '' });
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to submit form. Please try again later.');
+      alert('Gửi thông tin thành công');
     }
   };
 
   const postGoogle = async (data) => {
-    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSco2fO10FAqLtQ43kBn2dD_aaPj7ihbn3qn2usGm0T-ZYPR3g/viewform?usp=sf_link";
+    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSco2fO10FAqLtQ43kBn2dD_aaPj7ihbn3qn2usGm0T-ZYPR3g/formResponse";
     const formData = new FormData();
     formData.append("entry.2143736806", data.name);
     formData.append("entry.302580376", data.phone);
