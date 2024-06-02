@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import '../screens/Contact.css';
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -15,14 +17,13 @@ function ContactForm() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
     try {
       await postGoogle(formData);
       setFormData({ name: '', phone: '', email: '', content: '' });
+      toast.success('Gửi thành công');
     } catch (error) {
       console.error('Error:', error);
-      alert('Gửi thông tin thành công');
+      toast.error('Có lỗi xảy ra, vui lòng thử lại.');
     }
   };
 
@@ -39,50 +40,57 @@ function ContactForm() {
       body: formData,
     });
   };
+
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
-        <h2>Thông tin liên hệ</h2>
-        <Form.Group controlId="name">
-          <Form.Label>Họ và tên</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Họ và tên"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="phone">
-          <Form.Label>Số điện thoại</Form.Label>
-          <Form.Control
-            type="tel"
-            placeholder="Số điện thoại"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="content">
-          <Form.Label>Nội dung tư vấn</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            placeholder="Nội dung tư vấn"
-            value={formData.content}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Button type="submit">GỬI</Button>
-      </Form>
+    <div className="container123">
+      <div className="contact-box">
+        <div className="left"></div>
+        <div className="right">
+          <h2 className='theh2'>Thông tin liên hệ</h2>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="name">
+              <Form.Control
+                type="text"
+                placeholder="Họ và tên"
+                value={formData.name}
+                onChange={handleChange}
+                className="field"
+              />
+            </Form.Group>
+            <Form.Group controlId="phone">
+              <Form.Control
+                type="tel"
+                placeholder="Số điện thoại"
+                value={formData.phone}
+                onChange={handleChange}
+                className="field"
+              />
+            </Form.Group>
+            <Form.Group controlId="email">
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                className="field"
+              />
+            </Form.Group>
+            <Form.Group controlId="content">
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Nội dung tư vấn"
+                value={formData.content}
+                onChange={handleChange}
+                className="field"
+              />
+            </Form.Group>
+            <Button type="submit" className="btn">GỬI</Button>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 }
+
 export default ContactForm;
