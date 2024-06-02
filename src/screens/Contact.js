@@ -39,7 +39,6 @@ function ContactForm() {
       body: formData,
     });
   };
-
   return (
     <div>
       <Form onSubmit={handleSubmit}>
@@ -86,5 +85,4 @@ function ContactForm() {
     </div>
   );
 }
-
 export default ContactForm;
