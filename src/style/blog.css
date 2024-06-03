@@ -1,0 +1,56 @@
+.cardd {
+  height: fit-content;
+  background-color: white;
+  border: 1px solid gray;
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 17px 17px 27px 27px;
+}
+.fc-btn {
+  border-radius: 2px;
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold;
+  padding: 0 8px;
+}
+
+.fc-btn-default {
+  background-color: #f5f6f7;
+  border-color: #ccd0d5;
+  color: #4b4f56;
+}
+
+.fc-btn-white {
+  background-color: #fff;
+  border: none;
+  color: #4b4f56;
+}
+
+.fc-btn-rounded {
+  background-color: #f5f6f7;
+  border: none;
+  color: #4b4f56;
+  border-radius: 20px;
+  width: 129px;
+  height: 30px;
+}
+
+.fc-icon label {
+  margin-left: 18px;
+  margin-top: 2px;
+  width: 100px;
+}
+
+.fc-btn-primary {
+  background-color: #4267b2;
+  border-color: #29487d;
+  color: #fff;
+}
+
+
+span {
+  color: #606770;
+  font-size: 12px;
+}
+
+
+
