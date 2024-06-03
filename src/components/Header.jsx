@@ -94,7 +94,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               </li>
               <li className="mr-4 d-flex  align-items-center ">
                 <Link
-                  to="/lien-he"
+                  to="/contact-form"
                   style={{ color: "#2a3977", fontWeight: "bold" }}
                 >
                   Liên hệ
