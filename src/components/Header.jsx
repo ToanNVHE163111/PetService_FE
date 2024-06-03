@@ -87,7 +87,7 @@ const Header = () => {
               </li>
               <li className="mr-4 d-flex  align-items-center ">
                 <Link
-                  to="/contact-form"
+                  to="/contact"
                   style={{ color: "#2a3977", fontWeight: "bold" }}
                 >
                   Liên hệ

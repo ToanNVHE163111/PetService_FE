@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home_Page />} />
           <Route path="/online-booking" element={<Online_Booking />} />
-          <Route path="/contact-form" element={<ContactForm />} />
+          <Route path="/contact" element={<ContactForm />} />
         </Routes>
       </BrowserRouter>
     </div>
