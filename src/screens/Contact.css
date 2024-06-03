@@ -110,3 +110,17 @@
 		height: 200px;
 	}
 } 
+.error-message::before {
+	color: red;
+	position: absolute;
+  }
+  
+  .field-container {
+	position: relative;
+  }
+  
+
+  .error-message {
+	color: red;
+  }
+  

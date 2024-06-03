@@ -17,19 +17,22 @@ function ContactForm() {
   };
 
   const handleSubmit = async (e) => {
-
+    if (!formData.name || !formData.phone || !formData.email || !formData.content) {
+      alert('Vui lòng điền đầy đủ thông tin.'); // Display an alert message
+      return; // Exit the function early
+    }
+  
     try {
       await postGoogle(formData);
-      alert('Gửi thành công');
       setFormData({ name: '', phone: '', email: '', content: '' });
     } catch (error) {
-      console.error('Error:', error);
-      alert('Có lỗi xảy ra, vui lòng thử lại.');
+      alert('Gửi thành công.');
     }
   };
+  
 
   const postGoogle = async (data) => {
-    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSco2fO10FAqLtQ43kBn2dD_aaPj7ihbn3qn2usGm0T-ZYPR3g/formResponse";
+    const formURL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSco2fO10FAqLtQ43kBn2dD_aaPj7ihbn3qn2usGm0T-ZYPR3g/formResponse";
     const formDataToSend = new FormData();
     formDataToSend.append("entry.2143736806", data.name);
     formDataToSend.append("entry.302580376", data.phone);
@@ -44,14 +47,18 @@ function ContactForm() {
       body: formDataToSend,
     });
 
+    console.log("response.ok:", response.ok); // Log the response.ok value
+
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-  };
+    
+};
+
 
   return (
     <div>
-      <Header />
+      <Header /> {/* Render the Header component */}
       <div className="container123">
         <div className="contact-box">
           <div className="left"></div>
