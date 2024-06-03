@@ -148,7 +148,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           onClick={() => setVisible(true)}
           style={{ cursor: "pointer" }}
         >
-          <CartFill style={{ fontSize: "30px" }} />
+          <CartFill style={{ fontSize: "30px" , color:'#37457e'}} />
         </Col>
       </Row>
       {visible === true && <Cart visible={visible} setVisible={setVisible} />}
