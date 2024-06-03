@@ -18,8 +18,8 @@ function ContactForm() {
 
   const handleSubmit = async (e) => {
     if (!formData.name || !formData.phone || !formData.email || !formData.content) {
-      alert('Vui lòng điền đầy đủ thông tin.'); // Display an alert message
-      return; // Exit the function early
+      alert('Vui lòng điền đầy đủ thông tin.'); 
+      return; 
     }
   
     try {
@@ -47,7 +47,7 @@ function ContactForm() {
       body: formDataToSend,
     });
 
-    console.log("response.ok:", response.ok); // Log the response.ok value
+    console.log("response.ok:", response.ok); 
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -58,7 +58,7 @@ function ContactForm() {
 
   return (
     <div>
-      <Header /> {/* Render the Header component */}
+      <Header />
       <div className="container123">
         <div className="contact-box">
           <div className="left"></div>
