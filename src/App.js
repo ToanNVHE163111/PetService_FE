@@ -14,6 +14,7 @@ import RegisterForm from "./screens/RegisterForm";
 import Forgot_Password from "./screens/Forgot_Password";
 import Product_Detail from "./screens/Product_Detail";
 import Home from "./layout/Home";
+import ResetPass from "./screens/ResetPass";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -67,13 +68,27 @@ function App() {
               </>
             }
           />
-          <Route path="/forgot"  element={
+          <Route
+            path="/forgot"
+            element={
               <>
                 <Header />
                 <Forgot_Password />
                 <Footer />
               </>
-            } />
+            }
+          />
+
+          <Route
+            path="/reset-password/:id/:token"
+            element={
+              <>
+                <Header />
+                <ResetPass />
+                <Footer />
+              </>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
