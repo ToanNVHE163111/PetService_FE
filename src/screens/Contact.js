@@ -17,7 +17,6 @@ function ContactForm() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevents the default form submission behavior
 
     try {
       await postGoogle(formData);
@@ -52,7 +51,7 @@ function ContactForm() {
 
   return (
     <div>
-      <Header /> {/* Render the Header component */}
+      <Header />
       <div className="container123">
         <div className="contact-box">
           <div className="left"></div>
@@ -102,8 +101,6 @@ function ContactForm() {
         </div>
       </div>
     </div>
-
   );
 }
-
 export default ContactForm;
