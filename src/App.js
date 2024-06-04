@@ -16,6 +16,7 @@ import Product_Detail from "./screens/Product_Detail";
 import Home from "./layout/Home";
 import ResetPass from "./screens/ResetPass";
 import { ToastContainer } from "react-toastify";
+import DashBoard from "./DashBoard/Admin/DashBoard";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -90,8 +91,19 @@ function App() {
               </>
             }
           />
+
+          <Route
+            path="/dashboard"
+            element={
+              <>
+                <Header />
+                <DashBoard />
+                <Footer />
+              </>
+            }
+          />
         </Routes>
-        <ToastContainer/>
+        <ToastContainer />
       </BrowserRouter>
     </div>
   );

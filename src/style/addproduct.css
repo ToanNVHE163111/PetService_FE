@@ -1,0 +1,8 @@
+.custom-dialog-header {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.p-dialog .p-dialog-header-close {
+  margin: 10px;
+}
