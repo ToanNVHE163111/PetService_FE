@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Nav, Row, Tab } from "react-bootstrap";
-import ProductManagement from "../ProductMana/ProductManagement";
 import UserManagement from "../UserMana/UserManagement";
 import OrderManagement from "../OrderMana/OrderManagement";
+import ManaAllCateProduct from "../ProductMana/Product/ManaAllCateProduct";
 
 const DashBoard = () => {
   return (
@@ -24,7 +24,7 @@ const DashBoard = () => {
         <Col sm={9}>
           <Tab.Content>
             <Tab.Pane eventKey="first">
-              <ProductManagement />
+              <ManaAllCateProduct />
             </Tab.Pane>
             <Tab.Pane eventKey="second">
               <UserManagement />

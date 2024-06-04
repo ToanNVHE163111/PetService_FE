@@ -4,11 +4,11 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { PlusSquareFill, Trash, TrashFill, X } from "react-bootstrap-icons";
 import { Col, FormSelect, Row } from "react-bootstrap";
-import '../../style/addproduct.css'
+import '../../../style/addproduct.css'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const AddProduct = (props) => {
+const AddPet = (props) => {
     const { visible, setVisible } = props;
 
     const onHide = () => {
@@ -39,7 +39,7 @@ const AddProduct = (props) => {
           className="bg-light"
           style={{ width: "70vw" }}
           modal
-          header={<div className="custom-dialog-header">Add Product</div>}
+          header={<div className="custom-dialog-header">Add Pet</div>}
         >
           <div className="bg-light p-1" style={{ margin: "25px" }}>
             <div style={{ margin: "40px" }}>
@@ -121,4 +121,4 @@ const AddProduct = (props) => {
     );
 };
 
-export default AddProduct;
+export default AddPet;
