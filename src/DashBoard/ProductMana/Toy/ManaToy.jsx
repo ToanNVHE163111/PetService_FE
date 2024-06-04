@@ -14,7 +14,7 @@ const ManaToy = () => {
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <div>
-            <Row className="ml-1 mb-4">
+            <Row className="ml-1 mb-4 mt-4" >
               <h3>Toy Management</h3>
             </Row>
             <Row className="ml-1 mb-4">

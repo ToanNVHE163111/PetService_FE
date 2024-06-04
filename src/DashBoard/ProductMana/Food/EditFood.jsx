@@ -10,12 +10,41 @@ import { toast } from "react-toastify";
 
 const EditFood = (props) => {
   const { editVisible, setEditVisible, data } = props;
+  console.log(data);
+  const [name, setName] = useState(data?.name);
+  const [image, setImage] = useState([data?.image[0]]);
+  const [quantity, setQuantity] = useState(data?.quantity);
+  const [pettype, setPetType] = useState(data?.pettype);
+  const nav = useNavigate();
+
+  const handleEditProduct = (e) => {
+    e.preventDefault();
+    axios
+      .put(`http://localhost:9999/foods/${data._id}`, {
+        name: name,
+        quantity: quantity,
+        pettype:pettype
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("Chỉnh sửa sản phẩm thành công");
+          nav("/dashboard");
+          setEditVisible(false);
+          console.log(data);
+        } else {
+          toast.error("Chỉnh sửa sản phẩm thất bại");
+        }
+      })
+      .catch((error) => {
+        toast.error("Chỉnh sửa sản phẩm thất bại: " + error.message);
+      });
+  };
   const onHide = () => {
     setEditVisible(false);
   };
 
   const dialogFooter = (
-    <div style={{ margin: "20px" }}>
+    <div style={{ margin: "20px", textAlign:'end' }}>
       <Button
         className=" btn btn-success mr-2"
         type="submit"
@@ -42,31 +71,65 @@ const EditFood = (props) => {
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
-            <form id="editProductForm">
-              <Row>
+            <form id="editProductForm" onSubmit={handleEditProduct}>
+            <Row>
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6>Product Name</h6>
+                      <h6>Food Name</h6>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       name="name"
-                      placeholder="Input product name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Input food name"
                       style={{ height: "50px" }}
                       required
                     />
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="description">
-                      <h6>Description</h6>
+                      <h6>Images</h6>
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      name="description"
-                      placeholder="Input description"
+                      name="images"
+                      value={image}
+                      onChange={(e) => setImage(e.target.value)}
+                      placeholder="Input images"
+                      style={{ height: "50px" }}
+                      required
+                    />
+                  </div>
+                </Col>
+                <Col md={6}>
+                  <div className="form-group w-full">
+                    <label className="label" htmlFor="congNgheManHinh">
+                      <h6>Quantity</h6>
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      placeholder="Input quantity"
+                      style={{ height: "50px" }}
+                      required
+                    />
+                  </div>
+                  <div className="form-group w-full">
+                    <label className="label" htmlFor="doPhanGiai">
+                      <h6>PetType</h6>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={pettype}
+                      onChange={(e) => setPetType(e.target.value)}
+                      placeholder="Input độ phân giải"
                       style={{ height: "50px" }}
                       required
                     />

@@ -10,12 +10,17 @@ const ManaMedice = () => {
   const [dataEdit, setDataEdit] = useState([]);
 
 
+  const handleEditMedicine = (m) => {
+    setDataEdit(m); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
+    setEditVisible(true); // Hiển thị giao diện chỉnh sửa sản phẩm
+  };
+
     return (
         <Container fluid>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <div>
-            <Row className="ml-1 mb-4">
+            <Row className="ml-1 mb-4 mt-4">
               <h3>Medicine Management</h3>
             </Row>
             <Row className="ml-1 mb-4">
@@ -66,7 +71,7 @@ const ManaMedice = () => {
                         fontSize: "25px",
                         cursor: "pointer",
                       }}
-                      onClick={() => setEditVisible(true)}
+                      // onClick={() => handleEditFood(m)}
                     />
                   </i>
                 </td>
