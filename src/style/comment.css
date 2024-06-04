@@ -242,4 +242,24 @@
     transform: scale(1);
     opacity: 0;
   }
+  
 }
+
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  margin-left: 10px; /* Khoảng cách giữa hình ảnh người dùng và thông tin người dùng */
+}
+
+.comment-content {
+  margin-top: 10px; /* Khoảng cách giữa thông tin người dùng và nội dung comment */
+}
+
+.comment-text {
+  margin-bottom: 0; /* Xóa khoảng cách dưới của văn bản comment */
+}
+

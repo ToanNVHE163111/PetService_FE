@@ -16,7 +16,9 @@ const LoginForm = () => {
     event.preventDefault();
     const form = formRef.current;
     const username = form.elements["input-name"].value;
-    const password = form.elements["password_field"].value;
+    const password = form.elements["password_field"].value;   
+
+
     const data = { username, password };
 
     try {
@@ -25,10 +27,15 @@ const LoginForm = () => {
           "Content-Type": "application/json",
         },
       });
-      const { accessToken, refreshToken, username } = res.data;
+      
+      const { accessToken, refreshToken, username, id } = res.data;
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("username", username); // Lưu tên người dùng vào localStorage
+      localStorage.setItem("password", password); // Lưu tên người dùng vào localStorage
+      localStorage.setItem("userId", id);
+
+
       toast.success("Login successful!");
       nav("/");
     } catch (error) {

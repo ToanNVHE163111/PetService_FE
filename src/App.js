@@ -15,6 +15,7 @@ import Forgot_Password from "./screens/Forgot_Password";
 import Product_Detail from "./screens/Product_Detail";
 import Home from "./layout/Home";
 import ResetPass from "./screens/ResetPass";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,7 +46,7 @@ function App() {
               </>
             }
           />
-          <Route path="/detail" element={<Product_Detail />} />
+          <Route path="/detail/:id" element={<Product_Detail />} />
 
           <Route
             path="/blog"
@@ -90,6 +91,7 @@ function App() {
             }
           />
         </Routes>
+        <ToastContainer/>
       </BrowserRouter>
     </div>
   );
