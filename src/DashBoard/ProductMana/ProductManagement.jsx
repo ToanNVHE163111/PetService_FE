@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
+import axios from "axios";
 
 const ProductManagement = () => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
+  const [toys, setToys] = useState([]);
+  const [medicines, setMedicines] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:9999/toys')
+      .then((res) => {
+        setToys(res.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching toys:', error);
+      });
+  }, []);
+  useEffect(() => {
+    axios.get('http://localhost:9999/medicines')
+      .then((res) => {
+        setMedicines(res.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching medicines:', error);
+      });
+  }, []);
 
   return (
     <Container fluid>
@@ -31,20 +53,23 @@ const ProductManagement = () => {
                 <th>ID</th>
                 <th> Name</th>
                 <th>Image</th>
-                <th>Brand</th>
-                <th>Quantity </th>
+                <th>Pettype</th>
+                <th>Quantity</th>
                 <th>Option</th>
                 <th colSpan={2}>Operation</th>
               </tr>
             </thead>
 
             <tbody className="text-center">
-              <tr>
-                <td>1</td>
-                <td>name</td>
-                <td>image</td>
-                <td>cho</td>
-                <td>12</td>
+              
+
+                {toys.map((t) => (
+              <tr key={t.id}>  {/* Add a unique key for each row */}
+                <td>{t.id}</td>
+                <td>{t.name}</td>
+                <td>{t.image}</td>
+                <td>{t.pettype}</td>
+                <td>{t.quantity}</td>
                 <td>12</td>
                 <td>
                   <i className="delete">
@@ -70,6 +95,9 @@ const ProductManagement = () => {
                   </i>
                 </td>
               </tr>
+                ))}
+                
+                
             </tbody>
           </Table>
         </Col>
