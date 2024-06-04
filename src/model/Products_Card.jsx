@@ -1,6 +1,5 @@
 import React from "react";
-import images from "../assets/images/product.png";
-const Products_Card = ({ img, obj, des, price }) => {
+const Products_Card = ({ img, obj, name, price }) => {
   return (
     <div
       className="cards flex-column"
@@ -8,7 +7,7 @@ const Products_Card = ({ img, obj, des, price }) => {
     >
       <div>
         <img
-          src={images}
+          src={img}
           style={{
             maxWidth: "100%",
             maxHeight: "100%",
@@ -17,17 +16,14 @@ const Products_Card = ({ img, obj, des, price }) => {
         ></img>
       </div>
       <div>
-        <i className="text-secondary">{obj}Cho mèo</i>
+        <i className="text-secondary">{obj}</i>
       </div>
       <div>
-        <p className="text-center mt-1 font-weight-bolder">
-          {des}Cát vệ sinh mix than hoạt tính LAPAW cho mèo mùi Chanh túi
-          15L/8kg
-        </p>
+        <p className="text-center mt-1 font-weight-bolder">{name}</p>
       </div>
       <div>
         <h4 className="text-primary">
-          100000 <span className="align-text-bottom">đ</span>
+          {price} <span className="align-text-bottom">đ</span>
         </h4>
       </div>
     </div>
