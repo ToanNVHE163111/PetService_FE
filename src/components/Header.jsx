@@ -127,6 +127,15 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   </Link>
                 )}
               </li>
+
+              <li className="mr-4 d-flex  align-items-center ">
+                <Link
+                  to="/dashboard"
+                  style={{ color: "#2a3977", fontWeight: "bold" }}
+                >
+                  DashBoard
+                </Link>
+              </li>
             </ul>
           </div>
         </Col>
