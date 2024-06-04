@@ -4,12 +4,12 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { PlusSquareFill, TrashFill, X } from "react-bootstrap-icons";
 import { Col, FormSelect, Row } from "react-bootstrap";
-import "../../style/addproduct.css";
+import '../../../style/addproduct.css'
 
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const EditProduct = (props) => {
+const EditToy = (props) => {
   const { editVisible, setEditVisible, data } = props;
   const onHide = () => {
     setEditVisible(false);
@@ -39,7 +39,7 @@ const EditProduct = (props) => {
         className="bg-light"
         style={{ width: "70vw" }}
         modal
-        header={<div className="custom-dialog-header">Edit Product</div>}
+        header={<div className="custom-dialog-header">Edit Toy</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
@@ -82,4 +82,4 @@ const EditProduct = (props) => {
   );
 };
 
-export default EditProduct;
+export default EditToy;
