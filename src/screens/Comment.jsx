@@ -14,7 +14,7 @@ import {
 import { InputText } from "primereact/inputtext";
 
 const Comment = () => {
-  const { pid } = useParams();
+  const { id } = useParams();
   const [listComments, setListComments] = useState([]);
   const [text, setText] = useState("");
   const [editComment, setEditComment] = useState("");
@@ -40,7 +40,7 @@ const Comment = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9999/comments/" + "664eda4403454afcff0bb084")
+      .get("http://localhost:9999/comments/" + id)
       .then((res) => {
         const sortedComments = res.data.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -77,7 +77,7 @@ const Comment = () => {
         if (response.status === 200) {
           toast.success("Edit comment successfully");
           axios
-            .get("http://localhost:9999/comments/" + "664eda4403454afcff0bb084")
+            .get("http://localhost:9999/comments/" + id)
             .then((res) => {
               const sortCmt = res.data.sort(
                 (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -113,10 +113,11 @@ const Comment = () => {
       .post("http://localhost:9999/comments", {
         text: text,
         userId: userId,
-        petId: "664eda4403454afcff0bb084",
-        toyId: pid,
-        foodId: pid,
-        medicineId: pid,
+        petId: id,
+        toyId: id,
+        foodId: id,
+        medicineId: id,
+        productId: id
       })
       .then((response) => {
         if (response.status === 201) {
@@ -320,7 +321,6 @@ const Comment = () => {
         </div>
       </div>
 
-
       {listComments.map((c, index) => (
         <div class="comments" key={index}>
           <div class="comment-react">
@@ -373,7 +373,7 @@ const Comment = () => {
                 </svg>
               </div>
               <div class="user-info">
-                <h6 style={{fontSize:'20px'}}>{c.userId.fullname}</h6>
+                <h6 style={{ fontSize: "20px" }}>{c.userId.fullname}</h6>
                 <p style={{ fontSize: "14px" }}>{formatDate(c.createdAt)}</p>
               </div>
             </div>
@@ -413,8 +413,14 @@ const Comment = () => {
                     </Col>
                   </Row>
                 ) : (
-                  <div className="bg-light" style={{ width:'400px',height:'40px'}}>
-                    <p className="comment-text p-2 " style={{ fontSize: "20px" }}>
+                  <div
+                    className="bg-light"
+                    style={{ width: "400px", height: "40px" }}
+                  >
+                    <p
+                      className="comment-text p-2 "
+                      style={{ fontSize: "20px" }}
+                    >
                       {c.text}
                     </p>
                   </div>
@@ -468,8 +474,6 @@ const Comment = () => {
           </div>
         </div>
       ))}
-
-      
     </Container>
   );
 };

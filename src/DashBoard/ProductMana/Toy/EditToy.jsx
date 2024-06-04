@@ -15,7 +15,7 @@ const EditToy = (props) => {
   const [quantity, setQuantity] = useState(data?.quantity);
   const [pettype, setPetType] = useState(data?.pettype);
   const nav = useNavigate();
-
+console.log(data);
 
   const handleEditProduct = (e) => {
     e.preventDefault();
