@@ -18,10 +18,10 @@ function ContactForm() {
 
   const handleSubmit = async (e) => {
     if (!formData.name || !formData.phone || !formData.email || !formData.content) {
-      alert('Vui lòng điền đầy đủ thông tin.'); 
-      return; 
+      alert('Vui lòng điền đầy đủ thông tin.');
+      return;
     }
-  
+
     try {
       await postGoogle(formData);
       setFormData({ name: '', phone: '', email: '', content: '' });
@@ -29,7 +29,7 @@ function ContactForm() {
       alert('Gửi thành công.');
     }
   };
-  
+
 
   const postGoogle = async (data) => {
     const formURL = "https://docs.google.com/forms/u/1/d/e/1FAIpQLSco2fO10FAqLtQ43kBn2dD_aaPj7ihbn3qn2usGm0T-ZYPR3g/formResponse";
@@ -47,13 +47,13 @@ function ContactForm() {
       body: formDataToSend,
     });
 
-    console.log("response.ok:", response.ok); 
+    console.log("response.ok:", response.ok);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    
-};
+
+  };
 
 
   return (
