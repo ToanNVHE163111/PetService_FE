@@ -17,6 +17,9 @@ import ResetPass from "./screens/ResetPass";
 import { ToastContainer } from "react-toastify";
 import DashBoard from "./DashBoard/Admin/DashBoard";
 import EditBlog from "./screens/EditBlog";
+import Profile from "./screens/Profile";
+import EditProfile from "./screens/EditProfile";
+import Payment from "./screens/Payment";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,7 +53,6 @@ function App() {
             element={
               <>
                 <ContactForm />
-                <Footer />
               </>
             }
           />
@@ -109,6 +111,10 @@ function App() {
               </>
             }
           />
+
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>
