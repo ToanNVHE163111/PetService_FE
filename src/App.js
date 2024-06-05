@@ -17,6 +17,7 @@ import Home from "./layout/Home";
 import ResetPass from "./screens/ResetPass";
 import { ToastContainer } from "react-toastify";
 import DashBoard from "./DashBoard/Admin/DashBoard";
+import EditBlog from "./screens/EditBlog";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -93,6 +94,17 @@ function App() {
           />
 
           <Route
+            path="/editblog"
+            element={
+              <>
+                <Header />
+                <EditBlog />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
             path="/dashboard"
             element={
               <>
@@ -102,6 +114,7 @@ function App() {
               </>
             }
           />
+
         </Routes>
         <ToastContainer />
       </BrowserRouter>
