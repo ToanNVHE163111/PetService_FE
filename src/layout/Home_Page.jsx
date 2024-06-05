@@ -10,7 +10,7 @@ import New_Product from "../components/New_Product.jsx";
 const Home_Page = () => {
   return (
     <div>
-      <Header></Header>
+      {/* <Header></Header> */}
       <Banner></Banner>
       <Service_Item></Service_Item>
       <Hot_Product></Hot_Product>

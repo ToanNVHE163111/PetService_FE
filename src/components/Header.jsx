@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { Col, Container, Row, Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import images from "../assets/images/Pet_logo.png";
-import { CartFill, SendFill } from "react-bootstrap-icons";
+import { ArrowRepeat, BoxArrowInRight, CartFill, GraphUpArrow, PersonVcard, SendFill } from "react-bootstrap-icons";
 import Cart from "../screens/Cart";
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [visible, setVisible] = useState(false);
+  const nav = useNavigate();
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    // Thực hiện các bước đăng xuất khác nếu cần
+    localStorage.clear()
+    nav('/')
+    // Perform other logout steps if needed
   };
+
   return (
     <Container fluid className="mt-2">
       <Row className="align-items-center">
@@ -29,19 +33,19 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           md={6}
           className="d-flex justify-content-center align-items-center"
         >
-          <div className="d-flex ">
+          <div className="d-flex">
             <ul className="list-unstyled d-flex justify-content-between m-0">
-              <li className="mr-4 d-flex  align-items-center ">
+              <li className="mr-4 d-flex align-items-center">
                 <Link to="/" style={{ color: "#2a3977", fontWeight: "bold" }}>
                   Trang chủ
                 </Link>
               </li>
-              <li className="mr-4 d-flex  align-items-center ">
+              <li className="mr-4 d-flex align-items-center">
                 <Link
-                  to="/gioi-thieu"
+                  to="/home"
                   style={{ color: "#2a3977", fontWeight: "bold" }}
                 >
-                  Giới thiệu
+                  Sản Phẩm
                 </Link>
               </li>
               <li className="mr-4">
@@ -76,23 +80,15 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   </Dropdown.Menu>
                 </Dropdown>
               </li>
-              <li className="mr-4">
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="link"
-                    id="dropdown-blog"
-                    style={{ color: "#2a3977", fontWeight: "bold" }}
-                  >
-                    Blog
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="/blog">Bài viết 1</Dropdown.Item>
-                    <Dropdown.Item href="/blog2">Bài viết 2</Dropdown.Item>
-                    <Dropdown.Item href="/blog3">Bài viết 3</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+              <li style={{marginTop:'7px', marginRight:'35px'}}>
+                <Link
+                  to="/blog"
+                  style={{ color: "#2a3977", fontWeight: "bold",  }}
+                >
+                  Blog
+                </Link>
               </li>
-              <li className="mr-4 d-flex  align-items-center ">
+              <li className="mr-4 d-flex align-items-center">
                 <Link
                   to="/contact-form"
                   style={{ color: "#2a3977", fontWeight: "bold" }}
@@ -105,16 +101,17 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   <Dropdown>
                     <Dropdown.Toggle
                       variant="link"
-                      id="dropdown-blog"
+                      id="dropdown-settings"
                       style={{ color: "#2a3977", fontWeight: "bold" }}
                     >
                       Setting
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item href="/blog1">Bài viết 1</Dropdown.Item>
-                      <Dropdown.Item href="/blog2">Bài viết 2</Dropdown.Item>
+                      <Dropdown.Item href="/dashboard"><GraphUpArrow style={{ fontSize: "20px", marginRight: "10px" }} />Dashboard</Dropdown.Item>
+                      <Dropdown.Item href="/changepass"><ArrowRepeat style={{ fontSize: "20px", marginRight: "10px" }} />Change Password</Dropdown.Item>
+                      <Dropdown.Item href="/profile"><PersonVcard style={{ fontSize: "20px", marginRight: "10px" }} />Account Profile</Dropdown.Item>
                       <Dropdown.Item onClick={handleLogout}>
-                        LogOut
+                      <BoxArrowInRight style={{ fontSize: "20px", marginRight: "10px" }} />LogOut
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
@@ -126,15 +123,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                     Login
                   </Link>
                 )}
-              </li>
-
-              <li className="mr-4 d-flex  align-items-center ">
-                <Link
-                  to="/dashboard"
-                  style={{ color: "#2a3977", fontWeight: "bold" }}
-                >
-                  DashBoard
-                </Link>
               </li>
             </ul>
           </div>
@@ -157,7 +145,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           onClick={() => setVisible(true)}
           style={{ cursor: "pointer" }}
         >
-          <CartFill style={{ fontSize: "30px" , color:'#37457e'}} />
+          <CartFill style={{ fontSize: "30px", color: "#37457e" }} />
         </Col>
       </Row>
       {visible === true && <Cart visible={visible} setVisible={setVisible} />}

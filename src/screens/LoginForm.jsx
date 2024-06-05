@@ -7,7 +7,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const LoginForm = () => {
+const LoginForm = ({ setIsLoggedIn }) => {
   const formRef = useRef(null);
   const nav = useNavigate();
   const [error, setError] = useState(null);
@@ -16,8 +16,7 @@ const LoginForm = () => {
     event.preventDefault();
     const form = formRef.current;
     const username = form.elements["input-name"].value;
-    const password = form.elements["password_field"].value;   
-
+    const password = form.elements["password_field"].value;
 
     const data = { username, password };
 
@@ -27,7 +26,7 @@ const LoginForm = () => {
           "Content-Type": "application/json",
         },
       });
-      
+
       const { accessToken, refreshToken, username, id } = res.data;
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("accessToken", accessToken);
@@ -35,12 +34,13 @@ const LoginForm = () => {
       localStorage.setItem("password", password); // Lưu tên người dùng vào localStorage
       localStorage.setItem("userId", id);
 
-
+      setIsLoggedIn(true);
+      localStorage.setItem("isLoggedIn", "true");
       toast.success("Login successful!");
       nav("/");
     } catch (error) {
       setError(error.response.data.error);
-      toast.error(error.response.data.error);
+      toast.error("Username or password is incorrect");
     }
   };
 

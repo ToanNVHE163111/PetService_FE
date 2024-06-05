@@ -35,7 +35,7 @@ const Product_Detail = () => {
 
   return (
     <div>
-      <Header></Header>
+      {/* <Header></Header> */}
       <Container className="mt-5">
         {product && (
           <Row>
