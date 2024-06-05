@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <div>
       <Row>
-        <Header />
+        {/* <Header /> */}
       </Row>
       <Row className="container">
         <Col md={3} className="d-flex align-items-center">
