@@ -16,6 +16,7 @@ import Home from "./layout/Home";
 import ResetPass from "./screens/ResetPass";
 import EditProfile from "./screens/EditProfile";
 import Payment from "./screens/Payment";
+import Profile from "./screens/Profile";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,6 +30,7 @@ function App() {
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/profile" element={<Profile />} />
 
           <Route
             path="/login"
