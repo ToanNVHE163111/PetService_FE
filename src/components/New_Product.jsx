@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { SendFill } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-import Products_Card from "../model/Products_Card";
 import New_Products_Cart from "../model/New_Products_Cart";
 
 const New_Product = () => {
+
+
+  const [newProduct, setNewProduct] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:9999/products/last")
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        setNewProduct(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+  
   return (
     <Row className="container" style={{ width: "100%", marginTop: "100px" }}>
       <Col md={5}>
@@ -16,14 +30,19 @@ const New_Product = () => {
       </Col>
       <Col md={7} className="d-flex">
         <div>
-          <New_Products_Cart></New_Products_Cart>
         </div>
-        <div>
-          <New_Products_Cart></New_Products_Cart>
-        </div>
-        <div>
-          <New_Products_Cart></New_Products_Cart>
-        </div>
+        {newProduct.map((p) => (
+            <div key={p._id}>
+              <Link to={`/detail/${p._id}`}>
+                <New_Products_Cart
+                  name={p.name}
+                  obj={p.pettype}
+                  price={p.price}
+                  img={p.image[0]}
+                />
+              </Link>
+            </div>
+          ))}
       </Col>
     </Row>
   );
