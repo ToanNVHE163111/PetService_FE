@@ -10,19 +10,15 @@ import Simila_Product from "../components/Simila_Product";
 import Comment from "./Comment";
 
 const Product_Detail = () => {
-
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
-
-  
   useEffect(() => {
     // Lấy thông tin sản phẩm
     fetch(`http://localhost:9999/products/${id}`)
       .then((response) => response.json())
       .then((data) => setProduct(data))
       .catch((error) => console.error(error));
-   
   }, [id]);
 
   const [quantity, setQuantity] = useState(1);
@@ -41,7 +37,7 @@ const Product_Detail = () => {
     <div>
       <Header></Header>
       <Container className="mt-5">
-      {product && (
+        {product && (
           <Row>
             <Col md={6}>
               <div>
@@ -50,11 +46,13 @@ const Product_Detail = () => {
               </div>
             </Col>
             <Col md={6}>
-              <div>
-                <Zoom>
-                  <img alt={product.name} src={product.image} width="500" />
-                </Zoom>
-              </div>
+              {product.image.map((imgSrc, index) => (
+                <div key={index}>
+                  <Zoom>
+                    <img alt={product.name} src={imgSrc} width="500" />
+                  </Zoom>
+                </div>
+              ))}
             </Col>
           </Row>
         )}
@@ -70,11 +68,8 @@ const Product_Detail = () => {
           </Row>
         )}
 
-
-
-
         <Row>
-          <Comment/>
+          <Comment />
         </Row>
         <Row>
           <div>

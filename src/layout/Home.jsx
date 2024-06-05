@@ -63,7 +63,7 @@ const Home = () => {
                   name={product.name}
                   obj={product.pettype}
                   price={product.price}
-                  img={product.image}
+                  img={product.image[0]}
                 />
               </Link>
             </div>
