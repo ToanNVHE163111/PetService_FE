@@ -11,6 +11,7 @@ import {
 import { Lock, Unlock } from "react-bootstrap-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Change_Password = () => {
   const [oldPass, setOldPass] = useState("");
@@ -18,6 +19,7 @@ const Change_Password = () => {
   const [reNewPass, setReNewPass] = useState("");
   const password = localStorage.getItem("password");
   const username = localStorage.getItem("username");
+  const nav = useNavigate()
   // const token = localStorage.getItem("accessToken");
 
   const handleUpdate = () => {
@@ -43,7 +45,7 @@ const Change_Password = () => {
 
     axios
       .put(
-        `http://localhost:9999/users/${username}`,
+        `http://localhost:9999/users/changepass/${username}`,
         { password: newPass }
         // { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -53,6 +55,7 @@ const Change_Password = () => {
           setOldPass("");
           setNewPass("");
           setReNewPass("");
+          nav("/")
           localStorage.setItem("password", newPass);
         } else {
           toast.error("Change password failed!");
