@@ -1,10 +1,11 @@
-
 .card {
   width: 450px;
   height: fit-content;
   background-color: white;
   border: 2px solid gray;
-  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01),
+    0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09),
+    0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   border-radius: 17px 17px 27px 27px;
 }
 
@@ -22,7 +23,7 @@
 }
 
 .title::after {
-  content: '';
+  content: "";
   width: 8ch;
   height: 1px;
   position: absolute;
@@ -60,7 +61,7 @@
 }
 
 .comment-react button:after {
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
   position: absolute;
@@ -135,7 +136,7 @@
 }
 
 .comment-container .user .user-pic:after {
-  content: '';
+  content: "";
   width: 9px;
   height: 9px;
   position: absolute;
@@ -242,24 +243,13 @@
     transform: scale(1);
     opacity: 0;
   }
-  
 }
-
 
 .user {
   display: flex;
   align-items: center;
 }
 
-.user-info {
-  margin-left: 10px; /* Khoảng cách giữa hình ảnh người dùng và thông tin người dùng */
-}
-
-.comment-content {
-  margin-top: 10px; /* Khoảng cách giữa thông tin người dùng và nội dung comment */
-}
-
 .comment-text {
   margin-bottom: 0; /* Xóa khoảng cách dưới của văn bản comment */
 }
-

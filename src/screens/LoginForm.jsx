@@ -27,10 +27,11 @@ const LoginForm = ({ setIsLoggedIn }) => {
         },
       });
 
-      const { accessToken, refreshToken, username, id } = res.data;
+      const { accessToken, refreshToken, username, id , fullname} = res.data;
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("username", username); // Lưu tên người dùng vào localStorage
+      localStorage.setItem("fullname", fullname); // Lưu tên người dùng vào localStorage
       localStorage.setItem("password", password); // Lưu tên người dùng vào localStorage
       localStorage.setItem("userId", id);
 
