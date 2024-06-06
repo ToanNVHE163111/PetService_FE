@@ -16,7 +16,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [visible, setVisible] = useState(false);
   const nav = useNavigate();
   const role = localStorage.getItem("role");
-
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.clear();
@@ -106,7 +105,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   Liên hệ
                 </Link>
               </li>
-
               {isLoggedIn && parseInt(role) === 1 && (
                 <li className="mr-4 d-flex align-items-center">
                   <Link
@@ -128,12 +126,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                       Account
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      {/* <Dropdown.Item href="/dashboard">
-                        <GraphUpArrow
-                          style={{ fontSize: "20px", marginRight: "10px" }}
-                        />
-                        Dashboard
-                      </Dropdown.Item> */}
                       <Dropdown.Item href="/changepass">
                         <ArrowRepeat
                           style={{ fontSize: "20px", marginRight: "10px" }}
