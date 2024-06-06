@@ -9,8 +9,8 @@ const Products_Card = ({ img, obj, name, price }) => {
         <img
           src={img}
           style={{
-            maxWidth: "100%",
-            maxHeight: "100%",
+            width: "250px",
+            height: "270px",
             alignItems: "center",
           }}
         ></img>

@@ -8,16 +8,24 @@ import { Link, useParams } from "react-router-dom";
 import { Cart } from "react-bootstrap-icons";
 import Simila_Product from "../components/Simila_Product";
 import Comment from "./Comment";
+import Products_Card from "../model/Products_Card";
 
 const Product_Detail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
 
   useEffect(() => {
     // Lấy thông tin sản phẩm
     fetch(`http://localhost:9999/products/${id}`)
       .then((response) => response.json())
       .then((data) => setProduct(data))
+      .catch((error) => console.error(error));
+
+    // Lấy sản phẩm tương tự
+    fetch(`http://localhost:9999/products/similar/${id}`)
+      .then((response) => response.json())
+      .then((data) => setSimilarProducts(data))
       .catch((error) => console.error(error));
   }, [id]);
 
@@ -73,7 +81,24 @@ const Product_Detail = () => {
         </Row>
         <Row>
           <div>
-            <Simila_Product></Simila_Product>
+            <Row
+              className="container text-center"
+              style={{ marginTop: "100px" }}
+            >
+              <Col md={12}>
+                <h3 style={{ textAlign: "center" }}>Sản phẩm tương tự</h3>
+              </Col>
+              {similarProducts.map((similarProduct) => (
+                <Col md={3} key={similarProduct._id}>
+                  <Products_Card
+                    name={similarProduct.name}
+                    obj={similarProduct.pettype}
+                    price={similarProduct.price}
+                    img={similarProduct.image[0]}
+                  />
+                </Col>
+              ))}
+            </Row>
           </div>
         </Row>
       </Container>
