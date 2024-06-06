@@ -25,9 +25,7 @@ const Home = () => {
 
   return (
     <div>
-      <Row>
-        {/* <Header /> */}
-      </Row>
+      <Row>{/* <Header /> */}</Row>
       <Row className="container">
         <Col md={3} className="d-flex align-items-center">
           <h2>PET PRODUCTS</h2>
@@ -44,6 +42,7 @@ const Home = () => {
               <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Danh mục sản phẩm</Form.Label>
                 <Form.Control as="select">
+                  <option value="0">Tất cả</option>
                   {categories.map((category) => (
                     <option key={category._id} value={category._id}>
                       {category.name}
@@ -54,11 +53,11 @@ const Home = () => {
             </Form>
           </Row>
         </Col>
-        <Col className="d-flex align-content-between flex-wrap " md={9}  >
+        <Col className="d-flex align-content-between flex-wrap " md={9}>
           {products.map((product) => (
-            <div key={product._id} style={{marginBottom:'10px'}}>
+            <div key={product._id} style={{ marginBottom: "10px" }}>
               <Link to={`/detail/${product._id}`}>
-                <Products_Card 
+                <Products_Card
                   name={product.name}
                   obj={product.pettype}
                   price={product.price}

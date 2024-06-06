@@ -36,7 +36,7 @@ function App() {
         <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home_Page />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/listproduct" element={<Home />} />
           <Route path="/online-booking" element={<Online_Booking />} />
           <Route
             path="/login"
