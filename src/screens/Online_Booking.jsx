@@ -7,9 +7,7 @@ import Form from "react-bootstrap/Form";
 const Online_Booking = () => {
   return (
     <div>
-      <Row>
-        <Header />
-      </Row>
+      
       <Row>
         <div
           className="mt-3 text-center"

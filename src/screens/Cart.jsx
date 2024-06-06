@@ -9,6 +9,9 @@ const Cart = (props) => {
   const onHide = () => {
     setVisible(false);
   };
+  const handleCheckout = () => {
+    setVisible(false);
+  };
 
   const dialogFooter = (
     <div style={{ margin: "20px" }}>
@@ -16,8 +19,8 @@ const Cart = (props) => {
         <h5>Total: </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
-        <Link to={"/checkout"}>
-          <Button className="btn btn-success">
+        <Link to={"/payment"}>
+          <Button className="btn btn-success mr-2" onClick={handleCheckout}>
             <WalletFill
               style={{ fontSize: "22px", color: "white", marginRight: "7px" }}
             />
@@ -59,6 +62,7 @@ const Cart = (props) => {
                         <th style={{ width: "25%" }}>Product</th>
                         <th style={{ width: "20%" }}>Price</th>
                         <th style={{ width: "15%" }}>Quantity</th>
+                        <th style={{ width: "15%" }}>Category</th>
                         <th style={{ width: "25%" }}>Total</th>
                         <th style={{ width: "25%" }}>Action</th>
                       </tr>
@@ -82,10 +86,11 @@ const Cart = (props) => {
                           <input
                             type="number"
                             min="1"
-                            style={{ width: "50px" }}
+                            style={{ width: "50px", height:'30px' }}
                             value="aaa"
                           />
                         </td>
+                        <td style={{ verticalAlign: "middle" }}>Pet</td>
                         <td style={{ verticalAlign: "middle" }}>34</td>
                         <td style={{ verticalAlign: "middle" }}>
                           <Trash

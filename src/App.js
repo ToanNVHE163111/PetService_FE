@@ -7,25 +7,36 @@ import Blog from "./screens/Blog";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Change_Password from "./screens/Change_Password";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginForm from "./screens/LoginForm";
 import RegisterForm from "./screens/RegisterForm";
 import Forgot_Password from "./screens/Forgot_Password";
 import Product_Detail from "./screens/Product_Detail";
 import Home from "./layout/Home";
 import ResetPass from "./screens/ResetPass";
+import { ToastContainer } from "react-toastify";
+import DashBoard from "./DashBoard/Admin/DashBoard";
+import EditBlog from "./screens/EditBlog";
+import Profile from "./screens/Profile";
 import EditProfile from "./screens/EditProfile";
 import Payment from "./screens/Payment";
-import Profile from "./screens/Profile";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const loggedInStatus = localStorage.getItem("isLoggedIn");
+    if (loggedInStatus === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <div>
       <BrowserRouter>
+        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home_Page />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/listproduct" element={<Home />} />
           <Route path="/online-booking" element={<Online_Booking />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/editprofile" element={<EditProfile />} />
@@ -46,30 +57,24 @@ function App() {
             path="/contact-form"
             element={
               <>
-                <Header />
                 <ContactForm />
-                <Footer />
               </>
             }
           />
-          <Route path="/detail" element={<Product_Detail />} />
-
+          <Route path="/detail/:id" element={<Product_Detail />} />
           <Route
             path="/blog"
             element={
               <>
-                <Header />
                 <Blog />
                 <Footer />
               </>
             }
           />
-
           <Route
             path="/changepass"
             element={
               <>
-                <Header />
                 <Change_Password />
                 <Footer />
               </>
@@ -79,24 +84,44 @@ function App() {
             path="/forgot"
             element={
               <>
-                <Header />
                 <Forgot_Password />
                 <Footer />
               </>
             }
           />
-
           <Route
             path="/reset-password/:id/:token"
             element={
               <>
-                <Header />
                 <ResetPass />
                 <Footer />
               </>
             }
           />
+          <Route
+            path="/editblog"
+            element={
+              <>
+                <EditBlog />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <>
+                <DashBoard />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
     </div>
   );

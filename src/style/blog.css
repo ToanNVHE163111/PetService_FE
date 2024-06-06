@@ -32,6 +32,7 @@
   border-radius: 20px;
   width: 129px;
   height: 30px;
+  
 }
 
 .fc-icon label {
@@ -52,5 +53,22 @@ span {
   font-size: 12px;
 }
 
+.ellipsis-button {
+  position: absolute; /* Position the button absolutely */
+  right: 10px; /* Align the button to the right */
+  top: 10px; /* Align the button to the top */
+  background-color: #f5f6f7; /* Background color */
+  border: 1px solid #ccd0d5; /* Border */
+  color: #4b4f56; /* Text color */
+  border-radius: 50%; /* Rounded corners */
+  width: 30px; /* Width */
+  height: 30px; /* Height */
+  justify-content: center;
+  align-items: center;
+  margin-right: 40px;
+}
 
+.ellipsis-button:hover {
+  background-color: #ebedf0; /* Background color on hover */
+}
 

@@ -16,8 +16,9 @@ const Change_Password = () => {
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [reNewPass, setReNewPass] = useState("");
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = localStorage.getItem("token");
+  const password = localStorage.getItem("password");
+  const username = localStorage.getItem("username");
+  // const token = localStorage.getItem("accessToken");
 
   const handleUpdate = () => {
     if (!oldPass || !newPass || !reNewPass) {
@@ -28,7 +29,7 @@ const Change_Password = () => {
       toast.error("New passwords do not match!");
       return;
     }
-    if (oldPass !== user.password) {
+    if (oldPass !== password) {
       toast.error("Old password is incorrect!");
       return;
     }
@@ -37,11 +38,14 @@ const Change_Password = () => {
       return;
     }
 
+    console.log(`Sending request to update password for user: ${username}`);
+    console.log(`New password: ${newPass}`);
+
     axios
       .put(
-        `http://localhost:9999/users/${user.username}`,
-        { password: newPass },
-        { headers: { Authorization: `Bearer ${token}` } }
+        `http://localhost:9999/users/${username}`,
+        { password: newPass }
+        // { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
         if (response.status === 200) {
@@ -49,14 +53,13 @@ const Change_Password = () => {
           setOldPass("");
           setNewPass("");
           setReNewPass("");
-          const updatedUser = { ...user, password: newPass };
-          localStorage.setItem("user", JSON.stringify(updatedUser));
+          localStorage.setItem("password", newPass);
         } else {
           toast.error("Change password failed!");
         }
       })
       .catch((error) => {
-        console.error("Error: ", error);
+        console.log(error.message);
         toast.error("Change password failed!");
       });
   };

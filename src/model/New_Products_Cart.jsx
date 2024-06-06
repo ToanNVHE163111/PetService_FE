@@ -1,8 +1,7 @@
-import React from "react";
-import { Coin } from "react-bootstrap-icons";
-const Products_Card = ({ img, obj, name, price }) => {
-  return (
-    <div
+import React from 'react';
+const New_Products_Cart = ({ img, obj, name, price }) => {
+    return (
+        <div
       className="cards flex-column"
       style={{ width: "18rem", height: "28rem", marginRight: "10px" }}
     >
@@ -10,8 +9,8 @@ const Products_Card = ({ img, obj, name, price }) => {
         <img
           src={img}
           style={{
-            width: "250px",
-            height: "270px",
+            maxWidth: "100%",
+            maxHeight: "100%",
             alignItems: "center",
           }}
         ></img>
@@ -20,15 +19,17 @@ const Products_Card = ({ img, obj, name, price }) => {
         <i className="text-secondary">{obj}</i>
       </div>
       <div>
-        <p className="text-center mt-1 font-weight-bolder">{name}</p>
+        <p className="text-center mt-1 font-weight-bolder">
+          {name}
+        </p>
       </div>
       <div>
         <h4 className="text-primary">
-          <Coin style={{color:'yellow', fontSize:'27px' , marginRight:'5px'}}/>{price} <span>VND</span>
+        {price} <span className="align-text-bottom">đ</span>
         </h4>
       </div>
     </div>
-  );
+    );
 };
 
-export default Products_Card;
+export default New_Products_Cart;
