@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { Col, Container, Row, Dropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import images from "../assets/images/Pet_logo.png";
-import { ArrowRepeat, BoxArrowInRight, CartFill, GraphUpArrow, PersonVcard, SendFill } from "react-bootstrap-icons";
+import {
+  ArrowRepeat,
+  BoxArrowInRight,
+  CartFill,
+  GraphUpArrow,
+  PersonVcard,
+  SendFill,
+} from "react-bootstrap-icons";
 import Cart from "../screens/Cart";
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
@@ -11,8 +18,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.clear()
-    nav('/')
+    localStorage.clear();
+    nav("/");
     // Perform other logout steps if needed
   };
 
@@ -20,17 +27,19 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
     <Container fluid className="mt-2">
       <Row className="align-items-center">
         <Col md={2} className="d-flex justify-content-center mt-2">
-          <div>
-            <img
-              src={images}
-              alt="Description of the image"
-              style={{ maxWidth: "200px", height: "auto" }}
-            />
-          </div>
+          <Link to={"/"}>
+            <div>
+              <img
+                src={images}
+                alt="Description of the image"
+                style={{ maxWidth: "200px", height: "auto" }}
+              />
+            </div>
+          </Link>
         </Col>
 
         <Col
-          md={6}
+          md={7}
           className="d-flex justify-content-center align-items-center"
         >
           <div className="d-flex">
@@ -42,7 +51,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               </li>
               <li className="mr-4 d-flex align-items-center">
                 <Link
-                  to="/home"
+                  to="/listproduct"
                   style={{ color: "#2a3977", fontWeight: "bold" }}
                 >
                   Sản Phẩm
@@ -80,10 +89,10 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   </Dropdown.Menu>
                 </Dropdown>
               </li>
-              <li style={{marginTop:'7px', marginRight:'35px'}}>
+              <li style={{ marginTop: "7px", marginRight: "35px" }}>
                 <Link
                   to="/blog"
-                  style={{ color: "#2a3977", fontWeight: "bold",  }}
+                  style={{ color: "#2a3977", fontWeight: "bold" }}
                 >
                   Blog
                 </Link>
@@ -97,6 +106,16 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                 </Link>
               </li>
               <li className="mr-4 d-flex align-items-center">
+                {isLoggedIn && (
+                  <li className="mr-4 d-flex align-items-center">
+                    <Link
+                      to="/dashboard"
+                      style={{ color: "#2a3977", fontWeight: "bold" }}
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                )}
                 {isLoggedIn ? (
                   <Dropdown>
                     <Dropdown.Toggle
@@ -104,14 +123,32 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                       id="dropdown-settings"
                       style={{ color: "#2a3977", fontWeight: "bold" }}
                     >
-                      Setting
+                      Account
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item href="/dashboard"><GraphUpArrow style={{ fontSize: "20px", marginRight: "10px" }} />Dashboard</Dropdown.Item>
-                      <Dropdown.Item href="/changepass"><ArrowRepeat style={{ fontSize: "20px", marginRight: "10px" }} />Change Password</Dropdown.Item>
-                      <Dropdown.Item href="/profile"><PersonVcard style={{ fontSize: "20px", marginRight: "10px" }} />Account Profile</Dropdown.Item>
+                      {/* <Dropdown.Item href="/dashboard">
+                        <GraphUpArrow
+                          style={{ fontSize: "20px", marginRight: "10px" }}
+                        />
+                        Dashboard
+                      </Dropdown.Item> */}
+                      <Dropdown.Item href="/changepass">
+                        <ArrowRepeat
+                          style={{ fontSize: "20px", marginRight: "10px" }}
+                        />
+                        Change Password
+                      </Dropdown.Item>
+                      <Dropdown.Item href="/profile">
+                        <PersonVcard
+                          style={{ fontSize: "20px", marginRight: "10px" }}
+                        />
+                        Account Profile
+                      </Dropdown.Item>
                       <Dropdown.Item onClick={handleLogout}>
-                      <BoxArrowInRight style={{ fontSize: "20px", marginRight: "10px" }} />LogOut
+                        <BoxArrowInRight
+                          style={{ fontSize: "20px", marginRight: "10px" }}
+                        />
+                        LogOut
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
@@ -128,7 +165,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         </Col>
 
-        <Col md={3} className="d-flex justify-content-center">
+        <Col md={2} className="d-flex justify-content-center">
           <div>
             <Link
               to="/online-booking"
