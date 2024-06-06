@@ -45,12 +45,12 @@ const ManaPet = () => {
             <Row className="ml-1 mb-4 mt-4">
               <h3>Pet Management</h3>
             </Row>
-            <Row className="ml-1 mb-4 ">
+            {/* <Row className="ml-1 mb-4 ">
               <Button onClick={() => setVisible(true)}>
                 <PlusSquareFill className="mr-2" />
                 Add Pet
               </Button>
-            </Row>
+            </Row> */}
           </div>
 
           <Table striped bordered hover>

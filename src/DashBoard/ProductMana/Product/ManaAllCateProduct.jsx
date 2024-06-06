@@ -4,11 +4,15 @@ import ManaFood from "../Food/ManaFood";
 import ManaPet from "../Pet/ManaPet";
 import ManaToy from "../Toy/ManaToy";
 import ManaMedice from "../Medicine/ManaMedice";
+import AllProducts from "./AllProducts";
 
 const ManaAllCateProduct = () => {
   return (
     <Container fluid>
       <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+        <Tab eventKey="allproducts" title="All Products">
+          <AllProducts/>
+        </Tab>
         <Tab eventKey="Food" title="Food">
           <ManaFood />
         </Tab>
