@@ -3,12 +3,12 @@ import axios from "axios";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { PlusSquareFill, Trash, TrashFill, X } from "react-bootstrap-icons";
-import { Col, Dropdown, FormSelect, Row } from "react-bootstrap";
-import '../../style/addproduct.css'
+import { Col, FormSelect, Row } from "react-bootstrap";
+import '../../../style/addproduct.css'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const AddProduct = (props) => {
+const AddPet = (props) => {
   const { visible, setVisible } = props;
 
   const onHide = () => {
@@ -39,7 +39,7 @@ const AddProduct = (props) => {
         className="bg-light"
         style={{ width: "70vw" }}
         modal
-        header={<div className="custom-dialog-header"><h2>Add Product</h2></div>}
+        header={<div className="custom-dialog-header">Add Pet</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
@@ -48,7 +48,7 @@ const AddProduct = (props) => {
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6> Name</h6>
+                      <h6>Product Name</h6>
                     </label>
                     <input
                       type="text"
@@ -76,10 +76,10 @@ const AddProduct = (props) => {
 
                   <div className="form-group w-full">
                     <label className="label" htmlFor="congNgheManHinh">
-                      <h6>Quantity</h6>
+                      <h6>Công nghệ màn hình</h6>
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       className="form-control"
                       placeholder="Input công nghệ màn hình"
                       style={{ height: "50px" }}
@@ -88,19 +88,15 @@ const AddProduct = (props) => {
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="doPhanGiai">
-                      <h6>Pettype</h6>
+                      <h6>Độ phân giải</h6>
                     </label>
-                    <Dropdown>
-                      <Dropdown.Toggle  id="dropdown-basic">
-                        Dog
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Dog</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Cat</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                   
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Input độ phân giải"
+                      style={{ height: "50px" }}
+                      required
+                    />
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="soKheSim">
@@ -121,8 +117,8 @@ const AddProduct = (props) => {
           </div>
         </div>
       </Dialog>
-    </div>
+    </div >
   );
 };
 
-export default AddProduct;
+export default AddPet;
