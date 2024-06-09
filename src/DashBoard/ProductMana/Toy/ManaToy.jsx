@@ -3,6 +3,7 @@ import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddToy from "./AddToy";
 import EditToy from "./EditToy";
+import axios from "axios";
 
 const ManaToy = () => {
   const [visible, setVisible] = useState(false);
@@ -21,6 +22,20 @@ const ManaToy = () => {
       });
   }, []);
 
+
+  const handleDeleteToy = (id) => {
+    if (window.confirm(`Do you want to delete the toy - ID: ${id}?`)) {
+      axios
+        .delete(`http://localhost:9999/toys/${id}`)
+        .then(() => {
+          alert("Delete successfully!");
+          setToy(toy.filter((toy) => toy._id !== id));
+        })
+        .catch((err) => {
+          console.error(err.message);
+        });
+    }
+  };
   const imageBodyTemplate = (p) => {
     return (
       <img
@@ -80,7 +95,9 @@ const ManaToy = () => {
                           fontSize: "25px",
                           cursor: "pointer",
                         }}
+                        onClick={() => handleDeleteToy(t._id)} 
                       />
+
                     </i>
                   </td>
                   <td>

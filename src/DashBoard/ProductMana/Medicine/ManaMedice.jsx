@@ -3,7 +3,7 @@ import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddMedicine from "./AddMedicine";
 import EditMedicine from "./EditMedicine";
-
+import axios from "axios";
 const ManaMedice = () => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
@@ -30,6 +30,20 @@ const ManaMedice = () => {
         className="w-6rem shadow-2 border-round"
       />
     );
+  };
+
+  const handleDeleteMedice = (id) => {
+    if (window.confirm(`Do you want to delete the medice - ID: ${id}?`)) {
+      axios
+        .delete(`http://localhost:9999/medicines/${id}`)
+        .then(() => {
+          alert("Delete successfully!");
+          setMedicine(medicine.filter((medicine) => medicine._id !== id));
+        })
+        .catch((err) => {
+          console.error(err.message);
+        });
+    }
   };
 
   const handleEditMedicine = (m) => {
@@ -81,6 +95,8 @@ const ManaMedice = () => {
                           fontSize: "25px",
                           cursor: "pointer",
                         }}
+                        onClick={() => handleDeleteMedice(m._id)} 
+
                       />
                     </i>
                   </td>

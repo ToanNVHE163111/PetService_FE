@@ -72,3 +72,23 @@ span {
   background-color: #ebedf0; /* Background color on hover */
 }
 
+/* blog.css */
+.dropdown-menu {
+  padding: 0; /* Remove padding from the dropdown menu */
+}
+
+.dropdown-item {
+  padding: 5px 10px; /* Adjust padding as needed */
+  font-size: 14px; /* Adjust font size as needed */
+  text-align: center; /* Center align text */
+  min-width: 0; /* Remove any minimum width */
+}
+
+.list-unstyled {
+  margin: 0; /* Remove margin from the list */
+}
+
+.p-dialog .p-dialog-content {
+  overflow-x: hidden; /* Ẩn thanh cuộn ngang */
+}
+

@@ -3,6 +3,7 @@ import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddPet from "./AddPet";
 import EditPet from "./EditPet";
+import axios from "axios";
 
 const ManaPet = () => {
   const [visible, setVisible] = useState(false);
@@ -32,6 +33,19 @@ const ManaPet = () => {
     );
   };
 
+  const handleDeletePet = (id) => {
+    if (window.confirm(`Do you want to delete pet - ID: ${id}?`)) {
+      axios
+        .delete(`http://localhost:9999/pets/${id}`)
+        .then(() => {
+          alert("Delete successfully!");
+          setPet(pet.filter((pet) => pet._id !== id));
+        })
+        .catch((err) => {
+          console.error(err.message);
+        });
+    }
+  };
   const handleEditFood = (p) => {
     setDataEdit(p); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
     setEditVisible(true); // Hiển thị giao diện chỉnh sửa sản phẩm
@@ -83,6 +97,7 @@ const ManaPet = () => {
                           fontSize: "25px",
                           cursor: "pointer",
                         }}
+                        onClick={() => handleDeletePet(p._id)} 
                       />
                     </i>
                   </td>
