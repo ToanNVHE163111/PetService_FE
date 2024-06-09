@@ -111,7 +111,16 @@ function App() {
               </>
             }
           />
-
+           <Route
+            path="/editblog/:id"
+            element={
+              <>
+                <Header/>
+                <EditBlog />
+                <Footer />
+              </>
+            }
+          />
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/payment" element={<Payment />} />

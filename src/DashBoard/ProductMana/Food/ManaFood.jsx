@@ -3,6 +3,7 @@ import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddFood from "./AddFood";
 import EditFood from "./EditFood";
+import axios from "axios";
 
 const ManaFood = () => {
   const [visible, setVisible] = useState(false);
@@ -31,6 +32,19 @@ const ManaFood = () => {
         className="w-6rem shadow-2 border-round"
       />
     );
+  };
+  const handleDeleteFood = (id) => {
+    if (window.confirm(`Do you want to delete the food - ID: ${id}?`)) {
+      axios
+        .delete(`http://localhost:9999/foods/${id}`)
+        .then(() => {
+          alert("Delete successfully!");
+          setFood(food.filter((food) => food._id !== id));
+        })
+        .catch((err) => {
+          console.error(err.message);
+        });
+    }
   };
   const handleEditFood = (f) => {
     setDataEdit(f); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
@@ -83,6 +97,7 @@ const ManaFood = () => {
                         fontSize: "25px",
                         cursor: "pointer",
                       }}
+                      onClick={() => handleDeleteFood(f._id)}
                     />
                   </i>
                 </td>
