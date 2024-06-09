@@ -7,7 +7,7 @@ import Pending from "./Pending";
 const OrderManagement = () => {
     return (
         <Container fluid>
-        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+        <Tabs defaultActiveKey="allorder" id="uncontrolled-tab-example">
           <Tab eventKey="allorder" title="All Order">
             <AllOrder/>
           </Tab>
