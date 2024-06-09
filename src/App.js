@@ -49,7 +49,7 @@ function App() {
           />
           <Route path="/register" element={<RegisterForm />} />
           <Route
-            path="/contact-form"
+            path="/contact"
             element={
               <>
                 <ContactForm />

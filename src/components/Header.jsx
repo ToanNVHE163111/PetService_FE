@@ -15,6 +15,7 @@ import Cart from "../screens/Cart";
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [visible, setVisible] = useState(false);
   const nav = useNavigate();
+  const role = localStorage.getItem("role");
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -99,23 +100,24 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               </li>
               <li className="mr-4 d-flex align-items-center">
                 <Link
-                  to="/contact-form"
+                  to="/contact"
                   style={{ color: "#2a3977", fontWeight: "bold" }}
                 >
                   Liên hệ
                 </Link>
               </li>
+
+              {isLoggedIn && parseInt(role) === 1 && (
+                <li className="mr-4 d-flex align-items-center">
+                  <Link
+                    to="/dashboard"
+                    style={{ color: "#2a3977", fontWeight: "bold" }}
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
               <li className="mr-4 d-flex align-items-center">
-                {isLoggedIn && (
-                  <li className="mr-4 d-flex align-items-center">
-                    <Link
-                      to="/dashboard"
-                      style={{ color: "#2a3977", fontWeight: "bold" }}
-                    >
-                      Dashboard
-                    </Link>
-                  </li>
-                )}
                 {isLoggedIn ? (
                   <Dropdown>
                     <Dropdown.Toggle
