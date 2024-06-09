@@ -11,6 +11,11 @@ import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 const AllOrder = () => {
   return (
     <Container fluid>
+      <Row className="ml-1 mb-4 mt-4">
+        <Col md={6}>
+          <h3>Order Management</h3>
+        </Col>
+      </Row>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <Table striped bordered hover>
@@ -33,7 +38,14 @@ const AllOrder = () => {
                 <td>6/6/2024</td>
                 <td>Nguyễn Văn Thắng</td>
                 <td>
-                  <FormSelect style={{borderRadius:'30px', width:'110px', border:'none', paddingLeft:'8px'}}>
+                  <FormSelect
+                    style={{
+                      borderRadius: "30px",
+                      width: "110px",
+                      border: "none",
+                      paddingLeft: "8px",
+                    }}
+                  >
                     <option value="0">Pending</option>
                     <option value="1">Processing</option>
                     <option value="2">Completed</option>

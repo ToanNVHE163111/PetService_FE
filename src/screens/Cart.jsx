@@ -15,7 +15,21 @@ const Cart = (props) => {
     axios
       .get(`http://localhost:9999/cart/${user}`)
       .then((res) => {
-        setListCart(res.data);
+        const mergedCart = [];
+        const fetchedCart = res.data;
+
+        fetchedCart.forEach((item) => {
+          const existingItemIndex = mergedCart.findIndex(
+            (cartItem) => cartItem.productId._id === item.productId._id
+          );
+
+          if (existingItemIndex > -1) {
+            mergedCart[existingItemIndex].quantity += item.quantity;
+          } else {
+            mergedCart.push(item);
+          }
+        });
+        setListCart(mergedCart);
       })
       .catch((err) => {
         console.log(err.message);
@@ -35,7 +49,6 @@ const Cart = (props) => {
         });
     }
   };
-
 
   const onHide = () => {
     setVisible(false);
@@ -136,7 +149,7 @@ const Cart = (props) => {
                             <input
                               type="number"
                               min="1"
-                              style={{ width: "50px", height: "30px" }}
+                              style={{ width: "70px", height: "30px" }}
                               value={c.quantity}
                               onChange={(e) =>
                                 updateQuantity(index, parseInt(e.target.value))
