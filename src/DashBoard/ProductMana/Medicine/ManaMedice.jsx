@@ -17,11 +17,10 @@ const ManaMedice = ({categoryId}) => {
         setProducts(res.data);
       })
       .catch((error) => {
-        console.error('Error fetching toys:', error);
+        console.error('Error fetching medicine:', error);
       });
-  }, []);
+  }, [categoryId]);
 
-  console.log(categoryId);
   const imageBodyTemplate = (p) => {
     return (
       <img
@@ -46,12 +45,12 @@ const ManaMedice = ({categoryId}) => {
             <Row className="ml-1 mb-4 mt-4">
               <h3>Medicine Management</h3>
             </Row>
-            <Row className="ml-1 mb-4">
+            {/* <Row className="ml-1 mb-4">
               <Button onClick={() => setVisible(true)}>
                 <PlusSquareFill className="mr-2" />
                 Add Medicine
               </Button>
-            </Row>
+            </Row> */}
           </div>
 
           <Table striped bordered hover>

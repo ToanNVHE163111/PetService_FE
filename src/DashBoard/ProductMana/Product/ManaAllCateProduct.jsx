@@ -5,6 +5,7 @@ import ManaPet from "../Pet/ManaPet";
 import ManaToy from "../Toy/ManaToy";
 import ManaMedice from "../Medicine/ManaMedice";
 import axios from "axios";
+import AllProducts from "./AllProducts";
 
 const ManaAllCateProduct = () => {
   const [category,setCategory]=useState([])
@@ -26,7 +27,10 @@ const ManaAllCateProduct = () => {
 
   return (
     <Container fluid>
-      <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+      <Tabs defaultActiveKey="allproducts" id="uncontrolled-tab-example">
+        <Tab eventKey="allproducts" title="All Products">
+          <AllProducts/>
+        </Tab>
         <Tab eventKey="Food" title="Food">
           <ManaFood categoryId={foodId} />
         </Tab>

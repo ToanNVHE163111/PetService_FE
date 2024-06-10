@@ -19,8 +19,7 @@ const ManaPet = ({categoryId}) => {
       .catch((error) => {
         console.error('Error fetching toys:', error);
       });
-  }, []);
-  console.log(categoryId);
+  }, [categoryId]);
 
   const imageBodyTemplate = (p) => {
     return (
@@ -46,12 +45,12 @@ const ManaPet = ({categoryId}) => {
             <Row className="ml-1 mb-4 mt-4">
               <h3>Pet Management</h3>
             </Row>
-            <Row className="ml-1 mb-4 ">
+            {/* <Row className="ml-1 mb-4 ">
               <Button onClick={() => setVisible(true)}>
                 <PlusSquareFill className="mr-2" />
                 Add Pet
               </Button>
-            </Row>
+            </Row> */}
           </div>
 
           <Table striped bordered hover>

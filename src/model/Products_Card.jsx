@@ -1,4 +1,5 @@
 import React from "react";
+import { Coin } from "react-bootstrap-icons";
 const Products_Card = ({ img, obj, name, price }) => {
   return (
     <div
@@ -9,8 +10,8 @@ const Products_Card = ({ img, obj, name, price }) => {
         <img
           src={img}
           style={{
-            maxWidth: "100%",
-            maxHeight: "100%",
+            width: "250px",
+            height: "270px",
             alignItems: "center",
           }}
         ></img>
@@ -23,7 +24,7 @@ const Products_Card = ({ img, obj, name, price }) => {
       </div>
       <div>
         <h4 className="text-primary">
-          {price} <span className="align-text-bottom">đ</span>
+          <Coin style={{color:'yellow', fontSize:'27px' , marginRight:'5px'}}/>{price} <span>VND</span>
         </h4>
       </div>
     </div>

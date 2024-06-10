@@ -1,25 +1,26 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
-import AddToy from "./AddToy";
-import EditToy from "./EditToy";
+import AddProducts from "./AddProducts";
+import EditProduct from "./EditProduct";
 import axios from "axios";
-
-const ManaToy = ({categoryId}) => {
+const AllProducts = () => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
   const [products, setProducts] = useState([]);
 
+
   useEffect(() => {
-    axios.get(`http://localhost:9999/products/filter/${categoryId}`)
+    axios.get('http://localhost:9999/products')
       .then((res) => {
         setProducts(res.data);
       })
       .catch((error) => {
         console.error('Error fetching toys:', error);
       });
-  }, [categoryId]);
+  }, []);
 
   const imageBodyTemplate = (p) => {
     return (
@@ -31,25 +32,26 @@ const ManaToy = ({categoryId}) => {
       />
     );
   };
-  const handleEditToy = (t) => {
-    setDataEdit(t); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
+  const handleEditProduct = (p) => {
+    setDataEdit(p); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
     setEditVisible(true); // Hiển thị giao diện chỉnh sửa sản phẩm
   };
-
   return (
     <Container fluid>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <h3>Toy Management</h3>
+              <Col md={6}>
+                <h3>Products Management</h3>
+              </Col>
+              <Col md={6} className="d-flex justify-content-end">
+                <Button onClick={() => setVisible(true)}>
+                  <PlusSquareFill className="mr-2" />
+                  Add Product
+                </Button>
+              </Col>
             </Row>
-            {/* <Row className="ml-1 mb-4">
-              <Button onClick={() => setVisible(true)}>
-                <PlusSquareFill className="mr-2" />
-                Add Toy
-              </Button>
-            </Row> */}
           </div>
 
           <Table striped bordered hover>
@@ -59,19 +61,19 @@ const ManaToy = ({categoryId}) => {
                 <th> Name</th>
                 <th>Image</th>
                 <th>Quantity </th>
-                <th>PetType</th>
+                <th>Category</th>
                 <th colSpan={2}>Operation</th>
               </tr>
             </thead>
 
             <tbody className="text-center">
-              {products.map((t, index) => (
+              {products.map((p, index) => (
                 <tr key={index}>
-                  <td>{t._id}</td>
-                  <td>{t.name}</td>
-                  <td>{imageBodyTemplate(t)}</td>
-                  <td>{t.quantity}</td>
-                  <td>{t.pettype}</td>
+                  <td>{p._id}</td>
+                  <td>{p.name}</td>
+                  <td>{imageBodyTemplate(p)}</td>
+                  <td>{p.quantity}</td>
+                  <td>{p.pettype}</td>
                   <td>
                     <i className="delete">
                       <Trash
@@ -91,7 +93,7 @@ const ManaToy = ({categoryId}) => {
                           fontSize: "25px",
                           cursor: "pointer",
                         }}
-                        onClick={() => handleEditToy(t)}
+                        onClick={() => handleEditProduct(p)}
                       />
                     </i>
                   </td>
@@ -101,17 +103,20 @@ const ManaToy = ({categoryId}) => {
           </Table>
         </Col>
       </Row>
-      {visible === true && <AddToy visible={visible} setVisible={setVisible} />}
+      {visible === true && (
+        <AddProducts visible={visible} setVisible={setVisible} />
+      )}
 
       {editVisible === true && (
-        <EditToy
+        <EditProduct
           editVisible={editVisible}
           setEditVisible={setEditVisible}
           data={dataEdit}
+          productId={dataEdit._id}  // Truyền productId
         />
       )}
     </Container>
   );
 };
 
-export default ManaToy;
+export default AllProducts;

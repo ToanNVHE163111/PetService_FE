@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Header from "../components/Header";
@@ -8,16 +9,24 @@ import { Link, useParams } from "react-router-dom";
 import { Cart } from "react-bootstrap-icons";
 import Simila_Product from "../components/Simila_Product";
 import Comment from "./Comment";
+import Products_Card from "../model/Products_Card";
 
 const Product_Detail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
 
   useEffect(() => {
     // Lấy thông tin sản phẩm
     fetch(`http://localhost:9999/products/${id}`)
       .then((response) => response.json())
       .then((data) => setProduct(data))
+      .catch((error) => console.error(error));
+
+    // Lấy sản phẩm tương tự
+    fetch(`http://localhost:9999/products/similar/${id}`)
+      .then((response) => response.json())
+      .then((data) => setSimilarProducts(data))
       .catch((error) => console.error(error));
   }, [id]);
 
@@ -35,7 +44,7 @@ const Product_Detail = () => {
 
   return (
     <div>
-      <Header></Header>
+      {/* <Header></Header> */}
       <Container className="mt-5">
         {product && (
           <Row>
@@ -73,7 +82,27 @@ const Product_Detail = () => {
         </Row>
         <Row>
           <div>
-            <Simila_Product></Simila_Product>
+            <Row
+              className="container text-center"
+              style={{ marginTop: "100px" }}
+            >
+              <Col md={12}>
+                <h3 style={{ textAlign: "center" }}>Sản phẩm tương tự</h3>
+              </Col>
+              {similarProducts.map((similarProduct) => (
+                <Col md={4} key={similarProduct._id}>
+                  <Link to={`/detail/${similarProduct._id}`}>
+                    <Products_Card
+                      name={similarProduct.name}
+                      obj={similarProduct.pettype}
+                      price={similarProduct.price}
+                      img={similarProduct.image[0]}
+                    />
+                  </Link>
+
+                </Col>
+              ))}
+            </Row>
           </div>
         </Row>
       </Container>
