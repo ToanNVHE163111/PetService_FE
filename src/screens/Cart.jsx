@@ -3,13 +3,14 @@ import { Dialog } from "primereact/dialog";
 import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { Trash, WalletFill, X } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Cart = (props) => {
   const { visible, setVisible } = props;
   const [listCart, setListCart] = useState([]);
   const user = localStorage.getItem("userId");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -54,6 +55,7 @@ const Cart = (props) => {
     setVisible(false);
   };
   const handleCheckout = () => {
+    navigate("/checkout", { state: { listCart } });
     setVisible(false);
   };
   const calculateTotal = () => {
@@ -74,14 +76,12 @@ const Cart = (props) => {
         <h5>Total: {calculateTotal()} </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
-        <Link to={"/payment"}>
-          <Button className="btn btn-success mr-2" onClick={handleCheckout}>
-            <WalletFill
-              style={{ fontSize: "22px", color: "white", marginRight: "7px" }}
-            />
-            Check Out
-          </Button>
-        </Link>
+        <Button className="btn btn-success mr-2" onClick={handleCheckout}>
+          <WalletFill
+            style={{ fontSize: "22px", color: "white", marginRight: "7px" }}
+          />
+          Check Out
+        </Button>
         <Button onClick={onHide} className="btn btn-danger">
           <X style={{ fontSize: "22px" }} />
           Close

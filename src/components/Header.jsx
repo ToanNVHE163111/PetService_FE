@@ -16,7 +16,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [visible, setVisible] = useState(false);
   const nav = useNavigate();
   const role = localStorage.getItem("role");
-
+const fullname = localStorage.getItem("fullname");
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.clear();
@@ -40,7 +40,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         </Col>
 
         <Col
-          md={7}
+          md={8}
           className="d-flex justify-content-center align-items-center"
         >
           <div className="d-flex">
@@ -125,7 +125,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                       id="dropdown-settings"
                       style={{ color: "#2a3977", fontWeight: "bold" }}
                     >
-                      Account
+                      {fullname}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       {/* <Dropdown.Item href="/dashboard">
@@ -167,7 +167,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         </Col>
 
-        <Col md={2} className="d-flex justify-content-center">
+        <Col md={1} className="d-flex justify-content-center">
           <div>
             <Link
               to="/online-booking"

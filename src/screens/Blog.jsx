@@ -15,6 +15,7 @@ import {
 import "../style/blog.css";
 import Zoom from "react-medium-image-zoom";
 import EditBlog from "./EditBlog";
+import Comment from "./Comment";
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -31,7 +32,10 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 ));
 
 const CustomMenu = React.forwardRef(
-  ({ style, className, "aria-labelledby": labeledBy, onEdit, onDelete }, ref) => {
+  (
+    { style, className, "aria-labelledby": labeledBy, onEdit, onDelete },
+    ref
+  ) => {
     return (
       <div
         ref={ref}
@@ -49,7 +53,10 @@ const CustomMenu = React.forwardRef(
           <button className="dropdown-item dropdown-item-edit" onClick={onEdit}>
             <Pen size={18}></Pen>
           </button>
-          <button className="dropdown-item dropdown-item-delete" onClick={onDelete}>
+          <button
+            className="dropdown-item dropdown-item-delete"
+            onClick={onDelete}
+          >
             <Trash3Fill size={18}></Trash3Fill>
           </button>
         </ul>
@@ -62,7 +69,9 @@ const Blog = () => {
   const [blogs, setBlogs] = useState([]);
   const [dataEdit, setDataEdit] = useState(null);
   const [editVisible, setEditVisible] = useState(false);
-
+  const [showCommentForm, setShowCommentForm] = useState(false);
+  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [selectedBlogId, setSelectedBlogId] = useState("");
   useEffect(() => {
     axios
       .get("http://localhost:9999/blogs")
@@ -95,7 +104,9 @@ const Blog = () => {
 
   const handleUpdateBlog = (id, updatedData) => {
     setBlogs((prevBlogs) =>
-      prevBlogs.map((blog) => (blog._id === id ? { ...blog, ...updatedData } : blog))
+      prevBlogs.map((blog) =>
+        blog._id === id ? { ...blog, ...updatedData } : blog
+      )
     );
   };
 
@@ -106,7 +117,11 @@ const Blog = () => {
     const year = dateObject.getFullYear();
     return `${day}-${month}-${year}`;
   };
-
+  const handleComment = (blog) => {
+    setShowCommentForm(true);
+    setSelectedBlog(blog);
+    setSelectedBlogId(blog._id);
+  };
   return (
     <Container style={{ marginTop: "20px" }}>
       <Row>
@@ -154,7 +169,10 @@ const Blog = () => {
                 </button>
               </Col>
               <Col md={4} sm={4} xs={4} className="text-center">
-                <button className="fc-btn fc-btn-rounded" style={{ cursor: "pointer" }}>
+                <button
+                  className="fc-btn fc-btn-rounded"
+                  style={{ cursor: "pointer" }}
+                >
                   <label>
                     <Images style={{ fontSize: "25px", marginRight: "10px" }} />
                     Ảnh/Video
@@ -162,9 +180,14 @@ const Blog = () => {
                 </button>
               </Col>
               <Col md={4} sm={4} xs={4} className="text-center">
-                <button className="fc-btn fc-btn-rounded" style={{ cursor: "pointer" }}>
+                <button
+                  className="fc-btn fc-btn-rounded"
+                  style={{ cursor: "pointer" }}
+                >
                   <label>
-                    <EmojiLaughing style={{ fontSize: "25px", marginRight: "10px" }} />
+                    <EmojiLaughing
+                      style={{ fontSize: "25px", marginRight: "10px" }}
+                    />
                     Cảm xúc
                   </label>
                 </button>
@@ -195,8 +218,10 @@ const Blog = () => {
                   />
                   <b>{b.userId?.fullname}</b>
                   <Dropdown style={{ marginLeft: "auto" }}>
-                    <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                    </Dropdown.Toggle>
+                    <Dropdown.Toggle
+                      as={CustomToggle}
+                      id="dropdown-custom-components"
+                    ></Dropdown.Toggle>
                     <Dropdown.Menu
                       as={CustomMenu}
                       onEdit={() => handleEditBlog(b)}
@@ -214,12 +239,17 @@ const Blog = () => {
                 >
                   {formatDate(b.createdAt)}
                 </small>
-
                 <p>{b.content}</p>
                 <Row>
                   {b.images &&
                     b.images.map((imgSrc, index) => (
-                      <Col md={6} sm={4} xs={4} key={index} style={{marginBottom:'20px'}}>
+                      <Col
+                        md={6}
+                        sm={4}
+                        xs={4}
+                        key={index}
+                        style={{ marginBottom: "20px" }}
+                      >
                         <Zoom>
                           <img
                             src={imgSrc}
@@ -255,7 +285,10 @@ const Blog = () => {
                     </button>
                   </Col>
                   <Col md={6} sm={6} xs={6}>
-                    <button className="fc-btn fc-btn-white">
+                    <button
+                      className="fc-btn fc-btn-white"
+                      onClick={() => handleComment(b)}
+                    >
                       <div className="fc-icon fc-icon-comentar">
                         <label style={{ cursor: "pointer" }}>
                           <Chat
@@ -271,6 +304,13 @@ const Blog = () => {
               </div>
             </div>
           </Col>
+          {showCommentForm && selectedBlog && selectedBlog._id === b._id && (
+            <Comment
+              blogId={selectedBlog._id}
+              onClose={() => setShowCommentForm(false)}
+              selectedBlogId ={selectedBlogId}
+            />
+          )}
         </Row>
       ))}
       {editVisible && (
@@ -286,5 +326,3 @@ const Blog = () => {
 };
 
 export default Blog;
-
-
