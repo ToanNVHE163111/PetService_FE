@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "../style/profile.css";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import EditProfile from "./EditProfile"; // Import EditProfile component
+import "../style/profile.css";
+
 function Profile() {
   const [profile, setProfile] = useState({});
+  const [dataEdit, setDataEdit] = useState(null);
+  const [editVisible, setEditVisible] = useState(false);
   const username = localStorage.getItem("username");
+
   useEffect(() => {
     fetch(`http://localhost:9999/users/${username}`)
       .then((resp) => resp.json())
@@ -14,7 +18,20 @@ function Profile() {
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }, [username]);
+
+  const handleEditProfile = () => {
+    setDataEdit(profile);
+    setEditVisible(true);
+  };
+
+  const handleUpdateProfile = (id, updatedData) => {
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      ...updatedData
+    }));
+  };
+
   return (
     <div>
       <div className="container-xl px-4 mt-4">
@@ -36,14 +53,12 @@ function Profile() {
                 <img
                   className="img-account-profile rounded-circle mb-2"
                   src="http://bootdey.com/img/Content/avatar/avatar1.png"
-                  alt=""
+                  alt="Profile"
                 />
               </div>
             </div>
             <div className="mt-4 text-center" style={{ marginLeft: "100px" }}>
-              <Link to={"/editprofile"}>
-                <Button>Edit Profile</Button>
-              </Link>
+              <Button onClick={handleEditProfile}>Edit Profile</Button>
             </div>
           </div>
           <div className="col-xl-8 d-flex justify-content-center">
@@ -58,7 +73,6 @@ function Profile() {
                   <label className="small mb-1">Email address</label>
                   <p className="form-control">{profile.gmail}</p>
                 </div>
-
                 <div className="mb-3">
                   <label className="small mb-1">Gender</label>
                   <p className="form-control">{profile.gender}</p>
@@ -80,6 +94,14 @@ function Profile() {
           </div>
         </div>
       </div>
+      {editVisible && (
+        <EditProfile
+          editVisible={editVisible}
+          setEditVisible={setEditVisible}
+          data={dataEdit}
+          onUpdate={handleUpdateProfile}
+        />
+      )}
     </div>
   );
 }
