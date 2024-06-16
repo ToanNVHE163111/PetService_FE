@@ -151,7 +151,7 @@ const Checkout = () => {
                     <b>{calculateTotal()} VND</b>
                   </div>
                 </div>
-
+                {}
                 <button className="payment-btn">Place order</button>
               </div>
             </Col>
