@@ -1,90 +1,139 @@
-import React, { useState } from 'react';
-import Header from '../components/Header';
-import '../style/editprofile.css';
-function EditProfile() {
-    const [fullName, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [gender, setGender] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('');
+import React, { useState, useEffect } from 'react';
+import { Modal, Button, Form, Toast } from 'react-bootstrap';
+import axios from 'axios';
 
-    const handleSaveChanges = () => {
-        console.log("Full Name:", fullName);
-        console.log("Email:", email);
-        console.log("Password:", password);
-        console.log("Gender:", gender);
-        console.log("Birthday:", birthday);
-        console.log("Phone:", phone);
-        console.log("Address:", address);
-    };
+const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
+  const [formData, setFormData] = useState({
+    fullname: '',
+    gender: '',
+    birthday: '',
+    phone: '',
+    address: '',
+    gmail: data.gmail // Khởi tạo trạng thái ban đầu với dữ liệu từ props
+  });
+  const [showSuccessToast, setShowSuccessToast] = useState(false); // State cho Toast thành công
 
-    return (
-        <div>
-            <div className="container-xl px-4 mt-4">
-                <nav className="nav nav-borders">
-                    <a className="nav-link active ms-0" href="https://www.bootdey.com/snippets/view/bs5-edit-profile-account-details" target="__blank">Edit Profile</a>
-                </nav>
-                <hr className="mt-0 mb-4" />
-                <div className="row">
-                    <div className="col-xl-4">
-                        <div className="card mb-4 mb-xl-0">
-                            <div className="card-header">Profile Picture</div>
-                            <div className="card-body text-center">
-                                <img className="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
-                                <div className="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                                <button className="btn btn-primary" type="button">Upload new image</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-xl-8 d-flex justify-content-center">
-                        <div className="card mb-4">
-                            <div className="card-header text-center">Account Details</div>
-                            <div className="card-body">
-                                <form>
-                                    <div className="mb-3">
-                                        <label className="small mb-1" htmlFor="inputFullName">Full Name</label>
-                                        <input className="form-control" id="inputFullName" type="text" placeholder="Enter your full name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="small mb-1" htmlFor="inputEmail">Email address</label>
-                                        <input className="form-control" id="inputEmail" type="email" placeholder="Enter your email address" value={email} onChange={(e) => setEmail(e.target.value)} />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="small mb-1" htmlFor="inputPassword">Password</label>
-                                        <input className="form-control" id="inputPassword" type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="small mb-1" htmlFor="inputGender">Gender</label>
-                                        <select className="form-control" id="inputGender" value={gender} onChange={(e) => setGender(e.target.value)}>
-                                            <option value="">Select your gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="small mb-1" htmlFor="inputBirthday">Birthday</label>
-                                        <input className="form-control" id="inputBirthday" type="date" placeholder="Enter your birthday" value={birthday} onChange={(e) => setBirthday(e.target.value)} />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="small mb-1" htmlFor="inputPhone">Phone number</label>
-                                        <input className="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value={phone} onChange={(e) => setPhone(e.target.value)} />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="small mb-1" htmlFor="inputAddress">Address</label>
-                                        <input className="form-control" id="inputAddress" type="text" placeholder="Enter your address" value={address} onChange={(e) => setAddress(e.target.value)} />
-                                    </div>
-                                    <button className="btn btn-primary" type="button" onClick={handleSaveChanges}>Save changes</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
+  // Cập nhật dữ liệu mỗi khi props thay đổi
+  useEffect(() => {
+    setFormData({
+      fullname: data.fullname,
+      gender: data.gender,
+      birthday: data.birthday,
+      phone: data.phone,
+      address: data.address,
+      gmail: data.gmail
+    });
+  }, [data]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // Chỉ cập nhật giá trị nếu có sự thay đổi từ người dùng
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .put(`http://localhost:9999/users/${data.username}`, formData)
+      .then((res) => {
+        onUpdate(data.username, formData);
+        setEditVisible(false);
+        setShowSuccessToast(true); // Hiển thị Toast thành công khi cập nhật thành công
+      })
+      .catch((error) => {
+        console.error('Error updating profile:', error);
+      });
+  };
+
+  return (
+    <Modal show={editVisible} onHide={() => setEditVisible(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Edit Profile</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="fullname"
+              value={formData.fullname}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Gmail</Form.Label>
+            <Form.Control
+              type="email"
+              name="gmail"
+              value={formData.gmail}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Gender</Form.Label>
+            <Form.Control
+              as="select"
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              required
+            >
+              <option value="" disabled>Please select your gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Birthday</Form.Label>
+            <Form.Control
+              type="date"
+              name="birthday"
+              value={formData.birthday}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Phone</Form.Label>
+            <Form.Control
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Save Changes
+          </Button>
+        </Form>
+      </Modal.Body>
+      {/* Toast thành công */}
+      <Toast show={showSuccessToast} onClose={() => setShowSuccessToast(false)} delay={3000} autohide>
+        <Toast.Header>
+          <strong className="me-auto">Success</strong>
+        </Toast.Header>
+        <Toast.Body>Edit profile successful!</Toast.Body>
+      </Toast>
+    </Modal>
+  );
+};
 
 export default EditProfile;
