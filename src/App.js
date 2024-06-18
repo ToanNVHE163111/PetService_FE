@@ -20,6 +20,7 @@ import EditBlog from "./screens/EditBlog";
 import Profile from "./screens/Profile";
 import EditProfile from "./screens/EditProfile";
 import Checkout from "./screens/Checkout";
+import OrderStatus from "./DashBoard/OrderMana/OrderStatus";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -124,6 +125,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-status" element={<OrderStatus />} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>

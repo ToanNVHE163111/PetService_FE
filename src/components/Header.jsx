@@ -5,6 +5,7 @@ import images from "../assets/images/Pet_logo.png";
 import {
   ArrowRepeat,
   BoxArrowInRight,
+  Cart2,
   CartFill,
   GraphUpArrow,
   PersonVcard,
@@ -40,7 +41,7 @@ const fullname = localStorage.getItem("fullname");
         </Col>
 
         <Col
-          md={8}
+          md={7}
           className="d-flex justify-content-center align-items-center"
         >
           <div className="d-flex">
@@ -74,22 +75,7 @@ const fullname = localStorage.getItem("fullname");
                   </Dropdown.Menu>
                 </Dropdown>
               </li>
-              <li className="mr-4">
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="link"
-                    id="dropdown-shop"
-                    style={{ color: "#2a3977", fontWeight: "bold" }}
-                  >
-                    Cửa hàng
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="/shop1">Cửa hàng 1</Dropdown.Item>
-                    <Dropdown.Item href="/shop2">Cửa hàng 2</Dropdown.Item>
-                    <Dropdown.Item href="/shop3">Cửa hàng 3</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </li>
+              
               <li style={{ marginTop: "7px", marginRight: "35px" }}>
                 <Link
                   to="/blog"
@@ -146,6 +132,12 @@ const fullname = localStorage.getItem("fullname");
                         />
                         Account Profile
                       </Dropdown.Item>
+                      <Dropdown.Item href="/order-status">
+                        <Cart2
+                          style={{ fontSize: "20px", marginRight: "10px" }}
+                        />
+                        Xem đơn hàng
+                      </Dropdown.Item>
                       <Dropdown.Item onClick={handleLogout}>
                         <BoxArrowInRight
                           style={{ fontSize: "20px", marginRight: "10px" }}
@@ -167,7 +159,7 @@ const fullname = localStorage.getItem("fullname");
           </div>
         </Col>
 
-        <Col md={1} className="d-flex justify-content-center">
+        <Col md={2} className="d-flex justify-content-center">
           <div>
             <Link
               to="/online-booking"

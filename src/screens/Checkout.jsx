@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../style/payment.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import { CashStack } from "react-bootstrap-icons";
-import { PayPalButton } from "react-paypal-button-v2";
-
+import { toast } from "react-toastify";
+import axios from "axios";
 const Checkout = () => {
   const location = useLocation();
   const { listCart } = location.state || { listCart: [] };
   const [profile, setProfile] = useState({});
   const username = localStorage.getItem("username");
   const [paymentMethod, setPaymentMethod] = useState("0");
-
+  const nav = useNavigate()
   const calculateTotal = () => {
     let total = 0;
     listCart.forEach((p) => {
@@ -39,7 +39,28 @@ const Checkout = () => {
       });
   }, [username]);
 
+  const handlePlaceOrder = () => {
+    const orderData = {
+      paymentMethod: paymentMethod === "COD" ? "COD" : paymentMethod,
+      listCart: listCart,
+      profile: profile,
+    };
 
+    axios
+      .post("http://localhost:9999/payment", orderData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+        if (data.message) toast.success(data.message);
+        nav("/")
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   return (
     <div>
@@ -110,7 +131,7 @@ const Checkout = () => {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                   >
                     <option value="0">Choose payment method</option>
-                    <option value="cash">Ship Cod</option>
+                    <option value="COD">Ship Cod</option>
                     <option value="zalopay">Pay with zalopay</option>
                   </select>
                 </div>
@@ -160,10 +181,10 @@ const Checkout = () => {
                     <b>{calculateTotal()} VND</b>
                   </div>
                 </div>
-                {paymentMethod === "zalopay" ? (
-                   <button className="payment-btn">Pay with zalopay</button>
-                ) : (
-                  <button className="payment-btn">Place order</button>
+                {paymentMethod !== "0" && (
+                  <button className="payment-btn" onClick={handlePlaceOrder}>
+                    {paymentMethod === "zalopay" ? "Pay with zalopay" : "Place order"}
+                  </button>
                 )}
               </div>
             </Col>
