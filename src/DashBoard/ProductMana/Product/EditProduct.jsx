@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { PlusSquareFill, X } from "react-bootstrap-icons";
+import { PlusSquareDotted, PlusSquareFill, Trash, X } from "react-bootstrap-icons";
 import { Col, FormSelect, Row } from "react-bootstrap";
 import '../../../style/addproduct.css'
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TextArea from "antd/es/input/TextArea";
-import ComUpImg from "../../../ComeUpImage/ComUpImg";
+import Loading from "../../../components/Loading";
 
 
 const EditProduct = (props) => {
@@ -19,6 +19,9 @@ const EditProduct = (props) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedPettype, setSelectedPettype] = useState(null);
   const [category, setCategory] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [imagesPreview, setImagesPreview] = useState([])
+
 
 
   const nav = useNavigate();
@@ -33,11 +36,17 @@ const EditProduct = (props) => {
         console.error('Error fetching toys:', error);
       });
   }, []);
-console.log(image);
+  // console.log(editProducts);
+  // console.log(image);
   useEffect(() => {
     axios.get('http://localhost:9999/products/' + productId)
       .then((res) => {
-        setEditProducts(res.data);
+        setEditProducts({
+          ...res.data,
+          category: res.data.category?._id
+        });
+        setImagesPreview(res.data.image);
+        setImages(res.data.image)
         if (res.data.image && res.data.image.length > 0) {
           setImages(res.data.image);
         }
@@ -50,21 +59,19 @@ console.log(image);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    const newImageUrls = image.map((file) => file.url);
-
     axios
       .put("http://localhost:9999/products/" + productId, {
-        name:editProducts.name,
-        image:newImageUrls,
-        quantity:editProducts.quantity,
-        description:editProducts.description,
-        pettype:selectedPettype,
-        category:selectedCategory,  
-        price:editProducts.price
+        name: editProducts.name,
+        image: image,
+        quantity: editProducts.quantity,
+        description: editProducts.description,
+        pettype: selectedPettype,
+        category: selectedCategory,
+        price: editProducts.price
       })
       .then((response) => {
         if (response.status === 200) {
-          alert("Edit profile successfully");
+          toast.success("Product added successfully!");
           setEditVisible(false);
         } else {
           console.log("Edit profile failed");
@@ -95,23 +102,41 @@ console.log(image);
       </Button>
     </div>
   );
+  const handleFiles = async (e) => {
+    e.preventDefault();
+    setIsLoading(true)
+    let newImages = [];
+    let files = e.target.files;
+
+    for (let i = 0; i < files.length; i++) {
+      let formData = new FormData();
+      formData.append("file", files[i]);
+      formData.append("upload_preset", "bqu3hmdq");
+
+      const response = await axios({
+        method: 'post',
+        url: `https://api.cloudinary.com/v1_1/dakpa1ph2/image/upload/`,
+        data: formData,
+      });
+
+      if (response.status === 200) {
+        newImages.push(response.data.url);
+      } else {
+        console.log("Failed to upload image");
+      }
+    }
+    setIsLoading(false)
+    setImages([...editProducts.image, ...newImages]); // Thêm ảnh mới vào images từ editProducts
+    setImagesPreview([...imagesPreview, ...newImages]); // Cập nhật imagesPreview thay đổi
+
+  };
 
 
-const onChange = (data) => {
-  // Cập nhật trạng thái 'image' bằng danh sách các đối tượng tệp mới
-  setImages(data);
-  onChangeEditProducts(data);
-};
+  const handleDeleteImage = (image) => {
+    setImages((prev) => prev.filter((item) => item !== image));
+    setImagesPreview((prev) => prev.filter((item) => item !== image));
+  };
 
-const onChangeEditProducts = (data) => {
-  // Tạo một mảng chứa URL của các hình ảnh từ fileList
-  const newImageUrls = data.map((file) => file.url);
-  // Cập nhật trạng thái 'editProducts' với danh sách URL hình ảnh mới
-  setEditProducts({
-    ...editProducts,
-    image: newImageUrls
-  });
-};
   return (
     <div className="card flex justify-content-center">
       <Dialog
@@ -166,16 +191,23 @@ const onChangeEditProducts = (data) => {
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="description">
-                      <h6>Images</h6>
+                      <h5>Images</h5>
                     </label>
-                    <ComUpImg onChange={onChange} existingImages={image} />
+                    <label style={{ "paddingLeft": "100px" }} htmlFor="file">
+                      {isLoading
+                        ? <Loading />
+                        : <div className='flex flex-col items-center justify-center'>
+                          <PlusSquareDotted style={{ "cursor": "pointer" }} color='' size={80} />
+                        </div>}
+                    </label>
+                    <input onChange={handleFiles} hidden type="file" id='file' multiple />
                   </div>
                 </Col>
                 <Col md={6} >
                   <Row>
                     <Col md={6}>
                       <div className="form-group w-full">
-                        <label className="label" htmlFor="congNgheManHinh">
+                        <label className="label" htmlFor="quantity">
                           <h6>Quantity</h6>
                         </label>
                         <input
@@ -194,7 +226,7 @@ const onChangeEditProducts = (data) => {
                     </Col>
                     <Col md={6}>
                       <div className="form-group w-full">
-                        <label className="label" htmlFor="congNgheManHinh">
+                        <label className="label" htmlFor="price">
                           <h6>Price</h6>
                         </label>
                         <input
@@ -255,6 +287,21 @@ const onChangeEditProducts = (data) => {
                       </div>
                     </Col>
                   </Row>
+                  <Col md={12} style={{ "paddingTop": "125px" }}>
+                    <Row className="image-container">
+                      {imagesPreview.map((item, index) => (
+                        <Col md={3} key={index} className="image-item">
+                          <div className="relative">
+                            <img src={item} alt="preview" />
+                            <span title="Xóa" onClick={() => handleDeleteImage(item)}>
+                              <Trash />
+                            </span>
+                          </div>
+                        </Col>
+                      ))}
+                    </Row>
+
+                  </Col>
                 </Col>
 
               </Row>

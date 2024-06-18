@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, Upload, message } from 'antd';
+import {  Upload, message } from 'antd';
 import { PlusOutlined } from "@ant-design/icons";
 const ComUpImg = ({ onChange, numberImg, existingImages }) => {
   const [fileList, setFileList] = useState([]);
@@ -13,11 +12,17 @@ const ComUpImg = ({ onChange, numberImg, existingImages }) => {
         existingImages.map((img, index) => ({
           uid: `${index}`,
           status: 'done',
-          url: `${img}`,
+          url: (img.thumbUrl || img.url) ||(img.url||img.thumbUrl)
         }))
       );
     }
   }, [existingImages]);
+
+  const handleDelete = (file) => {
+    const updatedFileList = fileList.filter((item) => item.uid !== file.uid);
+    setFileList(updatedFileList);
+    onChange(updatedFileList);
+  }
 
   console.log(existingImages);
   const isImageFile = (file) => {
@@ -55,7 +60,10 @@ const ComUpImg = ({ onChange, numberImg, existingImages }) => {
         accept=".jpg,.jpeg,.png,.gif" // Chỉ cho phép chọn các tệp hình ảnh
         multiple={true} // Cho phép chọn nhiều tệp
       >
-        <PlusOutlined />
+        <div>
+          <PlusOutlined />
+          <div className="ant-upload-text">Upload</div>
+        </div>
       </Upload>
     </>
   );

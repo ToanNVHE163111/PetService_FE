@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { PlusSquareFill, Trash, TrashFill, X } from "react-bootstrap-icons";
+import { Image, PlusCircleDotted, PlusSquareDotted, PlusSquareFill, Trash, TrashFill, X } from "react-bootstrap-icons";
 import { Col, Form, FormSelect, Row } from "react-bootstrap";
 import "../../../style/addproduct.css";
 import { toast } from "react-toastify";
 import TextArea from "antd/es/input/TextArea";
 import ComUpImg from "../../../ComeUpImage/ComUpImg";
 import { useNavigate } from 'react-router-dom';
+import Loading from "../../../components/Loading";
 
 
 
@@ -23,6 +24,9 @@ const AddProducts = (props) => {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
+  const [imagesPreview, setImagesPreview] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const navigate = useNavigate();
 
@@ -39,7 +43,7 @@ const AddProducts = (props) => {
     setVisible(false);
   };
 
-
+  console.log(image);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -52,21 +56,32 @@ const AddProducts = (props) => {
       formData.append("category", selectedCategory);
       formData.append("price", price);
 
-      // Thêm các hình ảnh vào formData
-      image.forEach((img) => {
-        formData.append("image", img);
+      // Thêm URL ảnh vào formData
+      image.forEach((imgUrl) => {
+        formData.append("image", imgUrl);
       });
 
-      await axios.post("http://localhost:9999/products", formData);
-      toast.success("Product added successfully!");
-      setVisible(false);
-      navigate("/dashboard");
+      const response = await axios.post("http://localhost:9999/products", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
+      if (response.status === 201) {
+        toast.success("Product added successfully!");
+        console.log(response.data);
+        setVisible(false);
+        navigate("/dashboard");
+      } else {
+        console.error("Error adding product:", response.data);
+        toast.error("Error adding product. Please try again.");
+      }
     } catch (error) {
       console.error("Error adding product:", error);
       toast.error("Error adding product. Please try again.");
     }
   };
+
 
   const dialogFooter = (
     <div style={{ margin: "20px", textAlign: 'end' }}>
@@ -86,14 +101,40 @@ const AddProducts = (props) => {
   );
 
 
-  const onChange = (data) => {
-    const selectedImages = data;
-    // Tạo một mảng chứa đối tượng 'originFileObj' của các tệp đã chọn
-    const newImages = selectedImages.map((file) => file.originFileObj);
-    // Cập nhật trạng thái 'image' bằng danh sách tệp mới
+  const handleFiles = async (e) => {
+    e.preventDefault();
+    setIsLoading(true)
+    let newImages = [];
+    let files = e.target.files;
+
+    for (let i = 0; i < files.length; i++) {
+      let formData = new FormData();
+      formData.append("file", files[i]);
+      formData.append("upload_preset", "bqu3hmdq");
+
+      const response = await axios({
+        method: 'post',
+        url: `https://api.cloudinary.com/v1_1/dakpa1ph2/image/upload/`,
+        data: formData,
+      });
+
+      if (response.status === 200) {
+        newImages.push(response.data.url);
+      } else {
+        console.log("Failed to upload image");
+      }
+    }
+    setIsLoading(false)
+    setImagesPreview(prev => [...prev, ...newImages])
     setImages(newImages);
-    // setFileList(data);
-  }
+  };
+
+
+  const handleDeleteImage = (image) => {
+    setImages((prev) => prev.filter((item) => item !== image));
+    setImagesPreview((prev) => prev.filter((item) => item !== image));
+  };
+
 
   return (
     <div className="card flex justify-content-center">
@@ -141,13 +182,21 @@ const AddProducts = (props) => {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
-                  <div className="form-group w-full">
+                  <div className="form-group w-full p-4">
                     <label className="label" htmlFor="description">
-                      <h6>Images</h6>
+                      <h5>Images</h5>
                     </label>
-                    <ComUpImg onChange={onChange} />
+                    <label style={{"paddingLeft":"100px" }} htmlFor="file">
+                      {isLoading
+                        ? <Loading />
+                        : <div className='flex flex-col items-center justify-center'>
+                          <PlusSquareDotted style={{"cursor": "pointer"}} color='' size={80} />
+                        </div>}
+                    </label>
+                    <input onChange={handleFiles} hidden type="file" id='file' multiple />
                   </div>
                 </Col>
+
                 <Col md={6} >
                   <Row>
                     <Col md={6}>
@@ -224,7 +273,23 @@ const AddProducts = (props) => {
                       </div>
                     </Col>
                   </Row>
+                  <Col md={12} style={{ "paddingTop": "125px" }}>
+                    <Row className="image-container">
+                      {imagesPreview?.map((item, index) => (
+                        <Col md={3} key={index} className="image-item">
+                          <div className="relative">
+                            <img src={item} alt="preview" />
+                            <span title="Xóa" onClick={() => handleDeleteImage(item)}>
+                              <Trash />
+                            </span>
+                          </div>
+                        </Col>
+                      ))}
+                    </Row>
+
+                  </Col>
                 </Col>
+
 
               </Row>
             </form>

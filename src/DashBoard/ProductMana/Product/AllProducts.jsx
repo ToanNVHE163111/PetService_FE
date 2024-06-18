@@ -20,7 +20,7 @@ const AllProducts = () => {
       .catch((error) => {
         console.error('Error fetching toys:', error);
       });
-  }, []);
+  }, [products]);
 
   const imageBodyTemplate = (p) => {
     return (
