@@ -111,7 +111,7 @@ const Checkout = () => {
                   >
                     <option value="0">Choose payment method</option>
                     <option value="cash">Ship Cod</option>
-                    <option value="momo">Pay with momo</option>
+                    <option value="zalopay">Pay with zalopay</option>
                   </select>
                 </div>
               </div>
@@ -160,8 +160,8 @@ const Checkout = () => {
                     <b>{calculateTotal()} VND</b>
                   </div>
                 </div>
-                {paymentMethod === "momo" ? (
-                   <button className="payment-btn">Pay with momo</button>
+                {paymentMethod === "zalopay" ? (
+                   <button className="payment-btn">Pay with zalopay</button>
                 ) : (
                   <button className="payment-btn">Place order</button>
                 )}

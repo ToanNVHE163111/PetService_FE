@@ -37,13 +37,13 @@ const Cart = (props) => {
       });
   }, [user]);
 
-  const handleDelete = (index) => {
-    if (window.confirm("Are you sure you want to delete" + index + "?")) {
+  const handleDelete = (productId) => {
+    if (window.confirm("Are you sure you want to delete" + productId + "?")) {
       axios
-        .delete("http://localhost:9999/cart/" + index)
+        .delete("http://localhost:9999/cart/" + productId)
         .then(() => {
           toast.success("Cart updated successfully");
-          setListCart(listCart.filter((t) => t._id !== index));
+          setListCart(listCart.filter((t) => t.productId._id !== productId));
         })
         .catch((err) => {
           console.log(err.message);
@@ -169,7 +169,7 @@ const Cart = (props) => {
                                 fontSize: "25px",
                                 cursor: "pointer",
                               }}
-                              onClick={() => handleDelete(c._id)}
+                              onClick={() => handleDelete(c.productId._id)}
                             />
                           </td>
                         </tr>
