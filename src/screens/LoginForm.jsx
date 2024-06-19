@@ -32,7 +32,6 @@ const LoginForm = ({ setIsLoggedIn }) => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("username", username); // Lưu tên người dùng vào localStorage
       localStorage.setItem("fullname", fullname); // Lưu tên người dùng vào localStorage
-      localStorage.setItem("password", password); // Lưu tên người dùng vào localStorage
       localStorage.setItem("userId", id);
       localStorage.setItem("role", role);
 

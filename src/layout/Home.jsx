@@ -4,10 +4,15 @@ import images from "../assets/images/pet-cover.png";
 import Header from "../components/Header";
 import Products_Card from "../model/Products_Card";
 import { Link } from "react-router-dom";
-
+import { Paginator } from "primereact/paginator"; // Import Paginator
+import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/saga-blue/theme.css";
 const Home = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [first, setFirst] = useState(0);
+  const [rows, setRows] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetch("http://localhost:9999/products")
@@ -22,6 +27,12 @@ const Home = () => {
       .then((data) => setCategories(data))
       .catch((error) => console.error(error));
   }, []);
+  const onPageChange = (event) => {
+    setFirst(event.first);
+    setCurrentPage(event.page + 1);
+    setRows(event.rows);
+  };
+  const productsOnPage = products.slice(first, first + rows); // Danh sách sản phẩm trên trang hiện tại
 
   return (
     <div>
@@ -54,7 +65,7 @@ const Home = () => {
           </Row>
         </Col>
         <Col className="d-flex align-content-between flex-wrap " md={9}>
-          {products.map((product) => (
+          {productsOnPage.map((product) => (
             <div key={product._id} style={{ marginBottom: "10px" }}>
               <Link to={`/detail/${product._id}`}>
                 <Products_Card
@@ -67,6 +78,20 @@ const Home = () => {
             </div>
           ))}
         </Col>
+      </Row>
+      <Row
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <Paginator
+          first={first}
+          rows={rows}
+          totalRecords={products.length}
+          onPageChange={onPageChange}
+        />
       </Row>
     </div>
   );

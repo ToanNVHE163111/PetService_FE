@@ -10,10 +10,11 @@ import {
   ThreeDotsVertical,
   TrashFill,
 } from "react-bootstrap-icons";
+
 // import jwt from "jsonwebtoken";
 import { InputText } from "primereact/inputtext";
 
-const Comment = () => {
+const Comment = ({selectedBlogId}) => {
   const { id } = useParams();
   const [listComments, setListComments] = useState([]);
   const [text, setText] = useState("");
@@ -24,7 +25,6 @@ const Comment = () => {
   const [selectedComment, setSelectedComment] = useState(null);
   const [updateInput, setUpdateInput] = useState(false);
   const [selectedCommentIndex, setSelectedCommentIndex] = useState(null);
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -54,6 +54,23 @@ const Comment = () => {
       });
   }, []);
 
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:9999/comments/blog/" + selectedBlogId)
+      .then((res) => {
+        const sortedComments = res.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setListComments(sortedComments);
+        console.log(sortedComments);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+
   const handleDeleteComment = (e, index) => {
     e.preventDefault();
     if (window.confirm("Are you sure you want to delete" + index + "?")) {
@@ -68,28 +85,32 @@ const Comment = () => {
         });
     }
   };
+  console.log(selectedBlogId);
   const handleCreate = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:9999/comments", {
         text: text,
         userId: userId,
-        // petId: id,
-        // toyId: id,
-        // foodId: id,
-        // medicineId: id,
         productId: id,
+        blogId: selectedBlogId,
       })
+      
       .then((response) => {
         if (response.status === 201) {
-          const newCommentId = response.data.addComment._id; 
-          const userId = response.data.addComment.userId; 
-          const time = response.data.addComment.createdAt; 
+          const newCommentId = response.data.addComment._id;
+          const userId = response.data.addComment.userId;
+          const time = response.data.addComment.createdAt;
           console.log(userId);
           console.log(newCommentId);
           setListComments([
-            { _id:newCommentId, userId: {fullname: fullname }, text: text,createdAt: time },
-            ...listComments, 
+            {
+              _id: newCommentId,
+              userId: { fullname: fullname },
+              text: text,
+              createdAt: time,
+            },
+            ...listComments,
           ]);
           toast.success("Comment created successfully");
           setText("");
@@ -242,7 +263,9 @@ const Comment = () => {
                 </svg>
               </div>
               <div class="user-info">
-                <p style={{ fontSize: "15px", color:'black' }}>{c.userId.fullname}</p>
+                <p style={{ fontSize: "15px", color: "black" }}>
+                  {c.userId.fullname}
+                </p>
                 <small
                   style={{
                     display: "block",
@@ -295,11 +318,17 @@ const Comment = () => {
                 ) : (
                   <div
                     className="bg-light"
-                    style={{ width: "auto", height: "30px", paddingLeft: "10px", paddingRight: "10px", borderRadius:'10px' }}
+                    style={{
+                      width: "auto",
+                      height: "30px",
+                      paddingLeft: "10px",
+                      paddingRight: "10px",
+                      borderRadius: "10px",
+                    }}
                   >
                     <p
                       className="comment-text p-2 "
-                      style={{ fontSize: "15px", color:'black' }}
+                      style={{ fontSize: "15px", color: "black" }}
                     >
                       {c.text}
                     </p>
@@ -317,7 +346,7 @@ const Comment = () => {
                     </Button>
                   </>
                 )}
-                {isCurrentUserComment(c.userId.fullname ) &&
+                {isCurrentUserComment(c.userId.fullname) &&
                   selectedCommentIndex === index && (
                     <>
                       <Button
