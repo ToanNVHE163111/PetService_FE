@@ -121,4 +121,3 @@ const ManaFood = ({categoryId}) => {
 };
 
 export default ManaFood;
-
