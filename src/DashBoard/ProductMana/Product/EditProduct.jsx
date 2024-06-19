@@ -36,7 +36,6 @@ const EditProduct = (props) => {
         console.error('Error fetching toys:', error);
       });
   }, []);
-  // console.log(editProducts);
   // console.log(image);
   useEffect(() => {
     axios.get('http://localhost:9999/products/' + productId)
@@ -47,6 +46,8 @@ const EditProduct = (props) => {
         });
         setImagesPreview(res.data.image);
         setImages(res.data.image)
+        setSelectedCategory(res.data.category)
+        setSelectedPettype(res.data.pettype)
         if (res.data.image && res.data.image.length > 0) {
           setImages(res.data.image);
         }
@@ -71,8 +72,9 @@ const EditProduct = (props) => {
       })
       .then((response) => {
         if (response.status === 200) {
-          toast.success("Product added successfully!");
+          toast.success("Product updated successfully!");
           setEditVisible(false);
+          console.log(editProducts);
         } else {
           console.log("Edit profile failed");
         }
@@ -252,9 +254,13 @@ const EditProduct = (props) => {
                         </label><br></br>
                         <select
                           className="form-control"
-                          value={editProducts.category?._id}
+                          value={editProducts.category}
                           name="category"
-                          onChange={(e) => setSelectedCategory(e.target.value)}
+                          onChange={(e) => {
+                            const updatedCategory = e.target.value;
+                            setEditProducts({ ...editProducts, category: updatedCategory });
+                            setSelectedCategory(updatedCategory);
+                          }}
                           required
                           style={{ "height": "50px" }}
                         >
@@ -276,7 +282,11 @@ const EditProduct = (props) => {
                           className="form-control "
                           value={editProducts.pettype}
                           name="pettype"
-                          onChange={(e) => setSelectedPettype(e.target.value)}
+                          onChange={(e) => {
+                            const updatedPettype = e.target.value;
+                            setEditProducts({ ...editProducts, pettype: updatedPettype });
+                            setSelectedPettype(updatedPettype);
+                          }}
                           required
                           style={{ "height": "50px" }}
                         >
