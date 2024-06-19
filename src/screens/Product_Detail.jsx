@@ -5,7 +5,7 @@ import "react-medium-image-zoom/dist/styles.css";
 import Zoom from "react-medium-image-zoom";
 import images from "../assets/images/product.png";
 import { Link, useParams } from "react-router-dom";
-import { Cart, CartPlus } from "react-bootstrap-icons";
+import { Cart, CartPlus, Coin } from "react-bootstrap-icons";
 import Simila_Product from "../components/Simila_Product";
 import Comment from "./Comment";
 import Products_Card from "../model/Products_Card";
@@ -95,7 +95,15 @@ const Product_Detail = () => {
           <Col md={6}>
             <div>
               <h2>{product.name}</h2>
-              <h4>{product.price}</h4>
+              <Coin
+                style={{
+                  color: "yellow",
+                  fontSize: "27px",
+                  marginRight: "5px",
+                  marginBottom: "10px",
+                }}
+              />
+              {product.price} <span>VND</span>
               <div class="d-flex align-items-center">
                 <Button
                   onClick={decreaseQuantity}

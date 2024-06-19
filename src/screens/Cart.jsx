@@ -3,7 +3,7 @@ import { Dialog } from "primereact/dialog";
 import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { Trash, WalletFill, X } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../style/addproduct.css";
 
@@ -12,6 +12,7 @@ const Cart = (props) => {
   const { visible, setVisible } = props;
   const [listCart, setListCart] = useState([]);
   const user = localStorage.getItem("userId");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -38,13 +39,13 @@ const Cart = (props) => {
       });
   }, [user]);
 
-  const handleDelete = (index) => {
-    if (window.confirm("Are you sure you want to delete" + index + "?")) {
+  const handleDelete = (productId) => {
+    if (window.confirm("Are you sure you want to delete" + productId + "?")) {
       axios
-        .delete("http://localhost:9999/cart/" + index)
+        .delete("http://localhost:9999/cart/" + productId)
         .then(() => {
           toast.success("Cart updated successfully");
-          setListCart(listCart.filter((t) => t._id !== index));
+          setListCart(listCart.filter((t) => t.productId._id !== productId));
         })
         .catch((err) => {
           console.log(err.message);
@@ -56,6 +57,7 @@ const Cart = (props) => {
     setVisible(false);
   };
   const handleCheckout = () => {
+    navigate("/checkout", { state: { listCart } });
     setVisible(false);
   };
   const calculateTotal = () => {
@@ -76,14 +78,12 @@ const Cart = (props) => {
         <h5>Total: {calculateTotal()} </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
-        <Link to={"/payment"}>
-          <Button className="btn btn-success mr-2" onClick={handleCheckout}>
-            <WalletFill
-              style={{ fontSize: "22px", color: "white", marginRight: "7px" }}
-            />
-            Check Out
-          </Button>
-        </Link>
+        <Button className="btn btn-success mr-2" onClick={handleCheckout}>
+          <WalletFill
+            style={{ fontSize: "22px", color: "white", marginRight: "7px" }}
+          />
+          Check Out
+        </Button>
         <Button onClick={onHide} className="btn btn-danger">
           <X style={{ fontSize: "22px" }} />
           Close
@@ -171,7 +171,7 @@ const Cart = (props) => {
                                 fontSize: "25px",
                                 cursor: "pointer",
                               }}
-                              onClick={() => handleDelete(c._id)}
+                              onClick={() => handleDelete(c.productId._id)}
                             />
                           </td>
                         </tr>

@@ -7,8 +7,56 @@ import {
   Row,
   Table,
 } from "react-bootstrap";
-import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
+import { Eye, PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
+import axios from "axios";
+import OrderDetail from "./OrderDetail";
 const AllOrder = () => {
+  const [listOrder, setListOrder] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null); // State để lưu đơn hàng được chọn
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:9999/payment")
+      .then((response) => {
+        setListOrder(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  const formatDate = (inputDate) => {
+    const dateObject = new Date(inputDate);
+    const day = dateObject.getDate().toString().padStart(2, "0");
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
+    const year = dateObject.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+  const handleStatusChange = (e, orderId) => {
+    const newStatus = e.target.value;
+    axios
+      .put(`http://localhost:9999/payment/${orderId}`, { status: newStatus })
+      .then((response) => {
+        const updatedListOrder = listOrder.map((order) => {
+          if (order._id === orderId) {
+            return { ...order, status: newStatus };
+          }
+          return order;
+        });
+        setListOrder(updatedListOrder);
+        console.log("Trạng thái đã được cập nhật thành công");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const handleOrderDetail = (orderId) => {
+    // Tìm đơn hàng được chọn từ danh sách orders
+    const order = listOrder.find((o) => o._id === orderId);
+    setSelectedOrder(order); // Lưu thông tin đơn hàng vào state selectedOrder
+    setVisible(true); 
+  };
+
   return (
     <Container fluid>
       <Row className="ml-1 mb-4 mt-4">
@@ -21,66 +69,63 @@ const AllOrder = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>ID</th>
-                <th> Date</th>
+                <th>Order Date</th>
                 <th>Customer</th>
                 <th>Status </th>
-                <th>Item</th>
                 <th>Total</th>
                 <th>Payments</th>
-                <th colSpan={2}>Operation</th>
+                <th>Operation</th>
               </tr>
             </thead>
 
             <tbody className="text-center">
-              <tr>
-                <td>1</td>
-                <td>6/6/2024</td>
-                <td>Nguyễn Văn Thắng</td>
-                <td>
-                  <FormSelect
-                    style={{
-                      borderRadius: "30px",
-                      width: "110px",
-                      border: "none",
-                      paddingLeft: "8px",
-                    }}
-                  >
-                    <option value="0">Pending</option>
-                    <option value="1">Processing</option>
-                    <option value="2">Completed</option>
-                  </FormSelect>
-                </td>
-                <td>1</td>
-                <td>100000</td>
-                <td>Momo</td>
-                <td>
-                  <i className="delete">
-                    <Trash
+              {listOrder.map((o) => (
+                <tr key={o._id}>
+                  <td> {formatDate(o.createdAt)}</td>
+                  <td>{o.userId.fullname}</td>
+                  <td>
+                    <FormSelect
                       style={{
-                        color: "red",
-                        fontSize: "25px",
-                        cursor: "pointer",
+                        borderRadius: "30px",
+                        width: "110px",
+                        border: "none",
+                        paddingLeft: "8px",
                       }}
-                    />
-                  </i>
-                </td>
-                <td>
-                  <i className="edit">
-                    <PenFill
-                      style={{
-                        color: "blue",
-                        fontSize: "25px",
-                        cursor: "pointer",
-                      }}
-                    />
-                  </i>
-                </td>
-              </tr>
+                      value={o.status}
+                      onChange={(e) => handleStatusChange(e, o._id)}
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="Processing">Processing</option>
+                      <option value="Completed">Completed</option>
+                    </FormSelect>
+                  </td>
+
+                  <td>{o.totalAmount}</td>
+                  <td>{o.paymentMethod}</td>
+
+                  <td>
+                    <i className="edit">
+                      <Eye
+                        style={{
+                          color: "blue",
+                          fontSize: "25px",
+                          cursor: "pointer",
+                          
+                        }}
+                      onClick={() => handleOrderDetail(o._id)}
+
+                      />
+                    </i>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </Col>
       </Row>
+      {visible === true && (
+        <OrderDetail visible={visible} setVisible={setVisible} order={selectedOrder} />
+      )}
     </Container>
   );
 };
