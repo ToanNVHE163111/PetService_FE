@@ -5,37 +5,22 @@ import AddToy from "./AddToy";
 import EditToy from "./EditToy";
 import axios from "axios";
 
-const ManaToy = () => {
+const ManaToy = ({categoryId}) => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
-  const [toy, setToy] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:9999/toys")
-      .then((resp) => resp.json())
-      .then((data) => {
-        setToy(data);
+    axios.get(`http://localhost:9999/products/filter/${categoryId}`)
+      .then((res) => {
+        setProducts(res.data);
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch((error) => {
+        console.error('Error fetching toys:', error);
       });
-  }, []);
+  }, [categoryId]);
 
-
-  const handleDeleteToy = (id) => {
-    if (window.confirm(`Do you want to delete the toy - ID: ${id}?`)) {
-      axios
-        .delete(`http://localhost:9999/toys/${id}`)
-        .then(() => {
-          alert("Delete successfully!");
-          setToy(toy.filter((toy) => toy._id !== id));
-        })
-        .catch((err) => {
-          console.error(err.message);
-        });
-    }
-  };
   const imageBodyTemplate = (p) => {
     return (
       <img
@@ -72,20 +57,20 @@ const ManaToy = () => {
               <tr>
                 <th>ID</th>
                 <th> Name</th>
-                <th>Quantity </th>
                 <th>Image</th>
-                <th>Pet Type</th>
+                <th>Quantity </th>
+                <th>PetType</th>
                 <th colSpan={2}>Operation</th>
               </tr>
             </thead>
 
             <tbody className="text-center">
-              {toy.map((t, index) => (
+              {products.map((t, index) => (
                 <tr key={index}>
                   <td>{t._id}</td>
                   <td>{t.name}</td>
-                  <td>{t.quantity}</td>
                   <td>{imageBodyTemplate(t)}</td>
+                  <td>{t.quantity}</td>
                   <td>{t.pettype}</td>
                   <td>
                     <i className="delete">
@@ -95,9 +80,7 @@ const ManaToy = () => {
                           fontSize: "25px",
                           cursor: "pointer",
                         }}
-                        onClick={() => handleDeleteToy(t._id)} 
                       />
-
                     </i>
                   </td>
                   <td>

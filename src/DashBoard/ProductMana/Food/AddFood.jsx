@@ -7,6 +7,7 @@ import { Col, FormSelect, Row } from "react-bootstrap";
 import "../../../style/addproduct.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import ComUpImg from "../../../ComeUpImage/ComUpImg";
 
 const AddFood = (props) => {
   const { visible, setVisible } = props;
@@ -61,7 +62,7 @@ const AddFood = (props) => {
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="description">
-                      <h6>Images</h6>
+                      <h6>Desciption</h6>
                     </label>
                     <input
                       type="text"
@@ -97,6 +98,14 @@ const AddFood = (props) => {
                       style={{ height: "50px" }}
                       required
                     />
+                  </div>
+                </Col>
+                <Col md={6}>
+                  <div className="form-group w-full">
+                    <label className="label" htmlFor="congNgheManHinh">
+                      <h6>Images</h6>
+                    </label>
+                    <ComUpImg />
                   </div>
                 </Col>
               </Row>

@@ -5,6 +5,8 @@ import { Button, Col, Row } from "react-bootstrap";
 import { Trash, WalletFill, X } from "react-bootstrap-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "../style/addproduct.css";
+
 
 const Cart = (props) => {
   const { visible, setVisible } = props;
@@ -96,7 +98,7 @@ const Cart = (props) => {
         visible={visible}
         onHide={onHide}
         footer={dialogFooter}
-        className="bg-light"
+        className="bg-light dialogForm"
         style={{ width: "70vw" }}
         modal
         header={
