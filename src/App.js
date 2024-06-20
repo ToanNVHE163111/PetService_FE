@@ -20,6 +20,7 @@ import EditBlog from "./screens/EditBlog";
 import Profile from "./screens/Profile";
 import EditProfile from "./screens/EditProfile";
 import Payment from "./screens/Payment";
+import OrderStatusForm from "./screens/OrderStatusForm";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,6 +37,7 @@ function App() {
         <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home_Page />} />
+          <Route path="/orderstatus" element={<OrderStatusForm />} />
           <Route path="/listproduct" element={<Home />} />
           <Route path="/online-booking" element={<Online_Booking />} />
           <Route path="/contact" element={<ContactForm />} />

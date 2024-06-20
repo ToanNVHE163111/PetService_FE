@@ -1,0 +1,62 @@
+.container11 {
+    max-width: 800px;
+    margin: auto;
+    background-color: #e8b6b6; /* Màu nền cho phần nội dung chính */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table1 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+
+  }
+  
+  .table1 th,
+  .table1 td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .table1 th {
+    background-color: #f2f2f2;
+  }
+  
+  .order-details {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .order-details h2 {
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .order-details form {
+    margin-top: 20px;
+  }
+  
+  .order-details .form-label {
+    font-weight: bold;
+  }
+  
+  .order-details .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .order-details .form-control:read-only {
+    background-color: #f2f2f2;
+  }
+  
