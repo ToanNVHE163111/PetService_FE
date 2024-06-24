@@ -8,7 +8,7 @@ import {
   ThreeDots,
   XCircle,
 } from "react-bootstrap-icons";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Dialog } from "primereact/dialog";
 import axios from "axios";
 import "../style/addBlog.css";
@@ -17,8 +17,8 @@ import { useNavigate } from "react-router-dom";
 
 const AddBlog = (props) => {
   const { visible, setVisible } = props;
-  const [content, setContent] = useState("");
-  const [images, setImages] = useState([]);
+  const [content, setContent] = useState('');
+  const [images, setImages] = useState(['']);
   const fullname = localStorage.getItem("fullname");
   const nav = useNavigate();
   const userId = localStorage.getItem("userId");
@@ -44,6 +44,21 @@ const AddBlog = (props) => {
 
   const onHide = () => {
     setVisible(false);
+  };
+
+  const addImageInput = () => {
+    setImages([...images, '']);
+  };
+
+  const handleImageChange = (index, value) => {
+    const newImages = [...images];
+    newImages[index] = value;
+    setImages(newImages);
+  };
+
+  const removeImageInput = (index) => {
+    const newImages = images.filter((_, i) => i !== index);
+    setImages(newImages);
   };
 
   const dialogFooter = (
@@ -93,28 +108,37 @@ const AddBlog = (props) => {
               onChange={(e) => setContent(e.target.value)}
             />
             <div className="image-inputs">
-              <div className="image-input-container">
-                <input
-                  type="text"
-                  placeholder="Nhập link ảnh"
-                  className="image-input"
-                  value={images}
-                  onChange={(e) => setImages(e.target.value)}
-                />
-                <button type="button" className="close-button">
-                  <XCircle size={18} />
-                </button>
-              </div>
+              {images.map((image, index) => (
+                <div key={index} className="image-input-container">
+                  <input
+                    type="text"
+                    placeholder="Nhập link ảnh"
+                    className="image-input"
+                    value={image}
+                    onChange={(e) => handleImageChange(index, e.target.value)}
+                  />
+                  {index > 0 && (
+                    <button type="button" className="close-button" onClick={() => removeImageInput(index)}>
+                      <XCircle size={18} />
+                    </button>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
           <div className="actions">
-            <div className="icon-group d-flex">
+            <div className="icon-group">
               <button type="button" className="add-button">
                 Thêm vào bài viết của bạn
               </button>
-                <button type="button" className="icon-button">
+              <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip id="tooltip-top">Thêm ảnh</Tooltip>}
+              >
+                <button type="button" className="icon-button" onClick={addImageInput}>
                   <FileEarmarkImage size={22} />
                 </button>
+              </OverlayTrigger>
               <button type="button" className="icon-button">
                 <TagFill size={22} />
               </button>

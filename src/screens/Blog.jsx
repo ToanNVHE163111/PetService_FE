@@ -84,7 +84,7 @@ const Blog = () => {
       .catch((error) => {
         console.error("Error fetching blogs:", error);
       });
-  }, []);
+  }, [blogs]);
 
   const handleDeleteBlog = (id) => {
     if (window.confirm("Do you want to delete this blog")) {
@@ -114,7 +114,7 @@ const Blog = () => {
   };
 
   const formatDate = (inputDate) => {
-    const dateObject = new Date(inputDate);
+const dateObject = new Date(inputDate);
     const day = dateObject.getDate().toString().padStart(2, "0");
     const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
     const year = dateObject.getFullYear();
@@ -124,6 +124,7 @@ const Blog = () => {
     setShowCommentForm(true);
     setSelectedBlog(blog);
     setSelectedBlogId(blog._id);
+    setBlogs([`Item ${blogs.length + 1}`, ...blogs])
   };
   return (
     <Container style={{ marginTop: "20px" }}>
@@ -191,7 +192,7 @@ const Blog = () => {
                   <label>
                     <EmojiLaughing
                       style={{ fontSize: "25px", marginRight: "10px" }}
-                    />
+/>
                     Cảm xúc
                   </label>
                 </button>
@@ -202,7 +203,7 @@ const Blog = () => {
         </Col>
       </Row>
       <br />
-      {blogs.map((b) => (
+      {blogs.slice().reverse().map((b) => (
         <Row key={b._id}>
           <Col md={12}>
             <div className="cardd">
@@ -279,7 +280,7 @@ const Blog = () => {
                   <Col md={6} sm={6} xs={6}>
                     <button className="fc-btn fc-btn-white">
                       <div className="fc-icon">
-                        <label style={{ cursor: "pointer" }}>
+<label style={{ cursor: "pointer" }}>
                           <HandThumbsUp
                             style={{ fontSize: "25px", marginRight: "10px" }}
                           />
