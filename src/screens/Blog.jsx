@@ -16,6 +16,8 @@ import "../style/blog.css";
 import Zoom from "react-medium-image-zoom";
 import EditBlog from "./EditBlog";
 import Comment from "./Comment";
+import AddBlog from "./AddBlog";
+import { toast } from "react-toastify";
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -72,6 +74,7 @@ const Blog = () => {
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [selectedBlogId, setSelectedBlogId] = useState("");
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:9999/blogs")
@@ -81,14 +84,14 @@ const Blog = () => {
       .catch((error) => {
         console.error("Error fetching blogs:", error);
       });
-  }, []);
+  }, [blogs]);
 
   const handleDeleteBlog = (id) => {
-    if (window.confirm(`Do you want to delete the blog - ID: ${id}?`)) {
+    if (window.confirm("Do you want to delete this blog")) {
       axios
         .delete(`http://localhost:9999/blogs/${id}`)
         .then(() => {
-          alert("Delete successfully!");
+          toast.success("Delete successfully!");
           setBlogs(blogs.filter((blog) => blog._id !== id));
         })
         .catch((err) => {
@@ -111,7 +114,7 @@ const Blog = () => {
   };
 
   const formatDate = (inputDate) => {
-    const dateObject = new Date(inputDate);
+const dateObject = new Date(inputDate);
     const day = dateObject.getDate().toString().padStart(2, "0");
     const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
     const year = dateObject.getFullYear();
@@ -121,6 +124,7 @@ const Blog = () => {
     setShowCommentForm(true);
     setSelectedBlog(blog);
     setSelectedBlogId(blog._id);
+    setBlogs([`Item ${blogs.length + 1}`, ...blogs])
   };
   return (
     <Container style={{ marginTop: "20px" }}>
@@ -133,7 +137,7 @@ const Blog = () => {
             <Row style={{ marginTop: "20px" }}>
               <Col md={2} sm={2} xs={2} style={{ textAlign: "center" }}>
                 <img
-                  src="https://scontent.fhan5-2.fna.fbcdn.net/v/t39.30808-6/393724372_1041589230373346_6667114565953423430_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=tt-1yO8u2wUQ7kNvgEgX-aQ&_nc_ht=scontent.fhan5-2.fna&oh=00_AYBjv6tvMmNGoEYNsK-nSoBf_PhK-4LW98I5LhjtMFFREw&oe=6663304A"
+                  src="https://www.localbotswana.com/img/bw/d/1641218846_95961.jpg"
                   className="rounded-circle"
                   style={{ width: "44px", marginTop: "10px" }}
                 />
@@ -143,6 +147,7 @@ const Blog = () => {
                   style={{ borderRadius: "40px", paddingRight: "20px" }}
                   className="form-control"
                   placeholder="Bạn đang nghĩ gì thế ???"
+                  onClick={() => setVisible(true)}
                 ></textarea>
               </Col>
               <Col md={2} sm={2} xs={2} style={{ textAlign: "center" }}>
@@ -187,7 +192,7 @@ const Blog = () => {
                   <label>
                     <EmojiLaughing
                       style={{ fontSize: "25px", marginRight: "10px" }}
-                    />
+/>
                     Cảm xúc
                   </label>
                 </button>
@@ -198,7 +203,7 @@ const Blog = () => {
         </Col>
       </Row>
       <br />
-      {blogs.map((b) => (
+      {blogs.slice().reverse().map((b) => (
         <Row key={b._id}>
           <Col md={12}>
             <div className="cardd">
@@ -212,7 +217,7 @@ const Blog = () => {
                   }}
                 >
                   <img
-                    src="https://scontent.fhan5-2.fna.fbcdn.net/v/t39.30808-6/393724372_1041589230373346_6667114565953423430_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=tt-1yO8u2wUQ7kNvgEgX-aQ&_nc_ht=scontent.fhan5-2.fna&oh=00_AYBjv6tvMmNGoEYNsK-nSoBf_PhK-4LW98I5LhjtMFFREw&oe=6663304A"
+                    src="https://www.localbotswana.com/img/bw/d/1641218846_95961.jpg"
                     className="rounded-circle"
                     style={{ width: "40px", marginRight: "4px" }}
                   />
@@ -275,7 +280,7 @@ const Blog = () => {
                   <Col md={6} sm={6} xs={6}>
                     <button className="fc-btn fc-btn-white">
                       <div className="fc-icon">
-                        <label style={{ cursor: "pointer" }}>
+<label style={{ cursor: "pointer" }}>
                           <HandThumbsUp
                             style={{ fontSize: "25px", marginRight: "10px" }}
                           />
@@ -308,7 +313,7 @@ const Blog = () => {
             <Comment
               blogId={selectedBlog._id}
               onClose={() => setShowCommentForm(false)}
-              selectedBlogId ={selectedBlogId}
+              selectedBlogId={selectedBlogId}
             />
           )}
         </Row>
@@ -320,6 +325,9 @@ const Blog = () => {
           data={dataEdit}
           onUpdate={handleUpdateBlog}
         />
+      )}
+      {visible === true && (
+        <AddBlog visible={visible} setVisible={setVisible} />
       )}
     </Container>
   );
