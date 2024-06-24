@@ -4,46 +4,32 @@ import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddMedicine from "./AddMedicine";
 import EditMedicine from "./EditMedicine";
 import axios from "axios";
-const ManaMedice = () => {
+
+const ManaMedice = ({categoryId}) => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
-  const [medicine, setMedicine] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:9999/medicines")
-      .then((resp) => resp.json())
-      .then((data) => {
-        setMedicine(data);
+    axios.get(`http://localhost:9999/products/filter/${categoryId}`)
+      .then((res) => {
+        setProducts(res.data);
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch((error) => {
+        console.error('Error fetching medicine:', error);
       });
-  }, []);
+  }, [categoryId]);
 
   const imageBodyTemplate = (p) => {
     return (
       <img
-        src={p.images[0]}
+        src={p.image[0]}
         alt="image"
         style={{ height: "150px", width: "150px" }}
         className="w-6rem shadow-2 border-round"
       />
     );
-  };
-
-  const handleDeleteMedice = (id) => {
-    if (window.confirm(`Do you want to delete the medice - ID: ${id}?`)) {
-      axios
-        .delete(`http://localhost:9999/medicines/${id}`)
-        .then(() => {
-          alert("Delete successfully!");
-          setMedicine(medicine.filter((medicine) => medicine._id !== id));
-        })
-        .catch((err) => {
-          console.error(err.message);
-        });
-    }
   };
 
   const handleEditMedicine = (m) => {
@@ -74,13 +60,13 @@ const ManaMedice = () => {
                 <th> Name</th>
                 <th>Image</th>
                 <th>Quantity </th>
-                <th>Pet Type</th>
+                <th>PetType</th>
                 <th colSpan={2}>Operation</th>
               </tr>
             </thead>
 
             <tbody className="text-center">
-              {medicine.map((m, index) => (
+              {products.map((m, index) => (
                 <tr key={index}>
                   <td>{m._id}</td>
                   <td>{m.name}</td>
@@ -95,8 +81,6 @@ const ManaMedice = () => {
                           fontSize: "25px",
                           cursor: "pointer",
                         }}
-                        onClick={() => handleDeleteMedice(m._id)} 
-
                       />
                     </i>
                   </td>

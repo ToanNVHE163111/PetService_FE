@@ -1,109 +1,150 @@
-import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import Header from "../components/Header";
-import "react-medium-image-zoom/dist/styles.css";
-import Zoom from "react-medium-image-zoom";
-import images from "../assets/images/product.png";
-import { Link, useParams } from "react-router-dom";
-import { Cart } from "react-bootstrap-icons";
-import Simila_Product from "../components/Simila_Product";
-import Comment from "./Comment";
-import Products_Card from "../model/Products_Card";
+import React, { useState } from "react";
+import {
+  Button,
+  Col,
+  Container,
+  FormControl,
+  InputGroup,
+  Row,
+} from "react-bootstrap";
 
-const Product_Detail = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [similarProducts, setSimilarProducts] = useState([]);
+import { Lock, Unlock } from "react-bootstrap-icons";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-  useEffect(() => {
-    // Lấy thông tin sản phẩm
-    fetch(`http://localhost:9999/products/${id}`)
-      .then((response) => response.json())
-      .then((data) => setProduct(data))
-      .catch((error) => console.error(error));
+const Change_Password = () => {
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [reNewPass, setReNewPass] = useState("");
+  const username = localStorage.getItem("username");
+  const nav = useNavigate();
 
-    // Lấy sản phẩm tương tự
-    fetch(`http://localhost:9999/products/similar/${id}`)
-      .then((response) => response.json())
-      .then((data) => setSimilarProducts(data))
-      .catch((error) => console.error(error));
-  }, [id]);
+  const handleUpdate = () => {
+    if (!oldPass || !newPass || !reNewPass) {
+      toast.error("Please fill in all fields!");
+      return;
+    }
+    if (newPass !== reNewPass) {
+      toast.error("New passwords do not match!");
+      return;
+    }
+   
+    if (oldPass === newPass && oldPass === reNewPass) {
+      toast.error("The new password must be different from the old password");
+      return;
+    }
 
-  const [quantity, setQuantity] = useState(1);
+    console.log(`Sending request to update password for user: ${username}`);
+    console.log(`New password: ${newPass}`);
 
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
+    axios
+      .put(`http://localhost:9999/users/changepass/${username}`, {
+        oldPassword: oldPass,
+        newPassword: newPass,
+      })
+      .then((response) => {
+        if (response.data.status) {
+          toast.success("Change password successfully!");
+          setOldPass("");
+          setNewPass("");
+          setReNewPass("");
+          nav("/");
+          localStorage.setItem("password", newPass);
+        } else {
+          toast.error("Change password failed!");
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+        toast.error("Change password failed!");
+      });
   };
 
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
+  const containerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: "70px",
+    marginBottom: "70px",
+    height: "400px",
   };
 
   return (
-    <div>
-      {/* <Header></Header> */}
-      <Container className="mt-5">
-        {product && (
-          <Row>
-            <Col md={6}>
-              <div>
-                <h2>{product.name}</h2>
-                <h4>{product.price}</h4>
-              </div>
-            </Col>
-            <Col md={6}>
-              {product.image.map((imgSrc, index) => (
-                <div key={index}>
-                  <Zoom>
-                    <img alt={product.name} src={imgSrc} width="500" />
-                  </Zoom>
-                </div>
-              ))}
-            </Col>
-          </Row>
-        )}
-        {product && (
-          <Row>
-            <div
-              className="cards flex-column"
-              style={{ width: "100%", height: "28rem", marginRight: "10px" }}
-            >
-              <h2>Mô tả sản phẩm</h2>
-              <p>{product.description}</p>
-            </div>
-          </Row>
-        )}
+    <Container className="bg-light" style={{ borderRadius: "30px" }}>
+      <Row style={containerStyle}>
+        <Row style={{ marginTop: "60px", paddingBottom: "20px" }}>
+          <h3> Change PassWord</h3>
+        </Row>
+        <Col md={8}>
+          <InputGroup className="mb-3">
+            <Lock
+              style={{
+                fontSize: "25px",
+                border: "solid #CCCC 1px",
+                height: "38px",
+                color: "#808080",
+                backgroundColor: "#EEEEEE",
+                width: "30px",
+              }}
+            />
+            <FormControl
+              placeholder="Old Password"
+              aria-label="Old Password"
+              type="password"
+              value={oldPass}
+              onChange={(e) => setOldPass(e.target.value)}
+            />
+          </InputGroup>
 
-        <Row>
-          <Comment />
-        </Row>
-        <Row>
-          <div>
-            <Row
-              className="container text-center"
-              style={{ marginTop: "100px" }}
-            >
-              <Col md={12}>
-                <h3 style={{ textAlign: "center" }}>Sản phẩm tương tự</h3>
-              </Col>
-              {similarProducts.map((similarProduct) => (
-                <Col md={3} key={similarProduct._id}>
-                  <Products_Card
-                    name={similarProduct.name}
-                    obj={similarProduct.pettype}
-                    price={similarProduct.price}
-                    img={similarProduct.image[0]}
-                  />
-                </Col>
-              ))}
-            </Row>
+          <InputGroup className="mb-3">
+            <Unlock
+              style={{
+                fontSize: "25px",
+                border: "solid #CCCC 1px",
+                height: "38px",
+                color: "#808080",
+                backgroundColor: "#EEEEEE",
+                width: "30px",
+              }}
+            />
+            <FormControl
+              placeholder="New Password"
+              aria-label="New Password"
+              type="password"
+              value={newPass}
+              onChange={(e) => setNewPass(e.target.value)}
+            />
+          </InputGroup>
+          <InputGroup className="mb-3">
+            <Unlock
+              style={{
+                fontSize: "25px",
+                border: "solid #CCCC 1px",
+                height: "38px",
+                color: "#808080",
+                backgroundColor: "#EEEEEE",
+                width: "30px",
+              }}
+            />
+
+            <FormControl
+              placeholder="Re-enter New Password"
+              aria-label="Re-enter New Password"
+              value={reNewPass}
+              onChange={(e) => setReNewPass(e.target.value)}
+              type="password"
+            />
+          </InputGroup>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button variant="primary" onClick={handleUpdate}>
+              Update Password
+            </Button>
           </div>
-        </Row>
-      </Container>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-export default Product_Detail;
+export default Change_Password;

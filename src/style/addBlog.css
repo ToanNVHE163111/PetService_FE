@@ -91,13 +91,16 @@
 .image-input-container {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Khoảng cách giữa các input ảnh */
+    margin-bottom: 10px;
+    /* Khoảng cách giữa các input ảnh */
 }
 
 .image-input {
     /* Style cho input nhập link ảnh */
-    flex: 1; /* Sử dụng flex để input mở rộng dọc */
-    margin-right: 10px; /* Khoảng cách giữa input và nút đóng */
+    flex: 1;
+    /* Sử dụng flex để input mở rộng dọc */
+    margin-right: 10px;
+    /* Khoảng cách giữa input và nút đóng */
 }
 
 .close-button {

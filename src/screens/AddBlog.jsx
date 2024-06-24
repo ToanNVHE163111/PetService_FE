@@ -11,7 +11,7 @@ import {
 import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Dialog } from "primereact/dialog";
 import axios from "axios";
-import "../style/CreatePost.css";
+import "../style/addBlog.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
