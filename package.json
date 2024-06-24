@@ -29,7 +29,6 @@
     "react-dom": "^18.3.1",
     "react-loader-spinner": "^6.1.6",
     "react-medium-image-zoom": "^5.2.4",
-    "react-paypal-button-v2": "^2.6.3",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
