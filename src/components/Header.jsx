@@ -56,7 +56,7 @@ const fullname = localStorage.getItem("fullname");
                   to="/listproduct"
                   style={{ color: "#2a3977", fontWeight: "bold" }}
                 >
-                  Sản Phẩm
+                  Sản phẩm
                 </Link>
               </li>
               <li className="mr-4">
@@ -81,7 +81,7 @@ const fullname = localStorage.getItem("fullname");
                   to="/blog"
                   style={{ color: "#2a3977", fontWeight: "bold" }}
                 >
-                  Blog
+                  Bài viết
                 </Link>
               </li>
               <li className="mr-4 d-flex align-items-center">
@@ -99,7 +99,7 @@ const fullname = localStorage.getItem("fullname");
                     to="/dashboard"
                     style={{ color: "#2a3977", fontWeight: "bold" }}
                   >
-                    Dashboard
+                    Quản Lí
                   </Link>
                 </li>
               )}
@@ -114,23 +114,18 @@ const fullname = localStorage.getItem("fullname");
                       {fullname}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      {/* <Dropdown.Item href="/dashboard">
-                        <GraphUpArrow
-                          style={{ fontSize: "20px", marginRight: "10px" }}
-                        />
-                        Dashboard
-                      </Dropdown.Item> */}
+                    
                       <Dropdown.Item href="/changepass">
                         <ArrowRepeat
                           style={{ fontSize: "20px", marginRight: "10px" }}
                         />
-                        Change Password
+                        Thay đổi mật khẩu
                       </Dropdown.Item>
                       <Dropdown.Item href="/profile">
                         <PersonVcard
                           style={{ fontSize: "20px", marginRight: "10px" }}
                         />
-                        Account Profile
+                        Thông tin cá nhân
                       </Dropdown.Item>
                       <Dropdown.Item href="/order-status">
                         <Cart2
@@ -142,7 +137,7 @@ const fullname = localStorage.getItem("fullname");
                         <BoxArrowInRight
                           style={{ fontSize: "20px", marginRight: "10px" }}
                         />
-                        LogOut
+                        Đăng xuất
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>

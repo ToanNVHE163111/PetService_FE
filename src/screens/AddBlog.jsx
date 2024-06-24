@@ -75,7 +75,6 @@ const AddBlog = (props) => {
       </Button>
     </div>
   );
-
   return (
     <div className="create-post">
       <Dialog
