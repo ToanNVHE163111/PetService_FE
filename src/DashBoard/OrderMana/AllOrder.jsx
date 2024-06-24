@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
   Col,
   Container,
   FormSelect,
   Row,
   Table,
 } from "react-bootstrap";
-import { Eye, PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
+import { Eye } from "react-bootstrap-icons";
 import axios from "axios";
 import OrderDetail from "./OrderDetail";
+import { toast } from "react-toastify";
+
 const AllOrder = () => {
   const [listOrder, setListOrder] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null); // State để lưu đơn hàng được chọn
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   useEffect(() => {
     axios
@@ -25,6 +26,7 @@ const AllOrder = () => {
         console.error(error);
       });
   }, []);
+
   const formatDate = (inputDate) => {
     const dateObject = new Date(inputDate);
     const day = dateObject.getDate().toString().padStart(2, "0");
@@ -32,6 +34,7 @@ const AllOrder = () => {
     const year = dateObject.getFullYear();
     return `${day}-${month}-${year}`;
   };
+
   const handleStatusChange = (e, orderId) => {
     const newStatus = e.target.value;
     axios
@@ -44,17 +47,17 @@ const AllOrder = () => {
           return order;
         });
         setListOrder(updatedListOrder);
-        console.log("Trạng thái đã được cập nhật thành công");
+        toast.success("Status updated successfully");
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
   const handleOrderDetail = (orderId) => {
-    // Tìm đơn hàng được chọn từ danh sách orders
     const order = listOrder.find((o) => o._id === orderId);
-    setSelectedOrder(order); // Lưu thông tin đơn hàng vào state selectedOrder
-    setVisible(true); 
+    setSelectedOrder(order);
+    setVisible(true);
   };
 
   return (
@@ -71,9 +74,12 @@ const AllOrder = () => {
               <tr>
                 <th>Order Date</th>
                 <th>Customer</th>
-                <th>Status </th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Status</th>
                 <th>Total</th>
                 <th>Payments</th>
+                {/* <th>Received</th> */}
                 <th>Operation</th>
               </tr>
             </thead>
@@ -81,8 +87,10 @@ const AllOrder = () => {
             <tbody className="text-center">
               {listOrder.map((o) => (
                 <tr key={o._id}>
-                  <td> {formatDate(o.createdAt)}</td>
+                  <td>{formatDate(o.createdAt)}</td>
                   <td>{o.userId.fullname}</td>
+                  <td>{o.userId.phone}</td>
+                  <td>{o.userId.address}</td>
                   <td>
                     <FormSelect
                       style={{
@@ -93,16 +101,16 @@ const AllOrder = () => {
                       }}
                       value={o.status}
                       onChange={(e) => handleStatusChange(e, o._id)}
+                      disabled={o.status === "Completed"}
                     >
                       <option value="Pending">Pending</option>
                       <option value="Processing">Processing</option>
                       <option value="Completed">Completed</option>
                     </FormSelect>
                   </td>
-
                   <td>{o.totalAmount}</td>
                   <td>{o.paymentMethod}</td>
-
+                  {/* <td>{o.received ? "Yes" : "In delivery"}</td> */}
                   <td>
                     <i className="edit">
                       <Eye
@@ -110,10 +118,8 @@ const AllOrder = () => {
                           color: "blue",
                           fontSize: "25px",
                           cursor: "pointer",
-                          
                         }}
-                      onClick={() => handleOrderDetail(o._id)}
-
+                        onClick={() => handleOrderDetail(o._id)}
                       />
                     </i>
                   </td>
@@ -123,8 +129,12 @@ const AllOrder = () => {
           </Table>
         </Col>
       </Row>
-      {visible === true && (
-        <OrderDetail visible={visible} setVisible={setVisible} order={selectedOrder} />
+      {visible && (
+        <OrderDetail
+          visible={visible}
+          setVisible={setVisible}
+          order={selectedOrder}
+        />
       )}
     </Container>
   );

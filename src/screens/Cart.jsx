@@ -40,7 +40,7 @@ const Cart = (props) => {
   }, [user]);
 
   const handleDelete = (productId) => {
-    if (window.confirm("Are you sure you want to delete" + productId + "?")) {
+    if (window.confirm("Bạn có chắc chắn muốn sản phẩm này trong giỏ hàng của mình không")) {
       axios
         .delete("http://localhost:9999/cart/" + productId)
         .then(() => {
