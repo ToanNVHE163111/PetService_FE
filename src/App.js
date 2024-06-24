@@ -19,8 +19,8 @@ import DashBoard from "./DashBoard/Admin/DashBoard";
 import EditBlog from "./screens/EditBlog";
 import Profile from "./screens/Profile";
 import EditProfile from "./screens/EditProfile";
-import Payment from "./screens/Payment";
-import OrderStatusForm from "./screens/OrderStatusForm";
+import Checkout from "./screens/Checkout";
+import OrderStatus from "./DashBoard/OrderMana/OrderStatus";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,14 +37,8 @@ function App() {
         <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home_Page />} />
-          <Route path="/orderstatus" element={<OrderStatusForm />} />
           <Route path="/listproduct" element={<Home />} />
           <Route path="/online-booking" element={<Online_Booking />} />
-          <Route path="/contact" element={<ContactForm />} />
-          <Route path="/editprofile" element={<EditProfile />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/profile" element={<Profile />} />
-
           <Route
             path="/login"
             element={
@@ -56,7 +50,7 @@ function App() {
           />
           <Route path="/register" element={<RegisterForm />} />
           <Route
-            path="/contact-form"
+            path="/contact"
             element={
               <>
                 <ContactForm />
@@ -118,10 +112,20 @@ function App() {
               </>
             }
           />
-
+           <Route
+            path="/editblog/:id"
+            element={
+              <>
+                <Header/>
+                <EditBlog />
+                <Footer />
+              </>
+            }
+          />
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<EditProfile />} />
-          <Route path="/payment" element={<Payment />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-status" element={<OrderStatus />} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>

@@ -22,6 +22,7 @@ const RegisterForm = () => {
     const form = formRef.current;
     const username = form.elements["input-name"].value;
     const password = form.elements["password_field"].value;
+    const fullname = form.elements["input-fullname"].value;
 
     // Kiểm tra mật khẩu xác nhận
     if (password !== confirmPassword) {
@@ -29,7 +30,7 @@ const RegisterForm = () => {
       return;
     }
 
-    const data = { username, password };
+    const data = {fullname, username, password };
     try {
       const res = await axios.post(
         "http://localhost:9999/users/register",
@@ -43,7 +44,7 @@ const RegisterForm = () => {
       const { accessToken } = res.data;
       localStorage.setItem("accessToken", accessToken);
       toast.success("Registration successful!");
-      nav("/"); // Chuyển hướng người dùng sau khi đăng ký thành công
+      nav("/login"); 
     } catch (error) {
       if (error.response.status === 409) {
         setError("Username already exists");
@@ -86,7 +87,19 @@ const RegisterForm = () => {
                   register.
                 </span>
               </div>
-              <br />
+              <br /><div className="input_container">
+                <label className="input_label" htmlFor="email_field">
+                  Fullname
+                </label>
+                <input
+                  placeholder="Enter your username"
+                  title="Input title"
+                  name="input-fullname"
+                  type="text"
+                  className="input_field"
+                  id="email_field"
+                />
+              </div>
               <div className="input_container">
                 <label className="input_label" htmlFor="email_field">
                   Username

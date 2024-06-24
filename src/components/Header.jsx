@@ -5,6 +5,7 @@ import images from "../assets/images/Pet_logo.png";
 import {
   ArrowRepeat,
   BoxArrowInRight,
+  Cart2,
   CartFill,
   GraphUpArrow,
   PersonVcard,
@@ -15,7 +16,8 @@ import Cart from "../screens/Cart";
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [visible, setVisible] = useState(false);
   const nav = useNavigate();
-
+  const role = localStorage.getItem("role");
+const fullname = localStorage.getItem("fullname");
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.clear();
@@ -73,22 +75,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   </Dropdown.Menu>
                 </Dropdown>
               </li>
-              <li className="mr-4">
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="link"
-                    id="dropdown-shop"
-                    style={{ color: "#2a3977", fontWeight: "bold" }}
-                  >
-                    Cửa hàng
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="/shop1">Cửa hàng 1</Dropdown.Item>
-                    <Dropdown.Item href="/shop2">Cửa hàng 2</Dropdown.Item>
-                    <Dropdown.Item href="/shop3">Cửa hàng 3</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </li>
+              
               <li style={{ marginTop: "7px", marginRight: "35px" }}>
                 <Link
                   to="/blog"
@@ -105,17 +92,18 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   Liên hệ
                 </Link>
               </li>
+
+              {isLoggedIn && parseInt(role) === 1 && (
+                <li className="mr-4 d-flex align-items-center">
+                  <Link
+                    to="/dashboard"
+                    style={{ color: "#2a3977", fontWeight: "bold" }}
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
               <li className="mr-4 d-flex align-items-center">
-                {isLoggedIn && (
-                  <li className="mr-4 d-flex align-items-center">
-                    <Link
-                      to="/dashboard"
-                      style={{ color: "#2a3977", fontWeight: "bold" }}
-                    >
-                      Dashboard
-                    </Link>
-                  </li>
-                )}
                 {isLoggedIn ? (
                   <Dropdown>
                     <Dropdown.Toggle
@@ -123,7 +111,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                       id="dropdown-settings"
                       style={{ color: "#2a3977", fontWeight: "bold" }}
                     >
-                      Account
+                      {fullname}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       {/* <Dropdown.Item href="/dashboard">
@@ -143,6 +131,12 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                           style={{ fontSize: "20px", marginRight: "10px" }}
                         />
                         Account Profile
+                      </Dropdown.Item>
+                      <Dropdown.Item href="/order-status">
+                        <Cart2
+                          style={{ fontSize: "20px", marginRight: "10px" }}
+                        />
+                        Xem đơn hàng
                       </Dropdown.Item>
                       <Dropdown.Item onClick={handleLogout}>
                         <BoxArrowInRight

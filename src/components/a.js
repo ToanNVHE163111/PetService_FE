@@ -29,6 +29,7 @@ const Change_Password = () => {
       toast.error("New passwords do not match!");
       return;
     }
+   
     if (oldPass === newPass && oldPass === reNewPass) {
       toast.error("The new password must be different from the old password");
       return;
@@ -49,13 +50,14 @@ const Change_Password = () => {
           setNewPass("");
           setReNewPass("");
           nav("/");
+          localStorage.setItem("password", newPass);
         } else {
-          toast.error(response.data.message);
+          toast.error("Change password failed!");
         }
       })
       .catch((error) => {
         console.log(error.message);
-        toast.error(error.response ? error.response.data.message : "Change password failed!");
+        toast.error("Change password failed!");
       });
   };
 

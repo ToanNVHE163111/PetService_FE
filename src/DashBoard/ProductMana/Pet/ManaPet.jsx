@@ -3,23 +3,23 @@ import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddPet from "./AddPet";
 import EditPet from "./EditPet";
+import axios from "axios";
 
-const ManaPet = () => {
+const ManaPet = ({categoryId}) => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
-  const [pet, setPet] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:9999/pets")
-      .then((resp) => resp.json())
-      .then((data) => {
-        setPet(data);
+    axios.get(`http://localhost:9999/products/filter/${categoryId}`)
+      .then((res) => {
+        setProducts(res.data);
       })
-      .catch((err) => {
-        console.log(err.message);
+      .catch((error) => {
+        console.error('Error fetching toys:', error);
       });
-  }, []);
+  }, [categoryId]);
 
   const imageBodyTemplate = (p) => {
     return (
@@ -57,8 +57,7 @@ const ManaPet = () => {
             <thead className="text-center">
               <tr>
                 <th>ID</th>
-                <th> Breed</th>
-                <th>Gender</th>
+                <th> Name</th>
                 <th>Image</th>
                 <th>Quantity </th>
                 <th>PetType</th>
@@ -67,11 +66,10 @@ const ManaPet = () => {
             </thead>
 
             <tbody className="text-center">
-              {pet.map((p, index) => (
+              {products.map((p, index) => (
                 <tr key={index}>
                   <td>{p._id}</td>
-                  <td>{p.breed}</td> 
-                  <td>{p.gender}</td>
+                  <td>{p.name}</td>
                   <td>{imageBodyTemplate(p)}</td>
                   <td>{p.quantity}</td>
                   <td>{p.pettype}</td>

@@ -1,26 +1,27 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddFood from "./AddFood";
 import EditFood from "./EditFood";
+import axios from "axios";
 
-const ManaFood = () => {
+const ManaFood = ({categoryId}) => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
-  const [food, setFood] = useState([]);
-
+  const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:9999/foods")
-      .then((resp) => resp.json())
-      .then((data) => {
-        setFood(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
-
+    if (categoryId) {
+      axios.get(`http://localhost:9999/products/filter/${categoryId}`)
+        .then((res) => {
+          setProducts(res.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching foods:', error);
+        });
+    }
+  }, [categoryId])
 
   const imageBodyTemplate = (p) => {
     return (
@@ -66,13 +67,13 @@ const ManaFood = () => {
             </thead>
 
             <tbody className="text-center">
-              {food.map((f,index) =>(
+              {products.map((f,index) =>(
 
               
               <tr key={index}>
-                <td>{f._id}</td>
+                <td>{f._id} â</td>
                 <td>{f.name}</td>
-                <td>{imageBodyTemplate(f)}</td>
+                <td>{imageBodyTemplate(f)}</td> 
                 <td>{f.quantity}</td>
                 <td>{f.pettype}</td>
                 <td>
