@@ -64,7 +64,7 @@ const AllOrder = () => {
     <Container fluid>
       <Row className="ml-1 mb-4 mt-4">
         <Col md={6}>
-          <h3>Order Management</h3>
+          <h3>Quản Lý Đơn Hàng</h3>
         </Col>
       </Row>
       <Row style={{ width: "100%" }}>
@@ -72,15 +72,15 @@ const AllOrder = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>Order Date</th>
-                <th>Customer</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Status</th>
-                <th>Total</th>
-                <th>Payments</th>
+                <th>Ngày Đặt Hàng</th>
+                <th>Khách Hàng</th>
+                <th>Số Điện Thoại</th>
+                <th>Địa Chỉ</th>
+                <th>Trạng Thái</th>
+                <th>Tổng</th>
+                <th>Thanh Toán</th>
                 {/* <th>Received</th> */}
-                <th>Operation</th>
+                <th>Hoạt Động</th>
               </tr>
             </thead>
 
@@ -103,9 +103,9 @@ const AllOrder = () => {
                       onChange={(e) => handleStatusChange(e, o._id)}
                       disabled={o.status === "Completed"}
                     >
-                      <option value="Pending">Pending</option>
-                      <option value="Processing">Processing</option>
-                      <option value="Completed">Completed</option>
+                      <option value="Pending">Đang Chờ Xử Lý</option>
+                      <option value="Processing">Đang Xử Lý</option>
+                      <option value="Completed">Đã Hoàn Thành</option>
                     </FormSelect>
                   </td>
                   <td>{o.totalAmount}</td>

@@ -96,11 +96,11 @@ const EditProduct = (props) => {
         form="editProductForm"
         onClick={handleUpdate}
       >
-        <PlusSquareFill /> Save
+        <PlusSquareFill /> Lưu
       </Button>
       <Button onClick={onHide} className=" btn btn-danger">
         <X style={{ fontSize: "22px" }} />
-        Close
+        Đóng
       </Button>
     </div>
   );
@@ -148,7 +148,7 @@ const EditProduct = (props) => {
         className="bg-light dialogForm"
         style={{ width: "70vw" }}
         modal
-        header={<div className="custom-dialog-header">Add Product</div>}
+        header={<div className="custom-dialog-header">Thêm Sản Phẩm</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
@@ -157,7 +157,7 @@ const EditProduct = (props) => {
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6>Name</h6>
+                      <h6>Tên</h6>
                     </label>
                     <input
                       type="text"
@@ -175,7 +175,7 @@ const EditProduct = (props) => {
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="description">
-                      <h6>Description</h6>
+                      <h6>Mô Tả</h6>
                     </label>
                     <TextArea
                       type="text"
@@ -193,7 +193,7 @@ const EditProduct = (props) => {
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="description">
-                      <h5>Images</h5>
+                      <h5>Hình Ảnh</h5>
                     </label>
                     <label style={{ "paddingLeft": "100px" }} htmlFor="file">
                       {isLoading
@@ -210,7 +210,7 @@ const EditProduct = (props) => {
                     <Col md={6}>
                       <div className="form-group w-full">
                         <label className="label" htmlFor="quantity">
-                          <h6>Quantity</h6>
+                          <h6>Số Lượng</h6>
                         </label>
                         <input
                           type="number"
@@ -229,7 +229,7 @@ const EditProduct = (props) => {
                     <Col md={6}>
                       <div className="form-group w-full">
                         <label className="label" htmlFor="price">
-                          <h6>Price</h6>
+                          <h6>Giá</h6>
                         </label>
                         <input
                           type="number"
@@ -250,7 +250,7 @@ const EditProduct = (props) => {
                     <Col md={6}>
                       <div className="">
                         <label className="label">
-                          <h6>Category</h6>
+                          <h6>Danh Mục</h6>
                         </label><br></br>
                         <select
                           className="form-control"
@@ -264,7 +264,7 @@ const EditProduct = (props) => {
                           required
                           style={{ "height": "50px" }}
                         >
-                          <option value="0">Select Category</option>
+                          <option value="0">Chọn Danh Mục</option>
                           {category.map((category) => (
                             <option key={category._id} value={category._id}>
                               {category.name}
@@ -276,7 +276,7 @@ const EditProduct = (props) => {
                     <Col md={6}>
                       <div className="">
                         <label className="label">
-                          <h6>Pet Type</h6>
+                          <h6>Loại Thú Cưng</h6>
                         </label><br></br>
                         <select
                           className="form-control "
@@ -290,9 +290,9 @@ const EditProduct = (props) => {
                           required
                           style={{ "height": "50px" }}
                         >
-                          <option value="0">Select Pet Type</option>
-                          <option value="Dog">Dog</option>
-                          <option value="Cat">Cat</option>
+                          <option value="0">Chọn Loại Thú Cưng</option>
+                          <option value="Dog">Chó</option>
+                          <option value="Cat">Mèo</option>
                         </select>
                       </div>
                     </Col>

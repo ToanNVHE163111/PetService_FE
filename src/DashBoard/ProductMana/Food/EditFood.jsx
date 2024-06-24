@@ -50,11 +50,11 @@ const EditFood = (props) => {
         type="submit"
         form="editProductForm"
       >
-        <PlusSquareFill /> Save
+        <PlusSquareFill /> Lưu
       </Button>
       <Button onClick={onHide} className=" btn btn-danger">
         <X style={{ fontSize: "22px" }} />
-        Close
+        Đóng
       </Button>
     </div>
   );
@@ -67,7 +67,7 @@ const EditFood = (props) => {
         className="bg-light"
         style={{ width: "70vw" }}
         modal
-        header={<div className="custom-dialog-header">Edit Food</div>}
+        header={<div className="custom-dialog-header">Chỉnh Sửa Thực Phẩm</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
@@ -76,7 +76,7 @@ const EditFood = (props) => {
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6>Food Name</h6>
+                      <h6>Tên Thực Phẩm</h6>
                     </label>
                     <input
                       type="text"
@@ -91,7 +91,7 @@ const EditFood = (props) => {
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="description">
-                      <h6>Images</h6>
+                      <h6>Hình Ảnh</h6>
                     </label>
                     <input
                       type="text"
@@ -108,7 +108,7 @@ const EditFood = (props) => {
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="congNgheManHinh">
-                      <h6>Quantity</h6>
+                      <h6>Số Lượng</h6>
                     </label>
                     <input
                       type="number"
@@ -122,7 +122,7 @@ const EditFood = (props) => {
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="doPhanGiai">
-                      <h6>PetType</h6>
+                      <h6>Loại Thú Cưng</h6>
                     </label>
                     <input
                       type="text"

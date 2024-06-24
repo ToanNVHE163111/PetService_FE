@@ -11,16 +11,16 @@ const DashBoard = () => {
         <Col sm={2}>
           <Nav variant="pills" className="flex-column" >
             <Nav.Item>
-              <Nav.Link eventKey="first" style={{color:'black'}}>Product Management</Nav.Link>
+              <Nav.Link eventKey="first" style={{color:'black'}}>Quản Lý Sản Phẩm</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="second" style={{color:'black'}}>User Management</Nav.Link>
+              <Nav.Link eventKey="second" style={{color:'black'}}>Quản Lý Người Dùng</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="three" style={{color:'black'}}>Order Management</Nav.Link>
+              <Nav.Link eventKey="three" style={{color:'black'}}>Quản Lý Đơn Hàng</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="four" style={{color:'black'}}>Service Management</Nav.Link>
+              <Nav.Link eventKey="four" style={{color:'black'}}>Quản Lý Dịch Vụ</Nav.Link>
             </Nav.Item>
           </Nav>
         </Col>

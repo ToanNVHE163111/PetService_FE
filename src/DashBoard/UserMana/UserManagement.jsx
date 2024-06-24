@@ -30,20 +30,20 @@ const UserManagement = () => {
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4">
-              <h3>UserManagement</h3>
+              <h3>Quản Lý Người Dùng</h3>
             </Row>
           </div>
 
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>Full Name</th>
-                <th>Gender</th>
-                <th>Address</th>
-                <th>Birth Day</th>
-                <th>Phone</th>
+                <th>Tên Đầy Đủ</th>
+                <th>Giới Tính</th>
+                <th>Địa Điểm</th>
+                <th>Ngày Sinh</th>
+                <th>Số Điện Thoại</th>
                 <th>Gmail</th>
-                <th>User Name</th>
+                <th>Tên Người Dùng</th>
               </tr>
             </thead>
 

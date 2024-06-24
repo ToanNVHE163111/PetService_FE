@@ -21,11 +21,11 @@ const AddToy = (props) => {
             type="submit"
             form="addProductForm"
           >
-            <PlusSquareFill /> Add
+            <PlusSquareFill /> Thêm
           </Button>
           <Button onClick={onHide} className="btn btn-danger">
             <X style={{ fontSize: "22px" }} />
-            Close
+            Đóng
           </Button>
         </div>
       );
@@ -39,7 +39,7 @@ const AddToy = (props) => {
           className="bg-light"
           style={{ width: "70vw" }}
           modal
-          header={<div className="custom-dialog-header">Add Toy</div>}
+          header={<div className="custom-dialog-header">Thêm Đồ Chơi</div>}
         >
           <div className="bg-light p-1" style={{ margin: "25px" }}>
             <div style={{ margin: "40px" }}>
@@ -48,7 +48,7 @@ const AddToy = (props) => {
                   <Col md={6}>
                     <div className="form-group w-full">
                       <label className="label" htmlFor="name">
-                        <h6>Product Name</h6>
+                        <h6>Tên Sản Phẩm</h6>
                       </label>
                       <input
                         type="text"
@@ -61,7 +61,7 @@ const AddToy = (props) => {
                     </div>
                     <div className="form-group w-full">
                       <label className="label" htmlFor="description">
-                        <h6>Description</h6>
+                        <h6>Mô Tả</h6>
                       </label>
                       <input
                         type="text"

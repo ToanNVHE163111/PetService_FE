@@ -41,7 +41,7 @@ const OrderDetail = (props) => {
         className="bg-light"
         style={{ width: "70vw" }}
         modal
-        header={<div className="custom-dialog-header">Order Detail</div>}
+        header={<div className="custom-dialog-header">Chi Tiết Đơn Hàng</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
@@ -55,11 +55,11 @@ const OrderDetail = (props) => {
                     >
                       <thead>
                         <tr>
-                          <th style={{ width: "15%" }}>Order ID</th>
-                          <th style={{ width: "15%" }}>Name</th>
-                          <th style={{ width: "25%" }}>Quantity</th>
-                          <th style={{ width: "20%" }}>Price</th>
-                          <th style={{ width: "20%" }}>Total</th>
+                          <th style={{ width: "15%" }}>ID Đơn Hàng</th>
+                          <th style={{ width: "15%" }}>Tên</th>
+                          <th style={{ width: "25%" }}>Số Lượng</th>
+                          <th style={{ width: "20%" }}>Giá</th>
+                          <th style={{ width: "20%" }}>Tổng</th>
                         </tr>
                       </thead>
                       <tbody>

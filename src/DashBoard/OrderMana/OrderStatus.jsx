@@ -64,11 +64,11 @@ const OrderStatus = () => {
             <table className="table table-condensed">
               <thead>
                 <tr>
-                  <th style={{ width: "15%" }}>Order Date</th>
-                  <th style={{ width: "25%" }}>Status</th>
-                  <th style={{ width: "20%" }}>Total</th>
+                  <th style={{ width: "15%" }}>Ngày Đặt Hàng</th>
+                  <th style={{ width: "25%" }}>Trạng Thái</th>
+                  <th style={{ width: "20%" }}>Tổng</th>
                   {/* <th style={{ width: "20%" }}>Action</th> */}
-                  <th>Operation</th>
+                  <th>Hoạt Động</th>
                 </tr>
               </thead>
               <tbody>

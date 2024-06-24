@@ -43,12 +43,12 @@ const AllProducts = () => {
           <div>
             <Row className="ml-1 mb-4 mt-4">
               <Col md={6}>
-                <h3>Products Management</h3>
+                <h3>Quản Lý Sản Phẩm</h3>
               </Col>
               <Col md={6} className="d-flex justify-content-end">
                 <Button onClick={() => setVisible(true)}>
                   <PlusSquareFill className="mr-2" />
-                  Add Product
+                  Thêm Sản Phẩm
                 </Button>
               </Col>
             </Row>
@@ -58,11 +58,11 @@ const AllProducts = () => {
             <thead className="text-center">
               <tr>
                 <th>ID</th>
-                <th> Name</th>
-                <th>Image</th>
-                <th>Quantity </th>
-                <th>Category</th>
-                <th colSpan={2}>Operation</th>
+                <th>Tên</th>
+                <th>Hình Ảnh</th>
+                <th>Số Lượng</th>
+                <th>Danh Mục</th>
+                <th colSpan={2}>Hoạt Động</th>
               </tr>
             </thead>
 

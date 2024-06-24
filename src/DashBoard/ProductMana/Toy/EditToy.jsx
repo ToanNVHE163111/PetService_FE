@@ -51,11 +51,11 @@ console.log(data);
         type="submit"
         form="editProductForm"
       >
-        <PlusSquareFill /> Save
+        <PlusSquareFill /> Lưu
       </Button>
       <Button onClick={onHide} className=" btn btn-danger">
         <X style={{ fontSize: "22px" }} />
-        Close
+        Đóng
       </Button>
     </div>
   );
@@ -68,7 +68,7 @@ console.log(data);
         className="bg-light"
         style={{ width: "70vw" }}
         modal
-        header={<div className="custom-dialog-header">Edit Toy</div>}
+        header={<div className="custom-dialog-header">Chỉnh Sửa Đồ Chơi</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
@@ -77,7 +77,7 @@ console.log(data);
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6>Toy Name</h6>
+                      <h6>Tên Đồ Chơi</h6>
                     </label>
                     <input
                       type="text"
@@ -92,7 +92,7 @@ console.log(data);
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="description">
-                      <h6>Images</h6>
+                      <h6>Hình Ảnh</h6>
                     </label>
                     <input
                       type="text"
@@ -109,7 +109,7 @@ console.log(data);
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="congNgheManHinh">
-                      <h6>Quantity</h6>
+                      <h6>Số Lượng</h6>
                     </label>
                     <input
                       type="number"
@@ -123,7 +123,7 @@ console.log(data);
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="doPhanGiai">
-                      <h6>PetType</h6>
+                      <h6>Loại Thú Cưng</h6>
                     </label>
                     <input
                       type="text"

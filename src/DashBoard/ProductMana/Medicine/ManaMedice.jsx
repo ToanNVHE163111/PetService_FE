@@ -43,7 +43,7 @@ const ManaMedice = ({categoryId}) => {
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <h3>Medicine Management</h3>
+              <h3>Quản Lý Thuốc</h3>
             </Row>
             {/* <Row className="ml-1 mb-4">
               <Button onClick={() => setVisible(true)}>
@@ -57,11 +57,11 @@ const ManaMedice = ({categoryId}) => {
             <thead className="text-center">
               <tr>
                 <th>ID</th>
-                <th> Name</th>
-                <th>Image</th>
-                <th>Quantity </th>
-                <th>PetType</th>
-                <th colSpan={2}>Operation</th>
+                <th> Tên</th>
+                <th>Hình Ảnh</th>
+                <th>Số Lượng </th>
+                <th>Loại Thú Cưng</th>
+                <th colSpan={2}>Hoạt Động</th>
               </tr>
             </thead>
 
