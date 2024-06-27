@@ -8,8 +8,8 @@ import {
 } from "react-bootstrap";
 import { Eye } from "react-bootstrap-icons";
 import axios from "axios";
-import OrderDetail from "./OrderDetail";
 import { toast } from "react-toastify";
+import OrderDetailAdmin from "./OrderDetailAdmin";
 
 const AllOrder = () => {
   const [listOrder, setListOrder] = useState([]);
@@ -59,7 +59,14 @@ const AllOrder = () => {
     setSelectedOrder(order);
     setVisible(true);
   };
-
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid>
       <Row className="ml-1 mb-4 mt-4">
@@ -108,7 +115,7 @@ const AllOrder = () => {
                       <option value="Completed">Completed</option>
                     </FormSelect>
                   </td>
-                  <td>{o.totalAmount}</td>
+                  <td>{formatCurrency(o.totalAmount) +" ₫"}</td>
                   <td>{o.paymentMethod}</td>
                   {/* <td>{o.received ? "Yes" : "In delivery"}</td> */}
                   <td>
@@ -130,10 +137,10 @@ const AllOrder = () => {
         </Col>
       </Row>
       {visible && (
-        <OrderDetail
+        <OrderDetailAdmin
           visible={visible}
           setVisible={setVisible}
-          order={selectedOrder}
+          order={selectedOrder} 
         />
       )}
     </Container>

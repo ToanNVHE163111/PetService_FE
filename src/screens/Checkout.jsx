@@ -55,13 +55,20 @@ const Checkout = () => {
       .then((response) => {
         const data = response.data;
         if (data.message) toast.success(data.message);
-        nav("/")
+        nav("/listproduct")
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
-
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <div>
       <div className="payment-body">
@@ -159,7 +166,9 @@ const Checkout = () => {
                           <CashStack
                             style={{ color: "yellow", fontSize: "30px" }}
                           />
-                          {p.productId.price} VND
+                          {formatCurrency(p.productId.price) +" ₫"} 
+
+
                         </h5>
                       </div>
                       <div className="payment-row text-muted">
@@ -178,7 +187,7 @@ const Checkout = () => {
                     <b>Total to pay</b>
                   </div>
                   <div className="payment-col text-right">
-                    <b>{calculateTotal()} VND</b>
+                    <b>{formatCurrency(calculateTotal()) +" ₫"}</b>
                   </div>
                 </div>
                 {paymentMethod !== "0" && (

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row, Modal } from "react-bootstrap";
+import { Button, Col, Container, Row, Modal, Table } from "react-bootstrap";
 import { Eye } from "react-bootstrap-icons";
 import axios from "axios";
 import OrderDetail from "./OrderDetail";
-import { toast } from "react-toastify";
 
 const OrderStatus = () => {
   const [orders, setOrders] = useState([]);
@@ -36,7 +35,14 @@ const OrderStatus = () => {
     setSelectedOrder(order);
     setVisible(true);
   };
-
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   // const handleReceived = (orderId) => {
   //   axios
   //     .put(`http://localhost:9999/payment/${orderId}`, { received: true })
@@ -61,7 +67,7 @@ const OrderStatus = () => {
       <Row>
         <Col className="text-center">
           <div className="table-responsive">
-            <table className="table table-condensed">
+            <Table striped bordered hover>
               <thead>
                 <tr>
                   <th style={{ width: "15%" }}>Order Date</th>
@@ -79,7 +85,7 @@ const OrderStatus = () => {
                     </td>
                     <td style={{ verticalAlign: "middle" }}>{order.status}</td>
                     <td style={{ verticalAlign: "middle" }}>
-                      {order.totalAmount}
+                      {formatCurrency(order.totalAmount) +" ₫"}
                     </td>
                     {/* {order.status === "Completed" && (
                       <td>
@@ -116,7 +122,7 @@ const OrderStatus = () => {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </Table>
           </div>
         </Col>
       </Row>

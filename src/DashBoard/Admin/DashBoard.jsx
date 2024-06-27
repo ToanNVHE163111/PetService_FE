@@ -3,6 +3,7 @@ import { Col, Nav, Row, Tab } from "react-bootstrap";
 import UserManagement from "../UserMana/UserManagement";
 import OrderManagement from "../OrderMana/OrderManagement";
 import ManaAllCateProduct from "../ProductMana/Product/ManaAllCateProduct";
+import TotalDashBoard from "./TotalDashBoard";
 
 const DashBoard = () => {
   return (
@@ -11,16 +12,19 @@ const DashBoard = () => {
         <Col sm={2}>
           <Nav variant="pills" className="flex-column" >
             <Nav.Item>
-              <Nav.Link eventKey="first" style={{color:'black'}}>Product Management</Nav.Link>
+              <Nav.Link eventKey="first" style={{color:'black'}}>Quản lí sản phẩm</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="second" style={{color:'black'}}>User Management</Nav.Link>
+              <Nav.Link eventKey="second" style={{color:'black'}}>Quản lí người dùng</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="three" style={{color:'black'}}>Order Management</Nav.Link>
+              <Nav.Link eventKey="three" style={{color:'black'}}>Quản lí đơn hàng</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="four" style={{color:'black'}}>Service Management</Nav.Link>
+              <Nav.Link eventKey="four" style={{color:'black'}}>Quản lí dịch vụ</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="five" style={{color:'black'}}>Thống kê</Nav.Link>
             </Nav.Item>
           </Nav>
         </Col>
@@ -34,6 +38,9 @@ const DashBoard = () => {
             </Tab.Pane>
             <Tab.Pane eventKey="three">
               <OrderManagement />
+            </Tab.Pane>
+            <Tab.Pane eventKey="five">
+              <TotalDashBoard />
             </Tab.Pane>
           </Tab.Content>
         </Col>

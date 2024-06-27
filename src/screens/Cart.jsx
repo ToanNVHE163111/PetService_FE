@@ -75,7 +75,7 @@ const Cart = (props) => {
   const dialogFooter = (
     <div style={{ margin: "20px" }}>
       <div style={{ display: "flex", justifyContent: "start" }}>
-        <h5>Total: {calculateTotal()} </h5>
+        <h5>Total: {formatCurrency(calculateTotal())+" ₫"} </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
         <Button className="btn btn-success mr-2" onClick={handleCheckout}>
@@ -91,7 +91,14 @@ const Cart = (props) => {
       </div>
     </div>
   );
-
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <div>
       <Dialog
@@ -110,6 +117,9 @@ const Cart = (props) => {
           </div>
         }
       >
+        {listCart.length === 0 ? (
+        <div className="text-center mt-3">Không có sản phẩm nào trong giỏ hàng</div>
+      ) : (
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
             <Row>
@@ -145,7 +155,7 @@ const Cart = (props) => {
                             {c.productId.name}
                           </td>
                           <td style={{ verticalAlign: "middle" }}>
-                            {c.productId.price}
+                            {formatCurrency(c.productId.price) +" ₫"}
                           </td>
                           <td style={{ verticalAlign: "middle" }}>
                             <input
@@ -162,7 +172,7 @@ const Cart = (props) => {
                             {c.categoryId.name}
                           </td>
                           <td style={{ verticalAlign: "middle" }}>
-                            {c.quantity * c.productId.price}
+                            {formatCurrency(c.quantity * c.productId.price) + " ₫"}
                           </td>
                           <td style={{ verticalAlign: "middle" }}>
                             <Trash
@@ -183,6 +193,7 @@ const Cart = (props) => {
             </Row>
           </div>
         </div>
+        )}
       </Dialog>
     </div>
   );
