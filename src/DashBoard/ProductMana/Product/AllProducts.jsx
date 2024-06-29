@@ -36,6 +36,15 @@ const AllProducts = () => {
     setDataEdit(p); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
     setEditVisible(true); // Hiển thị giao diện chỉnh sửa sản phẩm
   };
+
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid>
       <Row style={{ width: "100%" }}>
@@ -60,6 +69,7 @@ const AllProducts = () => {
                 <th>ID</th>
                 <th> Name</th>
                 <th>Image</th>
+                <th>Price</th>
                 <th>Quantity </th>
                 <th>Category</th>
                 <th colSpan={2}>Operation</th>
@@ -72,6 +82,7 @@ const AllProducts = () => {
                   <td>{p._id}</td>
                   <td>{p.name}</td>
                   <td>{imageBodyTemplate(p)}</td>
+                  <td>{formatCurrency(p.price) + " ₫"}</td>
                   <td>{p.quantity}</td>
                   <td>{p.pettype}</td>
                   <td>

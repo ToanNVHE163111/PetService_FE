@@ -9,6 +9,7 @@ import {
   styled,
   useTheme
 } from "@mui/material";
+import { useEffect, useState } from "react";
 const ContentBox = styled("div")(() => ({
   display: "flex",
   flexWrap: "wrap",
@@ -51,10 +52,37 @@ const IconBox = styled("div")(() => ({
   "& .icon": { fontSize: "14px" },
 }));
 
+
+
+
+
 const StatCards2 = () => {
   const { palette } = useTheme();
+  const [totalOrder, setTotalOrder] = useState(0);
   const textError = palette.error.main;
   const bgError = lighten(palette.error.main, 0.85);
+
+
+  useEffect(() => {
+    fetch("http://localhost:9999/payment/calculate-total-amount")
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        setTotalOrder(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
 
   return (
     <Grid container spacing={3} sx={{ mb: 3 }}>
@@ -93,7 +121,7 @@ const StatCards2 = () => {
           </ContentBox>
 
           <ContentBox sx={{ pt: 2 }}>
-            <H1>$2.8M</H1>
+            <H1>{formatCurrency(totalOrder.totalAmount) + " ₫"}</H1>
             <IconBox sx={{ background: bgError }}>
               <Icon className="icon">expand_less</Icon>
             </IconBox>

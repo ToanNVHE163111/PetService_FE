@@ -3,13 +3,14 @@ import {
   Avatar,
   Box,
   Card,
-  IconButton, styled,
+  IconButton,
+  styled,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Paragraph } from "../Chart/Typography";
@@ -53,23 +54,34 @@ const Small = styled("small")(({ bgcolor }) => ({
 }));
 
 const TopSellingTable = () => {
-  const [top5, setTop5] = useState([]);
+  const [top3, setTop3] = useState([]);
   const { palette } = useTheme();
   const bgError = palette.error.main;
   const bgPrimary = palette.primary.main;
   const bgSecondary = palette.secondary.main;
   useEffect(() => {
-    fetch("http://localhost:9999/receipt/getTop5")
+    fetch("http://localhost:9999/payment/top-products")
       .then((resp) => resp.json())
       .then((data) => {
-        setTop5(data.data);
+        console.log(data);
+        setTop3(data);
       })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
+
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
+
   return (
-    <Card elevation={3} sx={{ pt: "20px", mb: 3 }} style={{width:'75vw'}}>
+    <Card elevation={3} sx={{ pt: "20px", mb: 3 }} style={{ width: "75vw" }}>
       <CardHeader>
         <Title>top selling products</Title>
       </CardHeader>
@@ -94,41 +106,46 @@ const TopSellingTable = () => {
           </TableHead>
 
           <TableBody>
-          {top5 && top5.map((product, index) => (
-              <TableRow key={index} hover>
-                <TableCell
-                  colSpan={4}
-                  align="left"
-                  sx={{ px: 0, textTransform: "capitalize" }}
-                >
-                  <Box display="flex" alignItems="center">
-                    <Avatar src={product.image} />
-                    <Paragraph sx={{ m: 0, ml: 4 }}>{product.name}</Paragraph>
-                  </Box>
-                </TableCell>
+            {top3.length === 0 ? (
+              <p>Không có sản phẩm nào.</p>
+            ) : (
+              Array.isArray(top3) &&top3.map((product, index) => (
+                <TableRow key={index} hover>
+                  <TableCell
+                    colSpan={4}
+                    align="left"
+                    sx={{ px: 0, textTransform: "capitalize" }}
+                  >
+                    <Box display="flex" alignItems="center">
+                      <Avatar src={product.image[0]} />
+                      <Paragraph sx={{ m: 0, ml: 4 }}>{product.name}</Paragraph>
+                    </Box>
+                  </TableCell>
 
-                <TableCell
-                  align="left"
-                  colSpan={2}
-                  sx={{ px: 0, textTransform: "capitalize" }}
-                >
-                  $
-                  {product.export_price > 999
-                    ? (product.export_price / 1000).toFixed(1) + "k"
-                    : product.export_price}
-                </TableCell>
+                  <TableCell
+                    align="left"
+                    colSpan={2}
+                    sx={{ px: 0, textTransform: "capitalize" }}
+                  >
+                    {formatCurrency(product.totalPrice) + "  ₫"}
+                  </TableCell>
 
-                <TableCell sx={{ px: 0 }} align="center" colSpan={2}>
-                  {product.quantity}
-                </TableCell>
+                  <TableCell
+                    sx={{ px: 0 }}
+                    style={{ paddingLeft: "40px" }}
+                    colSpan={2}
+                  >
+                    {product.totalQuantity}
+                  </TableCell>
 
-                <TableCell sx={{ px: 0 }} colSpan={1}>
-                  <IconButton>
-                    <EditIcon color="primary">edit</EditIcon>
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+                  <TableCell sx={{ px: 0 }} colSpan={1}>
+                    <IconButton>
+                      <EditIcon color="primary">edit</EditIcon>
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </ProductTable>
       </Box>
