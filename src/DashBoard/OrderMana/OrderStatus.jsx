@@ -67,27 +67,32 @@ const OrderStatus = () => {
       <Row>
         <Col className="text-center">
           <div className="table-responsive">
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th style={{ width: "15%" }}>Order Date</th>
-                  <th style={{ width: "25%" }}>Status</th>
-                  <th style={{ width: "20%" }}>Total</th>
-                  {/* <th style={{ width: "20%" }}>Action</th> */}
-                  <th>Operation</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order) => (
-                  <tr key={order._id}>
-                    <td style={{ verticalAlign: "middle" }}>
-                      {formatDate(order.createdAt)}
-                    </td>
-                    <td style={{ verticalAlign: "middle" }}>{order.status}</td>
-                    <td style={{ verticalAlign: "middle" }}>
-                      {formatCurrency(order.totalAmount) +" ₫"}
-                    </td>
-                    {/* {order.status === "Completed" && (
+            {orders.length === 0 ? (
+              <h5 style={{marginTop:'30px'}}>Bạn chưa đặt đơn hàng nào !!! </h5>
+            ) : (
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th style={{ width: "15%" }}>Order Date</th>
+                    <th style={{ width: "25%" }}>Status</th>
+                    <th style={{ width: "20%" }}>Total</th>
+                    {/* <th style={{ width: "20%" }}>Action</th> */}
+                    <th>Operation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map((order) => (
+                    <tr key={order._id}>
+                      <td style={{ verticalAlign: "middle" }}>
+                        {formatDate(order.createdAt)}
+                      </td>
+                      <td style={{ verticalAlign: "middle" }}>
+                        {order.status}
+                      </td>
+                      <td style={{ verticalAlign: "middle" }}>
+                        {formatCurrency(order.totalAmount) + " ₫"}
+                      </td>
+                      {/* {order.status === "Completed" && (
                       <td>
                         <Button
                           style={{ backgroundColor: "green", border: "none" }}
@@ -109,20 +114,21 @@ const OrderStatus = () => {
                         </Button>
                       </td>
                     )} */}
-                    <td>
-                      <Eye
-                        style={{
-                          color: "blue",
-                          fontSize: "25px",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleOrderDetail(order._id)}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+                      <td>
+                        <Eye
+                          style={{
+                            color: "blue",
+                            fontSize: "25px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleOrderDetail(order._id)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            )}
           </div>
         </Col>
       </Row>

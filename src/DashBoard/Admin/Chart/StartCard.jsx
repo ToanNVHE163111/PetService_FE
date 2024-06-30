@@ -38,7 +38,7 @@ const StatCards = (props) => {
   const { index } = props;
   const [sumWeekSale, setSumWeekSale] = useState(0);
   const [order, setListOrder] = useState(0);
-  const [totalOfStock, setTotalOfStock] = useState(0);
+  const [totalOfProducts, setTotalProducts] = useState(0);
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const handleArrowClick = (index) => {
@@ -50,21 +50,31 @@ const StatCards = (props) => {
       .get("http://localhost:9999/users")
       .then((response) => setUsers(response.data));
   },[]);
+
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
+
   useEffect(() => {
-    fetch("http://localhost:9999/receipt/sumWeekSale")
+    fetch("http://localhost:9999/payment/calculate-total-amount-weekly")
       .then((resp) => resp.json())
       .then((data) => {
-        setSumWeekSale(data.total);
+        setSumWeekSale(data.totalAmount);
       })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
   useEffect(() => {
-    fetch("http://localhost:9999/inventory/getTotalOfStock")
+    fetch("http://localhost:9999/payment/totalproducts")
       .then((resp) => resp.json())
       .then((data) => {
-        setTotalOfStock(data.total);
+        setTotalProducts(data.totalProducts);
       })
       .catch((err) => {
         console.log(err.message);
@@ -95,14 +105,14 @@ const StatCards = (props) => {
     },
     {
       name: "This week Sales",
-      amount: `${sumWeekSale} $`,
-      icon: "pi pi-dollar",
+      amount: `${formatCurrency(sumWeekSale) + " ₫"} `,
+      icon: "pi pi-money-bill",
       index: 0,
     },
     {
-      name: "Inventory Status",
-      amount: `${totalOfStock} products in Stock`,
-      icon: "pi pi-briefcase",
+      name: "Total products sold.",
+      amount: `${totalOfProducts} products`,
+      icon: "pi pi-shopping-cart",
       index: 1,
     },
    

@@ -21,8 +21,8 @@ const TotalDashBoard = () => {
   }));
   return (
     <Container fluid>
-      <Row style={{ marginLeft: "70px",  width: "100%" }}>
-        <h3>Admin DashBoard</h3>
+      <Row style={{ marginLeft: "30px",  width: "100%" , marginTop:'30px'}}>
+        <h3> DashBoard Shop</h3>
         <StatCards />
         <TopSellingTable />
         <StatCards2 />

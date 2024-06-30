@@ -86,7 +86,7 @@ const StatCards2 = () => {
 
   return (
     <Grid container spacing={3} sx={{ mb: 3 }}>
-      <Grid item xs={12} md={6}>
+      {/* <Grid item xs={12} md={6}>
         <Card elevation={3} sx={{ p: 2 }}>
           <ContentBox>
             <FabIcon
@@ -106,9 +106,9 @@ const StatCards2 = () => {
             <Span textcolor={"#08ad6c"}>(+21%)</Span>
           </ContentBox>
         </Card>
-      </Grid>
+      </Grid> */}
 
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={12}>
         <Card elevation={3} sx={{ p: 2 }}>
           <ContentBox>
             <FabIcon

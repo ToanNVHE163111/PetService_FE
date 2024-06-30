@@ -63,7 +63,7 @@ const Cart = (props) => {
   };
   const handleCheckout = () => {
     if(selectedItems.length === 0) {
-      toast.error('Vui lòng chọn ít nhất một sản phẩm trước khi thanh toán');
+      toast.warning('Vui lòng chọn ít nhất một sản phẩm trước khi thanh toán');
     } else {
       const itemsToBuy = selectedItems.length > 0 ? listCart.filter((item) => selectedItems.includes(item._id)) : listCart;
       navigate('/checkout', { state: { listCart: itemsToBuy } });

@@ -28,9 +28,10 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
     nav("/");
   };
 
-    useEffect(() => {
+  useEffect(() => {
     // Fetch cart data and count total items
-    axios.get(`http://localhost:9999/cart/${user}`)
+    axios
+      .get(`http://localhost:9999/cart/${user}`)
       .then((res) => {
         const fetchedCart = res.data;
         const totalItems = fetchedCart.length;
@@ -108,16 +109,19 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                 </Link>
               </li>
 
-              {isLoggedIn && parseInt(role) === 1 && (
-                <li className="mr-4 d-flex align-items-center">
-                  <Link
-                    to="/dashboard"
-                    style={{ color: "#2a3977", fontWeight: "bold" }}
-                  >
-                    Quản Lí
-                  </Link>
-                </li>
-              )}
+              {isLoggedIn &&
+                (parseInt(role) === 1 ||
+                  parseInt(role) === 2 ||
+                  parseInt(role) === 3) && (
+                  <li className="mr-4 d-flex align-items-center">
+                    <Link
+                      to="/dashboard"
+                      style={{ color: "#2a3977", fontWeight: "bold" }}
+                    >
+                      Quản Lí
+                    </Link>
+                  </li>
+                )}
               <li className="mr-4 d-flex align-items-center">
                 {isLoggedIn ? (
                   <Dropdown>
