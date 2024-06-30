@@ -18,6 +18,7 @@ import EditBlog from "./EditBlog";
 import Comment from "./Comment";
 import AddBlog from "./AddBlog";
 import { toast } from "react-toastify";
+import { Image } from 'antd'; // Import Image from Ant Design
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -143,12 +144,12 @@ const dateObject = new Date(inputDate);
                 />
               </Col>
               <Col md={8} sm={8} xs={8}>
-                <textarea
-                  style={{ borderRadius: "40px", paddingRight: "20px" }}
+                <input
+                  style={{ borderRadius: "40px", paddingRight: "20px", height: "60px" }}
                   className="form-control"
                   placeholder="Bạn đang nghĩ gì thế ???"
                   onClick={() => setVisible(true)}
-                ></textarea>
+                ></input>
               </Col>
               <Col md={2} sm={2} xs={2} style={{ textAlign: "center" }}>
                 <button className="rounded-circle" style={{ border: "none" }}>
@@ -246,23 +247,25 @@ const dateObject = new Date(inputDate);
                 </small>
                 <p>{b.content}</p>
                 <Row>
-                  {b.images &&
-                    b.images.map((imgSrc, index) => (
-                      <Col
-                        md={6}
-                        sm={4}
-                        xs={4}
-                        key={index}
-                        style={{ marginBottom: "20px" }}
-                      >
-                        <Zoom>
-                          <img
-                            src={imgSrc}
-                            style={{ width: "100%", height: "350px" }}
-                          />
-                        </Zoom>
-                      </Col>
-                    ))}
+                <Image.PreviewGroup>
+                    {b.images &&
+                      b.images.map((imgSrc, index) => (
+                        <Col
+                          md={6}
+                          sm={4}
+                          xs={4}
+                          key={index}
+                          style={{ marginBottom: "20px", display: "flex" }}
+                        >
+                          <Zoom>
+                            <Image
+                              src={imgSrc}
+                              style={{ width: "100%", maxHeight: "500px", flexWrap: "wrap",objectFit:"cover" }}
+                            />
+                          </Zoom>
+                        </Col>
+                      ))}
+                  </Image.PreviewGroup>
                 </Row>
                 <br />
                 <hr />
