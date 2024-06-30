@@ -21,6 +21,7 @@ import Profile from "./screens/Profile";
 import EditProfile from "./screens/EditProfile";
 import Checkout from "./screens/Checkout";
 import OrderStatus from "./DashBoard/OrderMana/OrderStatus";
+import Bill from "./screens/Bill";
 
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
               </>
             }
           />
+          <Route path="/Bill/:id" element={<Bill />} />
           <Route
             path="/forgot"
             element={
