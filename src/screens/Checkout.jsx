@@ -10,8 +10,9 @@ const Checkout = () => {
   const { listCart } = location.state || { listCart: [] };
   const [profile, setProfile] = useState({});
   const username = localStorage.getItem("username");
-  const [paymentMethod, setPaymentMethod] = useState("0");
-  const nav = useNavigate()
+  const [paymentMethod, setPaymentMethod] = useState(0);
+  console.log(paymentMethod);
+  const nav = useNavigate();
   const calculateTotal = () => {
     let total = 0;
     listCart.forEach((p) => {
@@ -39,6 +40,15 @@ const Checkout = () => {
       });
   }, [username]);
 
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
+
   const handlePlaceOrder = () => {
     const orderData = {
       paymentMethod: paymentMethod === "COD" ? "COD" : paymentMethod,
@@ -55,13 +65,42 @@ const Checkout = () => {
       .then((response) => {
         const data = response.data;
         if (data.message) toast.success(data.message);
-        nav("/")
+        nav("/");
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
 
+  const handlePlaceOrderVnPay = () => {
+    const orderData = {
+      paymentMethod: "VnPay",
+      listCart: listCart,
+      profile: profile,
+      bankCode: "",
+    };
+
+    axios
+      .post("http://localhost:9999/payment/pay", orderData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+        console.log(data.url);
+        if (data.message) {
+          toast.success(data.message);
+          nav("/");
+        } else if (data.url) {
+          window.location.href = data.url; // Redirect to the VNPAY payment URL
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error("Error placing order");
+      });
+  };
   return (
     <div>
       <div className="payment-body">
@@ -132,7 +171,7 @@ const Checkout = () => {
                   >
                     <option value="0">Choose payment method</option>
                     <option value="COD">Ship Cod</option>
-                    <option value="zalopay">Pay with zalopay</option>
+                    <option value="VnPay">Pay with VnPay</option>
                   </select>
                 </div>
               </div>
@@ -159,7 +198,7 @@ const Checkout = () => {
                           <CashStack
                             style={{ color: "yellow", fontSize: "30px" }}
                           />
-                          {p.productId.price} VND
+                          {formatCurrency(p.productId.price) + " ₫"} 
                         </h5>
                       </div>
                       <div className="payment-row text-muted">
@@ -169,21 +208,26 @@ const Checkout = () => {
                   </Row>
                 ))}
                 <hr />
-                <div className="payment-row lower">
-                  <div className="payment-col text-left">Delivery</div>
-                  <div className="payment-col text-right">Free</div>
-                </div>
+                
                 <div className="payment-row lower">
                   <div className="payment-col text-left">
                     <b>Total to pay</b>
                   </div>
                   <div className="payment-col text-right">
-                    <b>{calculateTotal()} VND</b>
+                    <b>{formatCurrency(calculateTotal()) +  " ₫"} </b>
                   </div>
                 </div>
-                {paymentMethod !== "0" && (
+                {paymentMethod === "COD" && (
                   <button className="payment-btn" onClick={handlePlaceOrder}>
-                    {paymentMethod === "zalopay" ? "Pay with zalopay" : "Place order"}
+                    Place order
+                  </button>
+                )}
+                {paymentMethod === "VnPay" && (
+                  <button
+                    className="payment-btn"
+                    onClick={handlePlaceOrderVnPay}
+                  >
+                    Pay with VnPay
                   </button>
                 )}
               </div>

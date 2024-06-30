@@ -65,6 +65,15 @@ const Product_Detail = () => {
       });
   };
 
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
+
   return (
     <Container className="mt-5">
       {product && (
@@ -103,7 +112,7 @@ const Product_Detail = () => {
                   marginBottom: "10px",
                 }}
               />
-              {product.price} <span>VND</span>
+              {formatCurrency(product.price) + " ₫"}
               <div class="d-flex align-items-center">
                 <Button
                   onClick={decreaseQuantity}
