@@ -99,7 +99,7 @@ const fullname = localStorage.getItem("fullname");
                     to="/dashboard"
                     style={{ color: "#2a3977", fontWeight: "bold" }}
                   >
-                    Dashboard
+                    Quản lý
                   </Link>
                 </li>
               )}
@@ -119,13 +119,13 @@ const fullname = localStorage.getItem("fullname");
                           style={{ fontSize: "20px", marginRight: "10px" }}
                         />
                         Dashboard
-                      </Dropdown.Item> */}
+                      </Dropdown.Item> */}  
                       <Dropdown.Item href="/changepass">
                         <ArrowRepeat
                           style={{ fontSize: "20px", marginRight: "10px" }}
                         />
                         Change Password
-                      </Dropdown.Item>
+                      </Dropdown.Item>  
                       <Dropdown.Item href="/profile">
                         <PersonVcard
                           style={{ fontSize: "20px", marginRight: "10px" }}

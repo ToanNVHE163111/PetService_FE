@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddPet from "./AddPet";
-import EditPet from "./EditPet";
+import EditProduct from "../Product/EditProduct";
+
 import axios from "axios";
 
 const ManaPet = ({categoryId}) => {
@@ -105,10 +106,11 @@ const ManaPet = ({categoryId}) => {
       {visible === true && <AddPet visible={visible} setVisible={setVisible} />}
 
       {editVisible === true && (
-        <EditPet
+        <EditProduct
           editVisible={editVisible}
           setEditVisible={setEditVisible}
           data={dataEdit}
+          productId={dataEdit._id}
         />
       )}
     </Container>
