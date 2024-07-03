@@ -43,25 +43,6 @@ const OrderStatus = () => {
       });
     }
   }
-  // const handleReceived = (orderId) => {
-  //   axios
-  //     .put(`http://localhost:9999/payment/${orderId}`, { received: true })
-  //     .then((response) => {
-  //       const updatedOrders = orders.map((order) => {
-  //         if (order._id === orderId) {
-  //           return { ...order, received: true };
-  //         }
-  //         return order;
-  //       });
-  //       setOrders(updatedOrders);
-  //       toast.success("Order marked as received successfully!");
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       toast.error("Failed to mark the order as received.");
-  //     });
-  // };
-
   return (
     <Container>
       <Row>
@@ -78,6 +59,7 @@ const OrderStatus = () => {
                     <th style={{ width: "15%" }}>Order Date</th>
                     <th style={{ width: "25%" }}>Status</th>
                     <th style={{ width: "20%" }}>Total</th>
+                    <th style={{ width: "20%" }}>Phương thức thanh toán</th>
                     <th>Operation</th>
                   </tr>
                 </thead>
@@ -92,6 +74,11 @@ const OrderStatus = () => {
                       </td>
                       <td style={{ verticalAlign: "middle" }}>
                         {formatCurrency(order.totalAmount) + " ₫"}
+                      </td>
+                      <td style={{ verticalAlign: "middle" }}>
+                        {order.paymentMethod === "VnPay"
+                          ? "VnPay-Đã thanh toán"
+                          : order.paymentMethod}
                       </td>
                       <td>
                         <Eye
