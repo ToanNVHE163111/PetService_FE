@@ -108,8 +108,8 @@ const StatCards2 = () => {
         </Card>
       </Grid> */}
 
-      <Grid item xs={12} md={12}>
-        <Card elevation={3} sx={{ p: 2 }}>
+      <Grid item xs={12} md={12} >
+        <Card elevation={3} sx={{ p: 2 }} style={{height:'336px'}}>
           <ContentBox>
             <FabIcon
               size="medium"

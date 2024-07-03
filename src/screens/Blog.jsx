@@ -260,7 +260,7 @@ const dateObject = new Date(inputDate);
                           <Zoom>
                             <Image
                               src={imgSrc}
-                              style={{ width: "100%", maxHeight: "500px", flexWrap: "wrap",objectFit:"cover" }}
+                              style={{ width: "520px", height: "350px", flexWrap: "wrap",objectFit:"cover" }}
                             />
                           </Zoom>
                         </Col>

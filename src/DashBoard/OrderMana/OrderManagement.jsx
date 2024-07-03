@@ -4,21 +4,25 @@ import AllOrder from "./AllOrder";
 import Processing from "./Processing";
 import Complete from "./Complete";
 import Pending from "./Pending";
+import Cancel from "./Cancel";
 const OrderManagement = () => {
     return (
         <Container fluid>
         <Tabs defaultActiveKey="allorder" id="uncontrolled-tab-example">
           <Tab eventKey="allorder" title="All Order">
-            <AllOrder/>
+            <AllOrder />
           </Tab>
           <Tab eventKey="Pending" title="Pending">
-            <Pending />
+          <Pending status="Pending" />
           </Tab>
           <Tab eventKey="Processing" title="Processing">
-            <Processing />
+          <Processing status="Processing" />
           </Tab>
           <Tab eventKey="Complete" title="Completed">
-            <Complete />
+          <Complete status="Completed" />
+          </Tab>
+          <Tab eventKey="Cancel" title="Cancel">
+          <Cancel status="Cancel" />
           </Tab>
           
         </Tabs>

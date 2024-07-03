@@ -21,30 +21,19 @@ const TotalDashBoard = () => {
   }));
   return (
     <Container fluid>
-      <Row style={{ marginLeft: "30px",  width: "100%" , marginTop:'30px'}}>
+      <Row style={{ marginLeft: "30px", width: "100%", marginTop: "30px" }}>
         <h3> DashBoard Shop</h3>
         <StatCards />
         <TopSellingTable />
-        <StatCards2 />
+
         <Grid container spacing={3}>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Card sx={{ px: 3, py: 2, mb: 3 }}>
-              <Title>Traffic Sources</Title>
-              <SubTitle>Last 30 days</SubTitle>
-              <DoughnutChart
-                height="280px"
-                color={[
-                  palette.primary.dark,
-                  palette.primary.main,
-                  palette.primary.light,
-                ]}
-              />
-            </Card>
-          </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Card sx={{ px: 3, py: 2, mb: 3 }}>
               <RevenueChart />
             </Card>
+          </Grid>
+          <Grid item lg={6} md={6} sm={12} xs={12} >
+            <StatCards2 />
           </Grid>
         </Grid>
       </Row>
