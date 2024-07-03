@@ -68,7 +68,9 @@ const OrderStatus = () => {
         <Col className="text-center">
           <div className="table-responsive">
             {orders.length === 0 ? (
-              <h5 style={{marginTop:'30px'}}>Bạn chưa đặt đơn hàng nào !!! </h5>
+              <h5 style={{ marginTop: "30px" }}>
+                Bạn chưa đặt đơn hàng nào !!!{" "}
+              </h5>
             ) : (
               <Table striped bordered hover>
                 <thead>
@@ -76,7 +78,6 @@ const OrderStatus = () => {
                     <th style={{ width: "15%" }}>Order Date</th>
                     <th style={{ width: "25%" }}>Status</th>
                     <th style={{ width: "20%" }}>Total</th>
-                    {/* <th style={{ width: "20%" }}>Action</th> */}
                     <th>Operation</th>
                   </tr>
                 </thead>
@@ -92,28 +93,6 @@ const OrderStatus = () => {
                       <td style={{ verticalAlign: "middle" }}>
                         {formatCurrency(order.totalAmount) + " ₫"}
                       </td>
-                      {/* {order.status === "Completed" && (
-                      <td>
-                        <Button
-                          style={{ backgroundColor: "green", border: "none" }}
-                          onClick={() => handleReceived(order._id)}
-                          disabled={order.received}
-                        >
-                          {order.received ? "Received" : "Mark as Received"}
-                        </Button>
-                      </td>
-                    )}
-                    {(order.status === "Pending" ||
-                      order.status === "Processing") && (
-                      <td>
-                        <Button
-                          disabled
-                          style={{ backgroundColor: "red", border: "none" }}
-                        >
-                          In delivery
-                        </Button>
-                      </td>
-                    )} */}
                       <td>
                         <Eye
                           style={{

@@ -5,7 +5,7 @@ import { Eye } from 'react-bootstrap-icons';
 import OrderDetailAdmin from './OrderDetailAdmin';
 import { toast } from 'react-toastify';
 
-const Pending = ({ status }) => {
+const Cancel = ({ status }) => {
     const [orders, setOrders] = useState([]);
     const [visible, setVisible] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -116,13 +116,12 @@ const Pending = ({ status }) => {
                       }}
                       value={order.status}
                       onChange={(e) => handleStatusChange(e, order._id)}
-                      disabled={order.status === "Completed"}
                     >
-                      <option value="Pending">Pending</option>
+                      <option value="Cancel">Cancel</option>
+                      {/* <option value="Pending">Pending</option>
                       <option value="Processing">Processing</option>
                       <option value="Completed">Completed</option>
-                      {/* <option value="Transfer">Transfer</option>
-                      <option value="Cancel">Cancel</option> */}
+                       */}
                     </FormSelect>
                   </td>
                   <td>{formatCurrency(order.totalAmount) + " ₫"}</td>
@@ -156,4 +155,4 @@ const Pending = ({ status }) => {
     );
 };
 
-export default Pending;
+export default Cancel;
