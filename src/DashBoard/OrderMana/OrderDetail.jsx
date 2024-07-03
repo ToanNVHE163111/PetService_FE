@@ -1,14 +1,17 @@
 import { Dialog } from "primereact/dialog";
-import React from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import { X } from "react-bootstrap-icons";
+import React, { useState } from "react";
+import { Button, Col, Row, Form } from "react-bootstrap";
+import axios from "axios";
 
 const OrderDetail = (props) => {
   const { visible, setVisible, order } = props;
+  const [cancelReason, setCancelReason] = useState("");
+  const [isCanceling, setIsCanceling] = useState(false);
 
   const onHide = () => {
     setVisible(false);
   };
+
   const calculateTotal = () => {
     let total = 0;
     order.items.forEach((item) => {
@@ -16,21 +19,78 @@ const OrderDetail = (props) => {
     });
     return total;
   };
+
+  const handleCancelOrder = async () => {
+    try {
+      await axios.put(`http://localhost:9999/payment/${order._id}/cancel`, {
+        cancelReason,
+      });
+      alert("Đơn hàng đã được hủy thành công");
+      window.location.reload(); // Tải lại trang để cập nhật trạng thái đơn hàng
+    } catch (error) {
+      console.error(error);
+      alert("Lỗi khi hủy đơn hàng");
+    }
+  };
+
   const dialogFooter = (
     <div>
       <div
         style={{ display: "flex", justifyContent: "start", marginTop: "5px" }}
       >
-        <h5>Total: {calculateTotal()} </h5>
+        <h5>Total: {formatCurrency(calculateTotal()) + " ₫"} </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
+        {!isCanceling  ? (
+          <Button
+            onClick={() => setIsCanceling(true)}
+            className="btn btn-danger mr-2"
+            disabled={order.status === "Completed" || order.status === "Cancel" || order.paymentMethod === "VnPay"}
+          >
+            Huỷ đơn hàng
+          </Button>
+        ) : (
+          <>
+            <Form.Control
+              as="select"
+              value={cancelReason}
+              onChange={(e) => setCancelReason(e.target.value)}
+              style={{ marginRight: "10px", width: "200px" }}
+            >
+              <option value="">Chọn lý do</option>
+              <option value="Đổi ý">Đổi ý</option>
+              <option value="Tìm thấy giá rẻ hơn">Tìm thấy giá rẻ hơn</option>
+              <option value="Khác">Khác</option>
+            </Form.Control>
+            <Button
+              onClick={handleCancelOrder}
+              className="btn btn-danger mr-2"
+              disabled={!cancelReason} // Vô hiệu hóa nút nếu chưa chọn lý do
+            >
+              Xác nhận huỷ
+            </Button>
+            <Button
+              onClick={() => setIsCanceling(false)}
+              className="btn btn-secondary mr-2"
+            >
+              Đóng
+            </Button>
+          </>
+        )}
         <Button onClick={onHide} className="btn btn-danger">
-          <X style={{ fontSize: "22px" }} />
-          Close
+          Đóng
         </Button>
       </div>
     </div>
   );
+
+  function formatCurrency(number) {
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
 
   return (
     <div className="card flex justify-content-center">
@@ -41,7 +101,7 @@ const OrderDetail = (props) => {
         className="bg-light"
         style={{ width: "70vw" }}
         modal
-        header={<div className="custom-dialog-header">Chi Tiết Đơn Hàng</div>}
+        header={<div className="custom-dialog-header">Chi tiết đơn hàng</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
@@ -55,19 +115,15 @@ const OrderDetail = (props) => {
                     >
                       <thead>
                         <tr>
-                          <th style={{ width: "15%" }}>ID Đơn Hàng</th>
-                          <th style={{ width: "15%" }}>Tên</th>
-                          <th style={{ width: "25%" }}>Số Lượng</th>
-                          <th style={{ width: "20%" }}>Giá</th>
-                          <th style={{ width: "20%" }}>Tổng</th>
+                          <th style={{ width: "15%" }}>Name</th>
+                          <th style={{ width: "25%" }}>Quantity</th>
+                          <th style={{ width: "20%" }}>Price</th>
+                          <th style={{ width: "20%" }}>Total</th>
                         </tr>
                       </thead>
                       <tbody>
                         {order.items.map((item) => (
                           <tr key={item.productId._id}>
-                            <td style={{ verticalAlign: "middle" }}>
-                              {item.productId._id}
-                            </td>
                             <td style={{ verticalAlign: "middle" }}>
                               {item.productId.name}
                             </td>
@@ -75,10 +131,11 @@ const OrderDetail = (props) => {
                               {item.quantity}
                             </td>
                             <td style={{ verticalAlign: "middle" }}>
-                              {item.price}
+                              {formatCurrency(item.price) + " ₫"}
                             </td>
                             <td style={{ verticalAlign: "middle" }}>
-                              {item.quantity * item.price}
+                              {formatCurrency(item.quantity * item.price) +
+                                " ₫"}
                             </td>
                           </tr>
                         ))}

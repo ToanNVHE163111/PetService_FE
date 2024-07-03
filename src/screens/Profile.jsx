@@ -58,7 +58,7 @@ function Profile() {
               </div>
             </div>
             <div className="mt-4 text-center" style={{ marginLeft: "100px" }}>
-              <Button onClick={handleEditProfile}>Edit Profile</Button>
+              <Button onClick={handleEditProfile}>Chỉnh sửa hồ sơ</Button>
             </div>
           </div>
           <div className="col-xl-8 d-flex justify-content-center">
@@ -70,7 +70,7 @@ function Profile() {
                   <p className="form-control">{profile.fullname}</p>
                 </div>
                 <div className="mb-3">
-                  <label className="small mb-1">Email address</label>
+                  <label className="small mb-1">Email</label>
                   <p className="form-control">{profile.gmail}</p>
                 </div>
                 <div className="mb-3">

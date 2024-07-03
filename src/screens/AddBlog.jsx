@@ -96,9 +96,7 @@ const AddBlog = (props) => {
             <span className="user-name">{fullname}</span>
           </div>
         </div>
-        <select className="privacy">
-          <option value="public">Công khai</option>
-        </select>
+      
         <form id="addBlog" onSubmit={handleAddBlog}>
           <div className="textarea-container">
             <textarea
@@ -139,18 +137,8 @@ const AddBlog = (props) => {
                   <FileEarmarkImage size={22} />
                 </button>
               </OverlayTrigger>
-              <button type="button" className="icon-button">
-                <TagFill size={22} />
-              </button>
-              <button type="button" className="icon-button">
-                <EmojiWinkFill size={22} />
-              </button>
-              <button type="button" className="icon-button">
-                <GeoAltFill size={22} />
-              </button>
-              <button type="button" className="icon-button">
-                <ThreeDots size={22} />
-              </button>
+              
+             
             </div>
           </div>
         </form>

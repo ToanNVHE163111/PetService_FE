@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  Col,
-  Container,
-  FormSelect,
-  Row,
-  Table,
-} from "react-bootstrap";
+import { Col, Container, FormSelect, Row, Table } from "react-bootstrap";
 import { Eye } from "react-bootstrap-icons";
 import axios from "axios";
-import OrderDetail from "./OrderDetail";
 import { toast } from "react-toastify";
+import OrderDetailAdmin from "./OrderDetailAdmin";
 
 const AllOrder = () => {
   const [listOrder, setListOrder] = useState([]);
@@ -36,21 +30,30 @@ const AllOrder = () => {
   };
 
   const handleStatusChange = (e, orderId) => {
-    const newStatus = e.target.value;
+    e.preventDefault();
+    const newStatus = e.target.value; // Lấy giá trị mới của status từ dropdown
     axios
-      .put(`http://localhost:9999/payment/${orderId}`, { status: newStatus })
+      .put("http://localhost:9999/payment/" + orderId, {
+        status: newStatus, 
+      })
       .then((response) => {
-        const updatedListOrder = listOrder.map((order) => {
-          if (order._id === orderId) {
-            return { ...order, status: newStatus };
-          }
-          return order;
-        });
-        setListOrder(updatedListOrder);
-        toast.success("Status updated successfully");
+        if (response.status === 200) {
+          toast.success("Status updated successfully!");
+          // Cập nhật trạng thái của đơn hàng trong state
+          setListOrder(prevOrders => {
+            return prevOrders.map(order => {
+              if (order._id === orderId) {
+                return { ...order, status: newStatus };
+              }
+              return order;
+            });
+          });
+        } else {
+          console.log("Edit Status failed");
+        }
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Error: ", error);
       });
   };
 
@@ -59,7 +62,14 @@ const AllOrder = () => {
     setSelectedOrder(order);
     setVisible(true);
   };
-
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid>
       <Row className="ml-1 mb-4 mt-4">
@@ -72,15 +82,14 @@ const AllOrder = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>Ngày Đặt Hàng</th>
-                <th>Khách Hàng</th>
-                <th>Số Điện Thoại</th>
-                <th>Địa Chỉ</th>
-                <th>Trạng Thái</th>
-                <th>Tổng</th>
-                <th>Thanh Toán</th>
-                {/* <th>Received</th> */}
-                <th>Hoạt Động</th>
+                <th>Order Date</th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Payments</th>
+                <th>Operation</th>
               </tr>
             </thead>
 
@@ -101,16 +110,18 @@ const AllOrder = () => {
                       }}
                       value={o.status}
                       onChange={(e) => handleStatusChange(e, o._id)}
-                      disabled={o.status === "Completed"}
+                      disabled={o.status === "Completed" || o.status === "Cancel"}
                     >
-                      <option value="Pending">Đang Chờ Xử Lý</option>
-                      <option value="Processing">Đang Xử Lý</option>
-                      <option value="Completed">Đã Hoàn Thành</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Processing">Processing</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Cancel">Cancel</option>
+                      {/* <option value="Transfer">Transfer</option>
+                      <option value="Cancel">Cancel</option> */}
                     </FormSelect>
                   </td>
-                  <td>{o.totalAmount}</td>
+                  <td>{formatCurrency(o.totalAmount) + " ₫"}</td>
                   <td>{o.paymentMethod}</td>
-                  {/* <td>{o.received ? "Yes" : "In delivery"}</td> */}
                   <td>
                     <i className="edit">
                       <Eye
@@ -130,7 +141,7 @@ const AllOrder = () => {
         </Col>
       </Row>
       {visible && (
-        <OrderDetail
+        <OrderDetailAdmin
           visible={visible}
           setVisible={setVisible}
           order={selectedOrder}

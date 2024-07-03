@@ -1,6 +1,16 @@
 import React from "react";
 import { Coin } from "react-bootstrap-icons";
 const Products_Card = ({ img, obj, name, price }) => {
+
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
+
   return (
     <div
       className="cards flex-column"
@@ -24,7 +34,7 @@ const Products_Card = ({ img, obj, name, price }) => {
       </div>
       <div>
         <h4 className="text-primary">
-          <Coin style={{color:'yellow', fontSize:'27px' , marginRight:'5px'}}/>{price} <span>VND</span>
+          <Coin style={{color:'yellow', fontSize:'27px' , marginRight:'5px'}}/>{formatCurrency(price)+" ₫"}
         </h4>
       </div>
     </div>

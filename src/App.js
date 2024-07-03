@@ -21,6 +21,8 @@ import Profile from "./screens/Profile";
 import EditProfile from "./screens/EditProfile";
 import Checkout from "./screens/Checkout";
 import OrderStatus from "./DashBoard/OrderMana/OrderStatus";
+import Bill from "./screens/Bill";
+import TotalService from "./screens/TotalService";
 
 
 function App() {
@@ -38,6 +40,7 @@ function App() {
         <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home_Page />} />
+          <Route path="/totalservice" element={<TotalService />} />
           <Route path="/listproduct" element={<Home />} />
           <Route path="/online-booking" element={<Online_Booking />} />
           <Route
@@ -77,6 +80,7 @@ function App() {
               </>
             }
           />
+          <Route path="/Bill/:id" element={<Bill />} />
           <Route
             path="/forgot"
             element={
