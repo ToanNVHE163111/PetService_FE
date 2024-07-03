@@ -1,14 +1,17 @@
 import { Dialog } from "primereact/dialog";
-import React from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import { X } from "react-bootstrap-icons";
+import React, { useState } from "react";
+import { Button, Col, Row, Form } from "react-bootstrap";
+import axios from "axios";
 
 const OrderDetail = (props) => {
   const { visible, setVisible, order } = props;
+  const [cancelReason, setCancelReason] = useState("");
+  const [isCanceling, setIsCanceling] = useState(false);
 
   const onHide = () => {
     setVisible(false);
   };
+
   const calculateTotal = () => {
     let total = 0;
     order.items.forEach((item) => {
@@ -16,6 +19,20 @@ const OrderDetail = (props) => {
     });
     return total;
   };
+
+  const handleCancelOrder = async () => {
+    try {
+      await axios.put(`http://localhost:9999/payment/${order._id}/cancel`, {
+        cancelReason,
+      });
+      alert("Đơn hàng đã được hủy thành công");
+      window.location.reload(); // Tải lại trang để cập nhật trạng thái đơn hàng
+    } catch (error) {
+      console.error(error);
+      alert("Lỗi khi hủy đơn hàng");
+    }
+  };
+
   const dialogFooter = (
     <div>
       <div
@@ -24,23 +41,57 @@ const OrderDetail = (props) => {
         <h5>Total: {formatCurrency(calculateTotal()) + " ₫"} </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
-        <Button className="btn btn-danger mr-2">
-          Huỷ đơn hàng
-        </Button>
+        {!isCanceling  ? (
+          <Button
+            onClick={() => setIsCanceling(true)}
+            className="btn btn-danger mr-2"
+            disabled={order.status === "Completed" || order.status === "Cancel" || order.paymentMethod === "VnPay"}
+          >
+            Huỷ đơn hàng
+          </Button>
+        ) : (
+          <>
+            <Form.Control
+              as="select"
+              value={cancelReason}
+              onChange={(e) => setCancelReason(e.target.value)}
+              style={{ marginRight: "10px", width: "200px" }}
+            >
+              <option value="">Chọn lý do</option>
+              <option value="Đổi ý">Đổi ý</option>
+              <option value="Tìm thấy giá rẻ hơn">Tìm thấy giá rẻ hơn</option>
+              <option value="Khác">Khác</option>
+            </Form.Control>
+            <Button
+              onClick={handleCancelOrder}
+              className="btn btn-danger mr-2"
+              disabled={!cancelReason} // Vô hiệu hóa nút nếu chưa chọn lý do
+            >
+              Xác nhận huỷ
+            </Button>
+            <Button
+              onClick={() => setIsCanceling(false)}
+              className="btn btn-secondary mr-2"
+            >
+              Đóng
+            </Button>
+          </>
+        )}
         <Button onClick={onHide} className="btn btn-danger">
           Đóng
         </Button>
       </div>
     </div>
   );
+
   function formatCurrency(number) {
-    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
     if (typeof number === "number") {
       return number.toLocaleString("en-US", {
         currency: "VND",
       });
     }
   }
+
   return (
     <div className="card flex justify-content-center">
       <Dialog

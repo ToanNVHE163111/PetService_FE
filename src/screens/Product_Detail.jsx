@@ -56,11 +56,12 @@ const Product_Detail = () => {
     axios
       .post("http://localhost:9999/cart", cartItem)
       .then((response) => {
-        toast.success("Added to cart successfully!");
+        toast.success("Thêm vào giỏ hàng thành công!");
+        setValue(1);
         console.log(response.data);
       })
       .catch((error) => {
-        toast.error("Failed to add to cart. Please try again.");
+        toast.error("Hãy thử lại");
         console.error({ error: error.message });
       });
   };
@@ -137,13 +138,18 @@ const Product_Detail = () => {
                   +
                 </Button>
               </div>
-              <div class="d-flex justify-content-start  mt-4 ">
+              <div class="d-flex mt-4 flex-column ">
                 <Button
                   className="btn btn-danger d-block text-center w-50"
                   onClick={handleAddToCart}
                 >
                   <CartPlus style={{ color: "white", fontSize: "30px" }} />
-                  ADD TO CART
+                  THÊM VÀO GIỎ HÀNG
+                </Button>
+
+                <Button className="btn btn-success d-block text-center w-50 mt-3">
+                  <CartPlus style={{ color: "white", fontSize: "30px" }} />
+                  MUA NGAY
                 </Button>
               </div>
             </div>
