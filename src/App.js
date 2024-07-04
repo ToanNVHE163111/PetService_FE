@@ -23,7 +23,6 @@ import Checkout from "./screens/Checkout";
 import Bill from "./screens/Bill";
 import ViewOrderUser from "./DashBoard/OrderMana/OrderForUser/ViewOrderUser";
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
@@ -125,8 +124,6 @@ function App() {
               </>
             }
           />
-         
-
 
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<EditProfile />} />
