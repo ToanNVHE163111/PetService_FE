@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row, Modal, Table } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Row,
+  Modal,
+  Table,
+  Breadcrumb,
+} from "react-bootstrap";
 import { Eye } from "react-bootstrap-icons";
 import axios from "axios";
 import OrderDetail from "./OrderDetail";
-
+import "../../../style/Breadcrumb.css"
 const OrderStatus = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -45,6 +53,9 @@ const OrderStatus = () => {
   }
   return (
     <Container>
+      <Row className="ml-1 mb-4 mt-4">
+        <Col md={6}></Col>
+      </Row>
       <Row>
         <Col className="text-center">
           <div className="table-responsive">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../style/payment.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
+import { Breadcrumb, Col, Row } from "react-bootstrap";
 import { CashStack } from "react-bootstrap-icons";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -11,23 +11,7 @@ const Checkout = () => {
   const [profile, setProfile] = useState({});
   const username = localStorage.getItem("username");
   const [paymentMethod, setPaymentMethod] = useState(0);
-  console.log(paymentMethod);
   const nav = useNavigate();
-  const calculateTotal = () => {
-    let total = 0;
-    listCart.forEach((p) => {
-      total += p.productId.price * p.quantity;
-    });
-    return total;
-  };
-
-  const calculateTotalItems = () => {
-    let totalItems = 0;
-    listCart.forEach((p) => {
-      totalItems += p.quantity;
-    });
-    return totalItems;
-  };
 
   useEffect(() => {
     fetch(`http://localhost:9999/users/${username}`)
@@ -48,30 +32,50 @@ const Checkout = () => {
       });
     }
   }
+  const calculateTotal = () => {
+    let total = 0;
+    listCart.forEach((p) => {
+      total += p.productId.price * p.quantity;
+    });
+    return total;
+  };
+
+  const calculateTotalItems = () => {
+    let totalItems = 0;
+    listCart.forEach((p) => {
+      totalItems += p.quantity;
+    });
+    return totalItems;
+  };
 
   const handlePlaceOrder = () => {
+    // const orderData = {
+    //   userId: profile._id,
+    //   items: listCart.map((item) => ({
+    //     productId: item.productId._id,
+    //     quantity: item.quantity,
+    //   })),
+    //   totalAmount: calculateTotal(),
+    //   paymentMethod: paymentMethod,
+    // };
+
     const orderData = {
-      paymentMethod: paymentMethod === "COD" ? "COD" : paymentMethod,
+      paymentMethod: paymentMethod,
       listCart: listCart,
       profile: profile,
     };
 
     axios
-      .post("http://localhost:9999/payment", orderData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post("http://localhost:9999/payment", orderData)
       .then((response) => {
-        const data = response.data;
-        if (data.message) toast.success(data.message);
+        toast.success("Order placed successfully!");
         nav("/");
       })
       .catch((error) => {
-        console.error("Error:", error);
+        toast.error("Failed to place order, please try again.");
+        console.error({ error: error.message });
       });
   };
-
   const handlePlaceOrderVnPay = () => {
     const orderData = {
       paymentMethod: "VnPay",
@@ -103,6 +107,12 @@ const Checkout = () => {
   };
   return (
     <div>
+       <Row className="mt-2 ml-2">
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
+          <Breadcrumb.Item active>Thanh toán</Breadcrumb.Item>
+        </Breadcrumb>
+      </Row>
       <div className="payment-body">
         <div className="container">
           <div className="row upper">
@@ -198,7 +208,7 @@ const Checkout = () => {
                           <CashStack
                             style={{ color: "yellow", fontSize: "30px" }}
                           />
-                          {formatCurrency(p.productId.price) + " ₫"} 
+                          {formatCurrency(p.productId.price) + " ₫"}
                         </h5>
                       </div>
                       <div className="payment-row text-muted">
@@ -208,13 +218,13 @@ const Checkout = () => {
                   </Row>
                 ))}
                 <hr />
-                
+
                 <div className="payment-row lower">
                   <div className="payment-col text-left">
                     <b>Total to pay</b>
                   </div>
                   <div className="payment-col text-right">
-                    <b>{formatCurrency(calculateTotal()) +  " ₫"} </b>
+                    <b>{formatCurrency(calculateTotal()) + " ₫"} </b>
                   </div>
                 </div>
                 {paymentMethod === "COD" && (

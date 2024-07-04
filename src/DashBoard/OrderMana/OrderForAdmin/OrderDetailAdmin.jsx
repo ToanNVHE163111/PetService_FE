@@ -28,7 +28,7 @@ const OrderDetailAdmin = (props) => {
       <div
         style={{ display: "flex", justifyContent: "start", marginTop: "5px" }}
       >
-        <h5>Total: {formatCurrency(calculateTotal()) +" ₫"} </h5>
+        <h5>Total: {formatCurrency(calculateTotal()) + " ₫"} </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
         <Button onClick={onHide} className="btn btn-danger">
@@ -63,7 +63,7 @@ const OrderDetailAdmin = (props) => {
             <Row>
               <Col md={6}>
                 <div className="form-group w-full">
-                  <label className="label" >
+                  <label className="label">
                     <h6>Tên khách hàng</h6>
                   </label>
                   <input
@@ -77,7 +77,7 @@ const OrderDetailAdmin = (props) => {
               </Col>
               <Col md={6}>
                 <div className="form-group w-full">
-                  <label className="label" >
+                  <label className="label">
                     <h6>Số điện thoại</h6>
                   </label>
                   <input
@@ -92,7 +92,7 @@ const OrderDetailAdmin = (props) => {
               <Col md={6}>
                 {" "}
                 <div className="form-group w-full">
-                  <label className="label" >
+                  <label className="label">
                     <h6>Địa chỉ</h6>
                   </label>
                   <input
@@ -106,7 +106,7 @@ const OrderDetailAdmin = (props) => {
               </Col>
               <Col md={6}>
                 <div className="form-group w-full">
-                  <label className="label" >
+                  <label className="label">
                     <h6>Tổng số lượng đơn hàng</h6>
                   </label>
                   <input
@@ -118,6 +118,22 @@ const OrderDetailAdmin = (props) => {
                   />
                 </div>
               </Col>
+              {order.status === "Cancel" && (
+                <Col md={12}>
+                  <div className="form-group w-full">
+                    <label className="label">
+                      <h6>Lí do huỷ đơn hàng</h6>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={order.cancelReason}
+                      style={{ height: "50px" }}
+                      required
+                    />
+                  </div>
+                </Col>
+              )}
             </Row>
           </div>
         </div>
@@ -150,10 +166,11 @@ const OrderDetailAdmin = (props) => {
                               {item.quantity}
                             </td>
                             <td style={{ verticalAlign: "middle" }}>
-                              {formatCurrency(item.price) +" ₫"}
+                              {formatCurrency(item.price) + " ₫"}
                             </td>
                             <td style={{ verticalAlign: "middle" }}>
-                              {formatCurrency(item.quantity * item.price) +" ₫"}
+                              {formatCurrency(item.quantity * item.price) +
+                                " ₫"}
                             </td>
                           </tr>
                         ))}
