@@ -106,24 +106,8 @@ const Cancel = ({ status }) => {
                   <td>{order.userId.fullname}</td>
                   <td>{order.userId.phone}</td>
                   <td>{order.userId.address}</td>
-                  <td>
-                    <FormSelect
-                      style={{
-                        borderRadius: "30px",
-                        width: "110px",
-                        border: "none",
-                        paddingLeft: "8px",
-                      }}
-                      value={order.status}
-                      onChange={(e) => handleStatusChange(e, order._id)}
-                    >
-                      <option value="Cancel">Cancel</option>
-                      {/* <option value="Pending">Pending</option>
-                      <option value="Processing">Processing</option>
-                      <option value="Completed">Completed</option>
-                       */}
-                    </FormSelect>
-                  </td>
+                  <td>{order.status}</td>
+                  
                   <td>{formatCurrency(order.totalAmount) + " ₫"}</td>
                   <td>{order.paymentMethod}</td>
                   <td>

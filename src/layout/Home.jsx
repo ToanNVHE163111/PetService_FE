@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Breadcrumb, Col, Container, Form, Row } from "react-bootstrap";
 import images from "../assets/images/pet-cover.png";
 import Header from "../components/Header";
 import Products_Card from "../model/Products_Card";
@@ -11,7 +11,7 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [first, setFirst] = useState(0);
-  const [rows, setRows] = useState(3);
+  const [rows, setRows] = useState(9);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -36,7 +36,12 @@ const Home = () => {
 
   return (
     <div>
-      <Row>{/* <Header /> */}</Row>
+      <Row className="mt-4 ml-2">
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
+          <Breadcrumb.Item active>Danh sách sản phẩm</Breadcrumb.Item>
+        </Breadcrumb>
+      </Row>
       <Row className="container">
         <Col md={3} className="d-flex align-items-center">
           <h2>PET PRODUCTS</h2>
