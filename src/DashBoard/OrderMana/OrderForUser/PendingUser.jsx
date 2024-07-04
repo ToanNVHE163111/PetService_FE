@@ -9,12 +9,12 @@ const PendingUser = ({ status }) => {
   const [orders, setOrders] = useState([]);
   const [visible, setVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
-
+  const user = localStorage.getItem("userId");
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9999/payment/${status}`
+          `http://localhost:9999/payment/${user}/${status}`
         );
         setOrders(response.data);
       } catch (error) {
@@ -32,8 +32,6 @@ const PendingUser = ({ status }) => {
     const year = dateObject.getFullYear();
     return `${day}-${month}-${year}`;
   };
-
-
 
   function formatCurrency(number) {
     // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
@@ -53,9 +51,7 @@ const PendingUser = ({ status }) => {
   return (
     <Container fluid>
       <Row className="ml-1 mb-4 mt-4">
-        <Col md={6}>
-          
-        </Col>
+        <Col md={6}></Col>
       </Row>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
@@ -78,10 +74,10 @@ const PendingUser = ({ status }) => {
 
                   <td>{formatCurrency(order.totalAmount) + " ₫"}</td>
                   <td style={{ verticalAlign: "middle" }}>
-                        {order.paymentMethod === "VnPay"
-                          ? "VnPay-Đã thanh toán"
-                          : order.paymentMethod}
-                      </td>
+                    {order.paymentMethod === "VnPay"
+                      ? "VnPay-Đã thanh toán"
+                      : order.paymentMethod}
+                  </td>
                   <td>
                     <i className="edit">
                       <Eye

@@ -8,12 +8,12 @@ const CompletedUser = ({ status }) => {
   const [orders, setOrders] = useState([]);
   const [visible, setVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
-
+  const user = localStorage.getItem("userId");
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9999/payment/${status}`
+          `http://localhost:9999/payment/${user}/${status}`
         );
         setOrders(response.data);
       } catch (error) {

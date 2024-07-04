@@ -123,7 +123,13 @@ const DashBoard = () => {
               </Nav.Item>
             </Nav>
           </Col>
-          <Col sm={9}></Col>
+          <Col sm={9}>
+            <Tab.Content>
+              <Tab.Pane eventKey="five">
+                <ManaAllDashBoard />
+              </Tab.Pane>
+            </Tab.Content>
+          </Col>
         </Row>
       )}
     </Tab.Container>
