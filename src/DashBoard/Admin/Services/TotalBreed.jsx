@@ -59,6 +59,8 @@ const TotalBreed = () => {
             data={chartData}
             options={chartOptions}
             className="w-full md:w-30rem"
+            height={300}
+
           />
         </div>
       </div>
