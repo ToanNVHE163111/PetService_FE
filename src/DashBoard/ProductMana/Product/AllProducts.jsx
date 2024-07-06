@@ -1,26 +1,40 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddProducts from "./AddProducts";
 import EditProduct from "./EditProduct";
 import axios from "axios";
+
 const AllProducts = () => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
   const [products, setProducts] = useState([]);
 
-
   useEffect(() => {
-    axios.get('http://localhost:9999/products')
+    axios
+      .get("http://localhost:9999/products")
       .then((res) => {
         setProducts(res.data);
       })
       .catch((error) => {
-        console.error('Error fetching toys:', error);
+        console.error("Error fetching toys:", error);
       });
-  }, [products]);
+  }, []);
+
+  const handleDeleteProduct = (id) => {
+    if (window.confirm("Bạn có muốn xóa sản phẩm này không?")) {
+      axios
+        .delete(`http://localhost:9999/products/${id}`)
+        .then(() => {
+          setProducts(products.filter((product) => product._id !== id));
+          console.log("Deleted product successfully");
+        })
+        .catch((error) => {
+          console.error("Failed to delete product:", error);
+        });
+    }
+  };
 
   const imageBodyTemplate = (p) => {
     return (
@@ -32,10 +46,20 @@ const AllProducts = () => {
       />
     );
   };
+
   const handleEditProduct = (p) => {
-    setDataEdit(p); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
-    setEditVisible(true); // Hiển thị giao diện chỉnh sửa sản phẩm
+    setDataEdit(p);
+    setEditVisible(true);
   };
+
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid>
       <Row style={{ width: "100%" }}>
@@ -60,6 +84,7 @@ const AllProducts = () => {
                 <th>ID</th>
                 <th> Name</th>
                 <th>Image</th>
+                <th>Price</th>
                 <th>Quantity </th>
                 <th>Category</th>
                 <th colSpan={2}>Operation</th>
@@ -72,10 +97,11 @@ const AllProducts = () => {
                   <td>{p._id}</td>
                   <td>{p.name}</td>
                   <td>{imageBodyTemplate(p)}</td>
+                  <td>{formatCurrency(p.price) + " ₫"}</td>
                   <td>{p.quantity}</td>
                   <td>{p.pettype}</td>
                   <td>
-                    <i className="delete">
+                    <i className="delete" onClick={() => handleDeleteProduct(p._id)}>
                       <Trash
                         style={{
                           color: "red",
@@ -112,7 +138,7 @@ const AllProducts = () => {
           editVisible={editVisible}
           setEditVisible={setEditVisible}
           data={dataEdit}
-          productId={dataEdit._id}  // Truyền productId
+          productId={dataEdit._id}
         />
       )}
     </Container>

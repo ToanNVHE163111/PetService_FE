@@ -21,6 +21,8 @@ import Profile from "./screens/Profile";
 import EditProfile from "./screens/EditProfile";
 import Checkout from "./screens/Checkout";
 import OrderStatus from "./DashBoard/OrderMana/OrderStatus";
+import Bill from "./screens/Bill";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -76,6 +78,7 @@ function App() {
               </>
             }
           />
+          <Route path="/Bill/:id" element={<Bill />} />
           <Route
             path="/forgot"
             element={
@@ -112,16 +115,27 @@ function App() {
               </>
             }
           />
-           <Route
+          <Route
             path="/editblog/:id"
             element={
               <>
-                <Header/>
+                <Header />
                 <EditBlog />
                 <Footer />
               </>
             }
           />
+          {/* <Route
+            path="/addblog"
+            element={
+              <>
+                <CreatePost />
+                <Footer />
+              </>
+            }
+          /> */}
+
+
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/checkout" element={<Checkout />} />

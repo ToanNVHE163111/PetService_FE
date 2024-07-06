@@ -113,7 +113,7 @@ const EditProduct = (props) => {
     for (let i = 0; i < files.length; i++) {
       let formData = new FormData();
       formData.append("file", files[i]);
-      formData.append("upload_preset", "bqu3hmdq");
+      formData.append("upload_preset", "img_shop");
 
       const response = await axios({
         method: 'post',
