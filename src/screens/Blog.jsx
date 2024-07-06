@@ -86,7 +86,7 @@ const Blog = () => {
       .catch((error) => {
         console.error("Error fetching blogs:", error);
       });
-  }, [blogs]);
+  }, []);
 
   const handleDeleteBlog = (id) => {
     if (window.confirm("Do you want to delete this blog")) {
@@ -142,6 +142,7 @@ const Blog = () => {
                   src="https://www.localbotswana.com/img/bw/d/1641218846_95961.jpg"
                   className="rounded-circle"
                   style={{ width: "44px", marginTop: "10px" }}
+                  alt="img_profile"
                 />
               </Col>
               <Col md={8} sm={8} xs={8}>

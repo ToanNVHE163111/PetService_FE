@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddFood from "./AddFood";
-import EditFood from "./EditFood";
+import EditProduct from "../Product/EditProduct";
+
 import axios from "axios";
 
 const ManaFood = ({categoryId}) => {
@@ -110,10 +111,11 @@ const ManaFood = ({categoryId}) => {
       )}
 
       {editVisible === true && (
-        <EditFood
+        <EditProduct
           editVisible={editVisible}
           setEditVisible={setEditVisible}
           data={dataEdit}
+          productId={dataEdit._id}
         />
       )}
     </Container>
