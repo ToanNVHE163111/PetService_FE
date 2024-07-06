@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Breadcrumb, Button, Row } from "react-bootstrap";
 import EditProfile from "./EditProfile"; // Import EditProfile component
 import "../style/profile.css";
 
@@ -34,6 +34,13 @@ function Profile() {
 
   return (
     <div>
+      <Row className="mt-2 ml-2">
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
+          <Breadcrumb.Item active>Thông tin cá nhân</Breadcrumb.Item>
+        </Breadcrumb>
+      </Row>
+
       <div className="container-xl px-4 mt-4">
         <nav className="nav nav-borders">
           <a
