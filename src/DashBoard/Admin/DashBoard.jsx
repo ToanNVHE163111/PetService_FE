@@ -10,7 +10,7 @@ import AppointmentList from "../AppointmentMana/AppointmentList";
 const DashBoard = () => {
   const role = parseInt(localStorage.getItem("role"), 10);
   return (
-    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+    <Tab.Container id="left-tabs-example" defaultActiveKey={role ===3 ? "four" : "first"}>
       <Row className="mt-2 ml-2">
         <Breadcrumb>
           <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
@@ -129,7 +129,7 @@ const DashBoard = () => {
           </Col>
           <Col sm={9}>
             <Tab.Content>
-            <Tab.Pane eventKey="four">
+              <Tab.Pane eventKey="four">
                 <AppointmentList />
               </Tab.Pane>
               <Tab.Pane eventKey="five">
