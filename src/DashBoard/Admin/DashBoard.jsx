@@ -5,6 +5,7 @@ import OrderManagement from "../OrderMana/OrderForAdmin/OrderManagement";
 import ManaAllCateProduct from "../ProductMana/Product/ManaAllCateProduct";
 import TotalDashBoard from "./TotalDashBoard";
 import ManaAllDashBoard from "./ManaAllDashBoard";
+import AppointmentList from "../AppointmentMana/AppointmentList";
 
 const DashBoard = () => {
   const role = parseInt(localStorage.getItem("role"), 10);
@@ -57,6 +58,9 @@ const DashBoard = () => {
               </Tab.Pane>
               <Tab.Pane eventKey="three">
                 <OrderManagement />
+              </Tab.Pane>
+              <Tab.Pane eventKey="four">
+                <AppointmentList />
               </Tab.Pane>
               <Tab.Pane eventKey="five">
                 <ManaAllDashBoard />
@@ -125,6 +129,9 @@ const DashBoard = () => {
           </Col>
           <Col sm={9}>
             <Tab.Content>
+            <Tab.Pane eventKey="four">
+                <AppointmentList />
+              </Tab.Pane>
               <Tab.Pane eventKey="five">
                 <ManaAllDashBoard />
               </Tab.Pane>

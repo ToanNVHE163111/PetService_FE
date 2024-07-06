@@ -5,7 +5,6 @@ import TotalServices from "./TotalServices";
 import TotalBreed from "./TotalBreed";
 import TotalByMonth from "./TotalByMonth";
 import { Col, Container, Row } from "react-bootstrap";
-import BestServices from "./BestServices";
 const TotalServiceMana = () => {
   return (
     <div className="all">
@@ -28,9 +27,6 @@ const TotalServiceMana = () => {
 
         <div className="row w-100">
           <Container fluid>
-            {/* <Row>
-                <BestServices/>
-            </Row> */}
             <Row>
               <Col md={6}>
                 <TotalBreed />
