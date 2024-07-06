@@ -3,7 +3,6 @@ import { Breadcrumb, Col, Nav, Row, Tab } from "react-bootstrap";
 import UserManagement from "../UserMana/UserManagement";
 import OrderManagement from "../OrderMana/OrderForAdmin/OrderManagement";
 import ManaAllCateProduct from "../ProductMana/Product/ManaAllCateProduct";
-import TotalDashBoard from "./TotalDashBoard";
 import ManaAllDashBoard from "./ManaAllDashBoard";
 import AppointmentList from "../AppointmentMana/AppointmentList";
 
