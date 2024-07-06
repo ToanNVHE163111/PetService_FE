@@ -18,7 +18,7 @@ import EditBlog from "./EditBlog";
 import Comment from "./Comment";
 import AddBlog from "./AddBlog";
 import { toast } from "react-toastify";
-import { Image } from "antd"; // Import Image from Ant Design
+import { Image } from "antd"; 
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a

@@ -126,8 +126,12 @@ const AllOrder = () => {
                       <option value="Pending">Pending</option>
                       <option value="Processing">Processing</option>
                       <option value="Completed">Completed</option>
+                      {o.status === "Cancel" && (
+                        <option value="Cancel">Cancel</option>
+                      )}
+
                       {/* <option value="Transfer">Transfer</option>
-                      <option value="Cancel">Cancel</option> */}
+                       */}
                     </FormSelect>
                   </td>
                   <td>{formatCurrency(o.totalAmount) + " ₫"}</td>

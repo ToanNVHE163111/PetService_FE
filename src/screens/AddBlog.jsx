@@ -216,23 +216,7 @@ const AddBlog = (props) => {
             </label>
             <input onChange={handleFiles} hidden type="file" id='file' multiple />
           </div>
-          <div className="actions">
-            <div className="icon-group">
-              <button type="button" className="add-button">
-                Thêm vào bài viết của bạn
-              </button>
-              <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip id="tooltip-top">Thêm ảnh</Tooltip>}
-              >
-                <button type="button" className="icon-button" onClick={addImageInput}>
-                  <FileEarmarkImage size={22} />
-                </button>
-              </OverlayTrigger>
-
-
-            </div>
-          </div>
+          
         </form>
       </Dialog>
     </div>

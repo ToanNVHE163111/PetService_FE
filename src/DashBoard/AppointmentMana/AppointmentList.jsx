@@ -55,6 +55,7 @@ console.log(events);
           <p><strong>Address:</strong> {selectedEvent.address}</p>
           <p><strong>Appointment Date:</strong> {new Date(selectedEvent.appointment_date).toLocaleString()}</p>
           <p><strong>Order Status:</strong> {selectedEvent.order_status}</p>
+          <p><strong>Service Type:</strong> {selectedEvent.service_type.name}</p>
           <p><strong>Pet Info:</strong></p>
           <ul>
             <li><strong>Pet Name:</strong> {selectedEvent.pet_info.pet_name}</li>
