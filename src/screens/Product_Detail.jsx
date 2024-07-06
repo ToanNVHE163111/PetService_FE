@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Button } from "react-bootstrap";
-import Header from "../components/Header";
+import { Col, Container, Row, Button, Breadcrumb } from "react-bootstrap";
 import "react-medium-image-zoom/dist/styles.css";
 import Zoom from "react-medium-image-zoom";
-import images from "../assets/images/product.png";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Cart, CartPlus, Coin } from "react-bootstrap-icons";
 import Simila_Product from "../components/Simila_Product";
 import Comment from "./Comment";
 import Products_Card from "../model/Products_Card";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import "../style/Breadcrumb.css"
 const Product_Detail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [profile, setProfile] = useState({});
   const [similarProducts, setSimilarProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [value, setValue] = useState(1);
   const userId = localStorage.getItem("userId");
+  const username = localStorage.getItem("username");
+
+  const nav = useNavigate();
   let categoryId;
 
   useEffect(() => {
@@ -36,6 +38,18 @@ const Product_Detail = () => {
       .then((data) => setSimilarProducts(data))
       .catch((error) => console.error(error));
   }, [id]);
+
+  useEffect(() => {
+    fetch(`http://localhost:9999/users/${username}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setProfile(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [username]);
+
   const increaseQuantity = () => {
     setValue((prevValue) => prevValue + 1);
   };
@@ -56,15 +70,25 @@ const Product_Detail = () => {
     axios
       .post("http://localhost:9999/cart", cartItem)
       .then((response) => {
-        toast.success("Added to cart successfully!");
+        toast.success("Thêm vào giỏ hàng thành công!");
+        setValue(1);
         console.log(response.data);
       })
       .catch((error) => {
-        toast.error("Failed to add to cart. Please try again.");
+        toast.error("Hãy thử lại");
         console.error({ error: error.message });
       });
   };
 
+  const handleByNow = () => {
+    const orderData = {
+      userId: profile._id,
+      productId: product,
+      categoryId: product.category._id,
+      quantity: value,
+    };
+    nav("/checkout", { state: { listCart: [orderData] } });
+  };
   function formatCurrency(number) {
     // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
     if (typeof number === "number") {
@@ -75,7 +99,17 @@ const Product_Detail = () => {
   }
 
   return (
-    <Container className="mt-5">
+    <Container fluid>
+      <Row className="mt-1 ml-2">
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
+          <Breadcrumb.Item href="http://localhost:3000/listproduct">
+            Danh sách sản phẩm
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active>Chi tiết sản phẩm</Breadcrumb.Item>
+        </Breadcrumb>
+      </Row>
+      <Container className=" mt-4">
       {product && (
         <Row>
           <Col md={6}>
@@ -137,13 +171,21 @@ const Product_Detail = () => {
                   +
                 </Button>
               </div>
-              <div class="d-flex justify-content-start  mt-4 ">
+              <div class="d-flex mt-4 flex-column ">
                 <Button
                   className="btn btn-danger d-block text-center w-50"
                   onClick={handleAddToCart}
                 >
                   <CartPlus style={{ color: "white", fontSize: "30px" }} />
-                  ADD TO CART
+                  THÊM VÀO GIỎ HÀNG
+                </Button>
+
+                <Button
+                  className="btn btn-success d-block text-center w-50 mt-3"
+                  onClick={handleByNow}
+                >
+                  <CartPlus style={{ color: "white", fontSize: "30px" }} />
+                  MUA NGAY
                 </Button>
               </div>
             </div>
@@ -183,6 +225,7 @@ const Product_Detail = () => {
           </Row>
         </div>
       </Row>
+      </Container>
     </Container>
   );
 };

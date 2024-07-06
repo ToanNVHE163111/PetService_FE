@@ -1,7 +1,7 @@
 import React from "react";
-import { Col, Nav, Row, Tab } from "react-bootstrap";
+import { Breadcrumb, Col, Nav, Row, Tab } from "react-bootstrap";
 import UserManagement from "../UserMana/UserManagement";
-import OrderManagement from "../OrderMana/OrderManagement";
+import OrderManagement from "../OrderMana/OrderForAdmin/OrderManagement";
 import ManaAllCateProduct from "../ProductMana/Product/ManaAllCateProduct";
 import TotalDashBoard from "./TotalDashBoard";
 import ManaAllDashBoard from "./ManaAllDashBoard";
@@ -11,8 +11,14 @@ const DashBoard = () => {
   const role = parseInt(localStorage.getItem("role"), 10);
   return (
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+      <Row className="mt-2 ml-2">
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
+          <Breadcrumb.Item active>Quản lí</Breadcrumb.Item>
+        </Breadcrumb>
+      </Row>
       {role === 1 && (
-        <Row style={{ marginTop: "90px" }}>
+        <Row style={{ marginTop: "50px" }}>
           <Col sm={2}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
@@ -121,7 +127,13 @@ const DashBoard = () => {
               </Nav.Item>
             </Nav>
           </Col>
-          <Col sm={9}></Col>
+          <Col sm={9}>
+            <Tab.Content>
+              <Tab.Pane eventKey="five">
+                <ManaAllDashBoard />
+              </Tab.Pane>
+            </Tab.Content>
+          </Col>
         </Row>
       )}
     </Tab.Container>

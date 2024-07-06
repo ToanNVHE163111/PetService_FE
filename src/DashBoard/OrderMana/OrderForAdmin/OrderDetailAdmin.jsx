@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { X } from "react-bootstrap-icons";
 
-const OrderDetail = (props) => {
+const OrderDetailAdmin = (props) => {
   const { visible, setVisible, order } = props;
 
   const onHide = () => {
@@ -16,6 +16,13 @@ const OrderDetail = (props) => {
     });
     return total;
   };
+  const calculateTotalQuantity = () => {
+    let totalQuantity = 0;
+    order.items.forEach((item) => {
+      totalQuantity += item.quantity;
+    });
+    return totalQuantity;
+  };
   const dialogFooter = (
     <div>
       <div
@@ -24,11 +31,9 @@ const OrderDetail = (props) => {
         <h5>Total: {formatCurrency(calculateTotal()) + " ₫"} </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
-        <Button className="btn btn-danger mr-2">
-          Huỷ đơn hàng
-        </Button>
         <Button onClick={onHide} className="btn btn-danger">
-          Đóng
+          <X style={{ fontSize: "22px" }} />
+          Close
         </Button>
       </div>
     </div>
@@ -53,6 +58,87 @@ const OrderDetail = (props) => {
         header={<div className="custom-dialog-header">Chi tiết đơn hàng</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
+          <h4 className="text-center">Thông tin chi tiết Khách hàng</h4>
+          <div style={{ margin: "40px" }}>
+            <Row>
+              <Col md={6}>
+                <div className="form-group w-full">
+                  <label className="label">
+                    <h6>Tên khách hàng</h6>
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    style={{ height: "50px" }}
+                    value={order.userId.fullname}
+                    required
+                  />
+                </div>
+              </Col>
+              <Col md={6}>
+                <div className="form-group w-full">
+                  <label className="label">
+                    <h6>Số điện thoại</h6>
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    style={{ height: "50px" }}
+                    value={order.userId.phone}
+                    required
+                  />
+                </div>
+              </Col>
+              <Col md={6}>
+                {" "}
+                <div className="form-group w-full">
+                  <label className="label">
+                    <h6>Địa chỉ</h6>
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    style={{ height: "50px" }}
+                    value={order.userId.address}
+                    required
+                  />
+                </div>
+              </Col>
+              <Col md={6}>
+                <div className="form-group w-full">
+                  <label className="label">
+                    <h6>Tổng số lượng đơn hàng</h6>
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    value={calculateTotalQuantity()}
+                    style={{ height: "50px" }}
+                    required
+                  />
+                </div>
+              </Col>
+              {order.status === "Cancel" && (
+                <Col md={12}>
+                  <div className="form-group w-full">
+                    <label className="label">
+                      <h6>Lí do huỷ đơn hàng</h6>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={order.cancelReason}
+                      style={{ height: "50px" }}
+                      required
+                    />
+                  </div>
+                </Col>
+              )}
+            </Row>
+          </div>
+        </div>
+        <div className="bg-light p-1" style={{ margin: "25px" }}>
+          <h4 className="text-center">Thông tin chi tiết đơn hàng</h4>
           <div style={{ margin: "40px" }}>
             <form id="addProductForm">
               <Row>
@@ -101,4 +187,4 @@ const OrderDetail = (props) => {
   );
 };
 
-export default OrderDetail;
+export default OrderDetailAdmin;

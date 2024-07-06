@@ -18,7 +18,7 @@ import EditBlog from "./EditBlog";
 import Comment from "./Comment";
 import AddBlog from "./AddBlog";
 import { toast } from "react-toastify";
-import { Image } from 'antd'; // Import Image from Ant Design
+import { Image } from "antd"; // Import Image from Ant Design
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -76,6 +76,7 @@ const Blog = () => {
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [selectedBlogId, setSelectedBlogId] = useState("");
   const [visible, setVisible] = useState(false);
+  const fullname = localStorage.getItem("fullname");
   useEffect(() => {
     axios
       .get("http://localhost:9999/blogs")
@@ -115,7 +116,7 @@ const Blog = () => {
   };
 
   const formatDate = (inputDate) => {
-const dateObject = new Date(inputDate);
+    const dateObject = new Date(inputDate);
     const day = dateObject.getDate().toString().padStart(2, "0");
     const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
     const year = dateObject.getFullYear();
@@ -125,7 +126,7 @@ const dateObject = new Date(inputDate);
     setShowCommentForm(true);
     setSelectedBlog(blog);
     setSelectedBlogId(blog._id);
-    setBlogs([`Item ${blogs.length + 1}`, ...blogs])
+    setBlogs([`Item ${blogs.length + 1}`, ...blogs]);
   };
   return (
     <Container style={{ marginTop: "20px" }}>
@@ -146,7 +147,11 @@ const dateObject = new Date(inputDate);
               </Col>
               <Col md={8} sm={8} xs={8}>
                 <input
-                  style={{ borderRadius: "40px", paddingRight: "20px", height: "60px" }}
+                  style={{
+                    borderRadius: "40px",
+                    paddingRight: "20px",
+                    height: "60px",
+                  }}
                   className="form-control"
                   placeholder="Bạn đang nghĩ gì thế ???"
                   onClick={() => setVisible(true)}
@@ -194,7 +199,7 @@ const dateObject = new Date(inputDate);
                   <label>
                     <EmojiLaughing
                       style={{ fontSize: "25px", marginRight: "10px" }}
-/>
+                    />
                     Cảm xúc
                   </label>
                 </button>
@@ -205,123 +210,133 @@ const dateObject = new Date(inputDate);
         </Col>
       </Row>
       <br />
-      {blogs.slice().reverse().map((b) => (
-        <Row key={b._id}>
-          <Col md={12}>
-            <div className="cardd">
-              <div className="card-body">
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    fontSize: "14px",
-                    color: "gray",
-                  }}
-                >
-                  <img
-                    src="https://www.localbotswana.com/img/bw/d/1641218846_95961.jpg"
-                    className="rounded-circle"
-                    style={{ width: "40px", marginRight: "4px" }}
-                  />
-                  <b>{b.userId?.fullname}</b>
-                  <Dropdown style={{ marginLeft: "auto" }}>
-                    <Dropdown.Toggle
-                      as={CustomToggle}
-                      id="dropdown-custom-components"
-                    ></Dropdown.Toggle>
-                    <Dropdown.Menu
-                      as={CustomMenu}
-                      onEdit={() => handleEditBlog(b)}
-                      onDelete={() => handleDeleteBlog(b._id)}
+      {blogs
+        .slice()
+        .reverse()
+        .map((b) => (
+          <Row key={b._id}>
+            <Col md={12}>
+              <div className="cardd">
+                <div className="card-body">
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      fontSize: "14px",
+                      color: "gray",
+                    }}
+                  >
+                    <img
+                      src="https://www.localbotswana.com/img/bw/d/1641218846_95961.jpg"
+                      className="rounded-circle"
+                      style={{ width: "40px", marginRight: "4px" }}
                     />
-                  </Dropdown>
-                </div>
-                <small
-                  style={{
-                    display: "block",
-                    marginTop: "-10px",
-                    marginLeft: "55px",
-                    color: "gray",
-                  }}
-                >
-                  {formatDate(b.createdAt)}
-                </small>
-                <p>{b.content}</p>
-                <Row>
-                <Image.PreviewGroup>
-                    {b.images &&
-                      b.images.map((imgSrc, index) => (
-                        <Col
-                          md={6}
-                          sm={4}
-                          xs={4}
-                          key={index}
-                          style={{ marginBottom: "20px", display: "flex" }}
-                        >
-                          <Zoom>
-                            <Image
-                              src={imgSrc}
-                              style={{ width: "100%", maxHeight: "500px", flexWrap: "wrap",objectFit:"cover" }}
+                    <b>{b.userId?.fullname}</b>
+                    {fullname === b.userId?.fullname && (
+                      <Dropdown style={{ marginLeft: "auto" }}>
+                        <Dropdown.Toggle
+                          as={CustomToggle}
+                          id="dropdown-custom-components"
+                        ></Dropdown.Toggle>
+                        <Dropdown.Menu
+                          as={CustomMenu}
+                          onEdit={() => handleEditBlog(b)}
+                          onDelete={() => handleDeleteBlog(b._id)}
+                        />
+                      </Dropdown>
+                    )}
+                  </div>
+                  <small
+                    style={{
+                      display: "block",
+                      marginTop: "-10px",
+                      marginLeft: "55px",
+                      color: "gray",
+                    }}
+                  >
+                    {formatDate(b.createdAt)}
+                  </small>
+                  <p>{b.content}</p>
+                  <Row>
+                    <Image.PreviewGroup>
+                      {b.images &&
+                        b.images.map((imgSrc, index) => (
+                          <Col
+                            md={6}
+                            sm={4}
+                            xs={4}
+                            key={index}
+                            style={{ marginBottom: "20px", display: "flex" }}
+                          >
+                            <Zoom>
+                              <Image
+                                src={imgSrc}
+                                style={{
+                                  width: "520px",
+                                  height: "350px",
+                                  flexWrap: "wrap",
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </Zoom>
+                          </Col>
+                        ))}
+                    </Image.PreviewGroup>
+                  </Row>
+                  <br />
+                  <hr />
+                  <Row>
+                    <Col md={12}>
+                      <div style={{ textAlign: "left" }}>
+                        <span style={{ marginLeft: "24px" }}>
+                          1 like 13 Comment
+                        </span>
+                      </div>
+                    </Col>
+                  </Row>
+                  <hr />
+                  <Row style={{ marginLeft: "0px", display: "flex" }}>
+                    <Col md={6} sm={6} xs={6}>
+                      <button className="fc-btn fc-btn-white">
+                        <div className="fc-icon">
+                          <label style={{ cursor: "pointer" }}>
+                            <HandThumbsUp
+                              style={{ fontSize: "25px", marginRight: "10px" }}
                             />
-                          </Zoom>
-                        </Col>
-                      ))}
-                  </Image.PreviewGroup>
-                </Row>
-                <br />
-                <hr />
-                <Row>
-                  <Col md={12}>
-                    <div style={{ textAlign: "left" }}>
-                      <span style={{ marginLeft: "24px" }}>
-                        1 like 13 Comment
-                      </span>
-                    </div>
-                  </Col>
-                </Row>
-                <hr />
-                <Row style={{ marginLeft: "0px", display: "flex" }}>
-                  <Col md={6} sm={6} xs={6}>
-                    <button className="fc-btn fc-btn-white">
-                      <div className="fc-icon">
-<label style={{ cursor: "pointer" }}>
-                          <HandThumbsUp
-                            style={{ fontSize: "25px", marginRight: "10px" }}
-                          />
-                          Thích
-                        </label>
-                      </div>
-                    </button>
-                  </Col>
-                  <Col md={6} sm={6} xs={6}>
-                    <button
-                      className="fc-btn fc-btn-white"
-                      onClick={() => handleComment(b)}
-                    >
-                      <div className="fc-icon fc-icon-comentar">
-                        <label style={{ cursor: "pointer" }}>
-                          <Chat
-                            style={{ fontSize: "25px", marginRight: "10px" }}
-                          />
-                          Bình luận
-                        </label>
-                      </div>
-                    </button>
-                  </Col>
-                </Row>
-                <br />
+                            Thích
+                          </label>
+                        </div>
+                      </button>
+                    </Col>
+                    <Col md={6} sm={6} xs={6}>
+                      <button
+                        className="fc-btn fc-btn-white"
+                        onClick={() => handleComment(b)}
+                      >
+                        <div className="fc-icon fc-icon-comentar">
+                          <label style={{ cursor: "pointer" }}>
+                            <Chat
+                              style={{ fontSize: "25px", marginRight: "10px" }}
+                            />
+                            Bình luận
+                          </label>
+                        </div>
+                      </button>
+                    </Col>
+                  </Row>
+                  <br />
+                </div>
               </div>
-            </div>
-          </Col>
-          {showCommentForm && selectedBlog && selectedBlog._id === b._id && (
-            <Comment
-              blogId={selectedBlog._id}
-              onClose={() => setShowCommentForm(false)}
-              selectedBlogId={selectedBlogId}
-            />
-          )}
-        </Row>
-      ))}
+            </Col>
+            {showCommentForm && selectedBlog && selectedBlog._id === b._id && (
+              <Comment
+                blogId={selectedBlog._id}
+                onClose={() => setShowCommentForm(false)}
+                selectedBlogId={selectedBlogId}
+              />
+            )}
+          </Row>
+        ))}
       {editVisible && (
         <EditBlog
           editVisible={editVisible}

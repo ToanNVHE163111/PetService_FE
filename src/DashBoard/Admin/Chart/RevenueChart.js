@@ -1,36 +1,55 @@
+import React, { useEffect, useState } from 'react';
 import { Chart } from 'primereact/chart';
-import React from 'react';
+import axios from 'axios';
 
 const RevenueChart = () => {
-    const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
+  const [chartData, setChartData] = useState({ labels: [], datasets: [] });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:9999/payment/monthly-revenue');
+        const monthlyRevenue = response.data;
+
+        const labels = monthlyRevenue.map(item => item.month);
+        const data = monthlyRevenue.map(item => item.revenue);
+
+        setChartData({
+          labels,
+          datasets: [
             {
-                label: 'Revenue',
-                data: [15000, 20000, 5000, 18000, 25000, 40000, 35000],
-                backgroundColor: '#42A5F5',
+              label: 'Doanh Thu ',
+              data,
+              backgroundColor: '#42A5F5',
             },
-        ],
+          ],
+        });
+      } catch (error) {
+        console.error('Error fetching monthly revenue data', error);
+      }
     };
 
-    const options = {
-        scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: true,
-                    },
-                },
-            ],
+    fetchData();
+  }, []);
+
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
         },
-    };
+      ],
+    },
+  };
 
-    return (
-        <div style={{height:'305px'}}>
-            <h3>Revenue Chart</h3>
-            <Chart type="line" data={data} options={options} />
-        </div>
-    );
+  return (
+    <div style={{ height: '305px' }}>
+      <h3>Doanh Thu Theo Tháng</h3>
+      <Chart type="line" data={chartData} options={options} />
+    </div>
+  );
 };
 
 export default RevenueChart;

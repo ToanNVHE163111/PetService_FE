@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row, Modal, Table } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Row,
+  Modal,
+  Table,
+  Breadcrumb,
+} from "react-bootstrap";
 import { Eye } from "react-bootstrap-icons";
 import axios from "axios";
 import OrderDetail from "./OrderDetail";
-
+import "../../../style/Breadcrumb.css"
 const OrderStatus = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -43,32 +51,18 @@ const OrderStatus = () => {
       });
     }
   }
-  // const handleReceived = (orderId) => {
-  //   axios
-  //     .put(`http://localhost:9999/payment/${orderId}`, { received: true })
-  //     .then((response) => {
-  //       const updatedOrders = orders.map((order) => {
-  //         if (order._id === orderId) {
-  //           return { ...order, received: true };
-  //         }
-  //         return order;
-  //       });
-  //       setOrders(updatedOrders);
-  //       toast.success("Order marked as received successfully!");
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       toast.error("Failed to mark the order as received.");
-  //     });
-  // };
-
   return (
     <Container>
+      <Row className="ml-1 mb-4 mt-4">
+        <Col md={6}></Col>
+      </Row>
       <Row>
         <Col className="text-center">
           <div className="table-responsive">
             {orders.length === 0 ? (
-              <h5 style={{marginTop:'30px'}}>Bạn chưa đặt đơn hàng nào !!! </h5>
+              <h5 style={{ marginTop: "30px" }}>
+                Bạn chưa đặt đơn hàng nào !!!{" "}
+              </h5>
             ) : (
               <Table striped bordered hover>
                 <thead>
@@ -76,7 +70,7 @@ const OrderStatus = () => {
                     <th style={{ width: "15%" }}>Order Date</th>
                     <th style={{ width: "25%" }}>Status</th>
                     <th style={{ width: "20%" }}>Total</th>
-                    {/* <th style={{ width: "20%" }}>Action</th> */}
+                    <th style={{ width: "20%" }}>Phương thức thanh toán</th>
                     <th>Operation</th>
                   </tr>
                 </thead>
@@ -92,28 +86,11 @@ const OrderStatus = () => {
                       <td style={{ verticalAlign: "middle" }}>
                         {formatCurrency(order.totalAmount) + " ₫"}
                       </td>
-                      {/* {order.status === "Completed" && (
-                      <td>
-                        <Button
-                          style={{ backgroundColor: "green", border: "none" }}
-                          onClick={() => handleReceived(order._id)}
-                          disabled={order.received}
-                        >
-                          {order.received ? "Received" : "Mark as Received"}
-                        </Button>
+                      <td style={{ verticalAlign: "middle" }}>
+                        {order.paymentMethod === "VnPay"
+                          ? "VnPay-Đã thanh toán"
+                          : order.paymentMethod}
                       </td>
-                    )}
-                    {(order.status === "Pending" ||
-                      order.status === "Processing") && (
-                      <td>
-                        <Button
-                          disabled
-                          style={{ backgroundColor: "red", border: "none" }}
-                        >
-                          In delivery
-                        </Button>
-                      </td>
-                    )} */}
                       <td>
                         <Eye
                           style={{

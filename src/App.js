@@ -20,9 +20,8 @@ import EditBlog from "./screens/EditBlog";
 import Profile from "./screens/Profile";
 import EditProfile from "./screens/EditProfile";
 import Checkout from "./screens/Checkout";
-import OrderStatus from "./DashBoard/OrderMana/OrderStatus";
 import Bill from "./screens/Bill";
-
+import ViewOrderUser from "./DashBoard/OrderMana/OrderForUser/ViewOrderUser";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -125,21 +124,11 @@ function App() {
               </>
             }
           />
-          {/* <Route
-            path="/addblog"
-            element={
-              <>
-                <CreatePost />
-                <Footer />
-              </>
-            }
-          /> */}
-
 
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-status" element={<OrderStatus />} />
+          <Route path="/order-status" element={<ViewOrderUser />} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>

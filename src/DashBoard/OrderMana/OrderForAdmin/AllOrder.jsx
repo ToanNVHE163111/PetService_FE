@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Col,
-  Container,
-  FormSelect,
-  Row,
-  Table,
-} from "react-bootstrap";
+import { Col, Container, FormSelect, Row, Table } from "react-bootstrap";
 import { Eye } from "react-bootstrap-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -36,21 +30,30 @@ const AllOrder = () => {
   };
 
   const handleStatusChange = (e, orderId) => {
-    const newStatus = e.target.value;
+    e.preventDefault();
+    const newStatus = e.target.value; // Lấy giá trị mới của status từ dropdown
     axios
-      .put(`http://localhost:9999/payment/${orderId}`, { status: newStatus })
+      .put("http://localhost:9999/payment/" + orderId, {
+        status: newStatus,
+      })
       .then((response) => {
-        const updatedListOrder = listOrder.map((order) => {
-          if (order._id === orderId) {
-            return { ...order, status: newStatus };
-          }
-          return order;
-        });
-        setListOrder(updatedListOrder);
-        toast.success("Status updated successfully");
+        if (response.status === 200) {
+          toast.success("Status updated successfully!");
+          // Cập nhật trạng thái của đơn hàng trong state
+          setListOrder((prevOrders) => {
+            return prevOrders.map((order) => {
+              if (order._id === orderId) {
+                return { ...order, status: newStatus };
+              }
+              return order;
+            });
+          });
+        } else {
+          console.log("Edit Status failed");
+        }
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Error: ", error);
       });
   };
 
@@ -86,7 +89,6 @@ const AllOrder = () => {
                 <th>Status</th>
                 <th>Total</th>
                 <th>Payments</th>
-                {/* <th>Received</th> */}
                 <th>Operation</th>
               </tr>
             </thead>
@@ -107,17 +109,29 @@ const AllOrder = () => {
                         paddingLeft: "8px",
                       }}
                       value={o.status}
-                      onChange={(e) => handleStatusChange(e, o._id)}
-                      disabled={o.status === "Completed"}
+                      onChange={(e) => {
+                        if (
+                          o.status === "Processing" &&
+                          e.target.value === "Pending"
+                        ) {
+                          return;
+                        }
+
+                        handleStatusChange(e, o._id);
+                      }}
+                      disabled={
+                        o.status === "Completed" || o.status === "Cancel"
+                      }
                     >
                       <option value="Pending">Pending</option>
                       <option value="Processing">Processing</option>
                       <option value="Completed">Completed</option>
+                      {/* <option value="Transfer">Transfer</option>
+                      <option value="Cancel">Cancel</option> */}
                     </FormSelect>
                   </td>
-                  <td>{formatCurrency(o.totalAmount) +" ₫"}</td>
+                  <td>{formatCurrency(o.totalAmount) + " ₫"}</td>
                   <td>{o.paymentMethod}</td>
-                  {/* <td>{o.received ? "Yes" : "In delivery"}</td> */}
                   <td>
                     <i className="edit">
                       <Eye
@@ -140,7 +154,7 @@ const AllOrder = () => {
         <OrderDetailAdmin
           visible={visible}
           setVisible={setVisible}
-          order={selectedOrder} 
+          order={selectedOrder}
         />
       )}
     </Container>
