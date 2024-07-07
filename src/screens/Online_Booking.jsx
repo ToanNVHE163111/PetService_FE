@@ -307,6 +307,7 @@ const Online_Booking = () => {
                     value={bookingData.pet_info.species}
                     isInvalid={!!errors.species}
                   >
+                    <option value="0">Chọn Loài</option>
                     <option value="Chó">Chó</option>
                     <option value="Mèo">Mèo</option>
                     <option value="Khác">Khác</option>
@@ -318,11 +319,16 @@ const Online_Booking = () => {
                 <Form.Group controlId="breed">
                   <Form.Label>Thuộc Giống</Form.Label>
                   <Form.Control
+                    as="select"
                     name="breed"
                     onChange={handlePetInfoChange}
                     value={bookingData.pet_info.breed}
                     isInvalid={!!errors.breed}
-                  />
+                  >
+                    <option value="0">Chọn Giống</option>
+                    <option value="Đực">Đực</option>
+                    <option value="Cái">Cái</option>
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {errors.breed}
                   </Form.Control.Feedback>

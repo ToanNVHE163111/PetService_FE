@@ -60,7 +60,7 @@ const TotalByMonth = () => {
             marginBottom: "10px",
           }}
         >
-          Revenue by service type
+        Doanh thu theo dịch vụ
         </h5>
         <div className="card-body">
           <Chart

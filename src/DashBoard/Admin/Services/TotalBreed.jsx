@@ -51,7 +51,7 @@ const TotalBreed = () => {
             marginBottom: "10px",
           }}
         >
-          Statistics by breed
+        Thống kê theo giống
         </h5>
         <div className="card-body">
           <Chart
