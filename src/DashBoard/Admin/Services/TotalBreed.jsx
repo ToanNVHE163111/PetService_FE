@@ -1,37 +1,56 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "primereact/chart";
 import { Container } from "react-bootstrap";
+import axios from "axios";
 
 const TotalBreed = () => {
   const [chartData, setChartData] = useState({});
-  const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const data = {
-      labels: ["Male", "Female"],
-      datasets: [
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:9999/booking/pet-breeds')
+        // if (!response.ok) {
+        //   alert("Failed to fetch breed");
+        // }
+        const {maleCount, femaleCount} = response.data
+        const documentStyle = getComputedStyle(document.documentElement);
+        const data = {
+          labels: ["Đực", "Cái"],
+          datasets: [
+            {
+              data: [maleCount, femaleCount],
+              backgroundColor: [
+                documentStyle.getPropertyValue("--blue-500"),
+                documentStyle.getPropertyValue("--yellow-500"),
+              ],
+              hoverBackgroundColor: [
+                documentStyle.getPropertyValue("--blue-400"),
+                documentStyle.getPropertyValue("--yellow-400"),
+              ],
+            },
+          ],
+        };
+       
+
+        setChartData(data);
+      } catch (error) {
+        console.error("Error fetching breed data", error);
+      }
+    };
+    fetchData();
+  }, []);
+  const options = {
+    scales: {
+      yAxes: [
         {
-          data: [ 50, 100],
-          backgroundColor: [
-            documentStyle.getPropertyValue("--blue-500"),
-            documentStyle.getPropertyValue("--yellow-500"),
-          ],
-          hoverBackgroundColor: [
-            documentStyle.getPropertyValue("--blue-400"),
-            documentStyle.getPropertyValue("--yellow-400"),
-          ],
+          ticks: {
+            beginAtZero: true,
+          },
         },
       ],
-    };
-    const options = {
-      cutout: "60%",
-    };
-
-    setChartData(data);
-    setChartOptions(options);
-  }, []);
-
+    },
+  };
   return (
     <Container fluid>
       <div
@@ -51,16 +70,16 @@ const TotalBreed = () => {
             marginBottom: "10px",
           }}
         >
-        Thống kê theo giống
+          Thống kê theo giống
         </h5>
         <div className="card-body">
           <Chart
             type="doughnut"
+            // type="bar"
             data={chartData}
-            options={chartOptions}
+            options={options}
             className="w-full md:w-30rem"
             height={300}
-
           />
         </div>
       </div>
