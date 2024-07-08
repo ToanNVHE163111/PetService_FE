@@ -10,8 +10,6 @@ import {
   ThreeDotsVertical,
   TrashFill,
 } from "react-bootstrap-icons";
-
-// import jwt from "jsonwebtoken";
 import { InputText } from "primereact/inputtext";
 
 const Comment = ({selectedBlogId}) => {

@@ -18,7 +18,7 @@ import EditBlog from "./EditBlog";
 import Comment from "./Comment";
 import AddBlog from "./AddBlog";
 import { toast } from "react-toastify";
-import { Image } from "antd"; 
+import { Image } from "antd";
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -77,6 +77,7 @@ const Blog = () => {
   const [selectedBlogId, setSelectedBlogId] = useState("");
   const [visible, setVisible] = useState(false);
   const fullname = localStorage.getItem("fullname");
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
   useEffect(() => {
     axios
       .get("http://localhost:9999/blogs")
@@ -130,85 +131,90 @@ const Blog = () => {
   };
   return (
     <Container style={{ marginTop: "20px" }}>
-      <Row>
-        <Col md={12}>
-          <div className="cardd">
-            <div className="card-header fc-card-header">
-              <h4>Bài Viết</h4>
-            </div>
-            <Row style={{ marginTop: "20px" }}>
-              <Col md={2} sm={2} xs={2} style={{ textAlign: "center" }}>
-                <img
-                  src="https://www.localbotswana.com/img/bw/d/1641218846_95961.jpg"
-                  className="rounded-circle"
-                  style={{ width: "44px", marginTop: "10px" }}
-                  alt="img_profile"
-                />
-              </Col>
-              <Col md={8} sm={8} xs={8}>
-                <input
-                  style={{
-                    borderRadius: "40px",
-                    paddingRight: "20px",
-                    height: "60px",
-                  }}
-                  className="form-control"
-                  placeholder="Bạn đang nghĩ gì thế ???"
-                  onClick={() => setVisible(true)}
-                ></input>
-              </Col>
-              <Col md={2} sm={2} xs={2} style={{ textAlign: "center" }}>
-                <button className="rounded-circle" style={{ border: "none" }}>
-                  <Send style={{ fontSize: "25px", marginTop: "10px" }} />
-                </button>
-              </Col>
-            </Row>
-            <hr />
+      {isLoggedIn && (
+        <Row>
+          <Col md={12}>
+            <div className="cardd">
+              <div className="card-header fc-card-header">
+                <h4>Bài Viết</h4>
+              </div>
+              <Row style={{ marginTop: "20px" }}>
+                <Col md={2} sm={2} xs={2} style={{ textAlign: "center" }}>
+                  <img
+                    src="https://www.localbotswana.com/img/bw/d/1641218846_95961.jpg"
+                    className="rounded-circle"
+                    style={{ width: "44px", marginTop: "10px" }}
+                    alt="img_profile"
+                  />
+                </Col>
+                <Col md={8} sm={8} xs={8}>
+                  <input
+                    style={{
+                      borderRadius: "40px",
+                      paddingRight: "20px",
+                      height: "60px",
+                    }}
+                    className="form-control"
+                    placeholder="Bạn đang nghĩ gì thế ???"
+                    onClick={() => setVisible(true)}
+                  ></input>
+                </Col>
+                <Col md={2} sm={2} xs={2} style={{ textAlign: "center" }}>
+                  <button className="rounded-circle" style={{ border: "none" }}>
+                    <Send style={{ fontSize: "25px", marginTop: "10px" }} />
+                  </button>
+                </Col>
+              </Row>
+              <hr />
 
-            <Row style={{ marginLeft: "0px", cursor: "pointer" }}>
-              <Col md={4} sm={4} xs={4} className="text-center">
-                <button className="fc-btn fc-btn-rounded">
-                  <label>
-                    <CameraReels
-                      style={{
-                        fontSize: "25px",
-                        marginRight: "10px",
-                        color: "red",
-                      }}
-                    />
-                    Phát trực tiếp
-                  </label>
-                </button>
-              </Col>
-              <Col md={4} sm={4} xs={4} className="text-center">
-                <button
-                  className="fc-btn fc-btn-rounded"
-                  style={{ cursor: "pointer" }}
-                >
-                  <label>
-                    <Images style={{ fontSize: "25px", marginRight: "10px" }} />
-                    Ảnh/Video
-                  </label>
-                </button>
-              </Col>
-              <Col md={4} sm={4} xs={4} className="text-center">
-                <button
-                  className="fc-btn fc-btn-rounded"
-                  style={{ cursor: "pointer" }}
-                >
-                  <label>
-                    <EmojiLaughing
-                      style={{ fontSize: "25px", marginRight: "10px" }}
-                    />
-                    Cảm xúc
-                  </label>
-                </button>
-              </Col>
-            </Row>
-            <br />
-          </div>
-        </Col>
-      </Row>
+              <Row style={{ marginLeft: "0px", cursor: "pointer" }}>
+                <Col md={4} sm={4} xs={4} className="text-center">
+                  <button className="fc-btn fc-btn-rounded">
+                    <label>
+                      <CameraReels
+                        style={{
+                          fontSize: "25px",
+                          marginRight: "10px",
+                          color: "red",
+                        }}
+                      />
+                      Phát trực tiếp
+                    </label>
+                  </button>
+                </Col>
+                <Col md={4} sm={4} xs={4} className="text-center">
+                  <button
+                    className="fc-btn fc-btn-rounded"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <label>
+                      <Images
+                        style={{ fontSize: "25px", marginRight: "10px" }}
+                      />
+                      Ảnh/Video
+                    </label>
+                  </button>
+                </Col>
+                <Col md={4} sm={4} xs={4} className="text-center">
+                  <button
+                    className="fc-btn fc-btn-rounded"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <label>
+                      <EmojiLaughing
+                        style={{ fontSize: "25px", marginRight: "10px" }}
+                      />
+                      Cảm xúc
+                    </label>
+                  </button>
+                </Col>
+              </Row>
+              <br />
+            </div>
+          </Col>
+        </Row>
+      )}
+
       <br />
       {blogs
         .slice()
