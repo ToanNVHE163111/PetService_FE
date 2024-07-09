@@ -99,7 +99,7 @@ const AddBlog = (props) => {
       
         <form id="addBlog" onSubmit={handleAddBlog}>
           <div className="textarea-container">
-            <textarea
+            <textarea 
               placeholder="Bạn đang nghĩ gì thế?"
               className="post-input"
               value={content}

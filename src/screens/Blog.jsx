@@ -76,6 +76,7 @@ const Blog = () => {
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [selectedBlogId, setSelectedBlogId] = useState("");
   const [visible, setVisible] = useState(false);
+  const fullname = localStorage.getItem("fullname");
   useEffect(() => {
     axios
       .get("http://localhost:9999/blogs")
@@ -115,7 +116,7 @@ const Blog = () => {
   };
 
   const formatDate = (inputDate) => {
-const dateObject = new Date(inputDate);
+    const dateObject = new Date(inputDate);
     const day = dateObject.getDate().toString().padStart(2, "0");
     const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
     const year = dateObject.getFullYear();
@@ -193,7 +194,7 @@ const dateObject = new Date(inputDate);
                   <label>
                     <EmojiLaughing
                       style={{ fontSize: "25px", marginRight: "10px" }}
-/>
+                    />
                     Cảm xúc
                   </label>
                 </button>
@@ -222,18 +223,26 @@ const dateObject = new Date(inputDate);
                     className="rounded-circle"
                     style={{ width: "40px", marginRight: "4px" }}
                   />
+
+
                   <b>{b.userId?.fullname}</b>
-                  <Dropdown style={{ marginLeft: "auto" }}>
-                    <Dropdown.Toggle
-                      as={CustomToggle}
-                      id="dropdown-custom-components"
-                    ></Dropdown.Toggle>
-                    <Dropdown.Menu
-                      as={CustomMenu}
-                      onEdit={() => handleEditBlog(b)}
-                      onDelete={() => handleDeleteBlog(b._id)}
-                    />
-                  </Dropdown>
+                  {fullname === b.userId?.fullname && (
+                    <Dropdown style={{ marginLeft: "auto" }}>
+                      <Dropdown.Toggle
+                        as={CustomToggle}
+                        id="dropdown-custom-components"
+                      ></Dropdown.Toggle>
+                      <Dropdown.Menu
+                        as={CustomMenu}
+                        onEdit={() => handleEditBlog(b)}
+                        onDelete={() => handleDeleteBlog(b._id)}
+                      />
+                    </Dropdown>
+                  )}
+
+
+
+
                 </div>
                 <small
                   style={{
@@ -247,26 +256,31 @@ const dateObject = new Date(inputDate);
                 </small>
                 <p>{b.content}</p>
                 <Row>
-                <Image.PreviewGroup>
-                    {b.images &&
-                      b.images.map((imgSrc, index) => (
-                        <Col
-                          md={6}
-                          sm={4}
-                          xs={4}
-                          key={index}
-                          style={{ marginBottom: "20px", display: "flex" }}
-                        >
-                          <Zoom>
-                            <Image
-                              src={imgSrc}
-                              style={{ width: "100%", maxHeight: "500px", flexWrap: "wrap",objectFit:"cover" }}
-                            />
-                          </Zoom>
-                        </Col>
-                      ))}
-                  </Image.PreviewGroup>
-                </Row>
+                    <Image.PreviewGroup>
+                      {b.images &&
+                        b.images.map((imgSrc, index) => (
+                          <Col
+                            md={6}
+                            sm={4}
+                            xs={4}
+                            key={index}
+                            style={{ marginBottom: "20px", display: "flex" }}
+                          >
+                            <Zoom>
+                              <Image
+                                src={imgSrc}
+                                style={{
+                                  width: "520px",
+                                  height: "350px",
+                                  flexWrap: "wrap",
+                                  objectFit: "cover",
+                                }}
+                              />
+                            </Zoom>
+                          </Col>
+                        ))}
+                    </Image.PreviewGroup>
+                  </Row>
                 <br />
                 <hr />
                 <Row>
@@ -283,7 +297,7 @@ const dateObject = new Date(inputDate);
                   <Col md={6} sm={6} xs={6}>
                     <button className="fc-btn fc-btn-white">
                       <div className="fc-icon">
-<label style={{ cursor: "pointer" }}>
+                        <label style={{ cursor: "pointer" }}>
                           <HandThumbsUp
                             style={{ fontSize: "25px", marginRight: "10px" }}
                           />

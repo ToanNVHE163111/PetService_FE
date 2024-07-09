@@ -22,6 +22,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const role = localStorage.getItem("role");
   const fullname = localStorage.getItem("fullname");
   const user = localStorage.getItem("userId"); // Get user ID
+  const [service, setService] = useState([]);
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.clear();
@@ -41,6 +42,19 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         console.log(err.message);
       });
   }, [user, visible]);
+
+
+  useEffect(() => {
+    fetch("http://localhost:9999/services")
+      .then((resp) => resp.json())
+      .then((data) => {
+        setService(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
   return (
     <Container fluid className="mt-2">
       <Row className="align-items-center">
@@ -85,9 +99,9 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                     Dịch vụ
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/service1">Dịch vụ 1</Dropdown.Item>
-                    <Dropdown.Item href="/service2">Dịch vụ 2</Dropdown.Item>
-                    <Dropdown.Item href="/service3">Dịch vụ 3</Dropdown.Item>
+                    {service.map((s) => (
+                      <Dropdown.Item href="#">{s.name}</Dropdown.Item>
+                    ))}
                   </Dropdown.Menu>
                 </Dropdown>
               </li>
