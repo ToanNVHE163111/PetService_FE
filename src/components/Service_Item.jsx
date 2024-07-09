@@ -5,6 +5,7 @@ import images from "../assets/images/3_dogs.png";
 import dogImage1 from "../assets/images/005-salon.png";
 import dogImage2 from "../assets/images/008-care.png";
 import dogImage3 from "../assets/images/009-shower-e1573897060648.png";
+import { Link } from "react-router-dom";
 
 const Service_Item = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -76,7 +77,9 @@ const Service_Item = () => {
                   chúng tôi luôn đặt ra những mục tiêu và thử thách mới. PET
                   SERVICE cung cấp các sản phẩm, phụ kiện rất đa dạng...
                 </Card.Text>
-                <Button variant="secondary">Xem Thêm</Button>
+                <Link to={"/listproduct"}>
+                  <Button variant="secondary">Xem Thêm</Button>
+                </Link>
                 {hoveredCard === 2 && (
                   <div className="heart-icon">
                     <SuitHeart />

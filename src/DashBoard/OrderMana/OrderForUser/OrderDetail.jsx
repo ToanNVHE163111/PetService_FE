@@ -26,10 +26,9 @@ const OrderDetail = (props) => {
         cancelReason,
       });
       alert("Đơn hàng đã được hủy thành công");
-      window.location.reload(); // Tải lại trang để cập nhật trạng thái đơn hàng
+      window.location.reload();
     } catch (error) {
       console.error(error);
-      alert("Lỗi khi hủy đơn hàng");
     }
   };
 
@@ -75,7 +74,7 @@ const OrderDetail = (props) => {
             <Button
               onClick={handleCancelOrder}
               className="btn btn-danger mr-2"
-              disabled={!cancelReason} // Vô hiệu hóa nút nếu chưa chọn lý do
+              disabled={!cancelReason} // disable nếu chưa chọn lý do
             >
               Xác nhận huỷ
             </Button>
