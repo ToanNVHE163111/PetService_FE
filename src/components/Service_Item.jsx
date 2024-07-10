@@ -46,7 +46,9 @@ const Service_Item = () => {
                   đẳng cấp và cá tính hơn. Với dịch vụ cắt tỉa lông thú cưng
                   chúng tôi sẽ giúp các bé trở thành phiên bản hoàn hảo nhất...
                 </Card.Text>
-                <Button variant="secondary">Xem Thêm</Button>
+                <Link to={"/grooming"}>
+                  <Button variant="secondary">Xem Thêm</Button>
+                </Link>
                 {hoveredCard === 1 && (
                   <div className="heart-icon">
                     <SuitHeart />
