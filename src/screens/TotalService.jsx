@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is included
 import "../style/totalsv.css";
+import Chart from 'chart.js/auto'; // Ensure Chart.js is imported
 
 const TotalService = () => {
     const ageGroups = [
@@ -13,6 +14,47 @@ const TotalService = () => {
         { ageRange: '45 - 50', width: '85%' },
         { ageRange: '50 - 55', width: '25%' },
     ];
+
+    const chartRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = document.getElementById('chartjs_bar_horizontal').getContext('2d');
+
+        // Destroy previous chart instance if it exists
+        if (chartRef.current) {
+            chartRef.current.destroy();
+        }
+
+        // Create new chart instance and save to ref
+        chartRef.current = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Location 1', 'Location 2', 'Location 3', 'Location 4', 'Location 5'],
+                datasets: [{
+                    label: 'Top Followers by Location',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Cleanup on unmount
+        return () => {
+            if (chartRef.current) {
+                chartRef.current.destroy();
+            }
+        };
+    }, []);
 
     return (
         <div className='all'>
@@ -92,15 +134,15 @@ const TotalService = () => {
                                         <path fill="none" stroke="#ff407b" d="M77.82900535738119,57.77922238356153A70,70,0,0,0,118.12800885178663,184.9999965456385" strokeWidth="2" opacity="0" style={{ WebkitTapHighlightColor: "rgba(0, 0, 0, 0)", opacity: 0 }}></path>
                                         <path fill="#ff407b" stroke="#ffffff" d="M76.10096272984039,55.32690334285702A73,73,0,0,0,118.12706637400605,187.99999639759443L118.1185840739809,214.99999506519785A100,100,0,0,1,60.54857908197314,33.25603197651647Z" strokeWidth="2" style={{ WebkitTapHighlightColor: "rgba(0, 0, 0, 0)" }}></path>
                                         <text x="118.15" y="105" textAnchor="middle" fontFamily="Arial" fontSize="15px" stroke="none" fill="#5969ff" style={{ WebkitTapHighlightColor: "rgba(0, 0, 0, 0)", textAnchor: "middle", fontFamily: "Arial", fontSize: "15px", fontWeight: 800 }} fontWeight="800" transform="matrix(1.6204,0,0,1.6204,-73.416,-71.8389)" strokeWidth="0.6171428680419921">
-                                            <tspan style={{ WebkitTapHighlightColor: "rgba(0, 0, 0, 0)" }} dy="5.999995231628418">Female</tspan>
+                                            <tspan style={{ WebkitTapHighlightColor: "rgba(0, 0, 0, 0)" }} dy="5.25">60%</tspan>
                                         </text>
-                                        <text x="118.15" y="125" textAnchor="middle" fontFamily="Arial" fontSize="14px" stroke="none" fill="#5969ff" style={{ WebkitTapHighlightColor: "rgba(0, 0, 0, 0)", textAnchor: "middle", fontFamily: "Arial", fontSize: "14px" }} transform="matrix(1.4583,0,0,1.4583,-54.2317,-53.625)" strokeWidth="0.6857142857142857">
+                                        <text x="118.15" y="135" textAnchor="middle" fontFamily="Arial" fontSize="14px" stroke="none" fill="#5969ff" style={{ WebkitTapHighlightColor: "rgba(0, 0, 0, 0)", textAnchor: "middle", fontFamily: "Arial", fontSize: "14px" }} transform="matrix(1.4583,0,0,1.4583,-54.2317,-53.625)" strokeWidth="0.6857142857142857">
                                             <tspan style={{ WebkitTapHighlightColor: "rgba(0, 0, 0, 0)" }} dy="4.799995422363281">60%</tspan>
                                         </text>
                                     </svg>
                                 </div>
                             </div>
-                            <div className="card-footer p-0 bg-white d-flex"  style={{marginLeft:"50px"}}>
+                            <div className="card-footer p-0 bg-white d-flex" style={{ marginLeft: "50px" }}>
                                 <div className="card-footer-item card-footer-item-bordered w-50">
                                     <h2 className="mb-0"> 60% </h2>
                                     <p>Female </p>
@@ -133,16 +175,17 @@ const TotalService = () => {
                     </div>
 
                     {/* Top Followers by Locations Card */}
-                    <div className="col-xl-5 col-lg-12 col-md-6 col-sm-12 col-12">
+                    <div className="col-xl-5 col-lg-12 col-md-6 col-sm-12 col-12 ml-auto">
                         <div className="carda">
                             <h5 className="card-header">Top Followers by Locations</h5>
                             <div className="card-body">
-                                <canvas id="chartjs_bar_horizontal" style={{ display: "block", height: "103px", width: "207px" }} width="258" height="128" className="chartjs-render-monitor"></canvas>
+                                <canvas id="chartjs_bar_horizontal" style={{ display: "block", height: "168px", width: "336px" }} width="420" height="210" className="chartjs-render-monitor"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div></div>
+            </div>
+        </div>
     );
 };
 

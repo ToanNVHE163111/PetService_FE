@@ -23,7 +23,7 @@ import Checkout from "./screens/Checkout";
 import OrderStatus from "./DashBoard/OrderMana/OrderStatus";
 import Bill from "./screens/Bill";
 import TotalService from "./screens/TotalService";
-
+import Grooming from "./screens/Grooming";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,6 +41,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home_Page />} />
           <Route path="/totalservice" element={<TotalService />} />
+          <Route path="/grooming" element={<Grooming />} />
+
           <Route path="/listproduct" element={<Home />} />
           <Route path="/online-booking" element={<Online_Booking />} />
           <Route
