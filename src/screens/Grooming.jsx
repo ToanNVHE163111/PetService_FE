@@ -13,7 +13,7 @@ const Grooming = () => {
                                 <div className="elementor-widget-wrap">
                                     <div className="elementor-element elementor-element-74affb47 elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading" data-id="74affb47" data-element_type="widget" data-widget_type="theme-post-title.default">
                                         <div className="elementor-widget-container">
-                                            <h1 className="elementor-heading-title elementor-size-default">Pet Service – Spa Thú Cưng Quận 7</h1>
+                                            <h1 className="elementor-heading-title elementor-size-default">Pet Service – Spa Thú Cưng Hà Nội</h1>
                                         </div>
                                     </div>
                                     <div className="elementor-element elementor-element-6ed93fe9 elementor-mobile-align-center elementor-widget elementor-widget-post-info" data-id="6ed93fe9" data-element_type="widget" data-widget_type="post-info.default">
@@ -36,7 +36,7 @@ const Grooming = () => {
                                                             <i aria-hidden="true" className="fas fa-calendar"></i>
                                                         </span>
                                                         <span className="elementor-icon-list-text elementor-post-info__item elementor-post-info__item--type-date">
-                                                            Tháng Mười 30, 2020
+                                                            Tháng 6 10, 2024
                                                         </span>
                                                     </a>
                                                 </li>
@@ -85,8 +85,8 @@ const Grooming = () => {
                                                 <figcaption className="wp-element-caption"><em>Không gian cửa hàng Pet Service</em></figcaption>
                                             </figure>
                                             <h2 className="wp-block-heading has-large-font-size">1. Pet Service Mang Lại Lợi Ích Gì ?</h2>
-                                            <h3 className="wp-block-heading has-medium-font-size">Spa thú cưng quận 7 chăm sóc ngoại hình thú cưng</h3>
-                                            <p>Chó mèo sau khi được chăm sóc, tắm rửa, cắt tỉa lông thường xuyên tại spa thú cưng quận 7 sẽ trở nên xinh đẹp hơn và không kém phần đáng yêu.</p>
+                                            <h3 className="wp-block-heading has-medium-font-size">Spa thú cưng Hà Nội chăm sóc ngoại hình thú cưng</h3>
+                                            <p>Chó mèo sau khi được chăm sóc, tắm rửa, cắt tỉa lông thường xuyên tại spa thú cưng Hà Nội sẽ trở nên xinh đẹp hơn và không kém phần đáng yêu.</p>
                                             <h3 className="wp-block-heading has-medium-font-size">Chăm sóc sức khỏe thú cưng</h3>
                                             <p>Chó mèo cũng giống như con người, khi được chăm sóc thì sẽ cảm thấy thoải mái, giảm căng thẳng, stress. Từ đó ăn ngủ ngon hơn, nâng cao sức khỏe và thân thiện, nghe lời hơn. Khi sử dụng dịch vụ spa thú cưng, mọi bụi bẩn trên lông, da, kẽ chân đều sẽ được loại bỏ hoàn toàn. Đồng thời cũng tránh được trường hợp vi khuẩn tích tụ lâu ngày trên cơ thể khiến thú cưng đổ bệnh.</p>
                                             <figure className="wp-block-image aligncenter size-full is-resized">
@@ -105,9 +105,7 @@ const Grooming = () => {
                                                 <li>Đảm bảo đội ngũ nhân viên chuyên nghiệp, uy tín, trách nhiệm và có nhiều kinh nghiệm chăm sóc thú cưng</li>
                                                 <li>Giá cả hợp lý, thường xuyên có chương trình khuyến mãi</li>
                                                 <li>Đảm bảo trang thiết bị hiện đại, được khử trùng liên tục sau mỗi bé</li>
-                                                <li>Spa thú cưng quận 7 có dịch vụ tại nhà khi chủ không có thời gian chăm sóc</li>
-                                                <li>Nhân viên trực điện thoại 24/24, tư vấn trực tiếp hoặc thông qua các trang xã hội (Facebook, Zalo, Instargram)</li>
-                                                <li>Pet Service còn có khách sạn thú cưng và cung cấp các sản phẩm thú cưng</li>
+                                                <li>Pet Service còn có và cung cấp các sản phẩm thú cưng</li>
                                             </ol>
                                             <figure className="wp-block-image aligncenter size-full is-resized">
                                                 <img src="https://petservicehcm.com/wp-content/uploads/2022/08/BANG-DICH-VU-MOI.png.webp" alt="Gioi-thieu-dich-vu-pet-service" width="798" height="599" />
