@@ -223,7 +223,7 @@ const Product_Detail = () => {
               style={{ marginTop: "100px" }}
             >
               <Col md={12}>
-                <h3 style={{ textAlign: "center" }}>Similar Products</h3>
+                <h3 style={{ textAlign: "center" }}>Sản Phẩm Tương Tự</h3>
               </Col>
               {similarProducts.map((similarProduct) => (
                 <Col md={3} key={similarProduct._id}>

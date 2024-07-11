@@ -23,6 +23,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const fullname = localStorage.getItem("fullname");
   const user = localStorage.getItem("userId");
   const [services, setServices] = useState([]);
+  
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.clear();
@@ -49,6 +50,15 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
       .then((res) => setServices(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  const handleBookingClick = () => {
+    if (isLoggedIn) {
+      nav("/online-booking");
+    } else {
+      nav("/login");
+    }
+  };
+
   return (
     <Container fluid className="mt-2">
       <Row className="align-items-center">
@@ -94,7 +104,9 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     {services.map((s) => (
-                      <Dropdown.Item href="/#">{s.name}</Dropdown.Item>
+                      <Dropdown.Item key={s._id} href="/#">
+                        {s.name}
+                      </Dropdown.Item>
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
@@ -182,23 +194,15 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
 
         <Col md={2} className="d-flex justify-content-center">
           <div>
-            <Link
-              to="/online-booking"
+            <button
+              onClick={handleBookingClick}
               className="btn btn-dark d-flex align-items-center rounded-pill mr-3"
             >
               <span>Online Booking</span>
               <SendFill className="ml-2" />
-            </Link>
+            </button>
           </div>
         </Col>
-        {/* <Col
-          md={1}
-          className="d-flex justify-content-center"
-          onClick={() => setVisible(true)}
-          style={{ cursor: "pointer" }}
-        >
-          <CartFill style={{ fontSize: "30px", color: "#37457e" }} />
-        </Col> */}
 
         <Col
           md={1}
@@ -214,7 +218,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           </i>
         </Col>
       </Row>
-      {visible === true && <Cart visible={visible} setVisible={setVisible} />}
+      {visible && <Cart visible={visible} setVisible={setVisible} />}
     </Container>
   );
 };

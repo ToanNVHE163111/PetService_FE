@@ -2,6 +2,7 @@ import { Dialog } from "primereact/dialog";
 import React, { useState } from "react";
 import { Button, Col, Row, Form } from "react-bootstrap";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const OrderDetail = (props) => {
   const { visible, setVisible, order } = props;
@@ -25,7 +26,7 @@ const OrderDetail = (props) => {
       await axios.put(`http://localhost:9999/payment/${order._id}/cancel`, {
         cancelReason,
       });
-      alert("Đơn hàng đã được hủy thành công");
+      toast.success("Đơn hàng đã được hủy thành công");
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -124,10 +125,10 @@ const OrderDetail = (props) => {
                     >
                       <thead>
                         <tr>
-                          <th style={{ width: "15%" }}>Name</th>
-                          <th style={{ width: "25%" }}>Quantity</th>
-                          <th style={{ width: "20%" }}>Price</th>
-                          <th style={{ width: "20%" }}>Total</th>
+                          <th style={{ width: "15%" }}>Tên</th>
+                          <th style={{ width: "25%" }}>Số Lượng</th>
+                          <th style={{ width: "20%" }}>Giá</th>
+                          <th style={{ width: "20%" }}>Tổng</th>
                         </tr>
                       </thead>
                       <tbody>

@@ -56,7 +56,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Full Name</Form.Label>
+            <Form.Label>Họ Và Tên</Form.Label>
             <Form.Control
               type="text"
               name="fullname"
@@ -66,7 +66,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Gmail</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
               name="gmail"
@@ -76,7 +76,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Gender</Form.Label>
+            <Form.Label>Giới Tính</Form.Label>
             <Form.Control
               as="select"
               name="gender"
@@ -84,14 +84,14 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
               onChange={handleChange}
               required
             >
-              <option value="" disabled>Please select your gender</option>
+              <option value="" disabled>Chọn Giới Tính</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
             </Form.Control>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Birthday</Form.Label>
+            <Form.Label>Ngày Sinh</Form.Label>
             <Form.Control
               type="date"
               name="birthday"
@@ -101,7 +101,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Phone</Form.Label>
+            <Form.Label>Số Điện Thoại</Form.Label>
             <Form.Control
               type="text"
               name="phone"
@@ -111,7 +111,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Address</Form.Label>
+            <Form.Label>Địa Chỉ</Form.Label>
             <Form.Control
               type="text"
               name="address"

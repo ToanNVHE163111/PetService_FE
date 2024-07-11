@@ -45,7 +45,7 @@ const ManaFood = ({categoryId}) => {
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <h3>Food Management</h3>
+              <h3>Quản Lý Thức Ăn</h3>
             </Row>
             {/* <Row className="ml-1 mb-4">
               <Button onClick={() => setVisible(true)}>
@@ -59,11 +59,12 @@ const ManaFood = ({categoryId}) => {
             <thead className="text-center">
               <tr>
                 <th>ID</th>
-                <th> Name</th>
-                <th>Image</th>
-                <th>Quantity </th>
-                <th>PetType</th>
-                <th colSpan={2}>Operation</th>
+                <th> Tên</th>
+                <th>Hình Ảnh</th>
+                <th>Giá</th>
+                <th>Số Lượng </th>
+                <th>Loại Thú Cưng</th>
+                <th colSpan={2}>Hành Động</th>
               </tr>
             </thead>
 
@@ -72,9 +73,10 @@ const ManaFood = ({categoryId}) => {
 
               
               <tr key={index}>
-                <td>{f._id} â</td>
+                <td>{f._id} </td>
                 <td>{f.name}</td>
                 <td>{imageBodyTemplate(f)}</td> 
+                <td>{f.price}</td>
                 <td>{f.quantity}</td>
                 <td>{f.pettype}</td>
                 <td>

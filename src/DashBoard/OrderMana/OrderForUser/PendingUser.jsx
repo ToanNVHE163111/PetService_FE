@@ -58,11 +58,11 @@ const PendingUser = ({ status }) => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>Order Date</th>
-                <th>Status</th>
-                <th>Total</th>
-                <th>Payments</th>
-                <th>Operation</th>
+                <th>Ngày Đặt Hàng</th>
+                <th>Trạng Thái</th>
+                <th>Tổng</th>
+                <th>Phương Thức Thanh Toán</th>
+                <th>Hành Động</th>
               </tr>
             </thead>
 

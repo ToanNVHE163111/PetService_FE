@@ -70,10 +70,10 @@ function Profile() {
           </div>
           <div className="col-xl-8 d-flex justify-content-center">
             <div className="card mb-4">
-              <div className="card-header text-center">Account Details</div>
+              <div className="card-header text-center">Thông Tin Cá Nhân</div>
               <div className="card-body">
                 <div className="mb-3">
-                  <label className="small mb-1">Full Name</label>
+                  <label className="small mb-1">Họ và tên</label>
                   <p className="form-control">{profile.fullname}</p>
                 </div>
                 <div className="mb-3">
@@ -81,19 +81,19 @@ function Profile() {
                   <p className="form-control">{profile.gmail}</p>
                 </div>
                 <div className="mb-3">
-                  <label className="small mb-1">Gender</label>
+                  <label className="small mb-1">Giới Tính</label>
                   <p className="form-control">{profile.gender}</p>
                 </div>
                 <div className="mb-3">
-                  <label className="small mb-1">Birthday</label>
+                  <label className="small mb-1">Ngày Sinh</label>
                   <p className="form-control">{profile.birthday}</p>
                 </div>
                 <div className="mb-3">
-                  <label className="small mb-1">Phone number</label>
+                  <label className="small mb-1">Số Điện Thoại</label>
                   <p className="form-control">{profile.phone}</p>
                 </div>
                 <div className="mb-3">
-                  <label className="small mb-1">Address</label>
+                  <label className="small mb-1">Địa Chỉ</label>
                   <p className="form-control">{profile.address}</p>
                 </div>
               </div>

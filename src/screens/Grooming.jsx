@@ -106,11 +106,11 @@ const Grooming = () => {
                         1. Pet Service Mang Lại Lợi Ích Gì ?
                       </h2>
                       <h3 className="wp-block-heading has-medium-font-size">
-                        Spa thú cưng quận 7 chăm sóc ngoại hình thú cưng
+                        Spa thú cưng  chăm sóc ngoại hình thú cưng
                       </h3>
                       <p>
                         Chó mèo sau khi được chăm sóc, tắm rửa, cắt tỉa lông
-                        thường xuyên tại spa thú cưng quận 7 sẽ trở nên xinh đẹp
+                        thường xuyên tại spa thú cưng  sẽ trở nên xinh đẹp
                         hơn và không kém phần đáng yêu.
                       </p>
                       <h3 className="wp-block-heading has-medium-font-size">
@@ -184,7 +184,7 @@ const Grooming = () => {
                           tục sau mỗi bé
                         </li>
                         <li>
-                          Spa thú cưng quận 7 có dịch vụ tại nhà khi chủ không
+                          Spa thú cưng  có dịch vụ tại nhà khi chủ không
                           có thời gian chăm sóc
                         </li>
                         <li>

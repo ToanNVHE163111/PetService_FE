@@ -25,7 +25,7 @@ const New_Product = () => {
       <Col md={5}>
         <div className="text-center">
           <p>PET SHOP</p>
-          <h2>New Products</h2>
+          <h2>Sản Phẩm Mới Nhất</h2>
         </div>
       </Col>
       <Col md={7} className="d-flex">

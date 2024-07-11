@@ -50,12 +50,13 @@ const ManaToy = ({categoryId}) => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>ID</th>
-                <th> Name</th>
-                <th>Image</th>
-                <th>Quantity </th>
-                <th>PetType</th>
-                <th colSpan={2}>Operation</th>
+              <th>ID</th>
+                <th> Tên</th>
+                <th>Hình Ảnh</th>
+                <th>Giá</th>
+                <th>Số Lượng </th>
+                <th>Loại Thú Cưng</th>
+                <th colSpan={2}>Hành Động</th>
               </tr>
             </thead>
 
@@ -65,6 +66,7 @@ const ManaToy = ({categoryId}) => {
                   <td>{t._id}</td>
                   <td>{t.name}</td>
                   <td>{imageBodyTemplate(t)}</td>
+                  <td>{t.price}</td>
                   <td>{t.quantity}</td>
                   <td>{t.pettype}</td>
                   <td>
