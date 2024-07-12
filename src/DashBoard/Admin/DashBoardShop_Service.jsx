@@ -42,7 +42,7 @@ const DashBoardShop_Service = () => {
       <div className="carda">
         <div className="card-body">
           <div className="d-inline-block">
-            <h5 className="text-muted">Revenue Of Shop</h5>
+            <h5 className="text-muted">Doanh Thu Của Cửa Hàng</h5>
             <h2 className="mb-0">
               {formatCurrency(totalOrder.totalAmount) + " ₫"}
             </h2>
@@ -55,7 +55,7 @@ const DashBoardShop_Service = () => {
       <div className="carda">
         <div className="card-body">
           <div className="d-inline-block">
-            <h5 className="text-muted">Revenue Of Services</h5>
+            <h5 className="text-muted">Doanh Thu Dịch Vụ</h5>
             <h2 className="mb-0">
               {formatCurrency(totalServices.totalAmount) + " ₫"}
             </h2>
@@ -69,7 +69,7 @@ const DashBoardShop_Service = () => {
       <div className="carda">
         <div className="card-body">
           <div className="d-inline-block">
-            <h5 className="text-muted">Total</h5>
+            <h5 className="text-muted">Tổng</h5>
             <h2 className="mb-0">
               {formatCurrency(
                 totalOrder.totalAmount + totalServices.totalAmount

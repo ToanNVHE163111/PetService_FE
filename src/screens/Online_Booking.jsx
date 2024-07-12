@@ -28,6 +28,7 @@ const Online_Booking = () => {
       weight: "",
       notes: "",
     },
+    userId: "", // Add this field
   });
   const [selectedSlot, setSelectedSlot] = useState("");
 
@@ -53,6 +54,15 @@ const Online_Booking = () => {
       }
     };
     fetchSlots();
+  }, []);
+
+  useEffect(() => {
+    // Fetch userId from local storage or your auth context
+    const userId = localStorage.getItem("userId");
+    setBookingData((prevData) => ({
+      ...prevData,
+      userId: userId,
+    }));
   }, []);
 
   const fetchSlotsByDate = async (date) => {
@@ -144,6 +154,7 @@ const Online_Booking = () => {
             weight: "",
             notes: "",
           },
+          userId: localStorage.getItem("userId"), // Reset with userId
         });
         setErrors({});
         setSelectedSlot("");

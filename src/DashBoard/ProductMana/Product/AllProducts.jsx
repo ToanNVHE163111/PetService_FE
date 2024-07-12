@@ -81,13 +81,13 @@ const AllProducts = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>ID</th>
-                <th> Name</th>
-                <th>Image</th>
-                <th>Price</th>
-                <th>Quantity </th>
-                <th>Category</th>
-                <th colSpan={2}>Operation</th>
+                <th> ID</th>
+                <th> Tên</th>
+                <th>Hình Ảnh</th>
+                <th>Giá</th>
+                <th>Số Lượng </th>
+                <th>Loại Thú Cưng</th>
+                <th colSpan={2}>Hành Động</th>
               </tr>
             </thead>
 
@@ -101,7 +101,10 @@ const AllProducts = () => {
                   <td>{p.quantity}</td>
                   <td>{p.pettype}</td>
                   <td>
-                    <i className="delete" onClick={() => handleDeleteProduct(p._id)}>
+                    <i
+                      className="delete"
+                      onClick={() => handleDeleteProduct(p._id)}
+                    >
                       <Trash
                         style={{
                           color: "red",

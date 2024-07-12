@@ -53,11 +53,11 @@ console.log(gender);
         type="submit"
         form="editProductForm"
       >
-        <PlusSquareFill /> Save
+        <PlusSquareFill /> Lưu
       </Button>
       <Button onClick={onHide} className=" btn btn-danger">
         <X style={{ fontSize: "22px" }} />
-        Close
+        Đóng
       </Button>
     </div>
   );
@@ -70,7 +70,7 @@ console.log(gender);
         className="bg-light"
         style={{ width: "70vw" }}
         modal
-        header={<div className="custom-dialog-header">Edit Pet</div>}
+        header={<div className="custom-dialog-header">Chỉnh Sửa</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
@@ -79,7 +79,7 @@ console.log(gender);
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6>Breed</h6>
+                      <h6>Giống</h6>
                     </label>
                     <input
                       type="text"
@@ -95,7 +95,7 @@ console.log(gender);
                   <div className="form-group w-full">
                     <Form.Group className="mb-3" controlId="formGroupGender">
                       <label className="label" htmlFor="name">
-                        <h6>Gender</h6>
+                        <h6>Giới Tính</h6>
                       </label>
                       <Form.Select
                         required
@@ -107,7 +107,7 @@ console.log(gender);
                           marginTop: "3px",
                         }}
                       >
-                        <option value="">Select Gender</option>
+                        <option value="">Lựa Chọn Giới Tính</option>
 
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -117,7 +117,7 @@ console.log(gender);
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6>Images</h6>
+                      <h6>Hình Ảnh</h6>
                     </label>
                     <input
                       type="text"
@@ -135,7 +135,7 @@ console.log(gender);
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6>Quantity</h6>
+                      <h6>Số Lượng</h6>
                     </label>
                     <input
                       type="number"
@@ -150,7 +150,7 @@ console.log(gender);
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="description">
-                      <h6>PetType</h6>
+                      <h6>Loại Thú Cưng</h6>
                     </label>
                     <input
                       type="text"

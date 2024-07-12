@@ -149,10 +149,10 @@ const OrderDetailAdmin = (props) => {
                     >
                       <thead>
                         <tr>
-                          <th style={{ width: "15%" }}>Name</th>
-                          <th style={{ width: "25%" }}>Quantity</th>
-                          <th style={{ width: "20%" }}>Price</th>
-                          <th style={{ width: "20%" }}>Total</th>
+                          <th style={{ width: "15%" }}>Tên</th>
+                          <th style={{ width: "25%" }}>Số Lượng</th>
+                          <th style={{ width: "20%" }}>Giá</th>
+                          <th style={{ width: "20%" }}>Tổng</th>
                         </tr>
                       </thead>
                       <tbody>

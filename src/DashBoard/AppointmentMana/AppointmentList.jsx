@@ -48,23 +48,23 @@ console.log(events);
       />
       {selectedEvent && (
         <div style={{ marginTop: 20 }}>
-          <h3>Appointment Details</h3>
-          <p><strong>Customer Name:</strong> {selectedEvent.customer_name}</p>
-          <p><strong>Phone Number:</strong> {selectedEvent.phone_number}</p>
+          <h3>Chi Tiết Cuộc Hẹn</h3>
+          <p><strong>Tên Khách Hàng:</strong> {selectedEvent.customer_name}</p>
+          <p><strong>Số Điện Thoại:</strong> {selectedEvent.phone_number}</p>
           <p><strong>Email:</strong> {selectedEvent.email}</p>
-          <p><strong>Address:</strong> {selectedEvent.address}</p>
-          <p><strong>Appointment Date:</strong> {new Date(selectedEvent.appointment_date).toLocaleString()}</p>
-          <p><strong>Order Status:</strong> {selectedEvent.order_status}</p>
-          <p><strong>Service Type:</strong> {selectedEvent.service_type.name}</p>
-          <p><strong>Price:</strong> {selectedEvent.service_type.price}</p>
-          <p><strong>Pet Info:</strong></p>
+          <p><strong>Địa Chỉ:</strong> {selectedEvent.address}</p>
+          <p><strong>Ngày Hẹn:</strong> {new Date(selectedEvent.appointment_date).toLocaleString()}</p>
+          <p><strong>Trạng Thái Đơn Hàng:</strong> {selectedEvent.order_status}</p>
+          <p><strong>Loại Dịch Vụ:</strong> {selectedEvent.service_type.name}</p>
+          <p><strong>Giá:</strong> {selectedEvent.service_type.price}</p>
+          <p><strong>Thông Tin Thú Cưng:</strong></p>
           <ul>
-            <li><strong>Pet Name:</strong> {selectedEvent.pet_info.pet_name}</li>
-            <li><strong>Species:</strong> {selectedEvent.pet_info.species}</li>
-            <li><strong>Breed:</strong> {selectedEvent.pet_info.breed}</li>
-            <li><strong>Age:</strong> {selectedEvent.pet_info.age}</li>
-            <li><strong>Weight:</strong> {selectedEvent.pet_info.weight}</li>
-            <li><strong>Notes:</strong> {selectedEvent.pet_info.notes}</li>
+            <li><strong>Tên Thú Cưng:</strong> {selectedEvent.pet_info.pet_name}</li>
+            <li><strong>Loài:</strong> {selectedEvent.pet_info.species}</li>
+            <li><strong>Giống:</strong> {selectedEvent.pet_info.breed}</li>
+            <li><strong>Tuổi:</strong> {selectedEvent.pet_info.age}</li>
+            <li><strong>Trọng Lượng:</strong> {selectedEvent.pet_info.weight}</li>
+            <li><strong>Ghi Chú:</strong> {selectedEvent.pet_info.notes}</li>
           </ul>
         </div>
       )}

@@ -80,7 +80,7 @@ const Cancel = ({ status }) => {
         <Container fluid>
       <Row className="ml-1 mb-4 mt-4">
         <Col md={6}>
-          <h3>Pending Management</h3>
+          <h3>Đơn Đã Huỷ</h3>
         </Col>
       </Row>
       <Row style={{ width: "100%" }}>
@@ -88,14 +88,14 @@ const Cancel = ({ status }) => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>Order Date</th>
-                <th>Customer</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Status</th>
-                <th>Total</th>
-                <th>Payments</th>
-                <th>Operation</th>
+                <th>Ngày Đặt Hàng</th>
+                <th>Khách Hàng</th>
+                <th>Số Điện Thoại</th>
+                <th>Địa Chỉ</th>
+                <th>Trạng Thái</th>
+                <th>Tổng</th>
+                <th>Phương Thức Thanh Toán</th>
+                <th>Hành Động</th>
               </tr>
             </thead>
 
