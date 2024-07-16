@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Tab, Tabs } from "react-bootstrap";
 import TotalDashBoard from "./TotalDashBoard";
-import TotalDashBoardService from "./TotalDashBoardService";
 import DashBoardShop_Service from "./DashBoardShop_Service";
+import TotalServiceMana from "./Services/TotalServiceMana";
 
 const ManaAllDashBoard = () => {
   // Chuyển đổi giá trị role từ localStorage thành số
@@ -18,7 +18,7 @@ const ManaAllDashBoard = () => {
             <TotalDashBoard />
           </Tab>
           <Tab eventKey="service" title="Service">
-            <TotalDashBoardService />
+            <TotalServiceMana />
           </Tab>
         </Tabs>
       )}
@@ -32,7 +32,7 @@ const ManaAllDashBoard = () => {
       {role === 3 && (
         <Tabs defaultActiveKey="service" id="uncontrolled-tab-example">
           <Tab eventKey="service" title="Service">
-            <TotalDashBoardService />
+            <TotalServiceMana />
           </Tab>
         </Tabs>
       )}

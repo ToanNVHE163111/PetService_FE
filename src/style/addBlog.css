@@ -118,3 +118,28 @@
 .close-button:hover {
     color: #050505;
 }
+
+
+.image-item span {
+    position: absolute;
+    top: 8%;
+    left: 88%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Màu nền của nút */
+    padding: 7px 8px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.items-center {
+    background: white; 
+    border-radius: 10px; 
+    padding: 10px;
+    border: 1px solid gray; 
+    cursor:pointer
+}
+.items-center:hover{
+    background-color: rgb(226, 223, 223);
+
+}

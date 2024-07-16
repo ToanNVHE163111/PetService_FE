@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
 import AddToy from "./AddToy";
-import EditToy from "./EditToy";
+import EditProduct from "../Product/EditProduct";
+
 import axios from "axios";
 
 const ManaToy = ({categoryId}) => {
@@ -44,12 +45,6 @@ const ManaToy = ({categoryId}) => {
             <Row className="ml-1 mb-4 mt-4">
               <h3>Quản Lý Đồ Chơi</h3>
             </Row>
-            {/* <Row className="ml-1 mb-4">
-              <Button onClick={() => setVisible(true)}>
-                <PlusSquareFill className="mr-2" />
-                Add Toy
-              </Button>
-            </Row> */}
           </div>
 
           <Table striped bordered hover>
@@ -104,10 +99,11 @@ const ManaToy = ({categoryId}) => {
       {visible === true && <AddToy visible={visible} setVisible={setVisible} />}
 
       {editVisible === true && (
-        <EditToy
+        <EditProduct
           editVisible={editVisible}
           setEditVisible={setEditVisible}
           data={dataEdit}
+          productId={dataEdit._id}
         />
       )}
     </Container>

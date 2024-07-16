@@ -29,7 +29,7 @@ const Hot_Product = () => {
         </div>
         <div className="text-center mt-5">
           <Link
-            to="/shop"
+            to="/listproduct"
             className="btn btn-secondary align-items-center rounded-pill mr-3"
           >
             <span>Trang chủ</span>

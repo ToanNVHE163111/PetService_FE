@@ -82,20 +82,19 @@ const AllProducts = () => {
             <thead className="text-center">
               <tr>
                 <th>ID</th>
-<<<<<<< HEAD
+
                 <th>Tên</th>
                 <th>Hình Ảnh</th>
                 <th>Số Lượng</th>
                 <th>Danh Mục</th>
                 <th colSpan={2}>Hoạt Động</th>
-=======
+
                 <th> Name</th>
                 <th>Image</th>
                 <th>Price</th>
                 <th>Quantity </th>
                 <th>Category</th>
                 <th colSpan={2}>Operation</th>
->>>>>>> d10481abe219edf8d98a5127c8d4bb1ea2a8606e
               </tr>
             </thead>
 

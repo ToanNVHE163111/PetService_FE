@@ -34,14 +34,14 @@ const AllOrder = () => {
     const newStatus = e.target.value; // Lấy giá trị mới của status từ dropdown
     axios
       .put("http://localhost:9999/payment/" + orderId, {
-        status: newStatus, 
+        status: newStatus,
       })
       .then((response) => {
         if (response.status === 200) {
           toast.success("Status updated successfully!");
           // Cập nhật trạng thái của đơn hàng trong state
-          setListOrder(prevOrders => {
-            return prevOrders.map(order => {
+          setListOrder((prevOrders) => {
+            return prevOrders.map((order) => {
               if (order._id === orderId) {
                 return { ...order, status: newStatus };
               }
@@ -109,15 +109,29 @@ const AllOrder = () => {
                         paddingLeft: "8px",
                       }}
                       value={o.status}
-                      onChange={(e) => handleStatusChange(e, o._id)}
-                      disabled={o.status === "Completed" || o.status === "Cancel"}
+                      onChange={(e) => {
+                        if (
+                          o.status === "Processing" &&
+                          e.target.value === "Pending"
+                        ) {
+                          return;
+                        }
+
+                        handleStatusChange(e, o._id);
+                      }}
+                      disabled={
+                        o.status === "Completed" || o.status === "Cancel"
+                      }
                     >
                       <option value="Pending">Pending</option>
                       <option value="Processing">Processing</option>
                       <option value="Completed">Completed</option>
-                      <option value="Cancel">Cancel</option>
+                      {o.status === "Cancel" && (
+                        <option value="Cancel">Cancel</option>
+                      )}
+
                       {/* <option value="Transfer">Transfer</option>
-                      <option value="Cancel">Cancel</option> */}
+                       */}
                     </FormSelect>
                   </td>
                   <td>{formatCurrency(o.totalAmount) + " ₫"}</td>

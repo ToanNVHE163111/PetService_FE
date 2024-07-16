@@ -41,11 +41,16 @@ const OrderDetail = (props) => {
         <h5>Total: {formatCurrency(calculateTotal()) + " ₫"} </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
-        {!isCanceling  ? (
+        {!isCanceling ? (
           <Button
             onClick={() => setIsCanceling(true)}
             className="btn btn-danger mr-2"
-            disabled={order.status === "Completed" || order.status === "Cancel" || order.paymentMethod === "VnPay"}
+            disabled={
+              order.status === "Processing" ||
+              order.status === "Completed" ||
+              order.status === "Cancel" ||
+              order.paymentMethod === "VnPay"
+            }
           >
             Huỷ đơn hàng
           </Button>
@@ -58,8 +63,13 @@ const OrderDetail = (props) => {
               style={{ marginRight: "10px", width: "200px" }}
             >
               <option value="">Chọn lý do</option>
-              <option value="Đổi ý">Đổi ý</option>
-              <option value="Tìm thấy giá rẻ hơn">Tìm thấy giá rẻ hơn</option>
+              <option value="Thay đổi địa chỉ">Thay đổi địa chỉ</option>
+              <option value="Tôi không có nhu cầu mua nữa">
+                Tôi không có nhu cầu mua nữa
+              </option>
+              <option value="Thay đổi đơn hàng (giá, số lượng, ...)">
+                Thay đổi đơn hàng (giá, số lượng, ...)
+              </option>
               <option value="Khác">Khác</option>
             </Form.Control>
             <Button
@@ -146,6 +156,24 @@ const OrderDetail = (props) => {
               </Row>
             </form>
           </div>
+        </div>
+        <div>
+          {order.status === "Cancel" && (
+            <Col md={12}>
+              <div className="form-group w-full">
+                <label className="label">
+                  <h6>Lí do huỷ đơn hàng</h6>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={order.cancelReason}
+                  style={{ height: "50px" }}
+                  required
+                />
+              </div>
+            </Col>
+          )}
         </div>
       </Dialog>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Toast } from 'react-bootstrap';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,6 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
     address: '',
     gmail: data.gmail // Khởi tạo trạng thái ban đầu với dữ liệu từ props
   });
-  const [showSuccessToast, setShowSuccessToast] = useState(false); // State cho Toast thành công
 
   // Cập nhật dữ liệu mỗi khi props thay đổi
   useEffect(() => {
@@ -41,7 +41,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
       .then((res) => {
         onUpdate(data.username, formData);
         setEditVisible(false);
-        setShowSuccessToast(true); // Hiển thị Toast thành công khi cập nhật thành công
+        toast.success("Cập nhật người dùng thành công"); // Hiển thị Toast thành công khi cập nhật thành công
       })
       .catch((error) => {
         console.error('Error updating profile:', error);
@@ -126,12 +126,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
         </Form>
       </Modal.Body>
       {/* Toast thành công */}
-      <Toast show={showSuccessToast} onClose={() => setShowSuccessToast(false)} delay={3000} autohide>
-        <Toast.Header>
-          <strong className="me-auto">Success</strong>
-        </Toast.Header>
-        <Toast.Body>Edit profile successful!</Toast.Body>
-      </Toast>
+     
     </Modal>
   );
 };

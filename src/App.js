@@ -20,10 +20,8 @@ import EditBlog from "./screens/EditBlog";
 import Profile from "./screens/Profile";
 import EditProfile from "./screens/EditProfile";
 import Checkout from "./screens/Checkout";
-import OrderStatus from "./DashBoard/OrderMana/OrderStatus";
 import Bill from "./screens/Bill";
-import TotalService from "./screens/TotalService";
-import Grooming from "./screens/Grooming";
+import ViewOrderUser from "./DashBoard/OrderMana/OrderForUser/ViewOrderUser";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,8 +38,8 @@ function App() {
         <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home_Page />} />
-          <Route path="/totalservice" element={<TotalService />} />
-          <Route path="/grooming" element={<Grooming />} />
+          {/* <Route path="/totalservice" element={<TotalService />} /> */}
+          {/* <Route path="/grooming" element={<Grooming />} /> */}
 
           <Route path="/listproduct" element={<Home />} />
           <Route path="/online-booking" element={<Online_Booking />} />
@@ -129,21 +127,11 @@ function App() {
               </>
             }
           />
-          {/* <Route
-            path="/addblog"
-            element={
-              <>
-                <CreatePost />
-                <Footer />
-              </>
-            }
-          /> */}
-
 
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-status" element={<OrderStatus />} />
+          <Route path="/order-status" element={<ViewOrderUser />} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>

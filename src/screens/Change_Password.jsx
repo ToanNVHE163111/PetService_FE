@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Breadcrumb,
   Button,
   Col,
   Container,
@@ -55,7 +56,11 @@ const Change_Password = () => {
       })
       .catch((error) => {
         console.log(error.message);
-        toast.error(error.response ? error.response.data.message : "Change password failed!");
+        toast.error(
+          error.response
+            ? error.response.data.message
+            : "Change password failed!"
+        );
       });
   };
 
@@ -69,78 +74,86 @@ const Change_Password = () => {
   };
 
   return (
-    <Container className="bg-light" style={{ borderRadius: "30px" }}>
-      <Row style={containerStyle}>
-        <Row style={{ marginTop: "60px", paddingBottom: "20px" }}>
-          <h3> Change PassWord</h3>
-        </Row>
-        <Col md={8}>
-          <InputGroup className="mb-3">
-            <Lock
-              style={{
-                fontSize: "25px",
-                border: "solid #CCCC 1px",
-                height: "38px",
-                color: "#808080",
-                backgroundColor: "#EEEEEE",
-                width: "30px",
-              }}
-            />
-            <FormControl
-              placeholder="Old Password"
-              aria-label="Old Password"
-              type="password"
-              value={oldPass}
-              onChange={(e) => setOldPass(e.target.value)}
-            />
-          </InputGroup>
-
-          <InputGroup className="mb-3">
-            <Unlock
-              style={{
-                fontSize: "25px",
-                border: "solid #CCCC 1px",
-                height: "38px",
-                color: "#808080",
-                backgroundColor: "#EEEEEE",
-                width: "30px",
-              }}
-            />
-            <FormControl
-              placeholder="New Password"
-              aria-label="New Password"
-              type="password"
-              value={newPass}
-              onChange={(e) => setNewPass(e.target.value)}
-            />
-          </InputGroup>
-          <InputGroup className="mb-3">
-            <Unlock
-              style={{
-                fontSize: "25px",
-                border: "solid #CCCC 1px",
-                height: "38px",
-                color: "#808080",
-                backgroundColor: "#EEEEEE",
-                width: "30px",
-              }}
-            />
-
-            <FormControl
-              placeholder="Re-enter New Password"
-              aria-label="Re-enter New Password"
-              value={reNewPass}
-              onChange={(e) => setReNewPass(e.target.value)}
-              type="password"
-            />
-          </InputGroup>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button variant="primary" onClick={handleUpdate}>
-              Update Password
-            </Button>
-          </div>
-        </Col>
+    <Container fluid>
+      <Row className="mt-2 ml-2">
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
+          <Breadcrumb.Item active>Thay đổi mật khẩu</Breadcrumb.Item>
+        </Breadcrumb>
       </Row>
+      <Container className="bg-light" style={{ borderRadius: "30px" }}>
+        <Row style={containerStyle}>
+          <Row style={{ marginTop: "60px", paddingBottom: "20px" }}>
+            <h3> Change PassWord</h3>
+          </Row>
+          <Col md={8}>
+            <InputGroup className="mb-3">
+              <Lock
+                style={{
+                  fontSize: "25px",
+                  border: "solid #CCCC 1px",
+                  height: "38px",
+                  color: "#808080",
+                  backgroundColor: "#EEEEEE",
+                  width: "30px",
+                }}
+              />
+              <FormControl
+                placeholder="Old Password"
+                aria-label="Old Password"
+                type="password"
+                value={oldPass}
+                onChange={(e) => setOldPass(e.target.value)}
+              />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <Unlock
+                style={{
+                  fontSize: "25px",
+                  border: "solid #CCCC 1px",
+                  height: "38px",
+                  color: "#808080",
+                  backgroundColor: "#EEEEEE",
+                  width: "30px",
+                }}
+              />
+              <FormControl
+                placeholder="New Password"
+                aria-label="New Password"
+                type="password"
+                value={newPass}
+                onChange={(e) => setNewPass(e.target.value)}
+              />
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <Unlock
+                style={{
+                  fontSize: "25px",
+                  border: "solid #CCCC 1px",
+                  height: "38px",
+                  color: "#808080",
+                  backgroundColor: "#EEEEEE",
+                  width: "30px",
+                }}
+              />
+
+              <FormControl
+                placeholder="Re-enter New Password"
+                aria-label="Re-enter New Password"
+                value={reNewPass}
+                onChange={(e) => setReNewPass(e.target.value)}
+                type="password"
+              />
+            </InputGroup>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button variant="primary" onClick={handleUpdate}>
+                Update Password
+              </Button>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </Container>
   );
 };
