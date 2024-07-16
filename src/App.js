@@ -23,6 +23,7 @@ import Checkout from "./screens/Checkout";
 import Bill from "./screens/Bill";
 import ViewOrderUser from "./DashBoard/OrderMana/OrderForUser/ViewOrderUser";
 import Grooming from "./screens/Grooming";
+import ViewBookingUser from "./DashBoard/BookingMana/OrderForUser/ViewBookingUser";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -131,6 +132,7 @@ function App() {
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-status" element={<ViewOrderUser />} />
+          <Route path="/booking-status" element={<ViewBookingUser />} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>

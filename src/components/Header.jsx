@@ -177,6 +177,12 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                         />
                         Xem đơn hàng
                       </Dropdown.Item>
+                      <Dropdown.Item href="/booking-status">
+                        <Cart2
+                          style={{ fontSize: "20px", marginRight: "10px" }}
+                        />
+                        Xem booking
+                      </Dropdown.Item>
                       <Dropdown.Item onClick={handleLogout}>
                         <BoxArrowInRight
                           style={{ fontSize: "20px", marginRight: "10px" }}
