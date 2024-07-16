@@ -113,10 +113,9 @@ const AllOrder = () => {
                         if (
                           o.status === "Processing" &&
                           e.target.value === "Pending"
-                        ) {
+                        ){
                           return;
                         }
-
                         handleStatusChange(e, o._id);
                       }}
                       disabled={
@@ -129,9 +128,6 @@ const AllOrder = () => {
                       {o.status === "Cancel" && (
                         <option value="Cancel">Cancel</option>
                       )}
-
-                      {/* <option value="Transfer">Transfer</option>
-                       */}
                     </FormSelect>
                   </td>
                   <td>{formatCurrency(o.totalAmount) + " ₫"}</td>
