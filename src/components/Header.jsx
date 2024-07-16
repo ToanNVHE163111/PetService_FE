@@ -14,6 +14,8 @@ import {
 } from "react-bootstrap-icons";
 import Cart from "../screens/Cart";
 import axios from "axios";
+import "../style/font.css"
+
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [visible, setVisible] = useState(false);
@@ -63,16 +65,20 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           <div className="d-flex">
             <ul className="list-unstyled d-flex justify-content-between m-0">
               <li className="mr-4 d-flex align-items-center">
-                <Link to="/" style={{ color: "#2a3977", fontWeight: "bold" }}>
-                  Trang chủ
+                <Link to="/" style={{ color: "#2a3977", fontFamily: "'Montserratb', sans-serif" }}>
+                  TRANG CHỦ
                 </Link>
               </li>
               <li className="mr-4 d-flex align-items-center">
                 <Link
                   to="/listproduct"
-                  style={{ color: "#2a3977", fontWeight: "bold" }}
+                  style={{
+                    color: "#2a3977", fontFamily: "'Montserratb', sans-serif", textDecoration: "none",
+                  }}
+
+
                 >
-                  Sản phẩm
+                  SẢN PHẨM
                 </Link>
               </li>
               <li className="mr-4">
@@ -80,9 +86,9 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   <Dropdown.Toggle
                     variant="link"
                     id="dropdown-services"
-                    style={{ color: "#2a3977", fontWeight: "bold" }}
+                    style={{ color: "#2a3977", fontFamily: "'Montserratb', sans-serif" }}
                   >
-                    Dịch vụ
+                    DỊCH VỤ
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item href="/service1">Dịch vụ 1</Dropdown.Item>
@@ -95,17 +101,17 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               <li style={{ marginTop: "7px", marginRight: "35px" }}>
                 <Link
                   to="/blog"
-                  style={{ color: "#2a3977", fontWeight: "bold" }}
+                  style={{ color: "#2a3977", fontFamily: "'Montserratb', sans-serif" }}
                 >
-                  Bài viết
+                  BÀI VIẾT
                 </Link>
               </li>
               <li className="mr-4 d-flex align-items-center">
                 <Link
                   to="/contact"
-                  style={{ color: "#2a3977", fontWeight: "bold" }}
+                  style={{ color: "#2a3977", fontFamily: "'Montserratb', sans-serif" }}
                 >
-                  Liên hệ
+                  LIÊN HỆ
                 </Link>
               </li>
 
@@ -116,9 +122,9 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   <li className="mr-4 d-flex align-items-center">
                     <Link
                       to="/dashboard"
-                      style={{ color: "#2a3977", fontWeight: "bold" }}
+                      style={{ color: "#2a3977", fontFamily: "'Montserratb', sans-serif" }}
                     >
-                      Quản Lí
+                      QUẢN LÝ
                     </Link>
                   </li>
                 )}
@@ -128,7 +134,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                     <Dropdown.Toggle
                       variant="link"
                       id="dropdown-settings"
-                      style={{ color: "#2a3977", fontWeight: "bold" }}
+                      style={{ color: "#2a3977", fontFamily: "'Montserratb', sans-serif" }}
                     >
                       {fullname}
                     </Dropdown.Toggle>
@@ -162,7 +168,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                 ) : (
                   <Link
                     to="/login"
-                    style={{ color: "#2a3977", fontWeight: "bold" }}
+                    style={{ color: "#2a3977", fontFamily: "'Montserratb', sans-serif" }}
                   >
                     Login
                   </Link>
