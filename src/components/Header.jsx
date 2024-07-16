@@ -23,7 +23,9 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const nav = useNavigate();
   const role = localStorage.getItem("role");
   const fullname = localStorage.getItem("fullname");
-  const user = localStorage.getItem("userId"); // Get user ID
+  const user = localStorage.getItem("userId");
+  const [services, setServices] = useState([]);
+  
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.clear();
@@ -43,6 +45,22 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         console.log(err.message);
       });
   }, [user, visible]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:9999/service")
+      .then((res) => setServices(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleBookingClick = () => {
+    if (isLoggedIn) {
+      nav("/online-booking");
+    } else {
+      nav("/login");
+    }
+  };
+
   return (
     <Container fluid className="mt-2">
       <Row className="align-items-center">
@@ -91,9 +109,11 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                     DỊCH VỤ
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/service1">Dịch vụ 1</Dropdown.Item>
-                    <Dropdown.Item href="/service2">Dịch vụ 2</Dropdown.Item>
-                    <Dropdown.Item href="/service3">Dịch vụ 3</Dropdown.Item>
+                    {services.map((s) => (
+                      <Dropdown.Item key={s._id} href="/#">
+                        {s.name}
+                      </Dropdown.Item>
+                    ))}
                   </Dropdown.Menu>
                 </Dropdown>
               </li>
@@ -180,23 +200,15 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
 
         <Col md={2} className="d-flex justify-content-center">
           <div>
-            <Link
-              to="/online-booking"
+            <button
+              onClick={handleBookingClick}
               className="btn btn-dark d-flex align-items-center rounded-pill mr-3"
             >
               <span>Online Booking</span>
               <SendFill className="ml-2" />
-            </Link>
+            </button>
           </div>
         </Col>
-        {/* <Col
-          md={1}
-          className="d-flex justify-content-center"
-          onClick={() => setVisible(true)}
-          style={{ cursor: "pointer" }}
-        >
-          <CartFill style={{ fontSize: "30px", color: "#37457e" }} />
-        </Col> */}
 
         <Col
           md={1}
@@ -212,7 +224,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           </i>
         </Col>
       </Row>
-      {visible === true && <Cart visible={visible} setVisible={setVisible} />}
+      {visible && <Cart visible={visible} setVisible={setVisible} />}
     </Container>
   );
 };

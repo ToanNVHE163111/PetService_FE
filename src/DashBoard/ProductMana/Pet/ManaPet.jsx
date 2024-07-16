@@ -57,12 +57,13 @@ const ManaPet = ({categoryId}) => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>ID</th>
-                <th> Name</th>
-                <th>Image</th>
-                <th>Quantity </th>
-                <th>PetType</th>
-                <th colSpan={2}>Operation</th>
+              <th>ID</th>
+                <th> Tên</th>
+                <th>Hình Ảnh</th>
+                <th>Giá</th>
+                <th>Số Lượng </th>
+                <th>Loại Thú Cưng</th>
+                <th colSpan={2}>Hành Động</th>
               </tr>
             </thead>
 
@@ -72,6 +73,7 @@ const ManaPet = ({categoryId}) => {
                   <td>{p._id}</td>
                   <td>{p.name}</td>
                   <td>{imageBodyTemplate(p)}</td>
+                  <td>{p.price}</td>
                   <td>{p.quantity}</td>
                   <td>{p.pettype}</td>
                   <td>

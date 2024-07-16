@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
   Col,
   Container,
   Row,
-  Modal,
   Table,
-  Breadcrumb,
 } from "react-bootstrap";
 import { Eye } from "react-bootstrap-icons";
 import axios from "axios";
@@ -67,11 +64,11 @@ const OrderStatus = () => {
               <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th style={{ width: "15%" }}>Order Date</th>
-                    <th style={{ width: "25%" }}>Status</th>
-                    <th style={{ width: "20%" }}>Total</th>
+                    <th style={{ width: "15%" }}>Ngày Đặt Hàng</th>
+                    <th style={{ width: "25%" }}>Trạng Thái</th>
+                    <th style={{ width: "20%" }}>Tổng</th>
                     <th style={{ width: "20%" }}>Phương thức thanh toán</th>
-                    <th>Operation</th>
+                    <th>Hành Động</th>
                   </tr>
                 </thead>
                 <tbody>

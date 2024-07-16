@@ -9,19 +9,19 @@ const OrderManagement = () => {
     return (
         <Container fluid>
         <Tabs defaultActiveKey="allorder" id="uncontrolled-tab-example">
-          <Tab eventKey="allorder" title="All Order">
+          <Tab eventKey="allorder" title="Tất Cả">
             <AllOrder />
           </Tab>
-          <Tab eventKey="Pending" title="Pending">
+          <Tab eventKey="Pending" title="Chờ Xác Nhận">
           <Pending status="Pending" />
           </Tab>
-          <Tab eventKey="Processing" title="Processing">
+          <Tab eventKey="Processing" title="Đang Xử Lý">
           <Processing status="Processing" />
           </Tab>
-          <Tab eventKey="Complete" title="Completed">
+          <Tab eventKey="Complete" title="Đã Giao">
           <Complete status="Completed" />
           </Tab>
-          <Tab eventKey="Cancel" title="Cancel">
+          <Tab eventKey="Cancel" title="Đã Huỷ">
           <Cancel status="Cancel" />
           </Tab>
           

@@ -3,14 +3,13 @@ import { Breadcrumb, Col, Nav, Row, Tab } from "react-bootstrap";
 import UserManagement from "../UserMana/UserManagement";
 import OrderManagement from "../OrderMana/OrderForAdmin/OrderManagement";
 import ManaAllCateProduct from "../ProductMana/Product/ManaAllCateProduct";
-import TotalDashBoard from "./TotalDashBoard";
 import ManaAllDashBoard from "./ManaAllDashBoard";
 import AppointmentList from "../AppointmentMana/AppointmentList";
 
 const DashBoard = () => {
   const role = parseInt(localStorage.getItem("role"), 10);
   return (
-    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+    <Tab.Container id="left-tabs-example" defaultActiveKey={role ===3 ? "four" : "first"}>
       <Row className="mt-2 ml-2">
         <Breadcrumb>
           <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
@@ -129,6 +128,9 @@ const DashBoard = () => {
           </Col>
           <Col sm={9}>
             <Tab.Content>
+              <Tab.Pane eventKey="four">
+                <AppointmentList />
+              </Tab.Pane>
               <Tab.Pane eventKey="five">
                 <ManaAllDashBoard />
               </Tab.Pane>

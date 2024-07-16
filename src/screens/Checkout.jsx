@@ -69,7 +69,7 @@ const Checkout = () => {
       .post("http://localhost:9999/payment", orderData)
       .then((response) => {
         toast.success("Order placed successfully!");
-        nav("/");
+        nav("/order-status");
       })
       .catch((error) => {
         toast.error("Failed to place order, please try again.");

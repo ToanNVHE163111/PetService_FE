@@ -6,19 +6,20 @@ import EditProduct from "../Product/EditProduct";
 
 import axios from "axios";
 
-const ManaMedice = ({categoryId}) => {
+const ManaMedice = ({ categoryId }) => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:9999/products/filter/${categoryId}`)
+    axios
+      .get(`http://localhost:9999/products/filter/${categoryId}`)
       .then((res) => {
         setProducts(res.data);
       })
       .catch((error) => {
-        console.error('Error fetching medicine:', error);
+        console.error("Error fetching medicine:", error);
       });
   }, [categoryId]);
 
@@ -58,11 +59,12 @@ const ManaMedice = ({categoryId}) => {
             <thead className="text-center">
               <tr>
                 <th>ID</th>
-                <th> Name</th>
-                <th>Image</th>
-                <th>Quantity </th>
-                <th>PetType</th>
-                <th colSpan={2}>Operation</th>
+                <th>Tên</th>
+                <th>Hình Ảnh</th>
+                <th>Giá</th>
+                <th>Số Lượng </th>
+                <th>Loại Thú Cưng</th>
+                <th colSpan={2}>Hành Động</th>
               </tr>
             </thead>
 

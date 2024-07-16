@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Toast } from 'react-bootstrap';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,6 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
     address: '',
     gmail: data.gmail // Khởi tạo trạng thái ban đầu với dữ liệu từ props
   });
-  const [showSuccessToast, setShowSuccessToast] = useState(false); // State cho Toast thành công
 
   // Cập nhật dữ liệu mỗi khi props thay đổi
   useEffect(() => {
@@ -41,7 +41,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
       .then((res) => {
         onUpdate(data.username, formData);
         setEditVisible(false);
-        setShowSuccessToast(true); // Hiển thị Toast thành công khi cập nhật thành công
+        toast.success("Cập nhật người dùng thành công"); // Hiển thị Toast thành công khi cập nhật thành công
       })
       .catch((error) => {
         console.error('Error updating profile:', error);
@@ -56,7 +56,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Full Name</Form.Label>
+            <Form.Label>Họ Và Tên</Form.Label>
             <Form.Control
               type="text"
               name="fullname"
@@ -66,7 +66,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Gmail</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
               name="gmail"
@@ -76,7 +76,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Gender</Form.Label>
+            <Form.Label>Giới Tính</Form.Label>
             <Form.Control
               as="select"
               name="gender"
@@ -84,14 +84,14 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
               onChange={handleChange}
               required
             >
-              <option value="" disabled>Please select your gender</option>
+              <option value="" disabled>Chọn Giới Tính</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
             </Form.Control>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Birthday</Form.Label>
+            <Form.Label>Ngày Sinh</Form.Label>
             <Form.Control
               type="date"
               name="birthday"
@@ -101,7 +101,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Phone</Form.Label>
+            <Form.Label>Số Điện Thoại</Form.Label>
             <Form.Control
               type="text"
               name="phone"
@@ -111,7 +111,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Address</Form.Label>
+            <Form.Label>Địa Chỉ</Form.Label>
             <Form.Control
               type="text"
               name="address"
@@ -126,12 +126,7 @@ const EditProfile = ({ editVisible, setEditVisible, data, onUpdate }) => {
         </Form>
       </Modal.Body>
       {/* Toast thành công */}
-      <Toast show={showSuccessToast} onClose={() => setShowSuccessToast(false)} delay={3000} autohide>
-        <Toast.Header>
-          <strong className="me-auto">Success</strong>
-        </Toast.Header>
-        <Toast.Body>Edit profile successful!</Toast.Body>
-      </Toast>
+     
     </Modal>
   );
 };

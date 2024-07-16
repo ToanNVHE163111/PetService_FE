@@ -39,7 +39,6 @@ const OrderDetailAdmin = (props) => {
     </div>
   );
   function formatCurrency(number) {
-    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
     if (typeof number === "number") {
       return number.toLocaleString("en-US", {
         currency: "VND",
@@ -150,10 +149,10 @@ const OrderDetailAdmin = (props) => {
                     >
                       <thead>
                         <tr>
-                          <th style={{ width: "15%" }}>Name</th>
-                          <th style={{ width: "25%" }}>Quantity</th>
-                          <th style={{ width: "20%" }}>Price</th>
-                          <th style={{ width: "20%" }}>Total</th>
+                          <th style={{ width: "15%" }}>Tên</th>
+                          <th style={{ width: "25%" }}>Số Lượng</th>
+                          <th style={{ width: "20%" }}>Giá</th>
+                          <th style={{ width: "20%" }}>Tổng</th>
                         </tr>
                       </thead>
                       <tbody>

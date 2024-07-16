@@ -28,6 +28,7 @@ const Online_Booking = () => {
       weight: "",
       notes: "",
     },
+    userId: "", // Add this field
   });
   const [selectedSlot, setSelectedSlot] = useState("");
 
@@ -53,6 +54,15 @@ const Online_Booking = () => {
       }
     };
     fetchSlots();
+  }, []);
+
+  useEffect(() => {
+    // Fetch userId from local storage or your auth context
+    const userId = localStorage.getItem("userId");
+    setBookingData((prevData) => ({
+      ...prevData,
+      userId: userId,
+    }));
   }, []);
 
   const fetchSlotsByDate = async (date) => {
@@ -144,6 +154,7 @@ const Online_Booking = () => {
             weight: "",
             notes: "",
           },
+          userId: localStorage.getItem("userId"), // Reset with userId
         });
         setErrors({});
         setSelectedSlot("");
@@ -307,6 +318,7 @@ const Online_Booking = () => {
                     value={bookingData.pet_info.species}
                     isInvalid={!!errors.species}
                   >
+                    <option value="0">Chọn Loài</option>
                     <option value="Chó">Chó</option>
                     <option value="Mèo">Mèo</option>
                     <option value="Khác">Khác</option>
@@ -318,11 +330,16 @@ const Online_Booking = () => {
                 <Form.Group controlId="breed">
                   <Form.Label>Thuộc Giống</Form.Label>
                   <Form.Control
+                    as="select"
                     name="breed"
                     onChange={handlePetInfoChange}
                     value={bookingData.pet_info.breed}
                     isInvalid={!!errors.breed}
-                  />
+                  >
+                    <option value="0">Chọn Giống</option>
+                    <option value="Đực">Đực</option>
+                    <option value="Cái">Cái</option>
+                  </Form.Control>
                   <Form.Control.Feedback type="invalid">
                     {errors.breed}
                   </Form.Control.Feedback>

@@ -23,16 +23,14 @@ const Hot_Product = () => {
     <Row className="container" style={{ width: "100%", marginTop: "100px" }}>
       <Col md={5}>
         <div className="text-center">
-          <p>PET SERVICE</p>
-          <h2>HOT ITEMS</h2>
           <h3>SẢN PHẨM NỔI BẬT</h3>
         </div>
         <div className="text-center mt-5">
           <Link
-            to="/shop"
+            to="/listproduct"
             className="btn btn-secondary align-items-center rounded-pill mr-3"
           >
-            <span>Trang chủ</span>
+            <span style={{color:"white"}}>Trang chủ</span>
             <SendFill className="ml-2" />
           </Link>
         </div>

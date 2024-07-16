@@ -157,7 +157,7 @@ const EditProduct = (props) => {
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6>Name</h6>
+                      <h6>Tên</h6>
                     </label>
                     <input
                       type="text"
