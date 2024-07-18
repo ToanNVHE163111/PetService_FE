@@ -1,52 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { Chart } from "primereact/chart";
-import { Container } from "react-bootstrap";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { Chart } from 'primereact/chart';
+import axios from 'axios';
 
 const TotalByMonth = () => {
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState({ labels: [], datasets: [] });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:9999/booking/revenue-by-service-type"
-        );
-        // if (!response.ok) {
-        //   alert("Failed to fetch revenue by month chart");
-        // }
-        const { revenueByServiceType } = response.data;
+        const response = await axios.get('http://localhost:9999/booking/revenue-by-service-type');
+        const revenueByServiceType = response.data.revenueByServiceType;
+        const labels = Object.keys(revenueByServiceType);
+        const data = Object.values(revenueByServiceType);
 
-        const documentStyle = getComputedStyle(document.documentElement);
-
-        // Example data structure from API response
-        const data = {
-          labels: Object.keys(revenueByServiceType),
+        setChartData({
+          labels,
           datasets: [
             {
-              data: Object.values(revenueByServiceType),
-              backgroundColor: [
-                documentStyle.getPropertyValue("--blue-500"),
-                documentStyle.getPropertyValue("--yellow-500"),
-                documentStyle.getPropertyValue("--green-500"),
-              ],
-              hoverBackgroundColor: [
-                documentStyle.getPropertyValue("--blue-400"),
-                documentStyle.getPropertyValue("--yellow-400"),
-                documentStyle.getPropertyValue("--green-400"),
-              ],
+              label: 'Doanh Thu theo Loại Dịch Vụ',
+              data,
+              backgroundColor: ['#42A5F5', '#66BB6A', '#FFCA28', '#EF5350'], 
             },
           ],
-        };
-
-        setChartData(data);
+        });
       } catch (error) {
-        console.error("Error fetching data", error);
+        console.error('Error fetching revenue by service type data', error);
       }
     };
 
     fetchData();
   }, []);
+
   const options = {
     scales: {
       yAxes: [
@@ -58,39 +42,12 @@ const TotalByMonth = () => {
       ],
     },
   };
+
   return (
-    <Container fluid>
-      <div
-        className="carda"
-        style={{
-          marginLeft: "15px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <h5
-          className="card-header"
-          style={{
-            width: "100%",
-            background: "#f2f2f2",
-            marginBottom: "10px",
-          }}
-        >
-          Doanh thu theo dịch vụ
-        </h5>
-        <div className="card-body">
-          <Chart
-            type="doughnut"
-            // type="bar"
-            data={chartData}
-            options={options}
-            className="w-full md:w-30rem"
-            height={300}
-          />
-        </div>
-      </div>
-    </Container>
+    <div style={{ height: '305px' }}>
+      <h3>Doanh Thu Theo Loại Dịch Vụ</h3>
+      <Chart type="bar" data={chartData} options={options} />
+    </div>
   );
 };
 
