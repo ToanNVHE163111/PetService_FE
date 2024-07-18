@@ -31,7 +31,7 @@ const Forgot_Password = () => {
         </Breadcrumb>
       </Row>
       <Container className="form-container">
-        <div className="logo-container">Forgot Password</div>
+        <div className="logo-container">Quên mật khẩu</div>
         <form className="form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -39,20 +39,20 @@ const Forgot_Password = () => {
               type="text"
               id="email"
               name="email"
-              placeholder="Enter your email"
+              placeholder="Nhập email nhận link cấp mật khẩu"
               onChange={(e) => setGmail(e.target.value)}
               required
             />
           </div>
           <button className="form-submit-btn" type="submit">
-            Send Email
+            Gửi
           </button>
         </form>
         <p className="signup-link">
-          Don't have an account?
+          Tôi không có tài khoản
           <a href="/register" className="signup-link link">
             {" "}
-            Sign up now
+            Đăng kí ngay...
           </a>
         </p>
       </Container>

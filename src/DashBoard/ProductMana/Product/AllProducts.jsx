@@ -67,7 +67,7 @@ const AllProducts = () => {
           <div>
             <Row className="ml-1 mb-4 mt-4">
               <Col md={6}>
-                <h3>Products Management</h3>
+                <h3>Quản Lí Sản Phẩm</h3>
               </Col>
               <Col md={6} className="d-flex justify-content-end">
                 <Button onClick={() => setVisible(true)}>

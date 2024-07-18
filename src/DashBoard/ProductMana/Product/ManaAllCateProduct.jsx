@@ -8,40 +8,43 @@ import axios from "axios";
 import AllProducts from "./AllProducts";
 
 const ManaAllCateProduct = () => {
-  const [category,setCategory]=useState([])
+  const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:9999/category')
+    axios
+      .get("http://localhost:9999/category")
       .then((res) => {
         setCategory(res.data);
       })
       .catch((error) => {
-        console.error('Error fetching toys:', error);
+        console.error("Error fetching toys:", error);
       });
   }, []);
 
-  const toyId = category.find(category => category.name === 'Toy')?._id;
-  const foodId = category.find(category => category.name === 'Food')?._id;
-  const petId = category.find(category => category.name === 'Pet')?._id;
-  const medicineId = category.find(category => category.name === 'Medicine')?._id;
+  const toyId = category.find((category) => category.name === "Toy")?._id;
+  const foodId = category.find((category) => category.name === "Food")?._id;
+  const petId = category.find((category) => category.name === "Pet")?._id;
+  const medicineId = category.find(
+    (category) => category.name === "Medicine"
+  )?._id;
 
   return (
     <Container fluid>
       <Tabs defaultActiveKey="allproducts" id="uncontrolled-tab-example">
-        <Tab eventKey="allproducts" title="All Products">
-          <AllProducts/>
+        <Tab eventKey="allproducts" title="Tát cả sản phẩm ">
+          <AllProducts />
         </Tab>
-        <Tab eventKey="Food" title="Food">
+        <Tab eventKey="Food" title="Thức ăn">
           <ManaFood categoryId={foodId} />
         </Tab>
-        <Tab eventKey="Pet" title="Pet">
-          <ManaPet categoryId={petId}/>
+        <Tab eventKey="Pet" title="Động vật">
+          <ManaPet categoryId={petId} />
         </Tab>
-        <Tab eventKey="Toy" title="Toy">
-          <ManaToy categoryId={toyId}/>
+        <Tab eventKey="Toy" title="Đồ chơi">
+          <ManaToy categoryId={toyId} />
         </Tab>
-        <Tab eventKey="Medicine" title="Medicine">
-          <ManaMedice categoryId={medicineId}/>
+        <Tab eventKey="Medicine" title="Thuốc">
+          <ManaMedice categoryId={medicineId} />
         </Tab>
       </Tabs>
     </Container>

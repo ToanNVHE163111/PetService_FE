@@ -45,7 +45,7 @@ const ManaMedice = ({ categoryId }) => {
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <h3>Medicine Management</h3>
+              <h3>Quản Lí Thuốc</h3>
             </Row>
             {/* <Row className="ml-1 mb-4">
               <Button onClick={() => setVisible(true)}>

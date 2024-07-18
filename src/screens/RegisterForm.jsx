@@ -30,7 +30,7 @@ const RegisterForm = () => {
       return;
     }
 
-    const data = {fullname, username, password };
+    const data = { fullname, username, password };
     try {
       const res = await axios.post(
         "http://localhost:9999/users/register",
@@ -44,7 +44,7 @@ const RegisterForm = () => {
       const { accessToken } = res.data;
       localStorage.setItem("accessToken", accessToken);
       toast.success("Registration successful!");
-      nav("/login"); 
+      nav("/login");
     } catch (error) {
       if (error.response.status === 409) {
         setError("Username already exists");
@@ -81,18 +81,19 @@ const RegisterForm = () => {
                 />
               </div>
               <div className="title_container">
-                <p className="title">Create an Account</p>
+                <p className="title">Tạo tài khoản đăng nhập</p>
                 <span className="subtitle">
-                  Get started with our app, just fill in the form below to
-                  register.
+                  Bắt đầu với ứng dụng của chúng tôi, chỉ cần điền vào biểu mẫu
+                  bên dưới để Đăng ký.
                 </span>
               </div>
-              <br /><div className="input_container">
+              <br />
+              <div className="input_container">
                 <label className="input_label" htmlFor="email_field">
-                  Fullname
+                  Họ và Tên
                 </label>
                 <input
-                  placeholder="Enter your username"
+                  placeholder="Nhập họ tên của bạn"
                   title="Input title"
                   name="input-fullname"
                   type="text"
@@ -102,10 +103,10 @@ const RegisterForm = () => {
               </div>
               <div className="input_container">
                 <label className="input_label" htmlFor="email_field">
-                  Username
+                  Tên đăng nhập
                 </label>
                 <input
-                  placeholder="Enter your username"
+                  placeholder="Nhập tên đăng nhập của bạn"
                   title="Input title"
                   name="input-name"
                   type="text"
@@ -115,10 +116,10 @@ const RegisterForm = () => {
               </div>
               <div className="input_container">
                 <label className="input_label" htmlFor="password_field">
-                  Password
+                  Mật khẩu
                 </label>
                 <input
-                  placeholder="Password"
+                  placeholder="Nhập mật khẩu"
                   title="Input title"
                   name="password_field"
                   type="password"
@@ -128,10 +129,10 @@ const RegisterForm = () => {
               </div>
               <div className="input_container">
                 <label className="input_label" htmlFor="confirm_password_field">
-                  Confirm Password
+                  Nhập lại mật khẩu
                 </label>
                 <input
-                  placeholder="Confirm Password"
+                  placeholder="Mật khẩu phải giống nhau"
                   title="Input title"
                   name="confirm_password_field"
                   type="password"

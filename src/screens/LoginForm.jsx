@@ -27,7 +27,8 @@ const LoginForm = ({ setIsLoggedIn }) => {
         },
       });
 
-      const { accessToken, refreshToken, username, id , fullname, role} = res.data;
+      const { accessToken, refreshToken, username, id, fullname, role } =
+        res.data;
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("username", username); // Lưu tên người dùng vào localStorage
@@ -70,16 +71,16 @@ const LoginForm = ({ setIsLoggedIn }) => {
                 />
               </div>
               <div className="title_container">
-                <p className="title">Login to your Account</p>
+                <p className="title">Đăng nhập với tài khoản của bạn</p>
                 <span className="subtitle">
-                  Get started with our app, just create an account and enjoy the
-                  experience.
+                  Bắt đầu với ứng dụng của chúng tôi, chỉ cần tạo một tài khoản
+                  và tận hưởng trải nghiệm.
                 </span>
               </div>
               <br />
               <div className="input_container">
                 <label className="input_label" htmlFor="email_field">
-                  Username
+                  Tên đăng nhập
                 </label>
                 <input
                   placeholder="Enter your username"
@@ -91,7 +92,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
               </div>
               <div className="input_container">
                 <label className="input_label" htmlFor="password_field">
-                  Password
+                  Mật khẩu
                 </label>
                 <input
                   placeholder="Password"
@@ -106,16 +107,16 @@ const LoginForm = ({ setIsLoggedIn }) => {
                 className="sign-in_btn mb-3 mt-2"
                 type="submit"
               >
-                Sign In
+                Đăng kí tài khoản
               </Button>
               <div>
                 <Link to={"/register"} className="text-danger text-opacity-75">
-                  I do not have an account!..
+                  Tôi chưa có tài khoản ...
                 </Link>
               </div>{" "}
               <div>
                 <Link to={"/forgot"} className="text-danger text-opacity-75">
-                  I forgot my password !!!
+                  Tôi quên mật khẩu
                 </Link>
               </div>
             </form>

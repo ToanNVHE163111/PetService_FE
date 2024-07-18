@@ -6,19 +6,20 @@ import EditProduct from "../Product/EditProduct";
 
 import axios from "axios";
 
-const ManaToy = ({categoryId}) => {
+const ManaToy = ({ categoryId }) => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:9999/products/filter/${categoryId}`)
+    axios
+      .get(`http://localhost:9999/products/filter/${categoryId}`)
       .then((res) => {
         setProducts(res.data);
       })
       .catch((error) => {
-        console.error('Error fetching toys:', error);
+        console.error("Error fetching toys:", error);
       });
   }, [categoryId]);
 
@@ -43,14 +44,14 @@ const ManaToy = ({categoryId}) => {
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <h3>Toy Management</h3>
+              <h3>Quản Lí Đồ Chơi </h3>
             </Row>
           </div>
 
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-              <th>ID</th>
+                <th>ID</th>
                 <th> Tên</th>
                 <th>Hình Ảnh</th>
                 <th>Giá</th>
