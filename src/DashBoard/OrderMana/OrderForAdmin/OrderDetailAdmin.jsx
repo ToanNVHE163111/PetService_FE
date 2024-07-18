@@ -43,8 +43,16 @@ const OrderDetailAdmin = (props) => {
       return number.toLocaleString("en-US", {
         currency: "VND",
       });
-    }
+    } 
   }
+
+  const formatDate = (inputDate) => {
+    const dateObject = new Date(inputDate);
+    const day = dateObject.getDate().toString().padStart(2, "0");
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
+    const year = dateObject.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
   return (
     <div className="card flex justify-content-center">
       <Dialog
@@ -112,6 +120,20 @@ const OrderDetailAdmin = (props) => {
                     type="number"
                     className="form-control"
                     value={calculateTotalQuantity()}
+                    style={{ height: "50px" }}
+                    required
+                  />
+                </div>
+              </Col>
+              <Col md={12}>
+                <div className="form-group w-full">
+                  <label className="label">
+                    <h6>Ngày Mua</h6>
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formatDate(order.createdAt)}
                     style={{ height: "50px" }}
                     required
                   />
