@@ -208,7 +208,7 @@ const Product_Detail = () => {
               className="cards flex-column"
               style={{ width: "100%", height: "28rem", marginRight: "10px" }}
             >
-              <h2>Product Description</h2>
+              <h2>Giới thiệu sản phẩm</h2>
               <p>{product.description}</p>
             </div>
           </Row>

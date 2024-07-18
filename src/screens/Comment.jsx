@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap-icons";
 import { InputText } from "primereact/inputtext";
 
-const Comment = ({selectedBlogId}) => {
+const Comment = ({ selectedBlogId }) => {
   const { id } = useParams();
   const [listComments, setListComments] = useState([]);
   const [text, setText] = useState("");
@@ -52,7 +52,6 @@ const Comment = ({selectedBlogId}) => {
       });
   }, []);
 
-
   useEffect(() => {
     axios
       .get("http://localhost:9999/comments/blog/" + selectedBlogId)
@@ -67,7 +66,6 @@ const Comment = ({selectedBlogId}) => {
         console.log(err.message);
       });
   }, []);
-
 
   const handleDeleteComment = (e, index) => {
     e.preventDefault();
@@ -93,7 +91,7 @@ const Comment = ({selectedBlogId}) => {
         productId: id,
         blogId: selectedBlogId,
       })
-      
+
       .then((response) => {
         if (response.status === 201) {
           const newCommentId = response.data.addComment._id;
@@ -166,7 +164,7 @@ const Comment = ({selectedBlogId}) => {
 
   return (
     <Container class="card">
-      <span class="title">Comments</span>
+      <span class="title">Bình luận</span>
       {username && (
         <div
           style={{
@@ -187,7 +185,7 @@ const Comment = ({selectedBlogId}) => {
               <Form.Group controlId="commentInput" className="flex-grow-1 mr-2">
                 <Form.Control
                   type="text"
-                  placeholder="Write a comment..."
+                  placeholder="Để lại cảm nhận của bạn "
                   value={text}
                   rows={2}
                   cols={30}

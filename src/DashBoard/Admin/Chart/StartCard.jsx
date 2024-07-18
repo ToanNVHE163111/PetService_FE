@@ -49,7 +49,7 @@ const StatCards = (props) => {
     axios
       .get("http://localhost:9999/users")
       .then((response) => setUsers(response.data));
-  },[]);
+  }, []);
 
   function formatCurrency(number) {
     // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
@@ -92,30 +92,29 @@ const StatCards = (props) => {
   }, []);
   const cardList = [
     {
-      name: "Total of user",
+      name: "Tổng khách hàng",
       amount: `${users.length} users`,
       icon: "pi pi-user",
       index: 0,
     },
     {
-      name: "Total order",
+      name: "Tổng đơn hàng",
       amount: `${order.length} Orders`,
       icon: "pi pi-shopping-cart",
       index: 3,
     },
     {
-      name: "This week Sales",
+      name: "Doanh thu trong tuần",
       amount: `${formatCurrency(sumWeekSale) + " ₫"} `,
       icon: "pi pi-money-bill",
       index: 0,
     },
     {
-      name: "Total products sold.",
+      name: "Tổng sản phẩm đã bán ",
       amount: `${totalOfProducts} products`,
       icon: "pi pi-shopping-cart",
       index: 1,
     },
-   
   ];
 
   return (

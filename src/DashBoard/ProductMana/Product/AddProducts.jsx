@@ -99,11 +99,11 @@ const AddProducts = (props) => {
         form="addProductForm"
         onClick={handleSubmit}
       >
-        <PlusSquareFill /> Add
+        <PlusSquareFill /> Thêm
       </Button>
       <Button onClick={onHide} className="btn btn-danger">
         <X style={{ fontSize: "22px" }} />
-        Close
+        Đóng
       </Button>
     </div>
   );
@@ -150,7 +150,7 @@ const AddProducts = (props) => {
         className="bg-light dialogForm"
         style={{ width: "70vw" }}
         modal
-        header={<div className="custom-dialog-header">Add Product</div>}
+        header={<div className="custom-dialog-header">Thêm Sản Phẩm</div>}
       >
         <div className="bg-light p-1" style={{ margin: "25px" }}>
           <div style={{ margin: "40px" }}>
@@ -159,13 +159,13 @@ const AddProducts = (props) => {
                 <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="name">
-                      <h6>Name</h6>
+                      <h6>Tên sản phẩm </h6>
                     </label>
                     <input
                       type="text"
                       className="form-control"
                       name="name"
-                      placeholder="Input product name"
+                      placeholder="Thêm tên sản phẩm "
                       style={{ height: "50px" }}
                       required
                       value={name}
@@ -174,13 +174,13 @@ const AddProducts = (props) => {
                   </div>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="description">
-                      <h6>Description</h6>
+                      <h6>Mô tả sản phẩm </h6>
                     </label>
                     <TextArea
                       type="text"
                       className="form-control"
                       name="description"
-                      placeholder="Input description"
+                      placeholder="Thêm mô tả sản phẩm "
                       required
                       rows={5}
                       value={description}
@@ -189,7 +189,7 @@ const AddProducts = (props) => {
                   </div>
                   <div className="form-group w-full p-4">
                     <label className="label" htmlFor="description">
-                      <h5>Images</h5>
+                      <h5>Ảnh </h5>
                     </label>
                     <label style={{ paddingLeft: "100px" }} htmlFor="file">
                       {isLoading ? (
@@ -219,7 +219,7 @@ const AddProducts = (props) => {
                     <Col md={6}>
                       <div className="form-group w-full">
                         <label className="label" htmlFor="congNgheManHinh">
-                          <h6>Quantity</h6>
+                          <h6>Số lượng </h6>
                         </label>
                         <input
                           type="number"
@@ -235,7 +235,7 @@ const AddProducts = (props) => {
                     <Col md={6}>
                       <div className="form-group w-full">
                         <label className="label" htmlFor="congNgheManHinh">
-                          <h6>Price</h6>
+                          <h6>Giá sản phẩm </h6>
                         </label>
                         <input
                           type="number"
@@ -254,7 +254,7 @@ const AddProducts = (props) => {
                     <Col md={6}>
                       <div className="">
                         <label className="label">
-                          <h6>Category</h6>
+                          <h6>Loại sản phẩm </h6>
                         </label>
                         <br></br>
                         <select
@@ -264,7 +264,7 @@ const AddProducts = (props) => {
                           required
                           style={{ height: "50px" }}
                         >
-                          <option value="0">Select Category</option>
+                          <option value="0">Sản phẩm của</option>
                           {category.map((category) => (
                             <option key={category._id} value={category._id}>
                               {category.name}
@@ -276,7 +276,7 @@ const AddProducts = (props) => {
                     <Col md={6}>
                       <div className="">
                         <label className="label">
-                          <h6>Pet Type</h6>
+                          <h6>Dành cho </h6>
                         </label>
                         <br></br>
                         <select
@@ -286,7 +286,7 @@ const AddProducts = (props) => {
                           required
                           style={{ height: "50px" }}
                         >
-                          <option value="0">Select Pet Type</option>
+                          <option value="0">Chọn đối tượng</option>
                           <option value="Dog">Dog</option>
                           <option value="Cat">Cat</option>
                         </select>

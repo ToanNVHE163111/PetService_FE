@@ -5,11 +5,14 @@ import OrderManagement from "../OrderMana/OrderForAdmin/OrderManagement";
 import ManaAllCateProduct from "../ProductMana/Product/ManaAllCateProduct";
 import ManaAllDashBoard from "./ManaAllDashBoard";
 import AppointmentList from "../AppointmentMana/AppointmentList";
-
+import ServiceManagement from "../ManaService/Manaservice";
 const DashBoard = () => {
   const role = parseInt(localStorage.getItem("role"), 10);
   return (
-    <Tab.Container id="left-tabs-example" defaultActiveKey={role ===3 ? "four" : "first"}>
+    <Tab.Container
+      id="left-tabs-example"
+      defaultActiveKey={role === 3 ? "four" : "first"}
+    >
       <Row className="mt-2 ml-2">
         <Breadcrumb>
           <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
@@ -37,6 +40,11 @@ const DashBoard = () => {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="four" style={{ color: "black" }}>
+                  Quản lí lịch đặt chăm sóc
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="six" style={{ color: "black" }}>
                   Quản lí dịch vụ
                 </Nav.Link>
               </Nav.Item>
@@ -63,6 +71,9 @@ const DashBoard = () => {
               </Tab.Pane>
               <Tab.Pane eventKey="five">
                 <ManaAllDashBoard />
+              </Tab.Pane>
+              <Tab.Pane eventKey="six">
+                <ServiceManagement />
               </Tab.Pane>
             </Tab.Content>
           </Col>
@@ -115,7 +126,7 @@ const DashBoard = () => {
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
                 <Nav.Link eventKey="four" style={{ color: "black" }}>
-                  Quản lí dịch vụ
+                  Quản lí lịch đặt chăm sóc
                 </Nav.Link>
               </Nav.Item>
 

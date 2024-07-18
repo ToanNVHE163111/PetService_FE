@@ -107,7 +107,7 @@ const Checkout = () => {
   };
   return (
     <div>
-       <Row className="mt-2 ml-2">
+      <Row className="mt-2 ml-2">
         <Breadcrumb>
           <Breadcrumb.Item href="/">Trang chủ</Breadcrumb.Item>
           <Breadcrumb.Item active>Thanh toán</Breadcrumb.Item>
@@ -117,17 +117,17 @@ const Checkout = () => {
         <div className="container">
           <div className="row upper">
             <span id="payment">
-              <span id="three">Checkout</span>
+              <span id="three">Thanh toán</span>
             </span>
           </div>
           <div className="row">
             <Col md={6} sm={6} xs={12}>
               <div className="payment-right border">
                 <div className="section-title">
-                  <h3 className="title pb-4 text-center">Billing address</h3>
+                  <h3 className="title pb-4 text-center">Chi tiết hóa đơn</h3>
                 </div>
                 <div className="form-group">
-                  <label>Full Name</label>
+                  <label>Họ và Tên</label>
                   <input
                     className="input"
                     type="text"
@@ -150,7 +150,7 @@ const Checkout = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Address</label>
+                  <label>Địa chỉ</label>
                   <input
                     className="input"
                     type="text"
@@ -161,7 +161,7 @@ const Checkout = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Phone Number</label>
+                  <label>Số điện thoại </label>
                   <input
                     className="input"
                     type="tel"
@@ -172,14 +172,14 @@ const Checkout = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Payment method</label>
+                  <label>Phương thức thanh toán </label>
                   <select
                     className="input payment_method w-100"
                     style={{ height: "35px" }}
                     name="payment_method"
                     onChange={(e) => setPaymentMethod(e.target.value)}
                   >
-                    <option value="0">Choose payment method</option>
+                    <option value="0">Lựa chọn phương thức thanh toán</option>
                     <option value="COD">Ship Cod</option>
                     <option value="VnPay">Pay with VnPay</option>
                   </select>
@@ -188,7 +188,7 @@ const Checkout = () => {
             </Col>
             <Col md={6} sm={6} xs={12}>
               <div className="payment-right border">
-                <div className="payment-header">Order Summary</div>
+                <div className="payment-header">Đơn đặt </div>
                 <p>{calculateTotalItems()} items</p>
                 {listCart.map((p, index) => (
                   <Row className="payment-row item" key={index}>
@@ -212,7 +212,7 @@ const Checkout = () => {
                         </h5>
                       </div>
                       <div className="payment-row text-muted">
-                        <h6> Quantity: {p.quantity}</h6>
+                        <h6> Số lượng: {p.quantity}</h6>
                       </div>
                     </Col>
                   </Row>
@@ -221,7 +221,7 @@ const Checkout = () => {
 
                 <div className="payment-row lower">
                   <div className="payment-col text-left">
-                    <b>Total to pay</b>
+                    <b>Tổng thanh toán</b>
                   </div>
                   <div className="payment-col text-right">
                     <b>{formatCurrency(calculateTotal()) + " ₫"} </b>
@@ -229,7 +229,7 @@ const Checkout = () => {
                 </div>
                 {paymentMethod === "COD" && (
                   <button className="payment-btn" onClick={handlePlaceOrder}>
-                    Place order
+                    Đặt hàng
                   </button>
                 )}
                 {paymentMethod === "VnPay" && (
@@ -237,7 +237,7 @@ const Checkout = () => {
                     className="payment-btn"
                     onClick={handlePlaceOrderVnPay}
                   >
-                    Pay with VnPay
+                    Đặt hàng
                   </button>
                 )}
               </div>

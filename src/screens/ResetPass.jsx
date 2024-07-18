@@ -6,14 +6,16 @@ import { Container } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 const ResetPass = () => {
-    const navigate = useNavigate();
-    
+  const navigate = useNavigate();
+
   const [password, setPassword] = useState();
   const { id, token } = useParams();
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:9999/users/reset-password/${id}/${token}`, { password })
+      .post(`http://localhost:9999/users/reset-password/${id}/${token}`, {
+        password,
+      })
       .then((res) => {
         if (res.data.Status === "Success") {
           toast.success("Success");
@@ -25,10 +27,10 @@ const ResetPass = () => {
 
   return (
     <Container className="form-container">
-      <div className="logo-container">Reset Password</div>
+      <div className="logo-container">Cập nhật lại mật khẩu</div>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="email">New Password</label>
+          <label htmlFor="email">Mật khẩu mới</label>
           <input
             type="password"
             placeholder="Enter your new password"
@@ -37,14 +39,14 @@ const ResetPass = () => {
           />
         </div>
         <button className="form-submit-btn" type="submit">
-        Update
+          Cập nhật
         </button>
       </form>
       <p className="signup-link">
-        Don't have an account?
+        Tôi không có tài khoản...
         <a href="/register" className="signup-link link">
           {" "}
-          Sign up now
+          Đăng kí ngay bây giờ
         </a>
       </p>
     </Container>

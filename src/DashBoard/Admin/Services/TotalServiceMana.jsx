@@ -12,7 +12,7 @@ const TotalServiceMana = () => {
         <Container fluid>
           <Row style={{ marginLeft: "30px", width: "100%", marginTop: "30px" }}>
             <h3 className="text-dark" style={{ fontWeight: "bolder" }}>
-              DashBoard Services
+              Doanh thu dịch vụ
             </h3>
           </Row>
           <Row>

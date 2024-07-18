@@ -7,7 +7,7 @@ import {
   Icon,
   lighten,
   styled,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 const ContentBox = styled("div")(() => ({
@@ -52,16 +52,11 @@ const IconBox = styled("div")(() => ({
   "& .icon": { fontSize: "14px" },
 }));
 
-
-
-
-
 const StatCards2 = () => {
   const { palette } = useTheme();
   const [totalOrder, setTotalOrder] = useState(0);
   const textError = palette.error.main;
   const bgError = lighten(palette.error.main, 0.85);
-
 
   useEffect(() => {
     fetch("http://localhost:9999/payment/calculate-total-amount")
@@ -108,16 +103,18 @@ const StatCards2 = () => {
         </Card>
       </Grid> */}
 
-      <Grid item xs={12} md={12} >
-        <Card elevation={3} sx={{ p: 2 }} style={{height:'336px'}}>
+      <Grid item xs={12} md={12}>
+        <Card elevation={3} sx={{ p: 2 }} style={{ height: "336px" }}>
           <ContentBox>
             <FabIcon
               size="medium"
               sx={{ background: bgError, overflow: "hidden" }}
             >
-              <StarBorderIcon sx={{ color: textError }}>star_outline</StarBorderIcon>
+              <StarBorderIcon sx={{ color: textError }}>
+                star_outline
+              </StarBorderIcon>
             </FabIcon>
-            <H3 textcolor={textError}>Transactions</H3>
+            <H3 textcolor={textError}>Tổng doanh thu</H3>
           </ContentBox>
 
           <ContentBox sx={{ pt: 2 }}>

@@ -1,65 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
-import AddProducts from "./AddProducts";
-import EditProduct from "./EditProduct";
+import AddTimeSlot from "./AddTimeSlot";
+import EditTimeSlot from "./EditTimeSlot";
 import axios from "axios";
 
-const AllProducts = () => {
+const TimeSlots = () => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [slots, setSlots] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:9999/products")
+      .get("http://localhost:9999/slots")
       .then((res) => {
-        setProducts(res.data);
+        setSlots(res.data);
       })
       .catch((error) => {
-        console.error("Error fetching toys:", error);
+        console.error("Error fetching time slots:", error);
       });
   }, []);
 
-  const handleDeleteProduct = (id) => {
-    if (window.confirm("Bạn có muốn xóa sản phẩm này không?")) {
+  const handleDeleteSlot = (id) => {
+    if (window.confirm("Bạn có muốn xóa time slot này không?")) {
       axios
-        .delete(`http://localhost:9999/products/${id}`)
+        .delete(`http://localhost:9999/slots/${id}`)
         .then(() => {
-          setProducts(products.filter((product) => product._id !== id));
-          console.log("Deleted product successfully");
+          setSlots(slots.filter((slot) => slot._id !== id));
+          console.log("Deleted time slot successfully");
         })
         .catch((error) => {
-          console.error("Failed to delete product:", error);
+          console.error("Failed to delete time slot:", error);
         });
     }
   };
 
-  const imageBodyTemplate = (p) => {
-    return (
-      <img
-        src={p.image[0]}
-        alt="image"
-        style={{ height: "150px", width: "150px" }}
-        className="w-6rem shadow-2 border-round"
-      />
-    );
-  };
-
-  const handleEditProduct = (p) => {
-    setDataEdit(p);
+  const handleEditSlot = (slot) => {
+    setDataEdit(slot);
     setEditVisible(true);
   };
 
-  function formatCurrency(number) {
-    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
-    if (typeof number === "number") {
-      return number.toLocaleString("en-US", {
-        currency: "VND",
-      });
-    }
-  }
   return (
     <Container fluid>
       <Row style={{ width: "100%" }}>
@@ -67,12 +48,12 @@ const AllProducts = () => {
           <div>
             <Row className="ml-1 mb-4 mt-4">
               <Col md={6}>
-                <h3>Quản Lí Sản Phẩm</h3>
+                <h3>Quản lí time slot</h3>
               </Col>
               <Col md={6} className="d-flex justify-content-end">
                 <Button onClick={() => setVisible(true)}>
                   <PlusSquareFill className="mr-2" />
-                  Add Product
+                  Thêm time slot
                 </Button>
               </Col>
             </Row>
@@ -81,29 +62,21 @@ const AllProducts = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th> ID</th>
-                <th> Tên</th>
-                <th>Hình Ảnh</th>
-                <th>Giá</th>
-                <th>Số Lượng </th>
-                <th>Loại Thú Cưng</th>
-                <th colSpan={2}>Hành Động</th>
+                <th>Thời gian (hours)</th>
+                <th>Số lượng slots</th>
+                <th colSpan={2}>Hành động</th>
               </tr>
             </thead>
 
             <tbody className="text-center">
-              {products.map((p, index) => (
+              {slots.map((slot, index) => (
                 <tr key={index}>
-                  <td>{p._id}</td>
-                  <td>{p.name}</td>
-                  <td>{imageBodyTemplate(p)}</td>
-                  <td>{formatCurrency(p.price) + " ₫"}</td>
-                  <td>{p.quantity}</td>
-                  <td>{p.pettype}</td>
+                  <td>{slot.time} giờ</td>
+                  <td>{slot.availableSlots}</td>
                   <td>
                     <i
                       className="delete"
-                      onClick={() => handleDeleteProduct(p._id)}
+                      onClick={() => handleDeleteSlot(slot._id)}
                     >
                       <Trash
                         style={{
@@ -122,7 +95,7 @@ const AllProducts = () => {
                           fontSize: "25px",
                           cursor: "pointer",
                         }}
-                        onClick={() => handleEditProduct(p)}
+                        onClick={() => handleEditSlot(slot)}
                       />
                     </i>
                   </td>
@@ -132,20 +105,17 @@ const AllProducts = () => {
           </Table>
         </Col>
       </Row>
-      {visible === true && (
-        <AddProducts visible={visible} setVisible={setVisible} />
-      )}
-
-      {editVisible === true && (
-        <EditProduct
+      {visible && <AddTimeSlot visible={visible} setVisible={setVisible} />}
+      {editVisible && (
+        <EditTimeSlot
           editVisible={editVisible}
           setEditVisible={setEditVisible}
           data={dataEdit}
-          productId={dataEdit._id}
+          slotId={dataEdit._id}
         />
       )}
     </Container>
   );
 };
 
-export default AllProducts;
+export default TimeSlots;

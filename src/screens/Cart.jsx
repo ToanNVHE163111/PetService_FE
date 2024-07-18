@@ -62,11 +62,14 @@ const Cart = (props) => {
     setVisible(false);
   };
   const handleCheckout = () => {
-    if(selectedItems.length === 0) {
-      toast.warning('Vui lòng chọn ít nhất một sản phẩm trước khi thanh toán');
+    if (selectedItems.length === 0) {
+      toast.warning("Vui lòng chọn ít nhất một sản phẩm trước khi thanh toán");
     } else {
-      const itemsToBuy = selectedItems.length > 0 ? listCart.filter((item) => selectedItems.includes(item._id)) : listCart;
-      navigate('/checkout', { state: { listCart: itemsToBuy } });
+      const itemsToBuy =
+        selectedItems.length > 0
+          ? listCart.filter((item) => selectedItems.includes(item._id))
+          : listCart;
+      navigate("/checkout", { state: { listCart: itemsToBuy } });
       setVisible(false);
     }
   };
@@ -85,18 +88,18 @@ const Cart = (props) => {
   const dialogFooter = (
     <div style={{ margin: "20px" }}>
       <div style={{ display: "flex", justifyContent: "start" }}>
-        <h5>Total: {formatCurrency(calculateTotal()) + " ₫"} </h5>
+        <h5>Tổng tiền : {formatCurrency(calculateTotal()) + " ₫"} </h5>
       </div>
       <div style={{ display: "flex", justifyContent: "end" }}>
         <Button className="btn btn-success mr-2" onClick={handleCheckout}>
           <WalletFill
             style={{ fontSize: "22px", color: "white", marginRight: "7px" }}
           />
-          Check Out
+          Thanh toán
         </Button>
         <Button onClick={onHide} className="btn btn-danger">
           <X style={{ fontSize: "22px" }} />
-          Close
+          Đóng
         </Button>
       </div>
     </div>
@@ -140,7 +143,7 @@ const Cart = (props) => {
             className="custom-dialog-header"
             style={{ textAlign: "center", marginTop: "20px" }}
           >
-            <h4> Cart Shop</h4>
+            <h4> Giỏ hàng</h4>
           </div>
         }
       >
@@ -164,13 +167,13 @@ const Cart = (props) => {
                               onChange={handleSelectAll}
                             />
                           </th>
-                          <th style={{ width: "15%" }}>Image</th>
-                          <th style={{ width: "25%" }}>Product</th>
-                          <th style={{ width: "20%" }}>Price</th>
-                          <th style={{ width: "15%" }}>Quantity</th>
-                          <th style={{ width: "15%" }}>Category</th>
-                          <th style={{ width: "25%" }}>Total</th>
-                          <th style={{ width: "25%" }}>Action</th>
+                          <th style={{ width: "15%" }}>Ảnh </th>
+                          <th style={{ width: "25%" }}>Tên sản phẩm</th>
+                          <th style={{ width: "20%" }}>Giá</th>
+                          <th style={{ width: "15%" }}>Số lượng</th>
+                          <th style={{ width: "15%" }}>Loại sản phẩm</th>
+                          <th style={{ width: "25%" }}>Tổng tiền</th>
+                          <th style={{ width: "25%" }}>Hành động</th>
                         </tr>
                       </thead>
                       <tbody>

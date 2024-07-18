@@ -8,6 +8,7 @@ import "primeicons/primeicons.css";
 import {
   ArrowRepeat,
   BoxArrowInRight,
+  Calendar,
   Cart2,
   PersonVcard,
   SendFill,
@@ -23,7 +24,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const fullname = localStorage.getItem("fullname");
   const user = localStorage.getItem("userId");
   const [services, setServices] = useState([]);
-  
+
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.clear();
@@ -169,13 +170,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                         <Cart2
                           style={{ fontSize: "20px", marginRight: "10px" }}
                         />
-                        Xem đơn hàng
+                        Đơn hàng
                       </Dropdown.Item>
                       <Dropdown.Item href="/booking-status">
-                        <Cart2
+                        <Calendar
                           style={{ fontSize: "20px", marginRight: "10px" }}
                         />
-                        Xem booking
+                        Lịch chăm sóc
                       </Dropdown.Item>
                       <Dropdown.Item onClick={handleLogout}>
                         <BoxArrowInRight
@@ -190,7 +191,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                     to="/login"
                     style={{ color: "#2a3977", fontWeight: "bold" }}
                   >
-                    Login
+                    Đăng nhập
                   </Link>
                 )}
               </li>
@@ -204,7 +205,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               onClick={handleBookingClick}
               className="btn btn-dark d-flex align-items-center rounded-pill mr-3"
             >
-              <span>Online Booking</span>
+              <span>Đặt lịch Online</span>
               <SendFill className="ml-2" />
             </button>
           </div>
