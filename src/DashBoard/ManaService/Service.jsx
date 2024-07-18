@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { PenFill, PlusSquareFill, Trash } from "react-bootstrap-icons";
-import AddTimeSlot from "./AddTimeSlot";
-import EditTimeSlot from "./EditTimeSlot";
-import axios from "axios";
+import AddTimeSlot from "./AddService";
 
-const TimeSlots = () => {
+import axios from "axios";
+import EditService from "./EditService";
+
+const Service = () => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
@@ -13,7 +14,7 @@ const TimeSlots = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9999/slots")
+      .get("http://localhost:9999/service")
       .then((res) => {
         setSlots(res.data);
       })
@@ -25,7 +26,7 @@ const TimeSlots = () => {
   const handleDeleteSlot = (id) => {
     if (window.confirm("Bạn có muốn xóa time slot này không?")) {
       axios
-        .delete(`http://localhost:9999/slots/${id}`)
+        .delete(`http://localhost:9999/service/${id}`)
         .then(() => {
           setSlots(slots.filter((slot) => slot._id !== id));
           console.log("Deleted time slot successfully");
@@ -48,12 +49,12 @@ const TimeSlots = () => {
           <div>
             <Row className="ml-1 mb-4 mt-4">
               <Col md={6}>
-                <h3>Quản lí time slot</h3>
+                <h3>Quản lí dịch vụ</h3>
               </Col>
               <Col md={6} className="d-flex justify-content-end">
                 <Button onClick={() => setVisible(true)}>
                   <PlusSquareFill className="mr-2" />
-                  Thêm time slot
+                  Thêm dịch vụ
                 </Button>
               </Col>
             </Row>
@@ -63,8 +64,10 @@ const TimeSlots = () => {
             <thead className="text-center">
               <tr>
                 <th>ID</th>
-                <th>Thời gian (hours)</th>
-                <th>Số lượng slots</th>
+                <th>Loại dịch vụ</th>
+                <th>Mô tả dịch vụ</th>
+                <th>Giá</th>
+                <th>Thời gian</th>
                 <th colSpan={2}>Hành động</th>
               </tr>
             </thead>
@@ -73,8 +76,11 @@ const TimeSlots = () => {
               {slots.map((slot, index) => (
                 <tr key={index}>
                   <td>{slot._id}</td>
-                  <td>{slot.time}</td>
-                  <td>{slot.availableSlots}</td>
+                  <td>{slot.name}</td>
+                  <td>{slot.description}</td>
+                  <td>{slot.price}</td>
+                  <td>{slot.duration}</td>
+
                   <td>
                     <i
                       className="delete"
@@ -109,7 +115,7 @@ const TimeSlots = () => {
       </Row>
       {visible && <AddTimeSlot visible={visible} setVisible={setVisible} />}
       {editVisible && (
-        <EditTimeSlot
+        <EditService
           editVisible={editVisible}
           setEditVisible={setEditVisible}
           data={dataEdit}
@@ -120,4 +126,4 @@ const TimeSlots = () => {
   );
 };
 
-export default TimeSlots;
+export default Service;

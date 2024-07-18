@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Tab, Tabs } from "react-bootstrap";
 import TimeSlots from "./TimeSlots";
+import Service from "./Service";
 const ServiceManagement = () => {
   return (
     <Container fluid>
@@ -8,7 +9,9 @@ const ServiceManagement = () => {
         <Tab eventKey="time_slot" title="Quản lí ca chăm sóc ">
           <TimeSlots />
         </Tab>
-        <Tab eventKey="dich_vu" title="Quản lí dịch vụ "></Tab>
+        <Tab eventKey="dich_vu" title="Quản lí dịch vụ ">
+          <Service />
+        </Tab>
       </Tabs>
     </Container>
   );
