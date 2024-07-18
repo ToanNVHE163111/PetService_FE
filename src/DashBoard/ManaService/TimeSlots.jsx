@@ -62,7 +62,6 @@ const TimeSlots = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>ID</th>
                 <th>Thời gian (hours)</th>
                 <th>Số lượng slots</th>
                 <th colSpan={2}>Hành động</th>
@@ -72,8 +71,7 @@ const TimeSlots = () => {
             <tbody className="text-center">
               {slots.map((slot, index) => (
                 <tr key={index}>
-                  <td>{slot._id}</td>
-                  <td>{slot.time}</td>
+                  <td>{slot.time} giờ</td>
                   <td>{slot.availableSlots}</td>
                   <td>
                     <i

@@ -107,7 +107,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
                 className="sign-in_btn mb-3 mt-2"
                 type="submit"
               >
-                Đăng kí tài khoản
+                Đăng nhập
               </Button>
               <div>
                 <Link to={"/register"} className="text-danger text-opacity-75">

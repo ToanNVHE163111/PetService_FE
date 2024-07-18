@@ -110,6 +110,8 @@ const EditService = ({ editVisible, setEditVisible, data, slotId }) => {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
+                </Col>
+                <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="price">
                       <h6>Giá</h6>

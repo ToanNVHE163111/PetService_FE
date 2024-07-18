@@ -63,7 +63,6 @@ const Service = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
-                <th>ID</th>
                 <th>Loại dịch vụ</th>
                 <th>Mô tả dịch vụ</th>
                 <th>Giá</th>
@@ -75,7 +74,6 @@ const Service = () => {
             <tbody className="text-center">
               {slots.map((slot, index) => (
                 <tr key={index}>
-                  <td>{slot._id}</td>
                   <td>{slot.name}</td>
                   <td>{slot.description}</td>
                   <td>{slot.price}</td>

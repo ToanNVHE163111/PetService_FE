@@ -229,7 +229,7 @@ const Checkout = () => {
                 </div>
                 {paymentMethod === "COD" && (
                   <button className="payment-btn" onClick={handlePlaceOrder}>
-                    Place order
+                    Đặt hàng
                   </button>
                 )}
                 {paymentMethod === "VnPay" && (
@@ -237,7 +237,7 @@ const Checkout = () => {
                     className="payment-btn"
                     onClick={handlePlaceOrderVnPay}
                   >
-                    Pay with VnPay
+                    Đặt hàng
                   </button>
                 )}
               </div>

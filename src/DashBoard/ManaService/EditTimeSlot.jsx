@@ -95,6 +95,8 @@ const EditTimeSlot = ({ editVisible, setEditVisible, data, slotId }) => {
                       onChange={(e) => setTime(e.target.value)}
                     />
                   </div>
+                </Col>{" "}
+                <Col md={6}>
                   <div className="form-group w-full">
                     <label className="label" htmlFor="availableSlots">
                       <h6>Số lượng slots </h6>

@@ -83,7 +83,7 @@ const TopSellingTable = () => {
   return (
     <Card elevation={3} sx={{ pt: "20px", mb: 3 }} style={{ width: "75vw" }}>
       <CardHeader>
-        <Title>top selling products</Title>
+        <Title>Sản phẩm bán chạy </Title>
       </CardHeader>
 
       <Box overflow="auto">
@@ -91,13 +91,13 @@ const TopSellingTable = () => {
           <TableHead>
             <TableRow>
               <TableCell sx={{ px: 3 }} colSpan={4}>
-                Name
+                Tên sản phẩm
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
-                Revenue
+                Doanh thu
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
-                Amount sold
+                Số lượng đã bán
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={1}>
                 Action
@@ -109,7 +109,8 @@ const TopSellingTable = () => {
             {top3.length === 0 ? (
               <p>Không có sản phẩm nào.</p>
             ) : (
-              Array.isArray(top3) &&top3.map((product, index) => (
+              Array.isArray(top3) &&
+              top3.map((product, index) => (
                 <TableRow key={index} hover>
                   <TableCell
                     colSpan={4}

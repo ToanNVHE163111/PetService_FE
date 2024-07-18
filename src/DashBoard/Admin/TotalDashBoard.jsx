@@ -22,7 +22,7 @@ const TotalDashBoard = () => {
   return (
     <Container fluid>
       <Row style={{ marginLeft: "30px", width: "100%", marginTop: "30px" }}>
-        <h3> DashBoard Shop</h3>
+        <h3> Doanh thu cửa hàng</h3>
         <StatCards />
         <TopSellingTable />
 
@@ -32,7 +32,7 @@ const TotalDashBoard = () => {
               <RevenueChart />
             </Card>
           </Grid>
-          <Grid item lg={6} md={6} sm={12} xs={12} >
+          <Grid item lg={6} md={6} sm={12} xs={12}>
             <StatCards2 />
           </Grid>
         </Grid>

@@ -27,7 +27,7 @@ const Banner = () => {
               to="/online-booking"
               className="btn btn-outline-primary rounded-pill"
             >
-              <span className="font-weight-bolder">ONLINE BOOKING</span>
+              <span className="font-weight-bolder">Đặt Lịch ONLINE</span>
             </Link>
           </div>
         </div>
