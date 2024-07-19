@@ -58,6 +58,7 @@ const ProcessingUser = ({ status }) => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
+                <th>STT</th>
                 <th>Ngày Đặt Hàng</th>
                 <th>Trạng Thái</th>
                 <th>Tổng</th>
@@ -67,8 +68,9 @@ const ProcessingUser = ({ status }) => {
             </thead>
 
             <tbody className="text-center">
-              {orders.map((order) => (
+              {orders.map((order,index) => (
                 <tr key={order._id}>
+                  <td>{index + 1}</td>
                   <td>{formatDate(order.createdAt)}</td>
                   <td>{order.status}</td>
 

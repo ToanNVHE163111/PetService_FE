@@ -31,7 +31,7 @@ const ManaAllCateProduct = () => {
   return (
     <Container fluid>
       <Tabs defaultActiveKey="allproducts" id="uncontrolled-tab-example">
-        <Tab eventKey="allproducts" title="Tát cả sản phẩm ">
+        <Tab eventKey="allproducts" title="Tất cả sản phẩm ">
           <AllProducts />
         </Tab>
         <Tab eventKey="Food" title="Thức ăn">

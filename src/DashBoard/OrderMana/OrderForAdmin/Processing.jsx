@@ -79,15 +79,14 @@ const Processing = ({ status }) => {
     return (
         <Container fluid>
       <Row className="ml-1 mb-4 mt-4">
-        <Col md={6}>
-          <h3>Đang Xử Lý</h3>
-        </Col>
+        
       </Row>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
+                <th>ID</th>
                 <th>Ngày Đặt Hàng</th>
                 <th>Khách Hàng</th>
                 <th>Số Điện Thoại</th>
@@ -100,8 +99,9 @@ const Processing = ({ status }) => {
             </thead>
 
             <tbody className="text-center">
-            {orders.map(order => (
+            {orders.map((order,index) => (
                 <tr key={order._id}>
+                   <td>{index + 1}</td>
                   <td>{formatDate(order.createdAt)}</td>
                   <td>{order.userId.fullname}</td>
                   <td>{order.userId.phone}</td>

@@ -73,15 +73,14 @@ const AllOrder = () => {
   return (
     <Container fluid>
       <Row className="ml-1 mb-4 mt-4">
-        <Col md={6}>
-          <h3>Quản Lý Đơn Hàng</h3>
-        </Col>
+        
       </Row>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
+                <th>ID</th>
                 <th>Ngày Đặt Hàng</th>
                 <th>Khách Hàng</th>
                 <th>Số Điện Thoại</th>
@@ -94,8 +93,9 @@ const AllOrder = () => {
             </thead>
 
             <tbody className="text-center">
-              {listOrder.map((o) => (
+              {listOrder.map((o, index) => (
                 <tr key={o._id}>
+                  <td>{index + 1}</td>
                   <td>{formatDate(o.createdAt)}</td>
                   <td>{o.userId.fullname}</td>
                   <td>{o.userId.phone}</td>

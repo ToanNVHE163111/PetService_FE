@@ -18,7 +18,7 @@ const ViewOrderUser = () => {
 
       <Container>
         <Tabs defaultActiveKey="tatca" id="uncontrolled-tab-example">
-          <Tab eventKey="tatca" title="Tất cả đơn hàng">
+          <Tab eventKey="tatca" title="Tất cả">
             <OrderStatus />
           </Tab>
           <Tab eventKey="Pending" title="Chờ xác nhận">
@@ -27,7 +27,7 @@ const ViewOrderUser = () => {
           <Tab eventKey="Processing" title="Đang xử lí">
             <ProcessingUser status="Processing" />
           </Tab>
-          <Tab eventKey="Completed" title="Đã giao">
+          <Tab eventKey="Completed" title="Đã hoàn thành">
             <CompletedUser status="Completed" />
           </Tab>
           <Tab eventKey="Cancel" title="Đã huỷ">

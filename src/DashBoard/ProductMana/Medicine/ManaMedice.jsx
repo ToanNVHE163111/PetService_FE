@@ -38,14 +38,21 @@ const ManaMedice = ({ categoryId }) => {
     setDataEdit(m); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
     setEditVisible(true); // Hiển thị giao diện chỉnh sửa sản phẩm
   };
-
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <h3>Quản Lí Thuốc</h3>
+              
             </Row>
             {/* <Row className="ml-1 mb-4">
               <Button onClick={() => setVisible(true)}>
@@ -71,9 +78,10 @@ const ManaMedice = ({ categoryId }) => {
             <tbody className="text-center">
               {products.map((m, index) => (
                 <tr key={index}>
-                  <td>{m._id}</td>
+                  <td>{index +1}</td>
                   <td>{m.name}</td>
                   <td>{imageBodyTemplate(m)}</td>
+                  <td>{formatCurrency(m.price) +" ₫"}</td>
                   <td>{m.quantity}</td>
                   <td>{m.pettype}</td>
                   <td>

@@ -47,10 +47,7 @@ const TimeSlots = () => {
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <Col md={6}>
-                <h3>Quản lí time slot</h3>
-              </Col>
-              <Col md={6} className="d-flex justify-content-end">
+              <Col md={12} className="d-flex justify-content-end">
                 <Button onClick={() => setVisible(true)}>
                   <PlusSquareFill className="mr-2" />
                   Thêm time slot
@@ -62,6 +59,7 @@ const TimeSlots = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
+                <th>ID</th>
                 <th>Thời gian (hours)</th>
                 <th>Số lượng slots</th>
                 <th colSpan={2}>Hành động</th>
@@ -71,6 +69,7 @@ const TimeSlots = () => {
             <tbody className="text-center">
               {slots.map((slot, index) => (
                 <tr key={index}>
+                  <td>{index + 1} </td>
                   <td>{slot.time} giờ</td>
                   <td>{slot.availableSlots}</td>
                   <td>
