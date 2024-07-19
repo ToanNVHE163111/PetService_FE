@@ -36,9 +36,10 @@ const UserManagement = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
+                <th>ID</th>
                 <th>Họ và Tên</th>
                 <th>Giới tính</th>
-                <th>Đại chỉ </th>
+                <th>Địa chỉ </th>
                 <th>Ngày sinh</th>
                 <th>Số điện thoại</th>
                 <th>Gmail</th>
@@ -49,6 +50,7 @@ const UserManagement = () => {
             <tbody className="text-center">
               {listUser.map((u, index) => (
                 <tr key={index}>
+                  <td>{index +1}</td>
                   <td>{u.fullname}</td>
                   <td>{u.gender}</td>
                   <td>{u.address}</td>

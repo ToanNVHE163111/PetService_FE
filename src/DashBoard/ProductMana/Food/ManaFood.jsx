@@ -7,22 +7,23 @@ import EditProduct from "../Product/EditProduct";
 
 import axios from "axios";
 
-const ManaFood = ({categoryId}) => {
+const ManaFood = ({ categoryId }) => {
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
   const [dataEdit, setDataEdit] = useState([]);
   const [products, setProducts] = useState([]);
   useEffect(() => {
     if (categoryId) {
-      axios.get(`http://localhost:9999/products/filter/${categoryId}`)
+      axios
+        .get(`http://localhost:9999/products/filter/${categoryId}`)
         .then((res) => {
           setProducts(res.data);
         })
         .catch((error) => {
-          console.error('Error fetching foods:', error);
+          console.error("Error fetching foods:", error);
         });
     }
-  }, [categoryId])
+  }, [categoryId]);
 
   const imageBodyTemplate = (p) => {
     return (
@@ -38,15 +39,20 @@ const ManaFood = ({categoryId}) => {
     setDataEdit(f); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
     setEditVisible(true); // Hiển thị giao diện chỉnh sửa sản phẩm
   };
-
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <div>
-            <Row className="ml-1 mb-4 mt-4">
-              <h3>Quản Lý Thức Ăn</h3>
-            </Row>
+            <Row className="ml-1 mb-4 mt-4"></Row>
             {/* <Row className="ml-1 mb-4">
               <Button onClick={() => setVisible(true)}>
                 <PlusSquareFill className="mr-2" />
@@ -69,40 +75,38 @@ const ManaFood = ({categoryId}) => {
             </thead>
 
             <tbody className="text-center">
-              {products.map((f,index) =>(
-
-              
-              <tr key={index}>
-                <td>{f._id} </td>
-                <td>{f.name}</td>
-                <td>{imageBodyTemplate(f)}</td> 
-                <td>{f.price}</td>
-                <td>{f.quantity}</td>
-                <td>{f.pettype}</td>
-                <td>
-                  <i className="delete">
-                    <Trash
-                      style={{
-                        color: "red",
-                        fontSize: "25px",
-                        cursor: "pointer",
-                      }}
-                    />
-                  </i>
-                </td>
-                <td>
-                  <i className="edit">
-                    <PenFill
-                      style={{
-                        color: "blue",
-                        fontSize: "25px",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => handleEditFood(f)}
-                    />
-                  </i>
-                </td>
-              </tr>
+              {products.map((f, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{f.name}</td>
+                  <td>{imageBodyTemplate(f)}</td>
+                  <td>{formatCurrency(f.price) +" ₫"}</td>
+                  <td>{f.quantity}</td>
+                  <td>{f.pettype}</td>
+                  <td>
+                    <i className="delete">
+                      <Trash
+                        style={{
+                          color: "red",
+                          fontSize: "25px",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </i>
+                  </td>
+                  <td>
+                    <i className="edit">
+                      <PenFill
+                        style={{
+                          color: "blue",
+                          fontSize: "25px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => handleEditFood(f)}
+                      />
+                    </i>
+                  </td>
+                </tr>
               ))}
             </tbody>
           </Table>

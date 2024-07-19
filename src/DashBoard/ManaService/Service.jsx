@@ -41,17 +41,22 @@ const Service = () => {
     setDataEdit(slot);
     setEditVisible(true);
   };
-
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <Col md={6}>
-                <h3>Quản lí dịch vụ</h3>
-              </Col>
-              <Col md={6} className="d-flex justify-content-end">
+              
+              <Col md={12} className="d-flex justify-content-end">
                 <Button onClick={() => setVisible(true)}>
                   <PlusSquareFill className="mr-2" />
                   Thêm dịch vụ
@@ -63,6 +68,7 @@ const Service = () => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
+                <th>ID</th>
                 <th>Loại dịch vụ</th>
                 <th>Mô tả dịch vụ</th>
                 <th>Giá</th>
@@ -74,9 +80,10 @@ const Service = () => {
             <tbody className="text-center">
               {slots.map((slot, index) => (
                 <tr key={index}>
+                  <td>{index +1} </td>
                   <td>{slot.name}</td>
                   <td>{slot.description}</td>
-                  <td>{slot.price}</td>
+                  <td>{formatCurrency(slot.price) + " ₫"}</td>
                   <td>{slot.duration}</td>
 
                   <td>

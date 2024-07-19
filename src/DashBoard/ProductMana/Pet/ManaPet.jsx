@@ -38,14 +38,21 @@ const ManaPet = ({ categoryId }) => {
     setDataEdit(p); // Cập nhật giá trị dataEdit bằng dữ liệu sản phẩm cần chỉnh sửa
     setEditVisible(true); // Hiển thị giao diện chỉnh sửa sản phẩm
   };
-
+  function formatCurrency(number) {
+    // Sử dụng hàm toLocaleString() để định dạng số thành chuỗi với ngăn cách hàng nghìn và mặc định là USD.
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid>
       <Row style={{ width: "100%" }}>
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <h3>Quản Lí Thú t</h3>
+            
             </Row>
             {/* <Row className="ml-1 mb-4 ">
               <Button onClick={() => setVisible(true)}>
@@ -71,10 +78,10 @@ const ManaPet = ({ categoryId }) => {
             <tbody className="text-center">
               {products.map((p, index) => (
                 <tr key={index}>
-                  <td>{p._id}</td>
+                 <td>{index +1}</td>
                   <td>{p.name}</td>
                   <td>{imageBodyTemplate(p)}</td>
-                  <td>{p.price}</td>
+                  <td>{formatCurrency(p.price) + " ₫"}</td>
                   <td>{p.quantity}</td>
                   <td>{p.pettype}</td>
                   <td>

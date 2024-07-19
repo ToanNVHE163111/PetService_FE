@@ -66,10 +66,8 @@ const AllProducts = () => {
         <Col md={12}>
           <div>
             <Row className="ml-1 mb-4 mt-4">
-              <Col md={6}>
-                <h3>Quản Lí Sản Phẩm</h3>
-              </Col>
-              <Col md={6} className="d-flex justify-content-end">
+              
+              <Col md={12} className="d-flex justify-content-end">
                 <Button onClick={() => setVisible(true)}>
                   <PlusSquareFill className="mr-2" />
                   Add Product
@@ -94,7 +92,7 @@ const AllProducts = () => {
             <tbody className="text-center">
               {products.map((p, index) => (
                 <tr key={index}>
-                  <td>{p._id}</td>
+                  <td>{index +1}</td>
                   <td>{p.name}</td>
                   <td>{imageBodyTemplate(p)}</td>
                   <td>{formatCurrency(p.price) + " ₫"}</td>

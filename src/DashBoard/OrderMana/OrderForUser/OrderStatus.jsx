@@ -64,6 +64,7 @@ const OrderStatus = () => {
               <Table striped bordered hover>
                 <thead>
                   <tr>
+                    <th style={{ width: "15%" }}>STT</th>
                     <th style={{ width: "15%" }}>Ngày Đặt Hàng</th>
                     <th style={{ width: "25%" }}>Trạng Thái</th>
                     <th style={{ width: "20%" }}>Tổng</th>
@@ -72,8 +73,9 @@ const OrderStatus = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map((order) => (
+                  {orders.map((order,index) => (
                     <tr key={order._id}>
+                      <td style={{ verticalAlign: "middle" }}>{index+1}</td>
                       <td style={{ verticalAlign: "middle" }}>
                         {formatDate(order.createdAt)}
                       </td>

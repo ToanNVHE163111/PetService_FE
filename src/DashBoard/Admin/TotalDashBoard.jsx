@@ -22,7 +22,7 @@ const TotalDashBoard = () => {
   return (
     <Container fluid>
       <Row style={{ marginLeft: "30px", width: "100%", marginTop: "30px" }}>
-        <h3> Doanh thu cửa hàng</h3>
+       
         <StatCards />
         <TopSellingTable />
 

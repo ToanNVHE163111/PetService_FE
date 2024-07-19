@@ -61,6 +61,7 @@ const OrderStatus = () => {
               <Table striped bordered hover>
                 <thead>
                   <tr>
+                    <th style={{ width: "15%" }}>STT</th>
                     <th style={{ width: "15%" }}>Order Date</th>
                     <th style={{ width: "25%" }}>Service</th>
                     <th style={{ width: "25%" }}>Status</th>
@@ -68,19 +69,20 @@ const OrderStatus = () => {
                     <th>Operation</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {orders.map((order) => (
+                <tbody className="text-center">
+                  {orders.map((order,index) => (
                     <tr key={order._id}>
-                      <td style={{ verticalAlign: "middle" }}>
+                      <td>{index + 1}</td>
+                      <td >
                         {formatDate(order.createdAt)}
                       </td>
-                      <td style={{ verticalAlign: "middle" }}>
+                      <td >
                         {order.service_type.name}
                       </td>
-                      <td style={{ verticalAlign: "middle" }}>
+                      <td >
                         {order.order_status}
                       </td>
-                      <td style={{ verticalAlign: "middle" }}>
+                      <td >
                         {formatCurrency(order.service_type.price) + " ₫"}
                       </td>
                       <td>

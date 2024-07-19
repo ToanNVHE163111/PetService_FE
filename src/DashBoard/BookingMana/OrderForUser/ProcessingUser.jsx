@@ -58,26 +58,23 @@ const ProcessingUser = ({ status }) => {
           <Table striped bordered hover>
             <thead className="text-center">
               <tr>
+                <th>STT</th>
                 <th>Order Date</th>
                 <th>Status</th>
                 <th>Total</th>
-                <th>Payments</th>
                 <th>Operation</th>
               </tr>
             </thead>
 
             <tbody className="text-center">
-              {orders.map((order) => (
+              {orders.map((order,index) => (
                 <tr key={order._id}>
+                  <td>{index + 1}</td>
                   <td>{formatDate(order.createdAt)}</td>
                   <td>{order.status}</td>
 
                   <td>{formatCurrency(order.totalAmount) + " ₫"}</td>
-                  <td style={{ verticalAlign: "middle" }}>
-                    {order.paymentMethod === "VnPay"
-                      ? "VnPay-Đã thanh toán"
-                      : order.paymentMethod}
-                  </td>
+                  
                   <td>
                     <i className="edit">
                       <Eye
