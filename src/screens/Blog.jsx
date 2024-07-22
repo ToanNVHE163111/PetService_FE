@@ -78,6 +78,7 @@ const Blog = () => {
   const [visible, setVisible] = useState(false);
   const fullname = localStorage.getItem("fullname");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
+
   useEffect(() => {
     axios
       .get("http://localhost:9999/blogs")
@@ -123,12 +124,14 @@ const Blog = () => {
     const year = dateObject.getFullYear();
     return `${day}-${month}-${year}`;
   };
+
   const handleComment = (blog) => {
     setShowCommentForm(true);
     setSelectedBlog(blog);
     setSelectedBlogId(blog._id);
     setBlogs([`Item ${blogs.length + 1}`, ...blogs]);
   };
+
   return (
     <Container style={{ marginTop: "20px" }}>
       {isLoggedIn && (
@@ -139,7 +142,7 @@ const Blog = () => {
                 <h4>Bài Viết</h4>
               </div>
               <Row style={{ marginTop: "20px" }}>
-                <Col md={2} sm={2} xs={2} style={{ textAlign: "center" }}>
+                <Col md={2} sm={2} xs={2} className="text-center">
                   <img
                     src="https://www.localbotswana.com/img/bw/d/1641218846_95961.jpg"
                     className="rounded-circle"
@@ -159,15 +162,14 @@ const Blog = () => {
                     onClick={() => setVisible(true)}
                   ></input>
                 </Col>
-                <Col md={2} sm={2} xs={2} style={{ textAlign: "center" }}>
+                <Col md={2} sm={2} xs={2} className="text-center">
                   <button className="rounded-circle" style={{ border: "none" }}>
                     <Send style={{ fontSize: "25px", marginTop: "10px" }} />
                   </button>
                 </Col>
               </Row>
               <hr />
-
-              <Row style={{ marginLeft: "0px", cursor: "pointer" }}>
+              <Row style={{ cursor: "pointer" }}>
                 <Col md={4} sm={4} xs={4} className="text-center">
                   <button className="fc-btn fc-btn-rounded">
                     <label>
@@ -183,10 +185,7 @@ const Blog = () => {
                   </button>
                 </Col>
                 <Col md={4} sm={4} xs={4} className="text-center">
-                  <button
-                    className="fc-btn fc-btn-rounded"
-                    style={{ cursor: "pointer" }}
-                  >
+                  <button className="fc-btn fc-btn-rounded">
                     <label>
                       <Images
                         style={{ fontSize: "25px", marginRight: "10px" }}
@@ -196,10 +195,7 @@ const Blog = () => {
                   </button>
                 </Col>
                 <Col md={4} sm={4} xs={4} className="text-center">
-                  <button
-                    className="fc-btn fc-btn-rounded"
-                    style={{ cursor: "pointer" }}
-                  >
+                  <button className="fc-btn fc-btn-rounded">
                     <label>
                       <EmojiLaughing
                         style={{ fontSize: "25px", marginRight: "10px" }}
@@ -269,18 +265,17 @@ const Blog = () => {
                         b.images.map((imgSrc, index) => (
                           <Col
                             md={6}
-                            sm={4}
-                            xs={4}
+                            sm={6}
+                            xs={12}
                             key={index}
-                            style={{ marginBottom: "20px", display: "flex" }}
+                            className="mb-2 d-flex"
                           >
                             <Zoom>
                               <Image
                                 src={imgSrc}
                                 style={{
-                                  width: "520px",
-                                  height: "350px",
-                                  flexWrap: "wrap",
+                                  width: "100%",
+                                  height: "auto",
                                   objectFit: "cover",
                                 }}
                               />
@@ -301,7 +296,7 @@ const Blog = () => {
                     </Col>
                   </Row>
                   <hr />
-                  <Row style={{ marginLeft: "0px", display: "flex" }}>
+                  <Row style={{ display: "flex" }}>
                     <Col md={6} sm={6} xs={6}>
                       <button className="fc-btn fc-btn-white">
                         <div className="fc-icon">
@@ -351,9 +346,7 @@ const Blog = () => {
           onUpdate={handleUpdateBlog}
         />
       )}
-      {visible === true && (
-        <AddBlog visible={visible} setVisible={setVisible} />
-      )}
+      {visible && <AddBlog visible={visible} setVisible={setVisible} />}
     </Container>
   );
 };

@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import New_Products_Cart from "../model/New_Products_Cart";
 
 const New_Product = () => {
-
-
   const [newProduct, setNewProduct] = useState([]);
 
   useEffect(() => {
@@ -19,7 +17,7 @@ const New_Product = () => {
         console.log(err.message);
       });
   }, []);
-  
+
   return (
     <Row className="container" style={{ width: "100%", marginTop: "100px" }}>
       <Col md={5}>
@@ -29,20 +27,19 @@ const New_Product = () => {
         </div>
       </Col>
       <Col md={7} className="d-flex">
-        <div>
-        </div>
+        <div></div>
         {newProduct.map((p) => (
-            <div key={p._id}>
-              <Link to={`/detail/${p._id}`}>
-                <New_Products_Cart
-                  name={p.name}
-                  obj={p.pettype}
-                  price={p.price}
-                  img={p.image[0]}
-                />
-              </Link>
-            </div>
-          ))}
+          <div key={p._id}>
+            <Link to={`/detail/${p._id}`}>
+              <New_Products_Cart
+                name={p.name}
+                obj={p.pettype}
+                price={p.price}
+                img={p.image[0]}
+              />
+            </Link>
+          </div>
+        ))}
       </Col>
     </Row>
   );

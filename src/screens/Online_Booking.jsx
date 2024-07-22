@@ -99,7 +99,13 @@ const Online_Booking = () => {
       },
     }));
   };
-
+  function formatCurrency(number) {
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   const validate = () => {
     const newErrors = {};
     if (!bookingData.service_type)
@@ -198,7 +204,7 @@ const Online_Booking = () => {
                     <option value="">Chọn dịch vụ</option>
                     {services.map((service) => (
                       <option key={service._id} value={service._id}>
-                        {service.name}
+                        {service.name} * {formatCurrency(service.price)}VND
                       </option>
                     ))}
                   </Form.Control>

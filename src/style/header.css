@@ -1,0 +1,11 @@
+@media (max-width: 756px) {
+  .d-flex {
+    flex-direction: column !important;
+  }
+  .mr-md-4 {
+    margin-right: 0 !important;
+  }
+  .mb-md-0 {
+    margin-bottom: 0 !important;
+  }
+}

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import images from "../assets/images/Pet_logo.png";
 import { Badge } from "primereact/badge";
 import "primeicons/primeicons.css";
-
+import "../style/mobile.css";
 import {
   ArrowRepeat,
   BoxArrowInRight,
@@ -15,6 +15,7 @@ import {
 } from "react-bootstrap-icons";
 import Cart from "../screens/Cart";
 import axios from "axios";
+import "../style/header.css";
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [visible, setVisible] = useState(false);
@@ -59,7 +60,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
       nav("/login");
     }
   };
-
+  function formatCurrency(number) {
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid className="mt-2">
       <Row className="align-items-center">
@@ -94,7 +101,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   Sản phẩm
                 </Link>
               </li>
-              <li className="mr-4">
+              <li className="mr-4 d-flex align-items-center">
                 <Dropdown>
                   <Dropdown.Toggle
                     variant="link"
@@ -106,14 +113,17 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                   <Dropdown.Menu>
                     {services.map((s) => (
                       <Dropdown.Item key={s._id} href="/#">
-                        {s.name}
+                        {s.name} * {formatCurrency(s.price)}VND
                       </Dropdown.Item>
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
               </li>
 
-              <li style={{ marginTop: "7px", marginRight: "35px" }}>
+              <li
+                className="mr-4 d-flex align-items-center"
+                style={{ marginTop: "7px", marginRight: "35px" }}
+              >
                 <Link
                   to="/blog"
                   style={{ color: "#2a3977", fontWeight: "bold" }}
@@ -199,11 +209,11 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         </Col>
 
-        <Col md={2} className="d-flex justify-content-center">
-          <div>
+        <Col md={2} className="d-flex justify-content-center ">
+          <div className="booking">
             <button
               onClick={handleBookingClick}
-              className="btn btn-dark d-flex align-items-center rounded-pill mr-3"
+              className="btn btn-dark d-flex align-items-center rounded-pill mr-3 "
             >
               <span>Đặt lịch Online</span>
               <SendFill className="ml-2" />
@@ -213,7 +223,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
 
         <Col
           md={1}
-          className="d-flex justify-content-center"
+          className="d-flex justify-content-center booking"
           onClick={() => setVisible(true)}
           style={{ cursor: "pointer" }}
         >

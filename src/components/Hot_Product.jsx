@@ -30,7 +30,7 @@ const Hot_Product = () => {
             to="/listproduct"
             className="btn btn-secondary align-items-center rounded-pill mr-3"
           >
-            <span style={{color:"white"}}>Trang chủ</span>
+            <span style={{ color: "white" }}>Trang chủ</span>
             <SendFill className="ml-2" />
           </Link>
         </div>

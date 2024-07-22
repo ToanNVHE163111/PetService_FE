@@ -218,21 +218,44 @@ const Product_Detail = () => {
         </Row>
         <Row>
           <div>
-            <Row
-              className="container text-center"
-              style={{ marginTop: "100px" }}
-            >
+            <Row className=" align-items-center" style={{ marginTop: "100px" }}>
               <Col md={12}>
                 <h3 style={{ textAlign: "center" }}>Sản Phẩm Tương Tự</h3>
               </Col>
+            </Row>
+            <Row className="d-flex flex-wrap justify-content-between">
               {similarProducts.map((similarProduct) => (
                 <Col md={3} key={similarProduct._id}>
-                  <Products_Card
-                    name={similarProduct.name}
-                    obj={similarProduct.pettype}
-                    price={similarProduct.price}
-                    img={similarProduct.image[0]}
-                  />
+                  <div style={{ marginBottom: "10px", position: "relative" }}>
+                    {similarProduct.quantity === 0 && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          backgroundColor: "rgba(0, 0, 0, 0.5)",
+                          color: "white",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          fontSize: "24px",
+                        }}
+                      >
+                        Hết hàng
+                      </div>
+                    )}
+                    <Link to={`/detail/${similarProduct._id}`}>
+                      <Products_Card
+                        name={similarProduct.name}
+                        obj={similarProduct.pettype}
+                        price={similarProduct.price}
+                        img={similarProduct.image[0]}
+                        dishable={similarProduct.quantity === 0}
+                      />
+                    </Link>
+                  </div>
                 </Col>
               ))}
             </Row>
