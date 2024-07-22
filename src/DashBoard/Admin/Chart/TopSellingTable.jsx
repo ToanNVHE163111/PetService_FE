@@ -99,9 +99,6 @@ const TopSellingTable = () => {
               <TableCell sx={{ px: 0 }} colSpan={2}>
                 Số lượng đã bán
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={1}>
-                Action
-              </TableCell>
             </TableRow>
           </TableHead>
 
@@ -137,12 +134,6 @@ const TopSellingTable = () => {
                     colSpan={2}
                   >
                     {product.totalQuantity}
-                  </TableCell>
-
-                  <TableCell sx={{ px: 0 }} colSpan={1}>
-                    <IconButton>
-                      <EditIcon color="primary">edit</EditIcon>
-                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))

@@ -41,7 +41,13 @@ const Service = () => {
     setDataEdit(slot);
     setEditVisible(true);
   };
-
+  function formatCurrency(number) {
+    if (typeof number === "number") {
+      return number.toLocaleString("en-US", {
+        currency: "VND",
+      });
+    }
+  }
   return (
     <Container fluid>
       <Row style={{ width: "100%" }}>
@@ -76,7 +82,7 @@ const Service = () => {
                 <tr key={index}>
                   <td>{slot.name}</td>
                   <td>{slot.description}</td>
-                  <td>{slot.price}</td>
+                  <td>{formatCurrency(slot.price)}đ</td>
                   <td>{slot.duration}</td>
 
                   <td>

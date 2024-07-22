@@ -5,7 +5,7 @@ import Service from "./Service";
 const ServiceManagement = () => {
   return (
     <Container fluid>
-      <Tabs defaultActiveKey="allorder" id="uncontrolled-tab-example">
+      <Tabs defaultActiveKey="time_slot" id="uncontrolled-tab-example">
         <Tab eventKey="time_slot" title="Quản lí ca chăm sóc ">
           <TimeSlots />
         </Tab>

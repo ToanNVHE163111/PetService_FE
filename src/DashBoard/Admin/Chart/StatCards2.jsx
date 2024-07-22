@@ -122,7 +122,6 @@ const StatCards2 = () => {
             <IconBox sx={{ background: bgError }}>
               <Icon className="icon">expand_less</Icon>
             </IconBox>
-            <Span textcolor={textError}>(+21%)</Span>
           </ContentBox>
         </Card>
       </Grid>

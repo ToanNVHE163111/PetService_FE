@@ -88,7 +88,7 @@ const Blog = () => {
       .catch((error) => {
         console.error("Error fetching blogs:", error);
       });
-  }, []);
+  }, [blogs]);
 
   const handleDeleteBlog = (id) => {
     if (window.confirm("Do you want to delete this blog")) {
@@ -289,9 +289,7 @@ const Blog = () => {
                   <Row>
                     <Col md={12}>
                       <div style={{ textAlign: "left" }}>
-                        <span style={{ marginLeft: "24px" }}>
-                          1 like 13 Comment
-                        </span>
+                        <span style={{ marginLeft: "24px" }}></span>
                       </div>
                     </Col>
                   </Row>

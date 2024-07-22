@@ -13,7 +13,7 @@ const Banner = () => {
             <h1 className="main-title">DỊCH VỤ THÚ CƯNG</h1>
             <h1 className="main-title">TẠI NHÀ</h1>
             <h2 className="sub-title">
-              <b>UY TÍN HÀNG ĐẦU</b> TẠI HỒ CHÍ MINH
+              <b>UY TÍN HÀNG ĐẦU</b> TẠI KCNC HÒA LẠC
             </h2>
           </div>
           <div className="d-flex align-items-center mt-4">
